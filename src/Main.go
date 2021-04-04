@@ -1,37 +1,44 @@
 package main
 
-import "fmt"
+import (
+	"ZzEmu"
+	"fmt"
+)
 
-type Animal struct {
-	nome string
-	cor  string
-}
+// type Animal struct {
+// 	nome string
+// 	cor  string
+// }
 
-type Generico interface {
-	andar() string
-	comer() string
-}
+// type Generico interface {
+// 	andar() string
+// 	comer() string
+// }
 
-func (a *Animal) andar() string {
-	return "O " + a.nome + " trotar"
-}
+// func (a *Animal) andar() string {
+// 	return "O " + a.nome + " trotar"
+// }
 
-func (a *Animal) comer() string {
-	return "O " + a.nome + " come feno"
-}
+// func (a *Animal) comer() string {
+// 	return "O " + a.nome + " come feno"
+// }
 
 func main() {
 
-	var pA *Animal = new(Animal)
-	pA.nome = "corvo"
-	pA.cor = "preto"
+	par := ZzEmu.RegisterPair{}
 
-	var pAnimal Generico = pA //new(Animal{nome: "aaa"}) //&Animal{nome: "onca", cor: "branca"} //new(Animal)
-	//pAnimal.nome = "burro"
-	//pAnimal.cor = "preto"
+	fmt.Println("Valor " + fmt.Sprint(par.Get()))
 
-	//cavalo Animal = Animal{nome: "cavalo", cor: "preta"}
+	// var pA *Animal = new(Animal)
+	// pA.nome = "corvo"
+	// pA.cor = "preto"
 
-	fmt.Println(pAnimal.andar() + pAnimal.comer())
+	// var pAnimal Generico = pA //new(Animal{nome: "aaa"}) //&Animal{nome: "onca", cor: "branca"} //new(Animal)
+	// //pAnimal.nome = "burro"
+	// //pAnimal.cor = "preto"
+
+	// //cavalo Animal = Animal{nome: "cavalo", cor: "preta"}
+
+	// fmt.Println(pAnimal.andar() + pAnimal.comer())
 
 }
