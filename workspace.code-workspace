@@ -1,0 +1,61 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {},
+    "tasks": {
+        "version": "2.0.0",
+        "type": "shell",
+        "echoCommand": true,
+        "command": "go",
+        "cwd": "${workspaceFolder}",
+        "tasks": [
+            {
+                "label": "build",
+                "command": "go build -o ./bin ${file}",
+                "group": {
+                    "kind": "build",
+                    "isDefault": true
+                },
+                "problemMatcher": []
+            },
+            {
+                "label": "install",
+                "command": "go install -v ${file}",
+                "group": "build"
+            },
+            {
+                "label": "test",
+                "command": "go test",
+                "args": [
+                    "-v",
+                    "./..."
+                ],
+                "group": "test"
+            },
+            {
+                "label": "rungo",
+                "command": "go run -v ${file}",
+                "group": {
+                    "kind": "build",
+                    "isDefault": true
+                }
+            }
+        ]
+    },
+    "launch": {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "name": "Launch file",
+                "type": "go",
+                "request": "launch",
+                "mode": "debug",
+                "program": "${file}"
+            }
+        ],
+        "compounds": []
+    }
+}
