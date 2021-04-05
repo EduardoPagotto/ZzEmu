@@ -8,7 +8,7 @@ import (
 func main() {
 
 	var con *ZzEmu.Console = new(ZzEmu.Console)
-	var cpu *ZzEmu.CPU = ZzEmu.CreateCPU(con)
+	var cpu *ZzEmu.Z80 = ZzEmu.CreateCPU(con)
 
 	fmt.Println("Valor " + fmt.Sprint(cpu))
 

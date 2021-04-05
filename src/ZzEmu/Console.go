@@ -6,13 +6,13 @@ const SizeRAM = 0x8000
 const TotRAM = StartRAM + SizeRAM - 1
 
 type Console struct {
-	CPU *CPU
+	CPU *Z80
 	ROM [TotROM]byte
 	RAM [TotRAM]byte
 }
 
-func CreateCPU(console *Console) *CPU {
-	cpu := NewCPU(NewCPUMemory(console))
+func CreateCPU(console *Console) *Z80 {
+	cpu := NewZ80(NewCPUMemory(console))
 	return cpu
 }
 

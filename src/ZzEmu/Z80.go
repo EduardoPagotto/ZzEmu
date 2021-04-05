@@ -5,7 +5,7 @@ type stepInfo struct {
 	// value   byte
 }
 
-type CPU struct {
+type Z80 struct {
 	Memory
 	Cycles uint64
 
@@ -30,105 +30,105 @@ type CPU struct {
 	table [256]func(*stepInfo)
 }
 
-// NewZ80 creates a new CPU instance.
-func NewCPU(memory Memory) *CPU {
+// creates a new Z80 instance.
+func NewZ80(memory Memory) *Z80 {
 
-	CPU := CPU{Memory: memory}
+	z80 := Z80{Memory: memory}
 
-	CPU.AF = Register16{&CPU.A, &CPU.F}
-	CPU.BC = Register16{&CPU.B, &CPU.C}
-	CPU.DE = Register16{&CPU.D, &CPU.E}
-	CPU.HL = Register16{&CPU.H, &CPU.L}
+	z80.AF = Register16{&z80.A, &z80.F}
+	z80.BC = Register16{&z80.B, &z80.C}
+	z80.DE = Register16{&z80.D, &z80.E}
+	z80.HL = Register16{&z80.H, &z80.L}
 
-	CPU.IX = Register16{&CPU.IXH, &CPU.IXL}
-	CPU.IY = Register16{&CPU.IYH, &CPU.IYL}
+	z80.IX = Register16{&z80.IXH, &z80.IXL}
+	z80.IY = Register16{&z80.IYH, &z80.IYL}
 
-	CPU.AF_ = Register16{&CPU.A_, &CPU.F_} // ??
-	CPU.BC_ = Register16{&CPU.B_, &CPU.C_}
-	CPU.DE_ = Register16{&CPU.D_, &CPU.E_}
-	CPU.HL_ = Register16{&CPU.H_, &CPU.L_}
+	z80.AF_ = Register16{&z80.A_, &z80.F_} // ??
+	z80.BC_ = Register16{&z80.B_, &z80.C_}
+	z80.DE_ = Register16{&z80.D_, &z80.E_}
+	z80.HL_ = Register16{&z80.H_, &z80.L_}
 
-	CPU.createTable()
-	CPU.Reset()
-	return &CPU
+	z80.createTable()
+	z80.Reset()
+	return &z80
 }
 
-func (c *CPU) createTable() {
-	c.table = [256]func(*stepInfo){
-		c.call, c.ret, c.rst, c.jp,
+func (z *Z80) createTable() {
+	z.table = [256]func(*stepInfo){
+		z.call, z.ret, z.rst, z.jp,
 	}
 }
 
-func (cpu *CPU) call(info *stepInfo) {
+func (z80 *Z80) call(info *stepInfo) {
 
-	addLo := cpu.Memory.Read(cpu.PC)
-	cpu.PC++
-	addHi := cpu.Memory.Read(cpu.PC)
-	cpu.PC++
+	addLo := z80.Memory.Read(z80.PC)
+	z80.PC++
+	addHi := z80.Memory.Read(z80.PC)
+	z80.PC++
 
-	cpu.Push16(cpu.PC)
-	cpu.PC = joinBytes(addHi, addLo)
+	z80.Push16(z80.PC)
+	z80.PC = joinBytes(addHi, addLo)
 }
 
-func (cpu *CPU) jp(info *stepInfo) {
-	jptemp := cpu.PC
-	pcl := cpu.Memory.Read(jptemp)
+func (z80 *Z80) jp(info *stepInfo) {
+	jptemp := z80.PC
+	pcl := z80.Memory.Read(jptemp)
 	jptemp++
-	pch := cpu.Memory.Read(jptemp)
-	cpu.PC = joinBytes(pch, pcl)
+	pch := z80.Memory.Read(jptemp)
+	z80.PC = joinBytes(pch, pcl)
 }
 
-// func (cpu *CPU) jr() {
-// 	var jrtemp int16 = signExtend(cpu.Memory.Read(cpu.PC))
+// func (z80 *Z80) jr() {
+// 	var jrtemp int16 = signExtend(z80.Memory.Read(z80.PC))
 
-// 	cpu.Memory.ContendReadNoMreq_loop(cpu.PC, 1, 5)
+// 	z80.Memory.ContendReadNoMreq_loop(z80.PC, 1, 5)
 
-// 	cpu.PC += uint16(jrtemp)
+// 	z80.PC += uint16(jrtemp)
 // }
 
-func (cpu *CPU) ret(info *stepInfo) {
-	cpu.PC = cpu.Pop16()
+func (z80 *Z80) ret(info *stepInfo) {
+	z80.PC = z80.Pop16()
 }
 
-func (cpu *CPU) rst(info *stepInfo) {
-	cpu.Push16(cpu.PC)
-	cpu.PC = info.address
+func (z80 *Z80) rst(info *stepInfo) {
+	z80.Push16(z80.PC)
+	z80.PC = info.address
 }
 
 //-- Auxiliares
 
-func (cpu *CPU) Ready16(address uint16) uint16 {
-	valLo := cpu.Memory.Read(address)
-	valHi := cpu.Memory.Read(address + 1)
-	return joinBytes(valHi, valLo)
-}
+// func (z80 *Z80) Ready16(address uint16) uint16 {
+// 	valLo := z80.Memory.Read(address)
+// 	valHi := z80.Memory.Read(address + 1)
+// 	return joinBytes(valHi, valLo)
+// }
 
-func (cpu *CPU) Reset() {
+func (z80 *Z80) Reset() {
 	// TODO ajuste Flags
 }
 
-func (cpu *CPU) PushSplited(high, low byte) {
-	cpu.SP--
-	cpu.Memory.Write(cpu.SP, high)
-	cpu.SP--
-	cpu.Memory.Write(cpu.SP, low)
+func (z80 *Z80) PushSplited(high, low byte) {
+	z80.SP--
+	z80.Memory.Write(z80.SP, high)
+	z80.SP--
+	z80.Memory.Write(z80.SP, low)
 }
 
-func (cpu *CPU) PopSlited() (byte, byte) {
-	valLo := cpu.Memory.Read(cpu.SP)
-	cpu.SP++
-	valHi := cpu.Memory.Read(cpu.SP)
-	cpu.SP++
+func (z80 *Z80) PopSlited() (byte, byte) {
+	valLo := z80.Memory.Read(z80.SP)
+	z80.SP++
+	valHi := z80.Memory.Read(z80.SP)
+	z80.SP++
 	return valHi, valLo
 }
 
-func (cpu *CPU) Push16(value uint16) {
-	//cpu.PushSplited(splitWord(value))
+func (z80 *Z80) Push16(value uint16) {
+	//z80.PushSplited(splitWord(value))
 	high, low := splitWord(value)
-	cpu.PushSplited(high, low)
+	z80.PushSplited(high, low)
 }
 
-func (cpu *CPU) Pop16() uint16 {
-	valHi, valLo := cpu.PopSlited()
+func (z80 *Z80) Pop16() uint16 {
+	valHi, valLo := z80.PopSlited()
 	return joinBytes(valHi, valLo)
 }
