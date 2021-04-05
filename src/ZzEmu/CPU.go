@@ -3,14 +3,14 @@ package ZzEmu
 type stepInfo int
 
 type CPU struct {
-	//Memory
+	Memory
 	Cycles uint64
-	PC     *RegisterPair
-	SP     *RegisterPair
-	AF     *RegisterPair
-	BC     *RegisterPair
-	DE     *RegisterPair
-	HL     *RegisterPair
+	PC     RegisterPair
+	SP     RegisterPair
+	AF     RegisterPair
+	BC     RegisterPair
+	DE     RegisterPair
+	HL     RegisterPair
 	table  [256]func(*stepInfo)
 }
 
@@ -32,19 +32,13 @@ func (cpu *CPU) ret(info *stepInfo) {
 	// cpu.PC = 0x0000
 }
 
-// func NewCPU(console *Console) *CPU {
-// 	// cpu := CPU{Memory: NewCPUMemory(console)}
-// 	// cpu.createTable()
-// 	// cpu.Reset()
+// func (cpu *CPU) Ready16(address uint16) uint16 {
+// 	// cpu.PC = 0x0000
+// 	return 0x0000
 // }
 
-func (cpu *CPU) Ready16(address uint16) uint16 {
-	// cpu.PC = 0x0000
-	return 0x0000
-}
-
 func (cpu *CPU) Reset() {
-	//cpu.PC = cpu.Ready16(0x0000)
-	// cpu.SP = 0x0000
-	//set of flags
+	cpu.PC.Set(0x0000)
+	cpu.SP.Set(0x0000)
+	// TODO ajuste Flags
 }

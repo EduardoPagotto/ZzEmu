@@ -1,15 +1,13 @@
 package ZzEmu
 
-// Registrador
-// type Register interface {
-// 	get() byte
-// 	set(value byte)
-// 	setR(value Register)
-// 	inc()
-// 	dec()
-// 	and(value byte)
-// 	or(value byte)
-// 	add(value byte)
+// type RegisterInterface interface {
+// 	Get() byte
+// 	Set(value byte)
+// 	Inc()
+// 	Dec()
+// 	And(value byte)
+// 	Or(value byte)
+// 	Add(value byte)
 // }
 
 type Register struct {

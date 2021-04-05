@@ -1,14 +1,17 @@
 package ZzEmu
 
-// type RegisterPair interface {
-// 	get() uint16
-// 	//set(value byte)
-// 	//setR(value Register)
-// 	inc()
-// 	dec()
-// 	add(value byte)
-// 	getHL() Register
-// 	getRL() Register
+// type RegisterPairInterface interface {
+// 	Hi() byte
+// 	Lo() byte
+// 	Get() uint16
+// 	SetHi(h byte)
+// 	SetLo(l byte)
+// 	Set(value uint16)
+// 	Inc()
+// 	Dec()
+// 	Add(value byte)
+// 	GetRH() *Register
+// 	GetRL() *Register
 // }
 
 type RegisterPair struct {
@@ -35,7 +38,7 @@ func (rp *RegisterPair) SetLo(l byte) {
 	rp.pair = (rp.pair & uint16(0xFF00)) | uint16(l)
 }
 
-func (rp *RegisterPair) set(value uint16) {
+func (rp *RegisterPair) Set(value uint16) {
 	rp.pair = value
 }
 

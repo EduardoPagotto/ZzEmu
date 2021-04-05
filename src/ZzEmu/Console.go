@@ -1,48 +1,23 @@
 package ZzEmu
 
-import (
-	"log"
-
-	"ZzEmu"
-)
+const TotROM = 0x8000
+const StartRAM = 0x8000
+const SizeRAM = 0x8000
+const TotRAM = StartRAM + SizeRAM - 1
 
 type Console struct {
-	CPU *ZzEmu.CPU
-	//Mapper Mapper
-	RAM []byte
+	CPU *CPU
+	ROM [TotROM]byte
+	RAM [TotRAM]byte
 }
 
-type cpuMemory struct {
-	console *Console
-}
-
-type Memory interface {
-	Read(address uint16) byte
-	Write(address uint16, value byte)
-}
-
-func NewCPU(console *Console) *ZzEmu.CPU {
-	cpu := ZzEmu.CPU{Memory: NewCPUMemory(console)}
+func NewCPU(console *Console) *CPU {
+	cpu := CPU{Memory: NewCPUMemory(console)}
 	cpu.createTable()
 	cpu.Reset()
+	return &cpu
 }
 
 func NewCPUMemory(console *Console) Memory {
 	return &cpuMemory{console}
-
-func (mem *cpuMemory) Read(address uint16) byte {
-	switch {
-	case address < 0x2000:
-		return mem.console.RAM[address%0x0800]
-	// case address >= 0x2000:
-	// 	return mem.console.Mapper.Read(address)
-	default:
-		log.Fatal("Memoria fora de range", address)
-	}
-	return 0
 }
-
-// type Mapper interface {
-// 	Read(address uint16) byte
-// 	Write(address uint16, value byte)
-// }
