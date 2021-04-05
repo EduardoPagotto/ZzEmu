@@ -1,6 +1,9 @@
 package ZzEmu
 
-type stepInfo int
+type stepInfo struct {
+	address uint16
+	// value   byte
+}
 
 type CPU struct {
 	Memory
@@ -33,25 +36,48 @@ type CPU struct {
 
 func (c *CPU) createTable() {
 	c.table = [256]func(*stepInfo){
-		c.call, c.ret, //c.rst,
+		c.call, c.ret, c.rst,
 	}
 }
 
 func (cpu *CPU) call(info *stepInfo) {
-	cpu.PC.SetLo(cpu.Memory.Read(cpu.SP.Get()))
-	cpu.SP.Inc()
-	cpu.PC.SetHi(cpu.Memory.Read(cpu.SP.Get()))
-	cpu.SP.Inc()
+
+	addLo := cpu.Memory.Read(cpu.PC.Get())
+	cpu.PC.Inc()
+	addHi := cpu.Memory.Read(cpu.PC.Get())
+	cpu.PC.Inc()
+	cpu.Push16(cpu.PC.Get())
+
+	cpu.PC.SetLo(addLo)
+	cpu.PC.SetHi(addHi)
 }
 
 func (cpu *CPU) ret(info *stepInfo) {
 	cpu.PC.Set(cpu.Pop16())
+
+	// cpu.PC.SetLo(cpu.Memory.Read(cpu.SP.Get()))
+	// cpu.SP.Inc()
+	// cpu.PC.SetHi(cpu.Memory.Read(cpu.SP.Get()))
+	// cpu.SP.Inc()
+
 }
 
-// func (cpu *CPU) Ready16(address uint16) uint16 {
-// 	// cpu.PC = 0x0000
-// 	return 0x0000
-// }
+func (cpu *CPU) rst(info *stepInfo) {
+	cpu.Push16(cpu.PC.Get())
+	cpu.PC.Set(info.address)
+}
+
+//-- Auxiliares
+
+func (cpu *CPU) Ready16(address uint16) uint16 {
+
+	valLo := uint16(cpu.Memory.Read(cpu.PC.Get()))
+	cpu.PC.Inc()
+	valHi := uint16(cpu.Memory.Read(cpu.PC.Get()))
+	cpu.PC.Inc()
+
+	return uint16((valHi << 8) | valLo)
+}
 
 func (cpu *CPU) Reset() {
 	// TODO ajuste Flags
@@ -74,8 +100,3 @@ func (cpu *CPU) Pop16() uint16 {
 
 	return uint16((valHi << 8) | valLo)
 }
-
-// func (cpu *CPU) rst(info *stepInfo, value uint16) {
-// 	cpu.Push16(cpu.PC.Get())
-// 	cpu.PC.Set(value)
-// }
