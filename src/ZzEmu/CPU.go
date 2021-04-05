@@ -55,7 +55,7 @@ func NewCPU(memory Memory) *CPU {
 
 func (c *CPU) createTable() {
 	c.table = [256]func(*stepInfo){
-		c.call, c.ret, c.rst,
+		c.call, c.ret, c.rst, c.jp,
 	}
 }
 
@@ -69,6 +69,22 @@ func (cpu *CPU) call(info *stepInfo) {
 	cpu.Push16(cpu.PC)
 	cpu.PC = joinBytes(addHi, addLo)
 }
+
+func (cpu *CPU) jp(info *stepInfo) {
+	jptemp := cpu.PC
+	pcl := cpu.Memory.Read(jptemp)
+	jptemp++
+	pch := cpu.Memory.Read(jptemp)
+	cpu.PC = joinBytes(pch, pcl)
+}
+
+// func (cpu *CPU) jr() {
+// 	var jrtemp int16 = signExtend(cpu.Memory.Read(cpu.PC))
+
+// 	cpu.Memory.ContendReadNoMreq_loop(cpu.PC, 1, 5)
+
+// 	cpu.PC += uint16(jrtemp)
+// }
 
 func (cpu *CPU) ret(info *stepInfo) {
 	cpu.PC = cpu.Pop16()

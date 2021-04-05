@@ -62,3 +62,7 @@ func splitWord(word uint16) (byte, byte) {
 func joinBytes(h, l byte) uint16 {
 	return uint16(l) | (uint16(h) << 8)
 }
+
+// func signExtend(v byte) int16 {
+// 	return int16(int8(v))
+// }
