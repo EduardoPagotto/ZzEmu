@@ -11,11 +11,9 @@ type Console struct {
 	RAM [TotRAM]byte
 }
 
-func NewCPU(console *Console) *CPU {
-	cpu := CPU{Memory: NewCPUMemory(console)}
-	cpu.createTable()
-	cpu.Reset()
-	return &cpu
+func CreateCPU(console *Console) *CPU {
+	cpu := NewCPU(NewCPUMemory(console))
+	return cpu
 }
 
 func NewCPUMemory(console *Console) Memory {
