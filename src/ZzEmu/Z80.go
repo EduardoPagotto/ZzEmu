@@ -6,7 +6,7 @@ type stepInfo struct {
 }
 
 type Z80 struct {
-	Memory
+	Memory Memory
 	Cycles uint64
 
 	A, F, B, C, D, E, H, L         byte
@@ -33,8 +33,8 @@ type Z80 struct {
 
 // creates a new Z80 instance.
 func NewZ80(memory Memory) *Z80 {
-
-	z80 := Z80{Memory: memory}
+	var z80 *Z80 = new(Z80)
+	z80.Memory = memory
 
 	z80.AF = Register16{&z80.A, &z80.F}
 	z80.BC = Register16{&z80.B, &z80.C}
@@ -51,7 +51,7 @@ func NewZ80(memory Memory) *Z80 {
 
 	z80.createTable()
 	z80.Reset()
-	return &z80
+	return z80
 }
 
 func (z *Z80) createTable() {
@@ -75,9 +75,9 @@ func (z80 *Z80) call(info *stepInfo) {
 
 func (z80 *Z80) jp(info *stepInfo) {
 	jptemp := z80.pc
-	pch := z80.Memory.Read(jptemp)
-	jptemp++
 	pcl := z80.Memory.Read(jptemp)
+	jptemp++
+	pch := z80.Memory.Read(jptemp)
 	z80.pc = joinBytes(pch, pcl)
 }
 
