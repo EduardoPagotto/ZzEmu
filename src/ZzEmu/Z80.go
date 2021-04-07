@@ -1,9 +1,23 @@
 package ZzEmu
 
-type stepInfo struct {
-	address uint16
-	// value   byte
+// The flags
+const FLAG_C = 0x01
+const FLAG_N = 0x02
+const FLAG_P = 0x04
+const FLAG_V = FLAG_P
+const FLAG_3 = 0x08
+const FLAG_H = 0x10
+const FLAG_5 = 0x20
+const FLAG_Z = 0x40
+const FLAG_S = 0x80
+
+type TsValid struct {
 }
+
+var (
+	OpcodeMap   [255]func(z *Z80, opcode byte)
+	OpcodeCBMap [255]func(z *Z80, opcode byte)
+)
 
 type Z80 struct {
 	Memory Memory
@@ -27,8 +41,6 @@ type Z80 struct {
 	Tstates             uint16
 	Halted              bool
 	interruptsEnabledAt int
-
-	table [256]func(*stepInfo)
 }
 
 // creates a new Z80 instance.
@@ -49,48 +61,11 @@ func NewZ80(memory Memory) *Z80 {
 	z80.DE_ = Register16{&z80.D_, &z80.E_}
 	z80.HL_ = Register16{&z80.H_, &z80.L_}
 
-	z80.createTable()
+	init_table_sz53()
+
+	initOpcodes()
 	z80.Reset()
 	return z80
-}
-
-func (z *Z80) createTable() {
-	z.table = [256]func(*stepInfo){
-		z.call, z.ret, z.rst, z.jp, z.jr,
-	}
-}
-
-func (z80 *Z80) call(info *stepInfo) {
-
-	addLo := z80.Memory.Read(z80.pc)
-	z80.pc++
-	addHi := z80.Memory.Read(z80.pc)
-	z80.pc++
-
-	z80.Push16(z80.pc)
-	z80.pc = joinBytes(addHi, addLo)
-}
-
-func (z80 *Z80) jp(info *stepInfo) {
-	jptemp := z80.pc
-	pcl := z80.Memory.Read(jptemp)
-	jptemp++
-	pch := z80.Memory.Read(jptemp)
-	z80.pc = joinBytes(pch, pcl)
-}
-
-func (z80 *Z80) jr(info *stepInfo) {
-	var jrtemp int16 = signExtend(z80.Memory.Read(z80.pc))
-	z80.pc += uint16(jrtemp)
-}
-
-func (z80 *Z80) ret(info *stepInfo) {
-	z80.pc = z80.Pop16()
-}
-
-func (z80 *Z80) rst(info *stepInfo) {
-	z80.Push16(z80.pc)
-	z80.pc = info.address
 }
 
 //-- Auxiliares
@@ -135,6 +110,16 @@ func (z80 *Z80) Push16(value uint16) {
 func (z80 *Z80) Pop16() uint16 {
 	valHi, valLo := z80.PopSlited()
 	return joinBytes(valHi, valLo)
+}
+
+// Execute a single instruction at the program counter.
+func (z80 *Z80) DoOpcode() {
+	// z80.Tstates += 4
+	opcode := z80.Memory.Read(z80.pc)
+	z80.R = (z80.R + 1) & 0x7f
+	z80.pc++
+
+	OpcodeMap[opcode](z80, opcode)
 }
 
 // func (z80 *Z80) contend(address uint16, time uint16) {

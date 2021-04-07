@@ -1,17 +1,5 @@
 package ZzEmu
 
-// type Register16Interface interface {
-// 	Hi() byte
-// 	Lo() byte
-// 	Get() uint16
-// 	SetHi(h byte)
-// 	SetLo(l byte)
-// 	Set(value uint16)
-// 	Inc()
-// 	Dec()
-// 	Add(value byte)
-// }
-
 type Register16 struct {
 	high *byte
 	low  *byte
@@ -65,4 +53,11 @@ func joinBytes(h, l byte) uint16 {
 
 func signExtend(v byte) int16 {
 	return int16(int8(v))
+}
+
+func ternOpB(cond bool, ret1, ret2 byte) byte {
+	if cond {
+		return ret1
+	}
+	return ret2
 }
