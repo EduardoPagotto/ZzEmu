@@ -36,13 +36,13 @@ func (mem *cpuMemory) Write(address uint16, value byte) {
 	log.Fatal("Escrita em memoria invalida")
 }
 
-func (mem *cpuMemory) contendMem(address, states, time uint16) uint16 {
-	return time
-}
+// func (mem *cpuMemory) contendMem(address, states, time uint16) uint16 {
+// 	return time
+// }
 
-func (mem *cpuMemory) contendIO(address, states, time uint16) uint16 {
-	return time
-}
+// func (mem *cpuMemory) contendIO(address, states, time uint16) uint16 {
+// 	return time
+// }
 
 // func contendMemory(z80 *z80.Z80, address uint16, time int) {
 // 	tstates_p := &z80.Tstates

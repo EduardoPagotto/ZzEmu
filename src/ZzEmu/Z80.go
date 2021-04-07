@@ -64,10 +64,8 @@ func (z80 *Z80) call(info *stepInfo) {
 
 	addLo := z80.Memory.Read(z80.pc)
 	z80.pc++
-	z80.contend(z80.pc, 1)
 	addHi := z80.Memory.Read(z80.pc)
 	z80.pc++
-	z80.contend(z80.pc, 1)
 
 	z80.Push16(z80.pc)
 	z80.pc = joinBytes(addHi, addLo)
@@ -83,9 +81,6 @@ func (z80 *Z80) jp(info *stepInfo) {
 
 func (z80 *Z80) jr(info *stepInfo) {
 	var jrtemp int16 = signExtend(z80.Memory.Read(z80.pc))
-
-	z80.contendLoop(z80.pc, 1, 5)
-
 	z80.pc += uint16(jrtemp)
 }
 
@@ -119,15 +114,12 @@ func (z80 *Z80) Reset() {
 
 func (z80 *Z80) PushSplited(high, low byte) {
 	z80.sp--
-	z80.contend(z80.sp, 3)
 	z80.Memory.Write(z80.sp, high)
 	z80.sp--
-	z80.contend(z80.sp, 3)
 	z80.Memory.Write(z80.sp, low)
 }
 
 func (z80 *Z80) PopSlited() (byte, byte) {
-	z80.contendLoop(z80.sp, 3, 2)
 	valLo := z80.Memory.Read(z80.sp)
 	z80.sp++
 	valHi := z80.Memory.Read(z80.sp)
@@ -145,18 +137,18 @@ func (z80 *Z80) Pop16() uint16 {
 	return joinBytes(valHi, valLo)
 }
 
-func (z80 *Z80) contend(address uint16, time uint16) {
-	z80.Tstates += z80.Memory.contendMem(address, z80.Tstates, time)
-}
+// func (z80 *Z80) contend(address uint16, time uint16) {
+// 	z80.Tstates += z80.Memory.contendMem(address, z80.Tstates, time)
+// }
 
 // func (z80 *Z80) contendIO(address uint16, time uint16) {
 // 	z80.Tstates += z80.Memory.contendIO(address, z80.Tstates, time)
 // }
 
-func (z80 *Z80) contendLoop(address uint16, time uint16, repet int) {
+// func (z80 *Z80) contendLoop(address uint16, time uint16, repet int) {
 
-	for i := 0; i < repet; i++ {
-		z80.contend(address, time)
-	}
+// 	for i := 0; i < repet; i++ {
+// 		z80.contend(address, time)
+// 	}
 
-}
+// }
