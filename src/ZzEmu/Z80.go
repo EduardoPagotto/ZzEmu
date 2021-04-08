@@ -80,12 +80,6 @@ func NewZ80(memory Memory) *Z80 {
 
 //-- Auxiliares
 
-// func (z80 *Z80) Ready16(address uint16) uint16 {
-// 	valLo := z80.Memory.Read(address)
-// 	valHi := z80.Memory.Read(address + 1)
-// 	return joinBytes(valHi, valLo)
-// }
-
 func (z80 *Z80) Reset() {
 	z80.A, z80.F, z80.B, z80.C, z80.D, z80.E, z80.H, z80.L = 0, 0, 0, 0, 0, 0, 0, 0
 	z80.A_, z80.F_, z80.B_, z80.C_, z80.D_, z80.E_, z80.H_, z80.L_ = 0, 0, 0, 0, 0, 0, 0, 0
@@ -97,28 +91,30 @@ func (z80 *Z80) Reset() {
 	z80.interruptsEnabledAt = 0
 }
 
-func (z80 *Z80) PushSplited(high, low byte) {
+func (z80 *Z80) Push8(value byte) {
+	z80.sp--
+	z80.Memory.Write(z80.sp, value)
+}
+
+func (z80 *Z80) Pop8() byte {
+	val := z80.Memory.Read(z80.sp)
+	z80.sp++
+	return val
+}
+
+func (z80 *Z80) Push16(value uint16) {
+	high, low := splitWord(value)
 	z80.sp--
 	z80.Memory.Write(z80.sp, high)
 	z80.sp--
 	z80.Memory.Write(z80.sp, low)
 }
 
-func (z80 *Z80) PopSlited() (byte, byte) {
+func (z80 *Z80) Pop16() uint16 {
 	valLo := z80.Memory.Read(z80.sp)
 	z80.sp++
 	valHi := z80.Memory.Read(z80.sp)
 	z80.sp++
-	return valHi, valLo
-}
-
-func (z80 *Z80) Push16(value uint16) {
-	high, low := splitWord(value)
-	z80.PushSplited(high, low)
-}
-
-func (z80 *Z80) Pop16() uint16 {
-	valHi, valLo := z80.PopSlited()
 	return joinBytes(valHi, valLo)
 }
 
@@ -132,30 +128,30 @@ func (z80 *Z80) DoOpcode() {
 	OpcodeMap[opcode](z80, opcode)
 }
 
-func (z80 *Z80) ld16rrnn(regl, regh *byte) {
-	var ldtemp uint16
-
-	ldtemp = uint16(z80.Memory.Read(z80.pc))
+/*
+Carrega uint16 seguinte do PC
+*/
+func (z80 *Z80) LdAddrLittleEndian() uint16 {
+	ldtemp := uint16(z80.Memory.Read(z80.pc))
 	z80.pc++
 	ldtemp |= uint16(z80.Memory.Read(z80.pc)) << 8
 	z80.pc++
+	return ldtemp
+}
+
+func (z80 *Z80) LoadByteFromPC() byte {
+	val := z80.Memory.Read(z80.pc)
+	z80.pc++
+	return val
+}
+
+/* Le posicao de memoria INDEXADO
+regl: ponteiro do registro Low
+regh: ponteiro do registro High
+*/
+func (z80 *Z80) ld16rrnn(regl, regh *byte) {
+	ldtemp := z80.LdAddrLittleEndian()
 	*regl = z80.Memory.Read(ldtemp)
 	ldtemp++
 	*regh = z80.Memory.Read(ldtemp)
 }
-
-// func (z80 *Z80) contend(address uint16, time uint16) {
-// 	z80.Tstates += z80.Memory.contendMem(address, z80.Tstates, time)
-// }
-
-// func (z80 *Z80) contendIO(address uint16, time uint16) {
-// 	z80.Tstates += z80.Memory.contendIO(address, z80.Tstates, time)
-// }
-
-// func (z80 *Z80) contendLoop(address uint16, time uint16, repet int) {
-
-// 	for i := 0; i < repet; i++ {
-// 		z80.contend(address, time)
-// 	}
-
-// }

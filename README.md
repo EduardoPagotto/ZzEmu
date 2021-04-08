@@ -45,3 +45,20 @@ Update envoirement
 # exec the batch
 source ./.bashrc
 ```
+
+# Funcoes implementadas
+NOP
+LD BC, nn
+LD (BC), A
+INC BC
+INC B
+DEC B
+LD B,nn
+RLCA
+EX AF,A'F'
+JR ssss
+LD SP, nn
+JP nn
+RET
+CALL nn
+LD SP,(nn)

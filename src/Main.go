@@ -17,7 +17,11 @@ func main() {
 
 	var addr uint16 = 0
 
-	console.ROM[0] = 0x00               // nop
+	console.ROM[0] = 0x00               // NOP
+	console.ROM[incremet(&addr)] = 0x01 // LD BC, 0x2000
+	console.ROM[incremet(&addr)] = 0x00 //
+	console.ROM[incremet(&addr)] = 0x20 //
+
 	console.ROM[incremet(&addr)] = 0x03 // inc bc
 	console.ROM[incremet(&addr)] = 0x04 // inc b
 	console.ROM[incremet(&addr)] = 0x05 // dec b
