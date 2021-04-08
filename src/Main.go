@@ -2,6 +2,7 @@ package main
 
 import (
 	"ZzEmu"
+	"fmt"
 )
 
 func main() {
@@ -24,6 +25,6 @@ func main() {
 	cpu.DoOpcode()
 	cpu.DoOpcode()
 
-	//fmt.Println("Valor " + fmt.Sprint(cpu))
+	fmt.Println("Valor " + fmt.Sprint(cpu))
 
 }

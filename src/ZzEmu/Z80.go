@@ -15,8 +15,12 @@ type TsValid struct {
 }
 
 var (
-	OpcodeMap   [255]func(z *Z80, opcode byte)
-	OpcodeCBMap [255]func(z *Z80, opcode byte)
+	OpcodeMap     [255]func(z *Z80, opcode byte)
+	OpcodeCBMap   [255]func(z *Z80, opcode byte)
+	OpcodeDDMap   [255]func(z *Z80, opcode byte)
+	OpcodeDDCBMap [255]func(z *Z80, opcode byte)
+	OpcodeDFMap   [255]func(z *Z80, opcode byte)
+	OpcodeEDMap   [255]func(z *Z80, opcode byte)
 )
 
 type Z80 struct {

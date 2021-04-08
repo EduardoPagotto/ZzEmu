@@ -205,7 +205,7 @@ func initOpcodes() {
 	// OpcodeMap[0xc8] = instr__RET_Z
 	// OpcodeMap[0xc9] = instr__RET
 	// OpcodeMap[0xca] = instr__JP_Z_NNNN
-	// OpcodeMap[0xcb] = instr__SHIFT_CB
+	OpcodeMap[0xcb] = instr__SHIFT_CB
 	// OpcodeMap[0xcc] = instr__CALL_Z_NNNN
 	// OpcodeMap[0xcd] = instr__CALL_NNNN
 	// OpcodeMap[0xce] = instr__ADC_A_NN
@@ -223,7 +223,7 @@ func initOpcodes() {
 	// OpcodeMap[0xda] = instr__JP_C_NNNN
 	// OpcodeMap[0xdb] = instr__IN_A_iNN
 	// OpcodeMap[0xdc] = instr__CALL_C_NNNN
-	// OpcodeMap[0xdd] = instr__SHIFT_DD
+	OpcodeMap[0xdd] = instr__SHIFT_DD
 	// OpcodeMap[0xde] = instr__SBC_A_NN
 	// OpcodeMap[0xdf] = instr__RST_18
 	// OpcodeMap[0xe0] = instr__RET_PO
@@ -239,7 +239,7 @@ func initOpcodes() {
 	// OpcodeMap[0xea] = instr__JP_PE_NNNN
 	// OpcodeMap[0xeb] = instr__EX_DE_HL
 	// OpcodeMap[0xec] = instr__CALL_PE_NNNN
-	// OpcodeMap[0xed] = instr__SHIFT_ED
+	OpcodeMap[0xed] = instr__SHIFT_ED
 	// OpcodeMap[0xee] = instr__XOR_A_NN
 	// OpcodeMap[0xef] = instr__RST_28
 	// OpcodeMap[0xf0] = instr__RET_P
@@ -255,7 +255,7 @@ func initOpcodes() {
 	// OpcodeMap[0xfa] = instr__JP_M_NNNN
 	// OpcodeMap[0xfb] = instr__EI
 	// OpcodeMap[0xfc] = instr__CALL_M_NNNN
-	// OpcodeMap[0xfd] = instr__SHIFT_FD
+	OpcodeMap[0xfd] = instr__SHIFT_FD
 	// OpcodeMap[0xfe] = instr__CP_NN
 	// OpcodeMap[0xff] = instr__RST_38
 }
@@ -1434,9 +1434,10 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 // 	}
 // }
 
-// /* shift CB */
-// func instr__SHIFT_CB(z *Z80, opcode byte) {
-// }
+/* shift CB */
+func instr__SHIFT_CB(z *Z80, opcode byte) {
+	OpcodeCBMap[opcode](z, opcode)
+}
 
 // /* CALL Z,nnnn */
 // func instr__CALL_Z_NNNN(z *Z80, opcode byte) {
@@ -1581,8 +1582,9 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 // }
 
 // /* shift DD */
-// func instr__SHIFT_DD(z *Z80, opcode byte) {
-// }
+func instr__SHIFT_DD(z *Z80, opcode byte) {
+	OpcodeDDMap[opcode](z, opcode)
+}
 
 // /* SBC A,nn */
 // func instr__SBC_A_NN(z *Z80, opcode byte) {
@@ -1706,8 +1708,9 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 // }
 
 // /* shift ED */
-// func instr__SHIFT_ED(z *Z80, opcode byte) {
-// }
+func instr__SHIFT_ED(z *Z80, opcode byte) {
+	OpcodeEDMap[opcode](z, opcode)
+}
 
 // /* XOR A,nn */
 // func instr__XOR_A_NN(z *Z80, opcode byte) {
@@ -1827,8 +1830,9 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 // }
 
 // /* shift FD */
-// func instr__SHIFT_FD(z *Z80, opcode byte) {
-// }
+func instr__SHIFT_FD(z *Z80, opcode byte) {
+	OpcodeDFMap[opcode](z, opcode)
+}
 
 // /* CP nn */
 // func instr__CP_NN(z *Z80, opcode byte) {
