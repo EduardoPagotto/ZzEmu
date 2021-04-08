@@ -15,12 +15,12 @@ const FLAG_S = 0x80
 // }
 
 var (
-	OpcodeMap     [255]func(z *Z80, opcode byte)
-	OpcodeCBMap   [255]func(z *Z80, opcode byte)
-	OpcodeDDMap   [255]func(z *Z80, opcode byte)
-	OpcodeDDCBMap [255]func(z *Z80, opcode byte)
-	OpcodeDFMap   [255]func(z *Z80, opcode byte)
-	OpcodeEDMap   [255]func(z *Z80, opcode byte)
+	OpcodeMap     [256]func(z *Z80, opcode byte)
+	OpcodeCBMap   [256]func(z *Z80, opcode byte)
+	OpcodeDDMap   [256]func(z *Z80, opcode byte)
+	OpcodeDDCBMap [256]func(z *Z80, opcode byte)
+	OpcodeDFMap   [256]func(z *Z80, opcode byte)
+	OpcodeEDMap   [256]func(z *Z80, opcode byte)
 )
 
 type Z80 struct {
@@ -91,6 +91,62 @@ func (z80 *Z80) Reset() {
 	z80.interruptsEnabledAt = 0
 }
 
+func (z80 *Z80) Add(value byte) {
+	var addtemp uint = uint(z80.A) + uint(value)
+	var lookup byte = ((z80.A & 0x88) >> 3) | ((value & 0x88) >> 2) | byte((addtemp&0x88)>>1)
+	z80.A = byte(addtemp)
+	z80.F = ternOpB(addtemp&0x100 != 0, FLAG_C, 0) | halfcarryAddTable[lookup&0x07] | overflowAddTable[lookup>>4] | sz53Table[z80.A]
+}
+
+func (z80 *Z80) Adc(value byte) {
+	var adctemp uint16 = uint16(z80.A) + uint16(value) + (uint16(z80.F) & FLAG_C)
+	var lookup byte = byte(((uint16(z80.A) & 0x88) >> 3) | ((uint16(value) & 0x88) >> 2) | ((uint16(adctemp) & 0x88) >> 1))
+	z80.A = byte(adctemp)
+	z80.F = ternOpB((adctemp&0x100) != 0, FLAG_C, 0) | halfcarryAddTable[lookup&0x07] | overflowAddTable[lookup>>4] | sz53Table[z80.A]
+}
+
+func (z80 *Z80) Sub(value byte) {
+	var subtemp uint16 = uint16(z80.A) - uint16(value)
+	var lookup byte = ((z80.A & 0x88) >> 3) | ((value & 0x88) >> 2) | byte((subtemp&0x88)>>1)
+	z80.A = byte(subtemp)
+	z80.F = ternOpB(subtemp&0x100 != 0, FLAG_C, 0) | FLAG_N |
+		halfcarrySubTable[lookup&0x07] | overflowSubTable[lookup>>4] |
+		sz53Table[z80.A]
+}
+
+func (z80 *Z80) Sbc(value byte) {
+	var sbctemp uint16 = uint16(z80.A) - uint16(value) - (uint16(z80.F) & FLAG_C)
+	var lookup byte = ((z80.A & 0x88) >> 3) | ((value & 0x88) >> 2) | byte((sbctemp&0x88)>>1)
+	z80.A = byte(sbctemp)
+	z80.F = ternOpB((sbctemp&0x100) != 0, FLAG_C, 0) | FLAG_N | halfcarrySubTable[lookup&0x07] | overflowSubTable[lookup>>4] | sz53Table[z80.A]
+}
+
+func (z80 *Z80) And(value byte) {
+	z80.A &= value
+	z80.F = FLAG_H | sz53pTable[z80.A]
+}
+
+func (z80 *Z80) Xor(value byte) {
+	z80.A ^= value
+	z80.F = sz53pTable[z80.A]
+}
+
+func (z80 *Z80) Or(value byte) {
+	z80.A |= value
+	z80.F = sz53pTable[z80.A]
+}
+
+func (z80 *Z80) Cp(value byte) {
+	var cptemp uint16 = uint16(z80.A) - uint16(value)
+	var lookup byte = ((z80.A & 0x88) >> 3) | ((value & 0x88) >> 2) | byte((cptemp&0x88)>>1)
+	z80.F = ternOpB((cptemp&0x100) != 0, FLAG_C, ternOpB(cptemp != 0, 0, FLAG_Z)) | FLAG_N | halfcarrySubTable[lookup&0x07] | overflowSubTable[lookup>>4] | (value & (FLAG_3 | FLAG_5)) | byte(cptemp&FLAG_S)
+}
+
+func (z80 *Z80) Rst(value byte) {
+	z80.Push16(z80.pc)
+	z80.pc = uint16(value)
+}
+
 func (z80 *Z80) Push8(value byte) {
 	z80.sp--
 	z80.Memory.Write(z80.sp, value)
@@ -156,26 +212,24 @@ func (z80 *Z80) ld16rrnn(regl, regh *byte) {
 	*regh = z80.Memory.Read(ldtemp)
 }
 
-func (z80 *Z80) PtrRegisterByte(opcode byte) *byte {
+func (z80 *Z80) GetRegisterValByte(opcode byte) byte {
 	r := opcode & 0x07
 	switch r {
 	case 0:
-		return &z80.B
+		return z80.B
 	case 1:
-		return &z80.C
+		return z80.C
 	case 2:
-		return &z80.D
+		return z80.D
 	case 3:
-		return &z80.E
+		return z80.E
 	case 4:
-		return &z80.H
+		return z80.H
 	case 5:
-		return &z80.L
-	case 6:
-		return nil
+		return z80.L
 	case 7:
-		return &z80.A
+		return z80.A
 	}
 
-	return nil
+	return 0
 }
