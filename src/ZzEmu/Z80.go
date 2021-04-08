@@ -155,3 +155,27 @@ func (z80 *Z80) ld16rrnn(regl, regh *byte) {
 	ldtemp++
 	*regh = z80.Memory.Read(ldtemp)
 }
+
+func (z80 *Z80) PtrRegisterByte(opcode byte) *byte {
+	r := opcode & 0x07
+	switch r {
+	case 0:
+		return &z80.B
+	case 1:
+		return &z80.C
+	case 2:
+		return &z80.D
+	case 3:
+		return &z80.E
+	case 4:
+		return &z80.H
+	case 5:
+		return &z80.L
+	case 6:
+		return nil
+	case 7:
+		return &z80.A
+	}
+
+	return nil
+}
