@@ -4,7 +4,10 @@
             "path": "."
         }
     ],
-    "settings": {},
+    "settings": {
+        "csv-preview.separator": ";",
+        "csv-preview.lineNumbers": "ordinal"
+    },
     "tasks": {
         "version": "2.0.0",
         "type": "shell",

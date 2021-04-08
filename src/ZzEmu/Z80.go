@@ -11,8 +11,8 @@ const FLAG_5 = 0x20
 const FLAG_Z = 0x40
 const FLAG_S = 0x80
 
-type TsValid struct {
-}
+// type TsValid struct {
+// }
 
 var (
 	OpcodeMap     [255]func(z *Z80, opcode byte)
@@ -68,6 +68,12 @@ func NewZ80(memory Memory) *Z80 {
 	init_table_sz53()
 
 	initOpcodes()
+	initOpcodeCBMap()
+	initOpcodeDDMap()
+	initOpcodeDDCBMap()
+	initOpcodeDFMap()
+	initOpcodeEDMap()
+
 	z80.Reset()
 	return z80
 }
@@ -124,6 +130,18 @@ func (z80 *Z80) DoOpcode() {
 	z80.pc++
 
 	OpcodeMap[opcode](z80, opcode)
+}
+
+func (z80 *Z80) ld16rrnn(regl, regh *byte) {
+	var ldtemp uint16
+
+	ldtemp = uint16(z80.Memory.Read(z80.pc))
+	z80.pc++
+	ldtemp |= uint16(z80.Memory.Read(z80.pc)) << 8
+	z80.pc++
+	*regl = z80.Memory.Read(ldtemp)
+	ldtemp++
+	*regh = z80.Memory.Read(ldtemp)
 }
 
 // func (z80 *Z80) contend(address uint16, time uint16) {

@@ -5,17 +5,33 @@ import (
 	"fmt"
 )
 
+func incremet(addr *uint16) uint16 {
+	(*addr)++
+	return *addr
+}
+
 func main() {
 
 	var console *ZzEmu.Console = new(ZzEmu.Console)
 	var cpu *ZzEmu.Z80 = ZzEmu.CreateCPU(console)
 
-	console.ROM[0] = 0x00 // nop
-	console.ROM[1] = 0x03 // inc bc
-	console.ROM[2] = 0x04 // inc b
-	console.ROM[3] = 0x05 // dec b
-	console.ROM[4] = 0x06 // ld b, 13
-	console.ROM[5] = 0x0d
+	var addr uint16 = 0
+
+	console.ROM[0] = 0x00               // nop
+	console.ROM[incremet(&addr)] = 0x03 // inc bc
+	console.ROM[incremet(&addr)] = 0x04 // inc b
+	console.ROM[incremet(&addr)] = 0x05 // dec b
+	console.ROM[incremet(&addr)] = 0x06 // ld b, 13
+	console.ROM[incremet(&addr)] = 0x0d
+
+	console.ROM[incremet(&addr)] = 0xed // LD SP,(0x1fff)
+	console.ROM[incremet(&addr)] = 0x7b
+	console.ROM[incremet(&addr)] = 0xff
+	console.ROM[incremet(&addr)] = 0x1f
+
+	console.ROM[incremet(&addr)] = 0x31 // LD SP, 0x1FFF
+	console.ROM[incremet(&addr)] = 0xff
+	console.ROM[incremet(&addr)] = 0x1f
 
 	cpu.DoOpcode()
 	cpu.DoOpcode()

@@ -51,7 +51,7 @@ func initOpcodes() {
 	// OpcodeMap[0x2e] = instr__LD_L_NN
 	// OpcodeMap[0x2f] = instr__CPL
 	// OpcodeMap[0x30] = instr__JR_NC_OFFSET
-	// OpcodeMap[0x31] = instr__LD_SP_NNNN
+	OpcodeMap[0x31] = instr__LD_SP_NNNN
 	// OpcodeMap[0x32] = instr__LD_iNNNN_A
 	// OpcodeMap[0x33] = instr__INC_SP
 	// OpcodeMap[0x34] = instr__INC_iHL
@@ -320,18 +320,18 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 
 // /* ADD HL,BC */
 // func instr__ADD_HL_BC(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq_loop(z.IR(), 1, 7)
+// 	z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 7)
 // 	z.add16(z.hl, z.BC())
 // }
 
 // /* LD A,(BC) */
 // func instr__LD_A_iBC(z *Z80, opcode byte) {
-// 	z.A = z.memory.ReadByte(z.BC())
+// 	z.A = z.Memory.Read(z.BC())
 // }
 
 // /* DEC BC */
 // func instr__DEC_BC(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
+// 	z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
 // 	z.DecBC()
 // }
 
@@ -347,7 +347,7 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 
 // /* LD C,nn */
 // func instr__LD_C_NN(z *Z80, opcode byte) {
-// 	z.C = z.memory.ReadByte(z.PC())
+// 	z.C = z.Memory.Read(z.PC())
 // 	z.IncPC(1)
 // }
 
@@ -360,33 +360,33 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 
 // /* DJNZ offset */
 // func instr__DJNZ_OFFSET(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq(z.IR(), 1)
+// 	z.Memory.ContendReadNoMreq(z.IR(), 1)
 // 	z.B--
 // 	if z.B != 0 {
 // 		z.jr()
 // 	} else {
-// 		z.memory.ContendRead(z.PC(), 3)
+// 		z.Memory.ContendRead(z.PC(), 3)
 // 	}
 // 	z.IncPC(1)
 // }
 
 // /* LD DE,nnnn */
 // func instr__LD_DE_NNNN(z *Z80, opcode byte) {
-// 	b1 := z.memory.ReadByte(z.PC())
+// 	b1 := z.Memory.Read(z.PC())
 // 	z.IncPC(1)
-// 	b2 := z.memory.ReadByte(z.PC())
+// 	b2 := z.Memory.Read(z.PC())
 // 	z.IncPC(1)
 // 	z.SetDE(joinBytes(b2, b1))
 // }
 
 // /* LD (DE),A */
 // func instr__LD_iDE_A(z *Z80, opcode byte) {
-// 	z.memory.WriteByte(z.DE(), z.A)
+// 	z.Memory.WriteByte(z.DE(), z.A)
 // }
 
 // /* INC DE */
 // func instr__INC_DE(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
+// 	z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
 // 	z.IncDE()
 // }
 
@@ -402,7 +402,7 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 
 // /* LD D,nn */
 // func instr__LD_D_NN(z *Z80, opcode byte) {
-// 	z.D = z.memory.ReadByte(z.PC())
+// 	z.D = z.Memory.Read(z.PC())
 // 	z.IncPC(1)
 // }
 
@@ -421,18 +421,18 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 
 // /* ADD HL,DE */
 // func instr__ADD_HL_DE(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq_loop(z.IR(), 1, 7)
+// 	z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 7)
 // 	z.add16(z.hl, z.DE())
 // }
 
 // /* LD A,(DE) */
 // func instr__LD_A_iDE(z *Z80, opcode byte) {
-// 	z.A = z.memory.ReadByte(z.DE())
+// 	z.A = z.Memory.Read(z.DE())
 // }
 
 // /* DEC DE */
 // func instr__DEC_DE(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
+// 	z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
 // 	z.DecDE()
 // }
 
@@ -448,7 +448,7 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 
 // /* LD E,nn */
 // func instr__LD_E_NN(z *Z80, opcode byte) {
-// 	z.E = z.memory.ReadByte(z.PC())
+// 	z.E = z.Memory.Read(z.PC())
 // 	z.IncPC(1)
 // }
 
@@ -464,16 +464,16 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 // 	if (z.F & FLAG_Z) == 0 {
 // 		z.jr()
 // 	} else {
-// 		z.memory.ContendRead(z.PC(), 3)
+// 		z.Memory.ContendRead(z.PC(), 3)
 // 	}
 // 	z.IncPC(1)
 // }
 
 // /* LD HL,nnnn */
 // func instr__LD_HL_NNNN(z *Z80, opcode byte) {
-// 	b1 := z.memory.ReadByte(z.PC())
+// 	b1 := z.Memory.Read(z.PC())
 // 	z.IncPC(1)
-// 	b2 := z.memory.ReadByte(z.PC())
+// 	b2 := z.Memory.Read(z.PC())
 // 	z.IncPC(1)
 // 	z.SetHL(joinBytes(b2, b1))
 // }
@@ -486,7 +486,7 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 
 // /* INC HL */
 // func instr__INC_HL(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
+// 	z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
 // 	z.IncHL()
 // }
 
@@ -502,7 +502,7 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 
 // /* LD H,nn */
 // func instr__LD_H_NN(z *Z80, opcode byte) {
-// 	z.H = z.memory.ReadByte(z.PC())
+// 	z.H = z.Memory.Read(z.PC())
 // 	z.IncPC(1)
 // }
 
@@ -532,14 +532,14 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 // 	if (z.F & FLAG_Z) != 0 {
 // 		z.jr()
 // 	} else {
-// 		z.memory.ContendRead(z.PC(), 3)
+// 		z.Memory.ContendRead(z.PC(), 3)
 // 	}
 // 	z.IncPC(1)
 // }
 
 // /* ADD HL,HL */
 // func instr__ADD_HL_HL(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq_loop(z.IR(), 1, 7)
+// 	z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 7)
 // 	z.add16(z.hl, z.HL())
 // }
 
@@ -551,7 +551,7 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 
 // /* DEC HL */
 // func instr__DEC_HL(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
+// 	z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
 // 	z.DecHL()
 // }
 
@@ -567,7 +567,7 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 
 // /* LD L,nn */
 // func instr__LD_L_NN(z *Z80, opcode byte) {
-// 	z.L = z.memory.ReadByte(z.PC())
+// 	z.L = z.Memory.Read(z.PC())
 // 	z.IncPC(1)
 // }
 
@@ -584,58 +584,60 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 // 	if (z.F & FLAG_C) == 0 {
 // 		z.jr()
 // 	} else {
-// 		z.memory.ContendRead(z.PC(), 3)
+// 		z.Memory.ContendRead(z.PC(), 3)
 // 	}
 // 	z.IncPC(1)
 // }
 
 // /* LD SP,nnnn */
-// func instr__LD_SP_NNNN(z *Z80, opcode byte) {
-// 	b1 := z.memory.ReadByte(z.PC())
-// 	z.IncPC(1)
-// 	b2 := z.memory.ReadByte(z.PC())
-// 	z.IncPC(1)
-// 	z.SetSP(joinBytes(b2, b1))
-// }
+func instr__LD_SP_NNNN(z *Z80, opcode byte) {
+
+	z.Tstates += 10
+	b1 := z.Memory.Read(z.pc)
+	z.pc++
+	b2 := z.Memory.Read(z.pc)
+	z.pc++
+	z.sp = joinBytes(b2, b1)
+}
 
 // /* LD (nnnn),A */
 // func instr__LD_iNNNN_A(z *Z80, opcode byte) {
-// 	var wordtemp uint16 = uint16(z.memory.ReadByte(z.PC()))
+// 	var wordtemp uint16 = uint16(z.Memory.Read(z.PC()))
 // 	z.IncPC(1)
-// 	wordtemp |= uint16(z.memory.ReadByte(z.PC())) << 8
+// 	wordtemp |= uint16(z.Memory.Read(z.PC())) << 8
 // 	z.IncPC(1)
-// 	z.memory.WriteByte(wordtemp, z.A)
+// 	z.Memory.WriteByte(wordtemp, z.A)
 // }
 
 // /* INC SP */
 // func instr__INC_SP(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
+// 	z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
 // 	z.IncSP()
 // }
 
 // /* INC (HL) */
 // func instr__INC_iHL(z *Z80, opcode byte) {
 // 	{
-// 		var bytetemp byte = z.memory.ReadByte(z.HL())
-// 		z.memory.ContendReadNoMreq(z.HL(), 1)
+// 		var bytetemp byte = z.Memory.Read(z.HL())
+// 		z.Memory.ContendReadNoMreq(z.HL(), 1)
 // 		z.inc(&bytetemp)
-// 		z.memory.WriteByte(z.HL(), bytetemp)
+// 		z.Memory.WriteByte(z.HL(), bytetemp)
 // 	}
 // }
 
 // /* DEC (HL) */
 // func instr__DEC_iHL(z *Z80, opcode byte) {
 // 	{
-// 		var bytetemp byte = z.memory.ReadByte(z.HL())
-// 		z.memory.ContendReadNoMreq(z.HL(), 1)
+// 		var bytetemp byte = z.Memory.Read(z.HL())
+// 		z.Memory.ContendReadNoMreq(z.HL(), 1)
 // 		z.dec(&bytetemp)
-// 		z.memory.WriteByte(z.HL(), bytetemp)
+// 		z.Memory.WriteByte(z.HL(), bytetemp)
 // 	}
 // }
 
 // /* LD (HL),nn */
 // func instr__LD_iHL_NN(z *Z80, opcode byte) {
-// 	z.memory.WriteByte(z.HL(), z.memory.ReadByte(z.PC()))
+// 	z.Memory.WriteByte(z.HL(), z.Memory.Read(z.PC()))
 // 	z.IncPC(1)
 // }
 
@@ -651,29 +653,29 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 // 	if (z.F & FLAG_C) != 0 {
 // 		z.jr()
 // 	} else {
-// 		z.memory.ContendRead(z.PC(), 3)
+// 		z.Memory.ContendRead(z.PC(), 3)
 // 	}
 // 	z.IncPC(1)
 // }
 
 // /* ADD HL,SP */
 // func instr__ADD_HL_SP(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq_loop(z.IR(), 1, 7)
+// 	z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 7)
 // 	z.add16(z.hl, z.SP())
 // }
 
 // /* LD A,(nnnn) */
 // func instr__LD_A_iNNNN(z *Z80, opcode byte) {
-// 	var wordtemp uint16 = uint16(z.memory.ReadByte(z.PC()))
+// 	var wordtemp uint16 = uint16(z.Memory.Read(z.PC()))
 // 	z.IncPC(1)
-// 	wordtemp |= uint16(z.memory.ReadByte(z.PC())) << 8
+// 	wordtemp |= uint16(z.Memory.Read(z.PC())) << 8
 // 	z.IncPC(1)
-// 	z.A = z.memory.ReadByte(wordtemp)
+// 	z.A = z.Memory.Read(wordtemp)
 // }
 
 // /* DEC SP */
 // func instr__DEC_SP(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
+// 	z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
 // 	z.DecSP()
 // }
 
@@ -689,7 +691,7 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 
 // /* LD A,nn */
 // func instr__LD_A_NN(z *Z80, opcode byte) {
-// 	z.A = z.memory.ReadByte(z.PC())
+// 	z.A = z.Memory.Read(z.PC())
 // 	z.IncPC(1)
 // }
 
@@ -731,7 +733,7 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 
 // /* LD B,(HL) */
 // func instr__LD_B_iHL(z *Z80, opcode byte) {
-// 	z.B = z.memory.ReadByte(z.HL())
+// 	z.B = z.Memory.Read(z.HL())
 // }
 
 // /* LD B,A */
@@ -770,7 +772,7 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 
 // /* LD C,(HL) */
 // func instr__LD_C_iHL(z *Z80, opcode byte) {
-// 	z.C = z.memory.ReadByte(z.HL())
+// 	z.C = z.Memory.Read(z.HL())
 // }
 
 // /* LD C,A */
@@ -809,7 +811,7 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 
 // /* LD D,(HL) */
 // func instr__LD_D_iHL(z *Z80, opcode byte) {
-// 	z.D = z.memory.ReadByte(z.HL())
+// 	z.D = z.Memory.Read(z.HL())
 // }
 
 // /* LD D,A */
@@ -848,7 +850,7 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 
 // /* LD E,(HL) */
 // func instr__LD_E_iHL(z *Z80, opcode byte) {
-// 	z.E = z.memory.ReadByte(z.HL())
+// 	z.E = z.Memory.Read(z.HL())
 // }
 
 // /* LD E,A */
@@ -887,7 +889,7 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 
 // /* LD H,(HL) */
 // func instr__LD_H_iHL(z *Z80, opcode byte) {
-// 	z.H = z.memory.ReadByte(z.HL())
+// 	z.H = z.Memory.Read(z.HL())
 // }
 
 // /* LD H,A */
@@ -926,7 +928,7 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 
 // /* LD L,(HL) */
 // func instr__LD_L_iHL(z *Z80, opcode byte) {
-// 	z.L = z.memory.ReadByte(z.HL())
+// 	z.L = z.Memory.Read(z.HL())
 // }
 
 // /* LD L,A */
@@ -936,32 +938,32 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 
 // /* LD (HL),B */
 // func instr__LD_iHL_B(z *Z80, opcode byte) {
-// 	z.memory.WriteByte(z.HL(), z.B)
+// 	z.Memory.WriteByte(z.HL(), z.B)
 // }
 
 // /* LD (HL),C */
 // func instr__LD_iHL_C(z *Z80, opcode byte) {
-// 	z.memory.WriteByte(z.HL(), z.C)
+// 	z.Memory.WriteByte(z.HL(), z.C)
 // }
 
 // /* LD (HL),D */
 // func instr__LD_iHL_D(z *Z80, opcode byte) {
-// 	z.memory.WriteByte(z.HL(), z.D)
+// 	z.Memory.WriteByte(z.HL(), z.D)
 // }
 
 // /* LD (HL),E */
 // func instr__LD_iHL_E(z *Z80, opcode byte) {
-// 	z.memory.WriteByte(z.HL(), z.E)
+// 	z.Memory.WriteByte(z.HL(), z.E)
 // }
 
 // /* LD (HL),H */
 // func instr__LD_iHL_H(z *Z80, opcode byte) {
-// 	z.memory.WriteByte(z.HL(), z.H)
+// 	z.Memory.WriteByte(z.HL(), z.H)
 // }
 
 // /* LD (HL),L */
 // func instr__LD_iHL_L(z *Z80, opcode byte) {
-// 	z.memory.WriteByte(z.HL(), z.L)
+// 	z.Memory.WriteByte(z.HL(), z.L)
 // }
 
 // /* HALT */
@@ -973,7 +975,7 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 
 // /* LD (HL),A */
 // func instr__LD_iHL_A(z *Z80, opcode byte) {
-// 	z.memory.WriteByte(z.HL(), z.A)
+// 	z.Memory.WriteByte(z.HL(), z.A)
 // }
 
 // /* LD A,B */
@@ -1008,7 +1010,7 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 
 // /* LD A,(HL) */
 // func instr__LD_A_iHL(z *Z80, opcode byte) {
-// 	z.A = z.memory.ReadByte(z.HL())
+// 	z.A = z.Memory.Read(z.HL())
 // }
 
 // /* LD A,A */
@@ -1047,7 +1049,7 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 
 // /* ADD A,(HL) */
 // func instr__ADD_A_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.HL())
+// 	var bytetemp byte = z.Memory.Read(z.HL())
 
 // 	z.add(bytetemp)
 // }
@@ -1089,7 +1091,7 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 
 // /* ADC A,(HL) */
 // func instr__ADC_A_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.HL())
+// 	var bytetemp byte = z.Memory.Read(z.HL())
 
 // 	z.adc(bytetemp)
 // }
@@ -1131,7 +1133,7 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 
 // /* SUB A,(HL) */
 // func instr__SUB_A_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.HL())
+// 	var bytetemp byte = z.Memory.Read(z.HL())
 
 // 	z.sub(bytetemp)
 // }
@@ -1173,7 +1175,7 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 
 // /* SBC A,(HL) */
 // func instr__SBC_A_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.HL())
+// 	var bytetemp byte = z.Memory.Read(z.HL())
 
 // 	z.sbc(bytetemp)
 // }
@@ -1215,7 +1217,7 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 
 // /* AND A,(HL) */
 // func instr__AND_A_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.HL())
+// 	var bytetemp byte = z.Memory.Read(z.HL())
 
 // 	z.and(bytetemp)
 // }
@@ -1257,7 +1259,7 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 
 // /* XOR A,(HL) */
 // func instr__XOR_A_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.HL())
+// 	var bytetemp byte = z.Memory.Read(z.HL())
 
 // 	z.xor(bytetemp)
 // }
@@ -1299,7 +1301,7 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 
 // /* OR A,(HL) */
 // func instr__OR_A_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.HL())
+// 	var bytetemp byte = z.Memory.Read(z.HL())
 
 // 	z.or(bytetemp)
 // }
@@ -1341,7 +1343,7 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 
 // /* CP (HL) */
 // func instr__CP_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.HL())
+// 	var bytetemp byte = z.Memory.Read(z.HL())
 
 // 	z.cp(bytetemp)
 // }
@@ -1353,7 +1355,7 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 
 // /* RET NZ */
 // func instr__RET_NZ(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq(z.IR(), 1)
+// 	z.Memory.ContendReadNoMreq(z.IR(), 1)
 // 	if !((z.F & FLAG_Z) != 0) {
 // 		z.ret()
 // 	}
@@ -1369,8 +1371,8 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 // 	if (z.F & FLAG_Z) == 0 {
 // 		z.jp()
 // 	} else {
-// 		z.memory.ContendRead(z.PC(), 3)
-// 		z.memory.ContendRead(z.PC()+1, 3)
+// 		z.Memory.ContendRead(z.PC(), 3)
+// 		z.Memory.ContendRead(z.PC()+1, 3)
 // 		z.IncPC(2)
 // 	}
 // }
@@ -1385,34 +1387,34 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 // 	if (z.F & FLAG_Z) == 0 {
 // 		z.call()
 // 	} else {
-// 		z.memory.ContendRead(z.PC(), 3)
-// 		z.memory.ContendRead(z.PC()+1, 3)
+// 		z.Memory.ContendRead(z.PC(), 3)
+// 		z.Memory.ContendRead(z.PC()+1, 3)
 // 		z.IncPC(2)
 // 	}
 // }
 
 // /* PUSH BC */
 // func instr__PUSH_BC(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq(z.IR(), 1)
+// 	z.Memory.ContendReadNoMreq(z.IR(), 1)
 // 	z.push16(z.C, z.B)
 // }
 
 // /* ADD A,nn */
 // func instr__ADD_A_NN(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.PC())
+// 	var bytetemp byte = z.Memory.Read(z.PC())
 // 	z.IncPC(1)
 // 	z.add(bytetemp)
 // }
 
 // /* RST 00 */
 // func instr__RST_00(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq(z.IR(), 1)
+// 	z.Memory.ContendReadNoMreq(z.IR(), 1)
 // 	z.rst(0x00)
 // }
 
 // /* RET Z */
 // func instr__RET_Z(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq(z.IR(), 1)
+// 	z.Memory.ContendReadNoMreq(z.IR(), 1)
 // 	if (z.F & FLAG_Z) != 0 {
 // 		z.ret()
 // 	}
@@ -1428,15 +1430,20 @@ func instr__EX_AF_AF(z *Z80, opcode byte) {
 // 	if (z.F & FLAG_Z) != 0 {
 // 		z.jp()
 // 	} else {
-// 		z.memory.ContendRead(z.PC(), 3)
-// 		z.memory.ContendRead(z.PC()+1, 3)
+// 		z.Memory.ContendRead(z.PC(), 3)
+// 		z.Memory.ContendRead(z.PC()+1, 3)
 // 		z.IncPC(2)
 // 	}
 // }
 
 /* shift CB */
 func instr__SHIFT_CB(z *Z80, opcode byte) {
-	OpcodeCBMap[opcode](z, opcode)
+
+	opcode2 := z.Memory.Read(z.pc)
+	z.R = (z.R + 1) & 0x7f // FIXME: Precisa ???
+	z.pc++
+
+	OpcodeCBMap[opcode2](z, opcode2)
 }
 
 // /* CALL Z,nnnn */
@@ -1444,8 +1451,8 @@ func instr__SHIFT_CB(z *Z80, opcode byte) {
 // 	if (z.F & FLAG_Z) != 0 {
 // 		z.call()
 // 	} else {
-// 		z.memory.ContendRead(z.PC(), 3)
-// 		z.memory.ContendRead(z.PC()+1, 3)
+// 		z.Memory.ContendRead(z.PC(), 3)
+// 		z.Memory.ContendRead(z.PC()+1, 3)
 // 		z.IncPC(2)
 // 	}
 // }
@@ -1457,20 +1464,20 @@ func instr__SHIFT_CB(z *Z80, opcode byte) {
 
 // /* ADC A,nn */
 // func instr__ADC_A_NN(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.PC())
+// 	var bytetemp byte = z.Memory.Read(z.PC())
 // 	z.IncPC(1)
 // 	z.adc(bytetemp)
 // }
 
 // /* RST 8 */
 // func instr__RST_8(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq(z.IR(), 1)
+// 	z.Memory.ContendReadNoMreq(z.IR(), 1)
 // 	z.rst(0x8)
 // }
 
 // /* RET NC */
 // func instr__RET_NC(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq(z.IR(), 1)
+// 	z.Memory.ContendReadNoMreq(z.IR(), 1)
 // 	if !((z.F & FLAG_C) != 0) {
 // 		z.ret()
 // 	}
@@ -1486,15 +1493,15 @@ func instr__SHIFT_CB(z *Z80, opcode byte) {
 // 	if (z.F & FLAG_C) == 0 {
 // 		z.jp()
 // 	} else {
-// 		z.memory.ContendRead(z.PC(), 3)
-// 		z.memory.ContendRead(z.PC()+1, 3)
+// 		z.Memory.ContendRead(z.PC(), 3)
+// 		z.Memory.ContendRead(z.PC()+1, 3)
 // 		z.IncPC(2)
 // 	}
 // }
 
 // /* OUT (nn),A */
 // func instr__OUT_iNN_A(z *Z80, opcode byte) {
-// 	var outtemp uint16 = uint16(z.memory.ReadByte(z.PC())) + (uint16(z.A) << 8)
+// 	var outtemp uint16 = uint16(z.Memory.Read(z.PC())) + (uint16(z.A) << 8)
 // 	z.IncPC(1)
 // 	z.writePort(outtemp, z.A)
 // }
@@ -1504,34 +1511,34 @@ func instr__SHIFT_CB(z *Z80, opcode byte) {
 // 	if (z.F & FLAG_C) == 0 {
 // 		z.call()
 // 	} else {
-// 		z.memory.ContendRead(z.PC(), 3)
-// 		z.memory.ContendRead(z.PC()+1, 3)
+// 		z.Memory.ContendRead(z.PC(), 3)
+// 		z.Memory.ContendRead(z.PC()+1, 3)
 // 		z.IncPC(2)
 // 	}
 // }
 
 // /* PUSH DE */
 // func instr__PUSH_DE(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq(z.IR(), 1)
+// 	z.Memory.ContendReadNoMreq(z.IR(), 1)
 // 	z.push16(z.E, z.D)
 // }
 
 // /* SUB nn */
 // func instr__SUB_NN(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.PC())
+// 	var bytetemp byte = z.Memory.Read(z.PC())
 // 	z.IncPC(1)
 // 	z.sub(bytetemp)
 // }
 
 // /* RST 10 */
 // func instr__RST_10(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq(z.IR(), 1)
+// 	z.Memory.ContendReadNoMreq(z.IR(), 1)
 // 	z.rst(0x10)
 // }
 
 // /* RET C */
 // func instr__RET_C(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq(z.IR(), 1)
+// 	z.Memory.ContendReadNoMreq(z.IR(), 1)
 // 	if (z.F & FLAG_C) != 0 {
 // 		z.ret()
 // 	}
@@ -1557,15 +1564,15 @@ func instr__SHIFT_CB(z *Z80, opcode byte) {
 // 	if (z.F & FLAG_C) != 0 {
 // 		z.jp()
 // 	} else {
-// 		z.memory.ContendRead(z.PC(), 3)
-// 		z.memory.ContendRead(z.PC()+1, 3)
+// 		z.Memory.ContendRead(z.PC(), 3)
+// 		z.Memory.ContendRead(z.PC()+1, 3)
 // 		z.IncPC(2)
 // 	}
 // }
 
 // /* IN A,(nn) */
 // func instr__IN_A_iNN(z *Z80, opcode byte) {
-// 	var intemp uint16 = uint16(z.memory.ReadByte(z.PC())) + (uint16(z.A) << 8)
+// 	var intemp uint16 = uint16(z.Memory.Read(z.PC())) + (uint16(z.A) << 8)
 // 	z.IncPC(1)
 // 	z.A = z.readPort(intemp)
 // }
@@ -1575,33 +1582,38 @@ func instr__SHIFT_CB(z *Z80, opcode byte) {
 // 	if (z.F & FLAG_C) != 0 {
 // 		z.call()
 // 	} else {
-// 		z.memory.ContendRead(z.PC(), 3)
-// 		z.memory.ContendRead(z.PC()+1, 3)
+// 		z.Memory.ContendRead(z.PC(), 3)
+// 		z.Memory.ContendRead(z.PC()+1, 3)
 // 		z.IncPC(2)
 // 	}
 // }
 
 // /* shift DD */
 func instr__SHIFT_DD(z *Z80, opcode byte) {
-	OpcodeDDMap[opcode](z, opcode)
+
+	opcode2 := z.Memory.Read(z.pc)
+	z.R = (z.R + 1) & 0x7f // FIXME: Precisa ???
+	z.pc++
+
+	OpcodeDDMap[opcode2](z, opcode2)
 }
 
 // /* SBC A,nn */
 // func instr__SBC_A_NN(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.PC())
+// 	var bytetemp byte = z.Memory.Read(z.PC())
 // 	z.IncPC(1)
 // 	z.sbc(bytetemp)
 // }
 
 // /* RST 18 */
 // func instr__RST_18(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq(z.IR(), 1)
+// 	z.Memory.ContendReadNoMreq(z.IR(), 1)
 // 	z.rst(0x18)
 // }
 
 // /* RET PO */
 // func instr__RET_PO(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq(z.IR(), 1)
+// 	z.Memory.ContendReadNoMreq(z.IR(), 1)
 // 	if !((z.F & FLAG_P) != 0) {
 // 		z.ret()
 // 	}
@@ -1617,20 +1629,20 @@ func instr__SHIFT_DD(z *Z80, opcode byte) {
 // 	if (z.F & FLAG_P) == 0 {
 // 		z.jp()
 // 	} else {
-// 		z.memory.ContendRead(z.PC(), 3)
-// 		z.memory.ContendRead(z.PC()+1, 3)
+// 		z.Memory.ContendRead(z.PC(), 3)
+// 		z.Memory.ContendRead(z.PC()+1, 3)
 // 		z.IncPC(2)
 // 	}
 // }
 
 // /* EX (SP),HL */
 // func instr__EX_iSP_HL(z *Z80, opcode byte) {
-// 	var bytetempl = z.memory.ReadByte(z.SP())
-// 	var bytetemph = z.memory.ReadByte(z.SP() + 1)
-// 	z.memory.ContendReadNoMreq(z.SP()+1, 1)
-// 	z.memory.WriteByte(z.SP()+1, z.H)
-// 	z.memory.WriteByte(z.SP(), z.L)
-// 	z.memory.ContendWriteNoMreq_loop(z.SP(), 1, 2)
+// 	var bytetempl = z.Memory.Read(z.SP())
+// 	var bytetemph = z.Memory.Read(z.SP() + 1)
+// 	z.Memory.ContendReadNoMreq(z.SP()+1, 1)
+// 	z.Memory.WriteByte(z.SP()+1, z.H)
+// 	z.Memory.WriteByte(z.SP(), z.L)
+// 	z.Memory.ContendWriteNoMreq_loop(z.SP(), 1, 2)
 // 	z.L = bytetempl
 // 	z.H = bytetemph
 // }
@@ -1640,34 +1652,34 @@ func instr__SHIFT_DD(z *Z80, opcode byte) {
 // 	if (z.F & FLAG_P) == 0 {
 // 		z.call()
 // 	} else {
-// 		z.memory.ContendRead(z.PC(), 3)
-// 		z.memory.ContendRead(z.PC()+1, 3)
+// 		z.Memory.ContendRead(z.PC(), 3)
+// 		z.Memory.ContendRead(z.PC()+1, 3)
 // 		z.IncPC(2)
 // 	}
 // }
 
 // /* PUSH HL */
 // func instr__PUSH_HL(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq(z.IR(), 1)
+// 	z.Memory.ContendReadNoMreq(z.IR(), 1)
 // 	z.push16(z.L, z.H)
 // }
 
 // /* AND nn */
 // func instr__AND_NN(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.PC())
+// 	var bytetemp byte = z.Memory.Read(z.PC())
 // 	z.IncPC(1)
 // 	z.and(bytetemp)
 // }
 
 // /* RST 20 */
 // func instr__RST_20(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq(z.IR(), 1)
+// 	z.Memory.ContendReadNoMreq(z.IR(), 1)
 // 	z.rst(0x20)
 // }
 
 // /* RET PE */
 // func instr__RET_PE(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq(z.IR(), 1)
+// 	z.Memory.ContendReadNoMreq(z.IR(), 1)
 // 	if (z.F & FLAG_P) != 0 {
 // 		z.ret()
 // 	}
@@ -1683,8 +1695,8 @@ func instr__SHIFT_DD(z *Z80, opcode byte) {
 // 	if (z.F & FLAG_P) != 0 {
 // 		z.jp()
 // 	} else {
-// 		z.memory.ContendRead(z.PC(), 3)
-// 		z.memory.ContendRead(z.PC()+1, 3)
+// 		z.Memory.ContendRead(z.PC(), 3)
+// 		z.Memory.ContendRead(z.PC()+1, 3)
 // 		z.IncPC(2)
 // 	}
 // }
@@ -1701,33 +1713,38 @@ func instr__SHIFT_DD(z *Z80, opcode byte) {
 // 	if (z.F & FLAG_P) != 0 {
 // 		z.call()
 // 	} else {
-// 		z.memory.ContendRead(z.PC(), 3)
-// 		z.memory.ContendRead(z.PC()+1, 3)
+// 		z.Memory.ContendRead(z.PC(), 3)
+// 		z.Memory.ContendRead(z.PC()+1, 3)
 // 		z.IncPC(2)
 // 	}
 // }
 
 // /* shift ED */
 func instr__SHIFT_ED(z *Z80, opcode byte) {
-	OpcodeEDMap[opcode](z, opcode)
+
+	opcode2 := z.Memory.Read(z.pc)
+	z.R = (z.R + 1) & 0x7f // FIXME: Precisa ???
+	z.pc++
+
+	OpcodeEDMap[opcode2](z, opcode2)
 }
 
 // /* XOR A,nn */
 // func instr__XOR_A_NN(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.PC())
+// 	var bytetemp byte = z.Memory.Read(z.PC())
 // 	z.IncPC(1)
 // 	z.xor(bytetemp)
 // }
 
 // /* RST 28 */
 // func instr__RST_28(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq(z.IR(), 1)
+// 	z.Memory.ContendReadNoMreq(z.IR(), 1)
 // 	z.rst(0x28)
 // }
 
 // /* RET P */
 // func instr__RET_P(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq(z.IR(), 1)
+// 	z.Memory.ContendReadNoMreq(z.IR(), 1)
 // 	if !((z.F & FLAG_S) != 0) {
 // 		z.ret()
 // 	}
@@ -1743,8 +1760,8 @@ func instr__SHIFT_ED(z *Z80, opcode byte) {
 // 	if (z.F & FLAG_S) == 0 {
 // 		z.jp()
 // 	} else {
-// 		z.memory.ContendRead(z.PC(), 3)
-// 		z.memory.ContendRead(z.PC()+1, 3)
+// 		z.Memory.ContendRead(z.PC(), 3)
+// 		z.Memory.ContendRead(z.PC()+1, 3)
 // 		z.IncPC(2)
 // 	}
 // }
@@ -1759,34 +1776,34 @@ func instr__SHIFT_ED(z *Z80, opcode byte) {
 // 	if (z.F & FLAG_S) == 0 {
 // 		z.call()
 // 	} else {
-// 		z.memory.ContendRead(z.PC(), 3)
-// 		z.memory.ContendRead(z.PC()+1, 3)
+// 		z.Memory.ContendRead(z.PC(), 3)
+// 		z.Memory.ContendRead(z.PC()+1, 3)
 // 		z.IncPC(2)
 // 	}
 // }
 
 // /* PUSH AF */
 // func instr__PUSH_AF(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq(z.IR(), 1)
+// 	z.Memory.ContendReadNoMreq(z.IR(), 1)
 // 	z.push16(z.F, z.A)
 // }
 
 // /* OR nn */
 // func instr__OR_NN(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.PC())
+// 	var bytetemp byte = z.Memory.Read(z.PC())
 // 	z.IncPC(1)
 // 	z.or(bytetemp)
 // }
 
 // /* RST 30 */
 // func instr__RST_30(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq(z.IR(), 1)
+// 	z.Memory.ContendReadNoMreq(z.IR(), 1)
 // 	z.rst(0x30)
 // }
 
 // /* RET M */
 // func instr__RET_M(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq(z.IR(), 1)
+// 	z.Memory.ContendReadNoMreq(z.IR(), 1)
 // 	if (z.F & FLAG_S) != 0 {
 // 		z.ret()
 // 	}
@@ -1794,7 +1811,7 @@ func instr__SHIFT_ED(z *Z80, opcode byte) {
 
 // /* LD SP,HL */
 // func instr__LD_SP_HL(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
+// 	z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
 // 	z.SetSP(z.HL())
 // }
 
@@ -1803,8 +1820,8 @@ func instr__SHIFT_ED(z *Z80, opcode byte) {
 // 	if (z.F & FLAG_S) != 0 {
 // 		z.jp()
 // 	} else {
-// 		z.memory.ContendRead(z.PC(), 3)
-// 		z.memory.ContendRead(z.PC()+1, 3)
+// 		z.Memory.ContendRead(z.PC(), 3)
+// 		z.Memory.ContendRead(z.PC()+1, 3)
 // 		z.IncPC(2)
 // 	}
 // }
@@ -1823,27 +1840,32 @@ func instr__SHIFT_ED(z *Z80, opcode byte) {
 // 	if (z.F & FLAG_S) != 0 {
 // 		z.call()
 // 	} else {
-// 		z.memory.ContendRead(z.PC(), 3)
-// 		z.memory.ContendRead(z.PC()+1, 3)
+// 		z.Memory.ContendRead(z.PC(), 3)
+// 		z.Memory.ContendRead(z.PC()+1, 3)
 // 		z.IncPC(2)
 // 	}
 // }
 
 // /* shift FD */
 func instr__SHIFT_FD(z *Z80, opcode byte) {
-	OpcodeDFMap[opcode](z, opcode)
+
+	opcode2 := z.Memory.Read(z.pc)
+	z.R = (z.R + 1) & 0x7f // FIXME: Precisa ???
+	z.pc++
+
+	OpcodeDFMap[opcode2](z, opcode2)
 }
 
 // /* CP nn */
 // func instr__CP_NN(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.PC())
+// 	var bytetemp byte = z.Memory.Read(z.PC())
 // 	z.IncPC(1)
 // 	z.cp(bytetemp)
 // }
 
 // /* RST 38 */
 // func instr__RST_38(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq(z.IR(), 1)
+// 	z.Memory.ContendReadNoMreq(z.IR(), 1)
 // 	z.rst(0x38)
 // }
 
