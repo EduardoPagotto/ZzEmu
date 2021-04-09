@@ -147,6 +147,17 @@ func (z80 *Z80) Rst(value byte) {
 	z80.pc = uint16(value)
 }
 
+func (z80 *Z80) Inc(value *byte) { // TODO merge com IncR
+	*value++
+	z80.F = (z80.F & FLAG_C) | ternOpB(*value == 0x80, FLAG_V, 0) | ternOpB((*value&0x0f) != 0, 0, FLAG_H) | sz53Table[(*value)]
+}
+
+func (z80 *Z80) Dec(value *byte) { // TODO merge com DecR
+	z80.F = (z80.F & FLAG_C) | ternOpB((*value&0x0f) != 0, 0, FLAG_H) | FLAG_N
+	*value--
+	z80.F |= ternOpB(*value == 0x7f, FLAG_V, 0) | sz53Table[*value]
+}
+
 func (z80 *Z80) Push8(value byte) {
 	z80.sp--
 	z80.Memory.Write(z80.sp, value)
@@ -212,6 +223,13 @@ func (z80 *Z80) ld16rrnn(regl, regh *byte) {
 	*regh = z80.Memory.Read(ldtemp)
 }
 
+func (z80 *Z80) ld16nnrr(regl, regh byte) {
+	ldtemp := z80.LdAddrLittleEndian()
+	z80.Memory.Write(ldtemp, regl)
+	ldtemp++
+	z80.Memory.Write(ldtemp, regh)
+}
+
 func (z80 *Z80) GetRegisterValByte(opcode byte) byte {
 	r := opcode & 0x07
 	switch r {
@@ -232,4 +250,40 @@ func (z80 *Z80) GetRegisterValByte(opcode byte) byte {
 	}
 
 	return 0
+}
+
+func (z80 *Z80) GetPrtRegisterValByte(opcode byte) *byte {
+	r := opcode & 0x07
+	switch r {
+	case 0:
+		return &z80.B
+	case 1:
+		return &z80.C
+	case 2:
+		return &z80.D
+	case 3:
+		return &z80.E
+	case 4:
+		return &z80.H
+	case 5:
+		return &z80.L
+	case 7:
+		return &z80.A
+	}
+
+	return nil
+}
+
+func (z80 *Z80) IncR(opcode byte) {
+	var ptrReg *byte = z80.GetPrtRegisterValByte(opcode)
+	(*ptrReg)++
+	z80.F = (z80.F & FLAG_C) | (ternOpB((*ptrReg) == 0x80, FLAG_V, 0)) | (ternOpB(((*ptrReg)&0x0f) != 0, 0, FLAG_H)) | sz53Table[(*ptrReg)]
+}
+
+func (z80 *Z80) DecR(opcode byte) {
+
+	var ptrReg *byte = z80.GetPrtRegisterValByte(opcode)
+	z80.F = (z80.F & FLAG_C) | (ternOpB((*ptrReg)&0x0f != 0, 0, FLAG_H)) | FLAG_N
+	(*ptrReg)--
+	z80.F |= (ternOpB((*ptrReg) == 0x7f, FLAG_V, 0)) | sz53Table[(*ptrReg)]
 }
