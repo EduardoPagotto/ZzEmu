@@ -46,19 +46,13 @@ Update envoirement
 source ./.bashrc
 ```
 
-# Funcoes implementadas
-NOP
-LD BC, nn
-LD (BC), A
-INC BC
-INC B
-DEC B
-LD B,nn
-RLCA
-EX AF,A'F'
-JR ssss
-LD SP, nn
-JP nn
-RET
-CALL nn
-LD SP,(nn)
+## Z80 dependencias para teste e extencoes do VScode
+```bash
+apt install pasmo
+
+code --install-extension golang.go
+code --install-extension GrapeCity.gc-excelviewer
+code --install-extension mborik.z80-macroasm
+code --install-extension mohsen1.prettify-json
+code --install-extension QiaoJie.binary-viewer
+```
