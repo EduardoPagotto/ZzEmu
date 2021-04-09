@@ -98,6 +98,13 @@ func (z80 *Z80) Call() {
 	z80.pc = newpc
 }
 
+func (z80 *Z80) Jr() {
+	z80.Tstates += 12
+	var jrtemp int16 = signExtend(z80.Memory.Read(z80.pc))
+	z80.pc += uint16(jrtemp)
+	z80.pc++
+}
+
 func (z80 *Z80) Add(value byte) {
 	var addtemp uint = uint(z80.A) + uint(value)
 	var lookup byte = ((z80.A & 0x88) >> 3) | ((value & 0x88) >> 2) | byte((addtemp&0x88)>>1)
