@@ -91,6 +91,13 @@ func (z80 *Z80) Reset() {
 	z80.interruptsEnabledAt = 0
 }
 
+func (z80 *Z80) Call() {
+	z80.Tstates += 17
+	newpc := z80.LdAddrLittleEndian()
+	z80.Push16(z80.pc)
+	z80.pc = newpc
+}
+
 func (z80 *Z80) Add(value byte) {
 	var addtemp uint = uint(z80.A) + uint(value)
 	var lookup byte = ((z80.A & 0x88) >> 3) | ((value & 0x88) >> 2) | byte((addtemp&0x88)>>1)

@@ -198,7 +198,7 @@ func initOpcodes() {
 	OpcodeMap[0xc1] = instr__POP_BC
 	OpcodeMap[0xc2] = instr__JP_NZ_NNNN
 	OpcodeMap[0xc3] = instr__JP_NNNN
-	// OpcodeMap[0xc4] = instr__CALL_NZ_NNNN
+	OpcodeMap[0xc4] = instr__CALL_NZ_NNNN
 	OpcodeMap[0xc5] = instr__PUSH_BC
 	// OpcodeMap[0xc6] = instr__ADD_A_NN
 	OpcodeMap[0xc7] = instr__RST_00
@@ -206,7 +206,7 @@ func initOpcodes() {
 	OpcodeMap[0xc9] = instr__RET
 	OpcodeMap[0xca] = instr__JP_Z_NNNN
 	OpcodeMap[0xcb] = instr__SHIFT_CB
-	// OpcodeMap[0xcc] = instr__CALL_Z_NNNN
+	OpcodeMap[0xcc] = instr__CALL_Z_NNNN
 	OpcodeMap[0xcd] = instr__CALL_NNNN
 	// OpcodeMap[0xce] = instr__ADC_A_NN
 	OpcodeMap[0xcf] = instr__RST_8
@@ -214,7 +214,7 @@ func initOpcodes() {
 	OpcodeMap[0xd1] = instr__POP_DE
 	OpcodeMap[0xd2] = instr__JP_NC_NNNN
 	// OpcodeMap[0xd3] = instr__OUT_iNN_A
-	// OpcodeMap[0xd4] = instr__CALL_NC_NNNN
+	OpcodeMap[0xd4] = instr__CALL_NC_NNNN
 	OpcodeMap[0xd5] = instr__PUSH_DE
 	// OpcodeMap[0xd6] = instr__SUB_NN
 	OpcodeMap[0xd7] = instr__RST_10
@@ -222,7 +222,7 @@ func initOpcodes() {
 	// OpcodeMap[0xd9] = instr__EXX
 	OpcodeMap[0xda] = instr__JP_C_NNNN
 	// OpcodeMap[0xdb] = instr__IN_A_iNN
-	// OpcodeMap[0xdc] = instr__CALL_C_NNNN
+	OpcodeMap[0xdc] = instr__CALL_C_NNNN
 	OpcodeMap[0xdd] = instr__SHIFT_DD
 	// OpcodeMap[0xde] = instr__SBC_A_NN
 	OpcodeMap[0xdf] = instr__RST_18
@@ -230,7 +230,7 @@ func initOpcodes() {
 	OpcodeMap[0xe1] = instr__POP_HL
 	OpcodeMap[0xe2] = instr__JP_PO_NNNN
 	// OpcodeMap[0xe3] = instr__EX_iSP_HL
-	// OpcodeMap[0xe4] = instr__CALL_PO_NNNN
+	OpcodeMap[0xe4] = instr__CALL_PO_NNNN
 	OpcodeMap[0xe5] = instr__PUSH_HL
 	// OpcodeMap[0xe6] = instr__AND_NN
 	OpcodeMap[0xe7] = instr__RST_20
@@ -238,7 +238,7 @@ func initOpcodes() {
 	OpcodeMap[0xe9] = instr__JP_HL
 	OpcodeMap[0xea] = instr__JP_PE_NNNN
 	OpcodeMap[0xeb] = instr__EX_DE_HL
-	// OpcodeMap[0xec] = instr__CALL_PE_NNNN
+	OpcodeMap[0xec] = instr__CALL_PE_NNNN
 	OpcodeMap[0xed] = instr__SHIFT_ED
 	// OpcodeMap[0xee] = instr__XOR_A_NN
 	OpcodeMap[0xef] = instr__RST_28
@@ -246,7 +246,7 @@ func initOpcodes() {
 	OpcodeMap[0xf1] = instr__POP_AF
 	OpcodeMap[0xf2] = instr__JP_P_NNNN
 	OpcodeMap[0xf3] = instr__DI
-	// OpcodeMap[0xf4] = instr__CALL_P_NNNN
+	OpcodeMap[0xf4] = instr__CALL_P_NNNN
 	OpcodeMap[0xf5] = instr__PUSH_AF
 	// OpcodeMap[0xf6] = instr__OR_NN
 	OpcodeMap[0xf7] = instr__RST_30
@@ -254,7 +254,7 @@ func initOpcodes() {
 	OpcodeMap[0xf9] = instr__LD_SP_HL
 	OpcodeMap[0xfa] = instr__JP_M_NNNN
 	OpcodeMap[0xfb] = instr__EI
-	// OpcodeMap[0xfc] = instr__CALL_M_NNNN
+	OpcodeMap[0xfc] = instr__CALL_M_NNNN
 	OpcodeMap[0xfd] = instr__SHIFT_FD
 	// OpcodeMap[0xfe] = instr__CP_NN
 	OpcodeMap[0xff] = instr__RST_38
@@ -932,16 +932,17 @@ func instr__JP_NNNN(z *Z80, opcode byte) {
 	z.pc = z.LdAddrLittleEndian()
 }
 
-// /* CALL NZ,nnnn */
-// func instr__CALL_NZ_NNNN(z *Z80, opcode byte) {
-// 	if (z.F & FLAG_Z) == 0 {
-// 		z.call()
-// 	} else {
-// 		z.Memory.ContendRead(z.PC(), 3)
-// 		z.Memory.ContendRead(z.PC()+1, 3)
-// 		z.IncPC(2)
-// 	}
-// }
+/* CALL NZ,nnnn */
+func instr__CALL_NZ_NNNN(z *Z80, opcode byte) {
+	if (z.F & FLAG_Z) == 0 {
+		z.Call()
+	} else {
+		//z.Memory.ContendRead(z.PC(), 3)
+		//z.Memory.ContendRead(z.PC()+1, 3)
+		z.Tstates += 10
+		z.pc += 2
+	}
+}
 
 // /* PUSH BC */
 func instr__PUSH_BC(z *Z80, opcode byte) {
@@ -1005,23 +1006,21 @@ func instr__SHIFT_CB(z *Z80, opcode byte) {
 	OpcodeCBMap[opcode2](z, opcode2)
 }
 
-// /* CALL Z,nnnn */
-// func instr__CALL_Z_NNNN(z *Z80, opcode byte) {
-// 	if (z.F & FLAG_Z) != 0 {
-// 		z.call()
-// 	} else {
-// 		z.Memory.ContendRead(z.PC(), 3)
-// 		z.Memory.ContendRead(z.PC()+1, 3)
-// 		z.IncPC(2)
-// 	}
-// }
+/* CALL Z,nnnn */
+func instr__CALL_Z_NNNN(z *Z80, opcode byte) {
+	if (z.F & FLAG_Z) != 0 {
+		z.Call()
+	} else {
+		//z.Memory.ContendRead(z.PC(), 3)
+		//z.Memory.ContendRead(z.PC()+1, 3)
+		z.Tstates += 10
+		z.pc += 2
+	}
+}
 
 // /* CALL nnnn */
 func instr__CALL_NNNN(z *Z80, opcode byte) {
-	z.Tstates += 17
-	newpc := z.LdAddrLittleEndian()
-	z.Push16(z.pc)
-	z.pc = newpc
+	z.Call() // z.Tstate incluido
 }
 
 // /* ADC A,nn */
@@ -1075,16 +1074,17 @@ func instr__JP_NC_NNNN(z *Z80, opcode byte) {
 // 	z.writePort(outtemp, z.A)
 // }
 
-// /* CALL NC,nnnn */
-// func instr__CALL_NC_NNNN(z *Z80, opcode byte) {
-// 	if (z.F & FLAG_C) == 0 {
-// 		z.call()
-// 	} else {
-// 		z.Memory.ContendRead(z.PC(), 3)
-// 		z.Memory.ContendRead(z.PC()+1, 3)
-// 		z.IncPC(2)
-// 	}
-// }
+/* CALL NC,nnnn */
+func instr__CALL_NC_NNNN(z *Z80, opcode byte) {
+	if (z.F & FLAG_C) == 0 {
+		z.Call()
+	} else {
+		//z.Memory.ContendRead(z.PC(), 3)
+		//z.Memory.ContendRead(z.PC()+1, 3)
+		z.Tstates += 10
+		z.pc += 2
+	}
+}
 
 // /* PUSH DE */
 func instr__PUSH_DE(z *Z80, opcode byte) {
@@ -1154,16 +1154,17 @@ func instr__JP_C_NNNN(z *Z80, opcode byte) {
 // 	z.A = z.readPort(intemp)
 // }
 
-// /* CALL C,nnnn */
-// func instr__CALL_C_NNNN(z *Z80, opcode byte) {
-// 	if (z.F & FLAG_C) != 0 {
-// 		z.call()
-// 	} else {
-// 		z.Memory.ContendRead(z.PC(), 3)
-// 		z.Memory.ContendRead(z.PC()+1, 3)
-// 		z.IncPC(2)
-// 	}
-// }
+/* CALL C,nnnn */
+func instr__CALL_C_NNNN(z *Z80, opcode byte) {
+	if (z.F & FLAG_C) != 0 {
+		z.Call()
+	} else {
+		//z.Memory.ContendRead(z.PC(), 3)
+		//z.Memory.ContendRead(z.PC()+1, 3)
+		z.Tstates += 10
+		z.pc += 2
+	}
+}
 
 // /* shift DD */
 func instr__SHIFT_DD(z *Z80, opcode byte) {
@@ -1231,16 +1232,17 @@ func instr__JP_PO_NNNN(z *Z80, opcode byte) {
 // 	z.H = bytetemph
 // }
 
-// /* CALL PO,nnnn */
-// func instr__CALL_PO_NNNN(z *Z80, opcode byte) {
-// 	if (z.F & FLAG_P) == 0 {
-// 		z.call()
-// 	} else {
-// 		z.Memory.ContendRead(z.PC(), 3)
-// 		z.Memory.ContendRead(z.PC()+1, 3)
-// 		z.IncPC(2)
-// 	}
-// }
+/* CALL PO,nnnn */
+func instr__CALL_PO_NNNN(z *Z80, opcode byte) {
+	if (z.F & FLAG_P) == 0 {
+		z.Call()
+	} else {
+		//z.Memory.ContendRead(z.PC(), 3)
+		//z.Memory.ContendRead(z.PC()+1, 3)
+		z.Tstates += 10
+		z.pc += 2
+	}
+}
 
 // /* PUSH HL */
 func instr__PUSH_HL(z *Z80, opcode byte) {
@@ -1304,16 +1306,17 @@ func instr__EX_DE_HL(z *Z80, opcode byte) {
 	z.L = e
 }
 
-// /* CALL PE,nnnn */
-// func instr__CALL_PE_NNNN(z *Z80, opcode byte) {
-// 	if (z.F & FLAG_P) != 0 {
-// 		z.call()
-// 	} else {
-// 		z.Memory.ContendRead(z.PC(), 3)
-// 		z.Memory.ContendRead(z.PC()+1, 3)
-// 		z.IncPC(2)
-// 	}
-// }
+/* CALL PE,nnnn */
+func instr__CALL_PE_NNNN(z *Z80, opcode byte) {
+	if (z.F & FLAG_P) != 0 {
+		z.Call()
+	} else {
+		//z.Memory.ContendRead(z.PC(), 3)
+		//z.Memory.ContendRead(z.PC()+1, 3)
+		z.Tstates += 10
+		z.pc += 2
+	}
+}
 
 // /* shift ED */
 func instr__SHIFT_ED(z *Z80, opcode byte) {
@@ -1374,16 +1377,17 @@ func instr__DI(z *Z80, opcode byte) {
 	z.IFF1, z.IFF2 = 0, 0
 }
 
-// /* CALL P,nnnn */
-// func instr__CALL_P_NNNN(z *Z80, opcode byte) {
-// 	if (z.F & FLAG_S) == 0 {
-// 		z.call()
-// 	} else {
-// 		z.Memory.ContendRead(z.PC(), 3)
-// 		z.Memory.ContendRead(z.PC()+1, 3)
-// 		z.IncPC(2)
-// 	}
-// }
+/* CALL P,nnnn */
+func instr__CALL_P_NNNN(z *Z80, opcode byte) {
+	if (z.F & FLAG_S) == 0 {
+		z.Call()
+	} else {
+		//z.Memory.ContendRead(z.PC(), 3)
+		//z.Memory.ContendRead(z.PC()+1, 3)
+		z.Tstates += 10
+		z.pc += 2
+	}
+}
 
 // /* PUSH AF */
 func instr__PUSH_AF(z *Z80, opcode byte) {
@@ -1446,16 +1450,17 @@ func instr__EI(z *Z80, opcode byte) {
 	// eventAdd(z.Tstates + 1, z80InterruptEvent)
 }
 
-// /* CALL M,nnnn */
-// func instr__CALL_M_NNNN(z *Z80, opcode byte) {
-// 	if (z.F & FLAG_S) != 0 {
-// 		z.call()
-// 	} else {
-// 		z.Memory.ContendRead(z.PC(), 3)
-// 		z.Memory.ContendRead(z.PC()+1, 3)
-// 		z.IncPC(2)
-// 	}
-// }
+/* CALL M,nnnn */
+func instr__CALL_M_NNNN(z *Z80, opcode byte) {
+	if (z.F & FLAG_S) != 0 {
+		z.Call()
+	} else {
+		//z.Memory.ContendRead(z.PC(), 3)
+		//z.Memory.ContendRead(z.PC()+1, 3)
+		z.Tstates += 10
+		z.pc += 2
+	}
+}
 
 // /* shift FD */
 func instr__SHIFT_FD(z *Z80, opcode byte) {
