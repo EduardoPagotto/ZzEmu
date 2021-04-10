@@ -25,7 +25,8 @@ var (
 
 type Z80 struct {
 	Memory Memory
-	Cycles uint64
+	Port   PortAccessor
+	//Cycles uint64
 
 	A, F, B, C, D, E, H, L         byte
 	A_, F_, B_, C_, D_, E_, H_, L_ byte
@@ -48,9 +49,10 @@ type Z80 struct {
 }
 
 // creates a new Z80 instance.
-func NewZ80(memory Memory) *Z80 {
+func NewZ80(memory Memory, port PortAccessor) *Z80 {
 	var z80 *Z80 = new(Z80)
 	z80.Memory = memory
+	z80.Port = port
 
 	z80.AF = Register16{&z80.A, &z80.F}
 	z80.BC = Register16{&z80.B, &z80.C}
@@ -91,6 +93,8 @@ func (z80 *Z80) Reset() {
 	z80.interruptsEnabledAt = 0
 }
 
+//--- flow controll
+
 func (z80 *Z80) Call() {
 	z80.Tstates += 17
 	newpc := z80.LdAddrLittleEndian()
@@ -104,6 +108,36 @@ func (z80 *Z80) Jr() {
 	z80.pc += uint16(jrtemp)
 	z80.pc++
 }
+
+func (z80 *Z80) Rst(value byte) {
+	z80.Push16(z80.pc)
+	z80.pc = uint16(value)
+}
+
+//-- Logic
+
+func (z80 *Z80) And(value byte) {
+	z80.A &= value
+	z80.F = FLAG_H | sz53pTable[z80.A]
+}
+
+func (z80 *Z80) Xor(value byte) {
+	z80.A ^= value
+	z80.F = sz53pTable[z80.A]
+}
+
+func (z80 *Z80) Or(value byte) {
+	z80.A |= value
+	z80.F = sz53pTable[z80.A]
+}
+
+func (z80 *Z80) Cp(value byte) {
+	var cptemp uint16 = uint16(z80.A) - uint16(value)
+	var lookup byte = ((z80.A & 0x88) >> 3) | ((value & 0x88) >> 2) | byte((cptemp&0x88)>>1)
+	z80.F = ternOpB((cptemp&0x100) != 0, FLAG_C, ternOpB(cptemp != 0, 0, FLAG_Z)) | FLAG_N | halfcarrySubTable[lookup&0x07] | overflowSubTable[lookup>>4] | (value & (FLAG_3 | FLAG_5)) | byte(cptemp&FLAG_S)
+}
+
+//-- aritmetric
 
 func (z80 *Z80) Add(value byte) {
 	var addtemp uint = uint(z80.A) + uint(value)
@@ -135,32 +169,6 @@ func (z80 *Z80) Sbc(value byte) {
 	z80.F = ternOpB((sbctemp&0x100) != 0, FLAG_C, 0) | FLAG_N | halfcarrySubTable[lookup&0x07] | overflowSubTable[lookup>>4] | sz53Table[z80.A]
 }
 
-func (z80 *Z80) And(value byte) {
-	z80.A &= value
-	z80.F = FLAG_H | sz53pTable[z80.A]
-}
-
-func (z80 *Z80) Xor(value byte) {
-	z80.A ^= value
-	z80.F = sz53pTable[z80.A]
-}
-
-func (z80 *Z80) Or(value byte) {
-	z80.A |= value
-	z80.F = sz53pTable[z80.A]
-}
-
-func (z80 *Z80) Cp(value byte) {
-	var cptemp uint16 = uint16(z80.A) - uint16(value)
-	var lookup byte = ((z80.A & 0x88) >> 3) | ((value & 0x88) >> 2) | byte((cptemp&0x88)>>1)
-	z80.F = ternOpB((cptemp&0x100) != 0, FLAG_C, ternOpB(cptemp != 0, 0, FLAG_Z)) | FLAG_N | halfcarrySubTable[lookup&0x07] | overflowSubTable[lookup>>4] | (value & (FLAG_3 | FLAG_5)) | byte(cptemp&FLAG_S)
-}
-
-func (z80 *Z80) Rst(value byte) {
-	z80.Push16(z80.pc)
-	z80.pc = uint16(value)
-}
-
 func (z80 *Z80) Inc(value *byte) { // TODO merge com IncR
 	*value++
 	z80.F = (z80.F & FLAG_C) | ternOpB(*value == 0x80, FLAG_V, 0) | ternOpB((*value&0x0f) != 0, 0, FLAG_H) | sz53Table[(*value)]
@@ -171,6 +179,22 @@ func (z80 *Z80) Dec(value *byte) { // TODO merge com DecR
 	*value--
 	z80.F |= ternOpB(*value == 0x7f, FLAG_V, 0) | sz53Table[*value]
 }
+
+func (z80 *Z80) IncR(opcode byte) {
+	var ptrReg *byte = z80.GetPrtRegisterValByte(opcode)
+	(*ptrReg)++
+	z80.F = (z80.F & FLAG_C) | (ternOpB((*ptrReg) == 0x80, FLAG_V, 0)) | (ternOpB(((*ptrReg)&0x0f) != 0, 0, FLAG_H)) | sz53Table[(*ptrReg)]
+}
+
+func (z80 *Z80) DecR(opcode byte) {
+
+	var ptrReg *byte = z80.GetPrtRegisterValByte(opcode)
+	z80.F = (z80.F & FLAG_C) | (ternOpB((*ptrReg)&0x0f != 0, 0, FLAG_H)) | FLAG_N
+	(*ptrReg)--
+	z80.F |= (ternOpB((*ptrReg) == 0x7f, FLAG_V, 0)) | sz53Table[(*ptrReg)]
+}
+
+//-- memory
 
 func (z80 *Z80) Push8(value byte) {
 	z80.sp--
@@ -197,16 +221,6 @@ func (z80 *Z80) Pop16() uint16 {
 	valHi := z80.Memory.Read(z80.sp)
 	z80.sp++
 	return joinBytes(valHi, valLo)
-}
-
-// Execute a single instruction at the program counter.
-func (z80 *Z80) DoOpcode() {
-	// z80.Tstates += 4
-	opcode := z80.Memory.Read(z80.pc)
-	z80.R = (z80.R + 1) & 0x7f
-	z80.pc++
-
-	OpcodeMap[opcode](z80, opcode)
 }
 
 /*
@@ -243,6 +257,18 @@ func (z80 *Z80) ld16nnrr(regl, regh byte) {
 	ldtemp++
 	z80.Memory.Write(ldtemp, regh)
 }
+
+//--- IO
+
+func (z80 *Z80) readPort(address uint16) byte {
+	return z80.Port.ReadPort(address)
+}
+
+func (z80 *Z80) writePort(address uint16, b byte) {
+	z80.Port.WritePort(address, b)
+}
+
+//-- register select to opcode
 
 func (z80 *Z80) GetRegisterValByte(opcode byte) byte {
 	r := opcode & 0x07
@@ -288,16 +314,14 @@ func (z80 *Z80) GetPrtRegisterValByte(opcode byte) *byte {
 	return nil
 }
 
-func (z80 *Z80) IncR(opcode byte) {
-	var ptrReg *byte = z80.GetPrtRegisterValByte(opcode)
-	(*ptrReg)++
-	z80.F = (z80.F & FLAG_C) | (ternOpB((*ptrReg) == 0x80, FLAG_V, 0)) | (ternOpB(((*ptrReg)&0x0f) != 0, 0, FLAG_H)) | sz53Table[(*ptrReg)]
-}
+//--- entry point
 
-func (z80 *Z80) DecR(opcode byte) {
+// Execute a single instruction at the program counter.
+func (z80 *Z80) DoOpcode() {
+	// z80.Tstates += 4
+	opcode := z80.Memory.Read(z80.pc)
+	z80.R = (z80.R + 1) & 0x7f
+	z80.pc++
 
-	var ptrReg *byte = z80.GetPrtRegisterValByte(opcode)
-	z80.F = (z80.F & FLAG_C) | (ternOpB((*ptrReg)&0x0f != 0, 0, FLAG_H)) | FLAG_N
-	(*ptrReg)--
-	z80.F |= (ternOpB((*ptrReg) == 0x7f, FLAG_V, 0)) | sz53Table[(*ptrReg)]
+	OpcodeMap[opcode](z80, opcode)
 }

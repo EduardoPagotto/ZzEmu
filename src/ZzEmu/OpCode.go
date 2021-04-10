@@ -213,7 +213,7 @@ func initOpcodes() {
 	OpcodeMap[0xd0] = instr__RET_NC
 	OpcodeMap[0xd1] = instr__POP_DE
 	OpcodeMap[0xd2] = instr__JP_NC_NNNN
-	// OpcodeMap[0xd3] = instr__OUT_iNN_A
+	OpcodeMap[0xd3] = instr__OUT_iNN_A
 	OpcodeMap[0xd4] = instr__CALL_NC_NNNN
 	OpcodeMap[0xd5] = instr__PUSH_DE
 	// OpcodeMap[0xd6] = instr__SUB_NN
@@ -221,7 +221,7 @@ func initOpcodes() {
 	OpcodeMap[0xd8] = instr__RET_C
 	OpcodeMap[0xd9] = instr__EXX
 	OpcodeMap[0xda] = instr__JP_C_NNNN
-	// OpcodeMap[0xdb] = instr__IN_A_iNN
+	OpcodeMap[0xdb] = instr__IN_A_iNN
 	OpcodeMap[0xdc] = instr__CALL_C_NNNN
 	OpcodeMap[0xdd] = instr__SHIFT_DD
 	// OpcodeMap[0xde] = instr__SBC_A_NN
@@ -1083,12 +1083,12 @@ func instr__JP_NC_NNNN(z *Z80, opcode byte) {
 	}
 }
 
-// /* OUT (nn),A */
-// func instr__OUT_iNN_A(z *Z80, opcode byte) {
-// 	var outtemp uint16 = uint16(z.Memory.Read(z.PC())) + (uint16(z.A) << 8)
-// 	z.IncPC(1)
-// 	z.writePort(outtemp, z.A)
-// }
+/* OUT (nn),A */
+func instr__OUT_iNN_A(z *Z80, opcode byte) {
+	z.Tstates += 11
+	var outtemp uint16 = uint16(z.LoadByteFromPC()) + (uint16(z.A) << 8)
+	z.writePort(outtemp, z.A)
+}
 
 /* CALL NC,nnnn */
 func instr__CALL_NC_NNNN(z *Z80, opcode byte) {
@@ -1164,12 +1164,12 @@ func instr__JP_C_NNNN(z *Z80, opcode byte) {
 	}
 }
 
-// /* IN A,(nn) */
-// func instr__IN_A_iNN(z *Z80, opcode byte) {
-// 	var intemp uint16 = uint16(z.Memory.Read(z.PC())) + (uint16(z.A) << 8)
-// 	z.IncPC(1)
-// 	z.A = z.readPort(intemp)
-// }
+/* IN A,(nn) */
+func instr__IN_A_iNN(z *Z80, opcode byte) {
+	z.Tstates += 11
+	var intemp uint16 = uint16(z.LoadByteFromPC()) + (uint16(z.A) << 8) // FIXME: preciso deslocar ????
+	z.A = z.readPort(intemp)
+}
 
 /* CALL C,nnnn */
 func instr__CALL_C_NNNN(z *Z80, opcode byte) {
