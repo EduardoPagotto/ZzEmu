@@ -13,30 +13,30 @@ func initOpcodeEDMap() {
 	OpcodeEDMap[0x43] = instrED__LD_iNNNN_BC
 	/* NEG */
 	OpcodeEDMap[0x7c] = instrED__NEG
-	// 	// Fallthrough cases
-	// 	OpcodeEDMap[0x44] = OpcodeEDMap[0x7c]
-	// 	OpcodeEDMap[0x4c] = OpcodeEDMap[0x7c]
-	// 	OpcodeEDMap[0x54] = OpcodeEDMap[0x7c]
-	// 	OpcodeEDMap[0x5c] = OpcodeEDMap[0x7c]
-	// 	OpcodeEDMap[0x64] = OpcodeEDMap[0x7c]
-	// 	OpcodeEDMap[0x6c] = OpcodeEDMap[0x7c]
-	// 	OpcodeEDMap[0x74] = OpcodeEDMap[0x7c]
+	// Fallthrough cases
+	OpcodeEDMap[0x44] = OpcodeEDMap[0x7c]
+	OpcodeEDMap[0x4c] = OpcodeEDMap[0x7c]
+	OpcodeEDMap[0x54] = OpcodeEDMap[0x7c]
+	OpcodeEDMap[0x5c] = OpcodeEDMap[0x7c]
+	OpcodeEDMap[0x64] = OpcodeEDMap[0x7c]
+	OpcodeEDMap[0x6c] = OpcodeEDMap[0x7c]
+	OpcodeEDMap[0x74] = OpcodeEDMap[0x7c]
 	/* RETN */
 	OpcodeEDMap[0x7d] = instrED__RETN
-	// 	// Fallthrough cases
-	// 	OpcodeEDMap[0x45] = OpcodeEDMap[0x7d]
-	// 	OpcodeEDMap[0x4d] = OpcodeEDMap[0x7d]
-	// 	OpcodeEDMap[0x55] = OpcodeEDMap[0x7d]
-	// 	OpcodeEDMap[0x5d] = OpcodeEDMap[0x7d]
-	// 	OpcodeEDMap[0x65] = OpcodeEDMap[0x7d]
-	// 	OpcodeEDMap[0x6d] = OpcodeEDMap[0x7d]
-	// 	OpcodeEDMap[0x75] = OpcodeEDMap[0x7d]
+	// Fallthrough cases
+	OpcodeEDMap[0x45] = OpcodeEDMap[0x7d]
+	OpcodeEDMap[0x4d] = OpcodeEDMap[0x7d]
+	OpcodeEDMap[0x55] = OpcodeEDMap[0x7d]
+	OpcodeEDMap[0x5d] = OpcodeEDMap[0x7d]
+	OpcodeEDMap[0x65] = OpcodeEDMap[0x7d]
+	OpcodeEDMap[0x6d] = OpcodeEDMap[0x7d]
+	OpcodeEDMap[0x75] = OpcodeEDMap[0x7d]
 	/* IM 0 */
 	OpcodeEDMap[0x6e] = instrED__IM_0
-	// 	// Fallthrough cases
-	// 	OpcodeEDMap[0x46] = OpcodeEDMap[0x6e]
-	// 	OpcodeEDMap[0x4e] = OpcodeEDMap[0x6e]
-	// 	OpcodeEDMap[0x66] = OpcodeEDMap[0x6e]
+	// Fallthrough cases
+	OpcodeEDMap[0x46] = OpcodeEDMap[0x6e]
+	OpcodeEDMap[0x4e] = OpcodeEDMap[0x6e]
+	OpcodeEDMap[0x66] = OpcodeEDMap[0x6e]
 	/* LD I,A */
 	OpcodeEDMap[0x47] = instrED__LD_I_A
 	/* IN C,(C) */
@@ -59,8 +59,8 @@ func initOpcodeEDMap() {
 	OpcodeEDMap[0x53] = instrED__LD_iNNNN_DE
 	/* IM 1 */
 	OpcodeEDMap[0x76] = instrED__IM_1
-	// 	// Fallthrough cases
-	// 	OpcodeEDMap[0x56] = OpcodeEDMap[0x76]
+	// Fallthrough cases
+	OpcodeEDMap[0x56] = OpcodeEDMap[0x76]
 	/* LD A,I */
 	OpcodeEDMap[0x57] = instrED__LD_A_I
 	/* IN E,(C) */
@@ -73,8 +73,8 @@ func initOpcodeEDMap() {
 	OpcodeEDMap[0x5b] = instrED__LD_DE_iNNNN
 	/* IM 2 */
 	OpcodeEDMap[0x7e] = instrED__IM_2
-	// 	// Fallthrough cases
-	// 	OpcodeEDMap[0x5e] = OpcodeEDMap[0x7e]
+	// Fallthrough cases
+	OpcodeEDMap[0x5e] = OpcodeEDMap[0x7e]
 	/* LD A,R */
 	OpcodeEDMap[0x5f] = instrED__LD_A_R
 	/* IN H,(C) */
