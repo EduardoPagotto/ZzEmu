@@ -13,7 +13,7 @@ func initOpcodes() {
 	OpcodeMap[0x08] = instr__EX_AF_AF
 	// OpcodeMap[0x09] = instr__ADD_HL_BC
 	OpcodeMap[0x0a] = instr__LD_A_iBC
-	// OpcodeMap[0x0b] = instr__DEC_BC
+	OpcodeMap[0x0b] = instr__DEC_BC
 	OpcodeMap[0x0c] = instr__INC_C
 	OpcodeMap[0x0d] = instr__DEC_C
 	OpcodeMap[0x0e] = instr__LD_C_NN
@@ -21,7 +21,7 @@ func initOpcodes() {
 	OpcodeMap[0x10] = instr__DJNZ_OFFSET
 	OpcodeMap[0x11] = instr__LD_DE_NNNN
 	OpcodeMap[0x12] = instr__LD_iDE_A
-	// OpcodeMap[0x13] = instr__INC_DE
+	OpcodeMap[0x13] = instr__INC_DE
 	OpcodeMap[0x14] = instr__INC_D
 	OpcodeMap[0x15] = instr__DEC_D
 	OpcodeMap[0x16] = instr__LD_D_NN
@@ -29,7 +29,7 @@ func initOpcodes() {
 	OpcodeMap[0x18] = instr__JR_OFFSET
 	// OpcodeMap[0x19] = instr__ADD_HL_DE
 	OpcodeMap[0x1a] = instr__LD_A_iDE
-	// OpcodeMap[0x1b] = instr__DEC_DE
+	OpcodeMap[0x1b] = instr__DEC_DE
 	OpcodeMap[0x1c] = instr__INC_E
 	OpcodeMap[0x1d] = instr__DEC_E
 	OpcodeMap[0x1e] = instr__LD_E_NN
@@ -37,7 +37,7 @@ func initOpcodes() {
 	OpcodeMap[0x20] = instr__JR_NZ_OFFSET
 	OpcodeMap[0x21] = instr__LD_HL_NNNN
 	OpcodeMap[0x22] = instr__LD_iNNNN_HL
-	// OpcodeMap[0x23] = instr__INC_HL
+	OpcodeMap[0x23] = instr__INC_HL
 	OpcodeMap[0x24] = instr__INC_H
 	OpcodeMap[0x25] = instr__DEC_H
 	OpcodeMap[0x26] = instr__LD_H_NN
@@ -45,7 +45,7 @@ func initOpcodes() {
 	OpcodeMap[0x28] = instr__JR_Z_OFFSET
 	// OpcodeMap[0x29] = instr__ADD_HL_HL
 	OpcodeMap[0x2a] = instr__LD_HL_iNNNN
-	// OpcodeMap[0x2b] = instr__DEC_HL
+	OpcodeMap[0x2b] = instr__DEC_HL
 	OpcodeMap[0x2c] = instr__INC_L
 	OpcodeMap[0x2d] = instr__DEC_L
 	OpcodeMap[0x2e] = instr__LD_L_NN
@@ -53,7 +53,7 @@ func initOpcodes() {
 	OpcodeMap[0x30] = instr__JR_NC_OFFSET
 	OpcodeMap[0x31] = instr__LD_SP_NNNN
 	OpcodeMap[0x32] = instr__LD_iNNNN_A
-	// OpcodeMap[0x33] = instr__INC_SP
+	OpcodeMap[0x33] = instr__INC_SP
 	OpcodeMap[0x34] = instr__INC_iHL
 	OpcodeMap[0x35] = instr__DEC_iHL
 	OpcodeMap[0x36] = instr__LD_iHL_NN
@@ -61,7 +61,7 @@ func initOpcodes() {
 	OpcodeMap[0x38] = instr__JR_C_OFFSET
 	// OpcodeMap[0x39] = instr__ADD_HL_SP
 	OpcodeMap[0x3a] = instr__LD_A_iNNNN
-	// OpcodeMap[0x3b] = instr__DEC_SP
+	OpcodeMap[0x3b] = instr__DEC_SP
 	OpcodeMap[0x3c] = instr__INC_A
 	OpcodeMap[0x3d] = instr__DEC_A
 	OpcodeMap[0x3e] = instr__LD_A_NN
@@ -219,7 +219,7 @@ func initOpcodes() {
 	// OpcodeMap[0xd6] = instr__SUB_NN
 	OpcodeMap[0xd7] = instr__RST_10
 	OpcodeMap[0xd8] = instr__RET_C
-	// OpcodeMap[0xd9] = instr__EXX
+	OpcodeMap[0xd9] = instr__EXX
 	OpcodeMap[0xda] = instr__JP_C_NNNN
 	// OpcodeMap[0xdb] = instr__IN_A_iNN
 	OpcodeMap[0xdc] = instr__CALL_C_NNNN
@@ -324,11 +324,12 @@ func instr__LD_A_iBC(z *Z80, opcode byte) {
 	z.A = z.Memory.Read(z.BC.Get())
 }
 
-// /* DEC BC */
-// func instr__DEC_BC(z *Z80, opcode byte) {
-// 	z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
-// 	z.DecBC()
-// }
+/* DEC BC */
+func instr__DEC_BC(z *Z80, opcode byte) {
+	//z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
+	z.Tstates += 6
+	z.BC.Dec()
+}
 
 /* INC C */
 func instr__INC_C(z *Z80, opcode byte) {
@@ -385,11 +386,12 @@ func instr__LD_iDE_A(z *Z80, opcode byte) {
 	z.Memory.Write(z.DE.Get(), z.A)
 }
 
-// /* INC DE */
-// func instr__INC_DE(z *Z80, opcode byte) {
-// 	z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
-// 	z.IncDE()
-// }
+/* INC DE */
+func instr__INC_DE(z *Z80, opcode byte) {
+	//z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
+	z.Tstates += 6
+	z.DE.Inc()
+}
 
 /* INC D */
 func instr__INC_D(z *Z80, opcode byte) {
@@ -434,11 +436,12 @@ func instr__LD_A_iDE(z *Z80, opcode byte) {
 	z.A = z.Memory.Read(z.DE.Get())
 }
 
-// /* DEC DE */
-// func instr__DEC_DE(z *Z80, opcode byte) {
-// 	z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
-// 	z.DecDE()
-// }
+/* DEC DE */
+func instr__DEC_DE(z *Z80, opcode byte) {
+	//z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
+	z.Tstates += 6
+	z.DE.Dec()
+}
 
 /* INC E */
 func instr__INC_E(z *Z80, opcode byte) {
@@ -491,11 +494,12 @@ func instr__LD_iNNNN_HL(z *Z80, opcode byte) {
 	z.ld16nnrr(z.L, z.H)
 }
 
-// /* INC HL */
-// func instr__INC_HL(z *Z80, opcode byte) {
-// 	z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
-// 	z.IncHL()
-// }
+/* INC HL */
+func instr__INC_HL(z *Z80, opcode byte) {
+	//z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
+	z.Tstates += 6
+	z.HL.Inc()
+}
 
 /* INC H */
 func instr__INC_H(z *Z80, opcode byte) {
@@ -561,11 +565,12 @@ func instr__LD_HL_iNNNN(z *Z80, opcode byte) {
 	// break
 }
 
-// /* DEC HL */
-// func instr__DEC_HL(z *Z80, opcode byte) {
-// 	z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
-// 	z.DecHL()
-// }
+/* DEC HL */
+func instr__DEC_HL(z *Z80, opcode byte) {
+	//z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
+	z.Tstates += 6
+	z.HL.Dec()
+}
 
 /* INC L */
 func instr__INC_L(z *Z80, opcode byte) {
@@ -620,11 +625,12 @@ func instr__LD_iNNNN_A(z *Z80, opcode byte) {
 
 }
 
-// /* INC SP */
-// func instr__INC_SP(z *Z80, opcode byte) {
-// 	z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
-// 	z.IncSP()
-// }
+/* INC SP */
+func instr__INC_SP(z *Z80, opcode byte) {
+	//z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
+	z.Tstates += 6
+	z.sp++
+}
 
 /* INC (HL) */
 func instr__INC_iHL(z *Z80, opcode byte) {
@@ -683,11 +689,12 @@ func instr__LD_A_iNNNN(z *Z80, opcode byte) {
 	z.A = z.Memory.Read(wordtemp)
 }
 
-// /* DEC SP */
-// func instr__DEC_SP(z *Z80, opcode byte) {
-// 	z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
-// 	z.DecSP()
-// }
+/* DEC SP */
+func instr__DEC_SP(z *Z80, opcode byte) {
+	//z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
+	z.Tstates += 6
+	z.sp--
+}
 
 /* INC A */
 func instr__INC_A(z *Z80, opcode byte) {
@@ -1129,20 +1136,21 @@ func instr__RET_C(z *Z80, opcode byte) {
 	}
 }
 
-// /* EXX */
-// func instr__EXX(z *Z80, opcode byte) {
-// 	var wordtemp uint16 = z.BC()
-// 	z.SetBC(z.BC_())
-// 	z.SetBC_(wordtemp)
+/* EXX */
+func instr__EXX(z *Z80, opcode byte) {
+	z.Tstates += 4
+	var wordtemp uint16 = z.BC.Get()
+	z.BC.Set(z.BC_.Get())
+	z.BC_.Set(wordtemp)
 
-// 	wordtemp = z.DE()
-// 	z.SetDE(z.DE_())
-// 	z.SetDE_(wordtemp)
+	wordtemp = z.DE.Get()
+	z.DE.Set(z.DE_.Get())
+	z.DE_.Set(wordtemp)
 
-// 	wordtemp = z.HL()
-// 	z.SetHL(z.HL_())
-// 	z.SetHL_(wordtemp)
-// }
+	wordtemp = z.HL.Get()
+	z.HL.Set(z.HL_.Get())
+	z.HL_.Set(wordtemp)
+}
 
 /* JP C,nnnn */
 func instr__JP_C_NNNN(z *Z80, opcode byte) {
