@@ -387,6 +387,11 @@ func (z80 *Z80) biti(bit, value byte, address uint16) {
 
 //--- IO
 
+func (z80 *Z80) in(reg *byte, port uint16) {
+	*reg = z80.readPort(port)
+	z80.F = (z80.F & FLAG_C) | sz53pTable[*reg]
+}
+
 func (z80 *Z80) readPort(address uint16) byte {
 	return z80.Port.ReadPort(address)
 }
