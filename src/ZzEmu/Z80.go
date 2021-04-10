@@ -146,6 +146,15 @@ func (z80 *Z80) Add(value byte) {
 	z80.F = ternOpB(addtemp&0x100 != 0, FLAG_C, 0) | halfcarryAddTable[lookup&0x07] | overflowAddTable[lookup>>4] | sz53Table[z80.A]
 }
 
+func (z80 *Z80) Add16(value1 Register16, value2 uint16) {
+	var add16temp uint = uint(value1.Get()) + uint(value2)
+	var lookup byte = byte(((value1.Get() & 0x0800) >> 11) | ((value2 & 0x0800) >> 10) | (uint16(add16temp)&0x0800)>>9)
+
+	value1.Set(uint16(add16temp))
+
+	z80.F = (z80.F & (FLAG_V | FLAG_Z | FLAG_S)) | ternOpB((add16temp&0x10000) != 0, FLAG_C, 0) | (byte(add16temp>>8) & (FLAG_3 | FLAG_5)) | halfcarryAddTable[lookup]
+}
+
 func (z80 *Z80) Adc(value byte) {
 	var adctemp uint16 = uint16(z80.A) + uint16(value) + (uint16(z80.F) & FLAG_C)
 	var lookup byte = byte(((uint16(z80.A) & 0x88) >> 3) | ((uint16(value) & 0x88) >> 2) | ((uint16(adctemp) & 0x88) >> 1))
