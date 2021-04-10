@@ -277,6 +277,14 @@ func (z80 *Z80) writePort(address uint16, b byte) {
 	z80.Port.WritePort(address, b)
 }
 
+//-- bit shift
+
+func (z80 *Z80) rlc(value byte) byte {
+	value = (value << 1) | (value >> 7)
+	z80.F = (value & FLAG_C) | sz53pTable[value]
+	return value
+}
+
 //-- register select to opcode
 
 func (z80 *Z80) GetRegisterValByte(opcode byte) byte {
