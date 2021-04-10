@@ -9,8 +9,8 @@ func initOpcodeEDMap() {
 	OpcodeEDMap[0x41] = instrED__OUT_iC_B
 	// 	/* SBC HL,BC */
 	// 	OpcodeEDMap[0x42] = instrED__SBC_HL_BC
-	// 	/* LD (nnnn),BC */
-	// 	OpcodeEDMap[0x43] = instrED__LD_iNNNN_BC
+	/* LD (nnnn),BC */
+	OpcodeEDMap[0x43] = instrED__LD_iNNNN_BC
 	/* NEG */
 	OpcodeEDMap[0x7c] = instrED__NEG
 	// 	// Fallthrough cases
@@ -37,16 +37,16 @@ func initOpcodeEDMap() {
 	// 	OpcodeEDMap[0x46] = OpcodeEDMap[0x6e]
 	// 	OpcodeEDMap[0x4e] = OpcodeEDMap[0x6e]
 	// 	OpcodeEDMap[0x66] = OpcodeEDMap[0x6e]
-	// 	/* LD I,A */
-	// 	OpcodeEDMap[0x47] = instrED__LD_I_A
+	/* LD I,A */
+	OpcodeEDMap[0x47] = instrED__LD_I_A
 	// 	/* IN C,(C) */
 	// 	OpcodeEDMap[0x48] = instrED__IN_C_iC
 	// 	/* OUT (C),C */
 	OpcodeEDMap[0x49] = instrED__OUT_iC_C
 	// 	/* ADC HL,BC */
 	// 	OpcodeEDMap[0x4a] = instrED__ADC_HL_BC
-	// 	/* LD BC,(nnnn) */
-	// 	OpcodeEDMap[0x4b] = instrED__LD_BC_iNNNN
+	/* LD BC,(nnnn) */
+	OpcodeEDMap[0x4b] = instrED__LD_BC_iNNNN
 	// 	/* LD R,A */
 	// 	OpcodeEDMap[0x4f] = instrED__LD_R_A
 	// 	/* IN D,(C) */
@@ -55,36 +55,36 @@ func initOpcodeEDMap() {
 	OpcodeEDMap[0x51] = instrED__OUT_iC_D
 	// 	/* SBC HL,DE */
 	// 	OpcodeEDMap[0x52] = instrED__SBC_HL_DE
-	// 	/* LD (nnnn),DE */
-	// 	OpcodeEDMap[0x53] = instrED__LD_iNNNN_DE
+	/* LD (nnnn),DE */
+	OpcodeEDMap[0x53] = instrED__LD_iNNNN_DE
 	/* IM 1 */
 	OpcodeEDMap[0x76] = instrED__IM_1
 	// 	// Fallthrough cases
 	// 	OpcodeEDMap[0x56] = OpcodeEDMap[0x76]
-	// 	/* LD A,I */
-	// 	OpcodeEDMap[0x57] = instrED__LD_A_I
+	/* LD A,I */
+	OpcodeEDMap[0x57] = instrED__LD_A_I
 	// 	/* IN E,(C) */
 	// 	OpcodeEDMap[0x58] = instrED__IN_E_iC
 	// 	/* OUT (C),E */
 	// 	OpcodeEDMap[0x59] = instrED__OUT_iC_E
 	// 	/* ADC HL,DE */
 	// 	OpcodeEDMap[0x5a] = instrED__ADC_HL_DE
-	// 	/* LD DE,(nnnn) */
-	// 	OpcodeEDMap[0x5b] = instrED__LD_DE_iNNNN
+	/* LD DE,(nnnn) */
+	OpcodeEDMap[0x5b] = instrED__LD_DE_iNNNN
 	/* IM 2 */
 	OpcodeEDMap[0x7e] = instrED__IM_2
 	// 	// Fallthrough cases
 	// 	OpcodeEDMap[0x5e] = OpcodeEDMap[0x7e]
-	// 	/* LD A,R */
-	// 	OpcodeEDMap[0x5f] = instrED__LD_A_R
+	/* LD A,R */
+	OpcodeEDMap[0x5f] = instrED__LD_A_R
 	// 	/* IN H,(C) */
 	// 	OpcodeEDMap[0x60] = instrED__IN_H_iC
 	/* OUT (C),H */
 	OpcodeEDMap[0x61] = instrED__OUT_iC_H
 	// 	/* SBC HL,HL */
 	// 	OpcodeEDMap[0x62] = instrED__SBC_HL_HL
-	// 	/* LD (nnnn),HL */
-	// 	OpcodeEDMap[0x63] = instrED__LD_iNNNN_HL
+	/* LD (nnnn),HL */
+	OpcodeEDMap[0x63] = instrED__LD_iNNNN_HL
 	// 	/* RRD */
 	// 	OpcodeEDMap[0x67] = instrED__RRD
 	// 	/* IN L,(C) */
@@ -93,8 +93,8 @@ func initOpcodeEDMap() {
 	OpcodeEDMap[0x69] = instrED__OUT_iC_L
 	// 	/* ADC HL,HL */
 	// 	OpcodeEDMap[0x6a] = instrED__ADC_HL_HL
-	// 	/* LD HL,(nnnn) */
-	// 	OpcodeEDMap[0x6b] = instrED__LD_HL_iNNNN
+	/* LD HL,(nnnn) */
+	OpcodeEDMap[0x6b] = instrED__LD_HL_iNNNN
 	// 	/* RLD */
 	// 	OpcodeEDMap[0x6f] = instrED__RLD
 	// 	/* IN F,(C) */
@@ -103,15 +103,15 @@ func initOpcodeEDMap() {
 	OpcodeEDMap[0x71] = instrED__OUT_iC_0
 	// 	/* SBC HL,SP */
 	// 	OpcodeEDMap[0x72] = instrED__SBC_HL_SP
-	// 	/* LD (nnnn),SP */
-	// 	OpcodeEDMap[0x73] = instrED__LD_iNNNN_SP
+	/* LD (nnnn),SP */
+	OpcodeEDMap[0x73] = instrED__LD_iNNNN_SP
 	// 	/* IN A,(C) */
 	// 	OpcodeEDMap[0x78] = instrED__IN_A_iC
 	/* OUT (C),A */
 	OpcodeEDMap[0x79] = instrED__OUT_iC_A
 	// 	/* ADC HL,SP */
 	// 	OpcodeEDMap[0x7a] = instrED__ADC_HL_SP
-	// 	/* LD SP,(nnnn) */
+	/* LD SP,(nnnn) */
 	OpcodeEDMap[0x7b] = instrED__LD_SP_iNNNN
 	// 	/* LDI */
 	// 	OpcodeEDMap[0xa0] = instrED__LDI
@@ -168,11 +168,11 @@ func instrED__OUT_iC_B(z *Z80, opcode byte) {
 // 	z.sbc16(z.BC())
 // }
 
-// /* LD (nnnn),BC */
-// func instrED__LD_iNNNN_BC(z *Z80, opcode byte) {
-// 	z.ld16nnrr(z.C, z.B)
-// 	// break
-// }
+/* LD (nnnn),BC */
+func instrED__LD_iNNNN_BC(z *Z80, opcode byte) {
+	z.Tstates += 20
+	z.StoreIndex16(z.C, z.B)
+}
 
 /* NEG */
 func instrED__NEG(z *Z80, opcode byte) {
@@ -195,11 +195,12 @@ func instrED__IM_0(z *Z80, opcode byte) {
 	z.IM = 0
 }
 
-// /* LD I,A */
-// func instrED__LD_I_A(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq(z.IR(), 1)
-// 	z.I = z.A
-// }
+/* LD I,A */
+func instrED__LD_I_A(z *Z80, opcode byte) {
+	z.Tstates += 9
+	//z.memory.ContendReadNoMreq(z.IR(), 1)
+	z.I = z.A
+}
 
 // /* IN C,(C) */
 // func instrED__IN_C_iC(z *Z80, opcode byte) {
@@ -218,11 +219,11 @@ func instrED__OUT_iC_C(z *Z80, opcode byte) {
 // 	z.adc16(z.BC())
 // }
 
-// /* LD BC,(nnnn) */
-// func instrED__LD_BC_iNNNN(z *Z80, opcode byte) {
-// 	z.ld16rrnn(&z.C, &z.B)
-// 	// break
-// }
+/* LD BC,(nnnn) */
+func instrED__LD_BC_iNNNN(z *Z80, opcode byte) {
+	z.Tstates += 20
+	z.LoadIndex16(&z.C, &z.B)
+}
 
 // /* LD R,A */
 // func instrED__LD_R_A(z *Z80, opcode byte) {
@@ -249,11 +250,11 @@ func instrED__OUT_iC_D(z *Z80, opcode byte) {
 // 	z.sbc16(z.DE())
 // }
 
-// /* LD (nnnn),DE */
-// func instrED__LD_iNNNN_DE(z *Z80, opcode byte) {
-// 	z.ld16nnrr(z.E, z.D)
-// 	// break
-// }
+/* LD (nnnn),DE */
+func instrED__LD_iNNNN_DE(z *Z80, opcode byte) {
+	z.Tstates += 20
+	z.StoreIndex16(z.E, z.D)
+}
 
 /* IM 1 */
 func instrED__IM_1(z *Z80, opcode byte) {
@@ -261,12 +262,13 @@ func instrED__IM_1(z *Z80, opcode byte) {
 	z.IM = 1
 }
 
-// /* LD A,I */
-// func instrED__LD_A_I(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq(z.IR(), 1)
-// 	z.A = z.I
-// 	z.F = (z.F & FLAG_C) | sz53Table[z.A] | ternOpB(z.IFF2 != 0, FLAG_V, 0)
-// }
+/* LD A,I */
+func instrED__LD_A_I(z *Z80, opcode byte) {
+	//z.memory.ContendReadNoMreq(z.IR(), 1)
+	z.Tstates += 9
+	z.A = z.I
+	z.F = (z.F & FLAG_C) | sz53Table[z.A] | ternOpB(z.IFF2 != 0, FLAG_V, 0)
+}
 
 // /* IN E,(C) */
 // func instrED__IN_E_iC(z *Z80, opcode byte) {
@@ -284,11 +286,11 @@ func instrED__IM_1(z *Z80, opcode byte) {
 // 	z.adc16(z.DE())
 // }
 
-// /* LD DE,(nnnn) */
-// func instrED__LD_DE_iNNNN(z *Z80, opcode byte) {
-// 	z.ld16rrnn(&z.E, &z.D)
-// 	// break
-// }
+/* LD DE,(nnnn) */
+func instrED__LD_DE_iNNNN(z *Z80, opcode byte) {
+	z.Tstates += 20
+	z.LoadIndex16(&z.E, &z.D)
+}
 
 /* IM 2 */
 func instrED__IM_2(z *Z80, opcode byte) {
@@ -296,12 +298,13 @@ func instrED__IM_2(z *Z80, opcode byte) {
 	z.IM = 2
 }
 
-// /* LD A,R */
-// func instrED__LD_A_R(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq(z.IR(), 1)
-// 	z.A = byte(z.R&0x7f) | (z.R7 & 0x80)
-// 	z.F = (z.F & FLAG_C) | sz53Table[z.A] | ternOpB(z.IFF2 != 0, FLAG_V, 0)
-// }
+/* LD A,R */
+func instrED__LD_A_R(z *Z80, opcode byte) {
+	//z.memory.ContendReadNoMreq(z.IR(), 1)
+	z.Tstates += 9
+	z.A = byte(z.R&0x7f) | (z.R7 & 0x80)
+	z.F = (z.F & FLAG_C) | sz53Table[z.A] | ternOpB(z.IFF2 != 0, FLAG_V, 0)
+}
 
 // /* IN H,(C) */
 // func instrED__IN_H_iC(z *Z80, opcode byte) {
@@ -320,11 +323,11 @@ func instrED__OUT_iC_H(z *Z80, opcode byte) {
 // 	z.sbc16(z.HL())
 // }
 
-// /* LD (nnnn),HL */
-// func instrED__LD_iNNNN_HL(z *Z80, opcode byte) {
-// 	z.ld16nnrr(z.L, z.H)
-// 	// break
-// }
+/* LD (nnnn),HL */
+func instrED__LD_iNNNN_HL(z *Z80, opcode byte) {
+	z.Tstates += 20
+	z.StoreIndex16(z.L, z.H)
+}
 
 // /* RRD */
 // func instrED__RRD(z *Z80, opcode byte) {
@@ -352,11 +355,11 @@ func instrED__OUT_iC_L(z *Z80, opcode byte) {
 // 	z.adc16(z.HL())
 // }
 
-// /* LD HL,(nnnn) */
-// func instrED__LD_HL_iNNNN(z *Z80, opcode byte) {
-// 	z.ld16rrnn(&z.L, &z.H)
-// 	// break
-// }
+/* LD HL,(nnnn) */
+func instrED__LD_HL_iNNNN(z *Z80, opcode byte) {
+	z.Tstates += 20
+	z.LoadIndex16(&z.L, &z.H)
+}
 
 // /* RLD */
 // func instrED__RLD(z *Z80, opcode byte) {
@@ -385,12 +388,12 @@ func instrED__OUT_iC_0(z *Z80, opcode byte) {
 // 	z.sbc16(z.SP())
 // }
 
-// /* LD (nnnn),SP */
-// func instrED__LD_iNNNN_SP(z *Z80, opcode byte) {
-// 	sph, spl := splitWord(z.sp)
-// 	z.ld16nnrr(spl, sph)
-// 	// break
-// }
+/* LD (nnnn),SP */
+func instrED__LD_iNNNN_SP(z *Z80, opcode byte) {
+	z.Tstates += 20
+	sph, spl := splitWord(z.sp)
+	z.StoreIndex16(spl, sph)
+}
 
 // /* IN A,(C) */
 // func instrED__IN_A_iC(z *Z80, opcode byte) {
@@ -413,7 +416,7 @@ func instrED__OUT_iC_A(z *Z80, opcode byte) {
 func instrED__LD_SP_iNNNN(z *Z80, opcode byte) {
 	z.Tstates += 20
 	sph, spl := splitWord(z.sp)
-	z.ld16rrnn(&spl, &sph)
+	z.LoadIndex16(&spl, &sph)
 	z.sp = joinBytes(sph, spl)
 }
 

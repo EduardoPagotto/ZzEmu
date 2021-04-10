@@ -97,7 +97,7 @@ func (z80 *Z80) Reset() {
 
 func (z80 *Z80) Call() {
 	z80.Tstates += 17
-	newpc := z80.LdAddrLittleEndian()
+	newpc := z80.Load16()
 	z80.Push16(z80.pc)
 	z80.pc = newpc
 }
@@ -205,17 +205,26 @@ func (z80 *Z80) DecR(opcode byte) {
 
 //-- memory
 
+/*
+Empilha byte no stack
+*/
 func (z80 *Z80) Push8(value byte) {
 	z80.sp--
 	z80.Memory.Write(z80.sp, value)
 }
 
+/*
+Desempilha byte do stack
+*/
 func (z80 *Z80) Pop8() byte {
 	val := z80.Memory.Read(z80.sp)
 	z80.sp++
 	return val
 }
 
+/*
+Empilha uint16 no stack
+*/
 func (z80 *Z80) Push16(value uint16) {
 	high, low := splitWord(value)
 	z80.sp--
@@ -224,6 +233,9 @@ func (z80 *Z80) Push16(value uint16) {
 	z80.Memory.Write(z80.sp, low)
 }
 
+/*
+Desempilha uint16 do stack
+*/
 func (z80 *Z80) Pop16() uint16 {
 	valLo := z80.Memory.Read(z80.sp)
 	z80.sp++
@@ -233,9 +245,9 @@ func (z80 *Z80) Pop16() uint16 {
 }
 
 /*
-Carrega uint16 seguinte do PC
+Carrega uint16 seguinte do PC em LittleEndian
 */
-func (z80 *Z80) LdAddrLittleEndian() uint16 {
+func (z80 *Z80) Load16() uint16 {
 	ldtemp := uint16(z80.Memory.Read(z80.pc))
 	z80.pc++
 	ldtemp |= uint16(z80.Memory.Read(z80.pc)) << 8
@@ -243,28 +255,49 @@ func (z80 *Z80) LdAddrLittleEndian() uint16 {
 	return ldtemp
 }
 
-func (z80 *Z80) LoadByteFromPC() byte {
+/*
+Carrega byte seguinte do PC
+*/
+func (z80 *Z80) Load8() byte {
 	val := z80.Memory.Read(z80.pc)
 	z80.pc++
 	return val
 }
 
-/* Le posicao de memoria INDEXADO
-regl: ponteiro do registro Low
-regh: ponteiro do registro High
+/*
+Carrega ponteiros (Low, Hight) com conteudo indexado pelo PC, PC+1
 */
-func (z80 *Z80) ld16rrnn(regl, regh *byte) {
-	ldtemp := z80.LdAddrLittleEndian()
+func (z80 *Z80) LoadIndex16(regl, regh *byte) {
+	ldtemp := z80.Load16()
 	*regl = z80.Memory.Read(ldtemp)
 	ldtemp++
 	*regh = z80.Memory.Read(ldtemp)
 }
 
-func (z80 *Z80) ld16nnrr(regl, regh byte) {
-	ldtemp := z80.LdAddrLittleEndian()
+/*
+Armazenda bytes (Low, High) na posicao indexada pelo PC, PC+1
+*/
+func (z80 *Z80) StoreIndex16(regl, regh byte) {
+	ldtemp := z80.Load16()
 	z80.Memory.Write(ldtemp, regl)
 	ldtemp++
 	z80.Memory.Write(ldtemp, regh)
+}
+
+/*
+Carrega ponteiro de byte na posicao indexada pelo PC, PC+1
+*/
+func (z80 *Z80) LoadIndex8(reg *byte) {
+	ldtemp := z80.Load16()
+	*reg = z80.Memory.Read(ldtemp)
+}
+
+/*
+Armazena bute na posicao indexada pelo PC, PC+1
+*/
+func (z80 *Z80) StoreIndex8(reg byte) {
+	var addr uint16 = z80.Load16()
+	z80.Memory.Write(addr, reg)
 }
 
 //--- IO

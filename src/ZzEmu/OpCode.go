@@ -265,8 +265,8 @@ func instr__NOP(z *Z80, opcode byte) {
 
 func instr__LD_BC_NNNN(z *Z80, opcode byte) {
 	z.Tstates += 10
-	z.C = z.LoadByteFromPC()
-	z.B = z.LoadByteFromPC()
+	z.C = z.Load8()
+	z.B = z.Load8()
 }
 
 func instr__LD_iBC_A(z *Z80, opcode byte) {
@@ -292,7 +292,7 @@ func instr__DEC_B(z *Z80, opcode byte) {
 
 func instr__LD_B_NN(z *Z80, opcode byte) {
 	z.Tstates += 7
-	z.B = z.LoadByteFromPC()
+	z.B = z.Load8()
 }
 
 func instr__RLCA(z *Z80, opcode byte) {
@@ -346,7 +346,7 @@ func instr__DEC_C(z *Z80, opcode byte) {
 // /* LD C,nn */
 func instr__LD_C_NN(z *Z80, opcode byte) {
 	z.Tstates += 7
-	z.C = z.LoadByteFromPC()
+	z.C = z.Load8()
 }
 
 /* RRCA */
@@ -375,8 +375,8 @@ func instr__DJNZ_OFFSET(z *Z80, opcode byte) {
 /* LD DE,nnnn */
 func instr__LD_DE_NNNN(z *Z80, opcode byte) {
 	z.Tstates += 10
-	z.E = z.LoadByteFromPC()
-	z.D = z.LoadByteFromPC()
+	z.E = z.Load8()
+	z.D = z.Load8()
 }
 
 /* LD (DE),A */
@@ -407,7 +407,7 @@ func instr__DEC_D(z *Z80, opcode byte) {
 // /* LD D,nn */
 func instr__LD_D_NN(z *Z80, opcode byte) {
 	z.Tstates += 7
-	z.D = z.LoadByteFromPC()
+	z.D = z.Load8()
 }
 
 /* RLA */
@@ -458,7 +458,7 @@ func instr__DEC_E(z *Z80, opcode byte) {
 // /* LD E,nn */
 func instr__LD_E_NN(z *Z80, opcode byte) {
 	z.Tstates += 7
-	z.E = z.LoadByteFromPC()
+	z.E = z.Load8()
 }
 
 /* RRA */
@@ -483,15 +483,15 @@ func instr__JR_NZ_OFFSET(z *Z80, opcode byte) {
 /* LD HL,nnnn */
 func instr__LD_HL_NNNN(z *Z80, opcode byte) {
 	z.Tstates += 10
-	z.L = z.LoadByteFromPC()
-	z.H = z.LoadByteFromPC()
+	z.L = z.Load8()
+	z.H = z.Load8()
 
 }
 
 /* LD (nnnn),HL */
 func instr__LD_iNNNN_HL(z *Z80, opcode byte) {
 	z.Tstates += 16
-	z.ld16nnrr(z.L, z.H)
+	z.StoreIndex16(z.L, z.H)
 }
 
 /* INC HL */
@@ -516,7 +516,7 @@ func instr__DEC_H(z *Z80, opcode byte) {
 // /* LD H,nn */
 func instr__LD_H_NN(z *Z80, opcode byte) {
 	z.Tstates += 7
-	z.H = z.LoadByteFromPC()
+	z.H = z.Load8()
 }
 
 /* DAA */
@@ -562,7 +562,7 @@ func instr__ADD_HL_HL(z *Z80, opcode byte) {
 /* LD HL,(nnnn) */
 func instr__LD_HL_iNNNN(z *Z80, opcode byte) {
 	z.Tstates += 16
-	z.ld16rrnn(&z.L, &z.H)
+	z.LoadIndex16(&z.L, &z.H)
 	// break
 }
 
@@ -588,7 +588,7 @@ func instr__DEC_L(z *Z80, opcode byte) {
 // /* LD L,nn */
 func instr__LD_L_NN(z *Z80, opcode byte) {
 	z.Tstates += 7
-	z.L = z.LoadByteFromPC()
+	z.L = z.Load8()
 }
 
 /* CPL */
@@ -613,17 +613,14 @@ func instr__JR_NC_OFFSET(z *Z80, opcode byte) {
 
 // /* LD SP,nnnn */
 func instr__LD_SP_NNNN(z *Z80, opcode byte) {
-
 	z.Tstates += 10
-	z.sp = z.LdAddrLittleEndian()
+	z.sp = z.Load16()
 }
 
 // /* LD (nnnn),A */
 func instr__LD_iNNNN_A(z *Z80, opcode byte) {
 	z.Tstates += 13
-	var addr uint16 = z.LdAddrLittleEndian()
-	z.Memory.Write(addr, z.A)
-
+	z.StoreIndex8(z.A)
 }
 
 /* INC SP */
@@ -655,7 +652,7 @@ func instr__DEC_iHL(z *Z80, opcode byte) {
 /* LD (HL),nn */
 func instr__LD_iHL_NN(z *Z80, opcode byte) {
 	z.Tstates += 10
-	z.Memory.Write(z.HL.Get(), z.LoadByteFromPC())
+	z.Memory.Write(z.HL.Get(), z.Load8())
 }
 
 /* SCF */
@@ -687,8 +684,7 @@ func instr__ADD_HL_SP(z *Z80, opcode byte) {
 /* LD A,(nnnn) */
 func instr__LD_A_iNNNN(z *Z80, opcode byte) {
 	z.Tstates += 13
-	var wordtemp uint16 = z.LdAddrLittleEndian()
-	z.A = z.Memory.Read(wordtemp)
+	z.LoadIndex8(&z.A)
 }
 
 /* DEC SP */
@@ -713,7 +709,7 @@ func instr__DEC_A(z *Z80, opcode byte) {
 // /* LD A,nn */
 func instr__LD_A_NN(z *Z80, opcode byte) {
 	z.Tstates += 7
-	z.A = z.LoadByteFromPC()
+	z.A = z.Load8()
 }
 
 /* CCF */
@@ -937,7 +933,7 @@ func instr__POP_BC(z *Z80, opcode byte) {
 func instr__JP_NZ_NNNN(z *Z80, opcode byte) {
 	z.Tstates += 10
 	if (z.F & FLAG_Z) == 0 {
-		z.pc = z.LdAddrLittleEndian()
+		z.pc = z.Load16()
 	} else {
 		//z.Memory.ContendRead(z.PC(), 3)
 		//z.Memory.ContendRead(z.PC()+1, 3)
@@ -948,7 +944,7 @@ func instr__JP_NZ_NNNN(z *Z80, opcode byte) {
 // /* JP nnnn */
 func instr__JP_NNNN(z *Z80, opcode byte) {
 	z.Tstates += 10
-	z.pc = z.LdAddrLittleEndian()
+	z.pc = z.Load16()
 }
 
 /* CALL NZ,nnnn */
@@ -974,7 +970,7 @@ func instr__PUSH_BC(z *Z80, opcode byte) {
 /* ADD A,nn */
 func instr__ADD_A_NN(z *Z80, opcode byte) {
 	z.Tstates += 7
-	z.Add(z.LoadByteFromPC())
+	z.Add(z.Load8())
 }
 
 /* RST 00 */
@@ -1006,7 +1002,7 @@ func instr__RET(z *Z80, opcode byte) {
 func instr__JP_Z_NNNN(z *Z80, opcode byte) {
 	z.Tstates += 10
 	if (z.F & FLAG_Z) != 0 {
-		z.pc = z.LdAddrLittleEndian()
+		z.pc = z.Load16()
 	} else {
 		//z.Memory.ContendRead(z.PC(), 3)
 		//z.Memory.ContendRead(z.PC()+1, 3)
@@ -1044,7 +1040,7 @@ func instr__CALL_NNNN(z *Z80, opcode byte) {
 /* ADC A,nn */
 func instr__ADC_A_NN(z *Z80, opcode byte) {
 	z.Tstates += 7
-	var bytetemp byte = z.LoadByteFromPC()
+	var bytetemp byte = z.Load8()
 	z.Adc(bytetemp)
 }
 
@@ -1077,7 +1073,7 @@ func instr__POP_DE(z *Z80, opcode byte) {
 func instr__JP_NC_NNNN(z *Z80, opcode byte) {
 	z.Tstates += 10
 	if (z.F & FLAG_C) == 0 {
-		z.pc = z.LdAddrLittleEndian()
+		z.pc = z.Load16()
 	} else {
 		//z.Memory.ContendRead(z.PC(), 3)
 		//z.Memory.ContendRead(z.PC()+1, 3)
@@ -1088,7 +1084,7 @@ func instr__JP_NC_NNNN(z *Z80, opcode byte) {
 /* OUT (nn),A */
 func instr__OUT_iNN_A(z *Z80, opcode byte) {
 	z.Tstates += 11
-	var outtemp uint16 = uint16(z.LoadByteFromPC()) + (uint16(z.A) << 8)
+	var outtemp uint16 = uint16(z.Load8()) + (uint16(z.A) << 8)
 	z.writePort(outtemp, z.A)
 }
 
@@ -1116,7 +1112,7 @@ func instr__PUSH_DE(z *Z80, opcode byte) {
 /* SUB nn */
 func instr__SUB_NN(z *Z80, opcode byte) {
 	z.Tstates += 7
-	var bytetemp byte = z.LoadByteFromPC()
+	var bytetemp byte = z.Load8()
 	z.Sub(bytetemp)
 }
 
@@ -1158,7 +1154,7 @@ func instr__EXX(z *Z80, opcode byte) {
 func instr__JP_C_NNNN(z *Z80, opcode byte) {
 	z.Tstates += 10
 	if (z.F & FLAG_C) != 0 {
-		z.pc = z.LdAddrLittleEndian()
+		z.pc = z.Load16()
 	} else {
 		//z.Memory.ContendRead(z.PC(), 3)
 		//z.Memory.ContendRead(z.PC()+1, 3)
@@ -1169,7 +1165,7 @@ func instr__JP_C_NNNN(z *Z80, opcode byte) {
 /* IN A,(nn) */
 func instr__IN_A_iNN(z *Z80, opcode byte) {
 	z.Tstates += 11
-	var intemp uint16 = uint16(z.LoadByteFromPC()) + (uint16(z.A) << 8) // FIXME: preciso deslocar ????
+	var intemp uint16 = uint16(z.Load8()) + (uint16(z.A) << 8) // FIXME: preciso deslocar ????
 	z.A = z.readPort(intemp)
 }
 
@@ -1198,7 +1194,7 @@ func instr__SHIFT_DD(z *Z80, opcode byte) {
 /* SBC A,nn */
 func instr__SBC_A_NN(z *Z80, opcode byte) {
 	z.Tstates += 7
-	var bytetemp byte = z.LoadByteFromPC()
+	var bytetemp byte = z.Load8()
 	z.Sbc(bytetemp)
 }
 
@@ -1231,7 +1227,7 @@ func instr__POP_HL(z *Z80, opcode byte) {
 func instr__JP_PO_NNNN(z *Z80, opcode byte) {
 	z.Tstates += 10
 	if (z.F & FLAG_P) == 0 {
-		z.pc = z.LdAddrLittleEndian()
+		z.pc = z.Load16()
 	} else {
 		//z.Memory.ContendRead(z.PC(), 3)
 		//z.Memory.ContendRead(z.PC()+1, 3)
@@ -1275,7 +1271,7 @@ func instr__PUSH_HL(z *Z80, opcode byte) {
 /* AND nn */
 func instr__AND_NN(z *Z80, opcode byte) {
 	z.Tstates += 7
-	z.And(z.LoadByteFromPC())
+	z.And(z.Load8())
 }
 
 /* RST 20 */
@@ -1306,7 +1302,7 @@ func instr__JP_HL(z *Z80, opcode byte) {
 func instr__JP_PE_NNNN(z *Z80, opcode byte) {
 	z.Tstates += 10
 	if (z.F & FLAG_P) != 0 {
-		z.pc = z.LdAddrLittleEndian()
+		z.pc = z.Load16()
 	} else {
 		//z.Memory.ContendRead(z.PC(), 3)
 		//z.Memory.ContendRead(z.PC()+1, 3)
@@ -1350,7 +1346,7 @@ func instr__SHIFT_ED(z *Z80, opcode byte) {
 /* XOR A,nn */
 func instr__XOR_A_NN(z *Z80, opcode byte) {
 	z.Tstates += 7
-	z.Xor(z.LoadByteFromPC())
+	z.Xor(z.Load8())
 }
 
 /* RST 28 */
@@ -1382,7 +1378,7 @@ func instr__POP_AF(z *Z80, opcode byte) {
 func instr__JP_P_NNNN(z *Z80, opcode byte) {
 	z.Tstates += 10
 	if (z.F & FLAG_S) == 0 {
-		z.pc = z.LdAddrLittleEndian()
+		z.pc = z.Load16()
 	} else {
 		//z.Memory.ContendRead(z.PC(), 3)
 		//z.Memory.ContendRead(z.PC()+1, 3)
@@ -1418,7 +1414,7 @@ func instr__PUSH_AF(z *Z80, opcode byte) {
 /* OR nn */
 func instr__OR_NN(z *Z80, opcode byte) {
 	z.Tstates += 7
-	z.Or(z.LoadByteFromPC())
+	z.Or(z.Load8())
 }
 
 /* RST 30 */
@@ -1449,7 +1445,7 @@ func instr__LD_SP_HL(z *Z80, opcode byte) {
 func instr__JP_M_NNNN(z *Z80, opcode byte) {
 	z.Tstates += 10
 	if (z.F & FLAG_S) != 0 {
-		z.pc = z.LdAddrLittleEndian()
+		z.pc = z.Load16()
 	} else {
 		//z.Memory.ContendRead(z.PC(), 3)
 		//z.Memory.ContendRead(z.PC()+1, 3)
@@ -1492,7 +1488,7 @@ func instr__SHIFT_FD(z *Z80, opcode byte) {
 /* CP nn */
 func instr__CP_NN(z *Z80, opcode byte) {
 	z.Tstates += 7
-	z.Cp(z.LoadByteFromPC())
+	z.Cp(z.Load8())
 }
 
 /* RST 38 */

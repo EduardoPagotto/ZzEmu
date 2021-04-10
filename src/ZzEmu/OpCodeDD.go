@@ -3,177 +3,177 @@ package ZzEmu
 func initOpcodeDDMap() {
 	// 	// BEGIN of 0xdd shifted opcodes
 	// 	/* ADD REGISTER,BC */
-	// 	OpcodesMap[SHIFT_0xDD+0x09] = instrDD__ADD_REG_BC
+	// 	OpcodeDDCBMap[0x09] = instrDD__ADD_REG_BC
 	// 	/* ADD REGISTER,DE */
-	// 	OpcodesMap[SHIFT_0xDD+0x19] = instrDD__ADD_REG_DE
+	// 	OpcodeDDCBMap[0x19] = instrDD__ADD_REG_DE
 	// 	/* LD REGISTER,nnnn */
-	// 	OpcodesMap[SHIFT_0xDD+0x21] = instrDD__LD_REG_NNNN
-	// 	/* LD (nnnn),REGISTER */
-	// 	OpcodesMap[SHIFT_0xDD+0x22] = instrDD__LD_iNNNN_REG
+	// 	OpcodeDDCBMap[0x21] = instrDD__LD_REG_NNNN
+	/* LD (nnnn),REGISTER */
+	OpcodeDDCBMap[0x22] = instrDD__LD_iNNNN_REG
 	// 	/* INC REGISTER */
-	// 	OpcodesMap[SHIFT_0xDD+0x23] = instrDD__INC_REG
+	// 	OpcodeDDCBMap[0x23] = instrDD__INC_REG
 	// 	/* INC REGISTERH */
-	// 	OpcodesMap[SHIFT_0xDD+0x24] = instrDD__INC_REGH
+	// 	OpcodeDDCBMap[0x24] = instrDD__INC_REGH
 	// 	/* DEC REGISTERH */
-	// 	OpcodesMap[SHIFT_0xDD+0x25] = instrDD__DEC_REGH
+	// 	OpcodeDDCBMap[0x25] = instrDD__DEC_REGH
 	// 	/* LD REGISTERH,nn */
-	// 	OpcodesMap[SHIFT_0xDD+0x26] = instrDD__LD_REGH_NN
+	// 	OpcodeDDCBMap[0x26] = instrDD__LD_REGH_NN
 	// 	/* ADD REGISTER,REGISTER */
-	// 	OpcodesMap[SHIFT_0xDD+0x29] = instrDD__ADD_REG_REG
-	// 	/* LD REGISTER,(nnnn) */
-	// 	OpcodesMap[SHIFT_0xDD+0x2a] = instrDD__LD_REG_iNNNN
+	// 	OpcodeDDCBMap[0x29] = instrDD__ADD_REG_REG
+	/* LD REGISTER,(nnnn) */
+	OpcodeDDCBMap[0x2a] = instrDD__LD_REG_iNNNN
 	// 	/* DEC REGISTER */
-	// 	OpcodesMap[SHIFT_0xDD+0x2b] = instrDD__DEC_REG
+	// 	OpcodeDDCBMap[0x2b] = instrDD__DEC_REG
 	// 	/* INC REGISTERL */
-	// 	OpcodesMap[SHIFT_0xDD+0x2c] = instrDD__INC_REGL
+	// 	OpcodeDDCBMap[0x2c] = instrDD__INC_REGL
 	// 	/* DEC REGISTERL */
-	// 	OpcodesMap[SHIFT_0xDD+0x2d] = instrDD__DEC_REGL
+	// 	OpcodeDDCBMap[0x2d] = instrDD__DEC_REGL
 	// 	/* LD REGISTERL,nn */
-	// 	OpcodesMap[SHIFT_0xDD+0x2e] = instrDD__LD_REGL_NN
+	// 	OpcodeDDCBMap[0x2e] = instrDD__LD_REGL_NN
 	// 	/* INC (REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xDD+0x34] = instrDD__INC_iREGpDD
+	// 	OpcodeDDCBMap[0x34] = instrDD__INC_iREGpDD
 	// 	/* DEC (REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xDD+0x35] = instrDD__DEC_iREGpDD
+	// 	OpcodeDDCBMap[0x35] = instrDD__DEC_iREGpDD
 	// 	/* LD (REGISTER+dd),nn */
-	// 	OpcodesMap[SHIFT_0xDD+0x36] = instrDD__LD_iREGpDD_NN
+	// 	OpcodeDDCBMap[0x36] = instrDD__LD_iREGpDD_NN
 	// 	/* ADD REGISTER,SP */
-	// 	OpcodesMap[SHIFT_0xDD+0x39] = instrDD__ADD_REG_SP
+	// 	OpcodeDDCBMap[0x39] = instrDD__ADD_REG_SP
 	// 	/* LD B,REGISTERH */
-	// 	OpcodesMap[SHIFT_0xDD+0x44] = instrDD__LD_B_REGH
+	// 	OpcodeDDCBMap[0x44] = instrDD__LD_B_REGH
 	// 	/* LD B,REGISTERL */
-	// 	OpcodesMap[SHIFT_0xDD+0x45] = instrDD__LD_B_REGL
+	// 	OpcodeDDCBMap[0x45] = instrDD__LD_B_REGL
 	// 	/* LD B,(REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xDD+0x46] = instrDD__LD_B_iREGpDD
+	// 	OpcodeDDCBMap[0x46] = instrDD__LD_B_iREGpDD
 	// 	/* LD C,REGISTERH */
-	// 	OpcodesMap[SHIFT_0xDD+0x4c] = instrDD__LD_C_REGH
+	// 	OpcodeDDCBMap[0x4c] = instrDD__LD_C_REGH
 	// 	/* LD C,REGISTERL */
-	// 	OpcodesMap[SHIFT_0xDD+0x4d] = instrDD__LD_C_REGL
+	// 	OpcodeDDCBMap[0x4d] = instrDD__LD_C_REGL
 	// 	/* LD C,(REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xDD+0x4e] = instrDD__LD_C_iREGpDD
+	// 	OpcodeDDCBMap[0x4e] = instrDD__LD_C_iREGpDD
 	// 	/* LD D,REGISTERH */
-	// 	OpcodesMap[SHIFT_0xDD+0x54] = instrDD__LD_D_REGH
+	// 	OpcodeDDCBMap[0x54] = instrDD__LD_D_REGH
 	// 	/* LD D,REGISTERL */
-	// 	OpcodesMap[SHIFT_0xDD+0x55] = instrDD__LD_D_REGL
+	// 	OpcodeDDCBMap[0x55] = instrDD__LD_D_REGL
 	// 	/* LD D,(REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xDD+0x56] = instrDD__LD_D_iREGpDD
+	// 	OpcodeDDCBMap[0x56] = instrDD__LD_D_iREGpDD
 	// 	/* LD E,REGISTERH */
-	// 	OpcodesMap[SHIFT_0xDD+0x5c] = instrDD__LD_E_REGH
+	// 	OpcodeDDCBMap[0x5c] = instrDD__LD_E_REGH
 	// 	/* LD E,REGISTERL */
-	// 	OpcodesMap[SHIFT_0xDD+0x5d] = instrDD__LD_E_REGL
+	// 	OpcodeDDCBMap[0x5d] = instrDD__LD_E_REGL
 	// 	/* LD E,(REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xDD+0x5e] = instrDD__LD_E_iREGpDD
+	// 	OpcodeDDCBMap[0x5e] = instrDD__LD_E_iREGpDD
 	// 	/* LD REGISTERH,B */
-	// 	OpcodesMap[SHIFT_0xDD+0x60] = instrDD__LD_REGH_B
+	// 	OpcodeDDCBMap[0x60] = instrDD__LD_REGH_B
 	// 	/* LD REGISTERH,C */
-	// 	OpcodesMap[SHIFT_0xDD+0x61] = instrDD__LD_REGH_C
+	// 	OpcodeDDCBMap[0x61] = instrDD__LD_REGH_C
 	// 	/* LD REGISTERH,D */
-	// 	OpcodesMap[SHIFT_0xDD+0x62] = instrDD__LD_REGH_D
+	// 	OpcodeDDCBMap[0x62] = instrDD__LD_REGH_D
 	// 	/* LD REGISTERH,E */
-	// 	OpcodesMap[SHIFT_0xDD+0x63] = instrDD__LD_REGH_E
+	// 	OpcodeDDCBMap[0x63] = instrDD__LD_REGH_E
 	// 	/* LD REGISTERH,REGISTERH */
-	// 	OpcodesMap[SHIFT_0xDD+0x64] = instrDD__LD_REGH_REGH
+	// 	OpcodeDDCBMap[0x64] = instrDD__LD_REGH_REGH
 	// 	/* LD REGISTERH,REGISTERL */
-	// 	OpcodesMap[SHIFT_0xDD+0x65] = instrDD__LD_REGH_REGL
+	// 	OpcodeDDCBMap[0x65] = instrDD__LD_REGH_REGL
 	// 	/* LD H,(REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xDD+0x66] = instrDD__LD_H_iREGpDD
+	// 	OpcodeDDCBMap[0x66] = instrDD__LD_H_iREGpDD
 	// 	/* LD REGISTERH,A */
-	// 	OpcodesMap[SHIFT_0xDD+0x67] = instrDD__LD_REGH_A
+	// 	OpcodeDDCBMap[0x67] = instrDD__LD_REGH_A
 	// 	/* LD REGISTERL,B */
-	// 	OpcodesMap[SHIFT_0xDD+0x68] = instrDD__LD_REGL_B
+	// 	OpcodeDDCBMap[0x68] = instrDD__LD_REGL_B
 	// 	/* LD REGISTERL,C */
-	// 	OpcodesMap[SHIFT_0xDD+0x69] = instrDD__LD_REGL_C
+	// 	OpcodeDDCBMap[0x69] = instrDD__LD_REGL_C
 	// 	/* LD REGISTERL,D */
-	// 	OpcodesMap[SHIFT_0xDD+0x6a] = instrDD__LD_REGL_D
+	// 	OpcodeDDCBMap[0x6a] = instrDD__LD_REGL_D
 	// 	/* LD REGISTERL,E */
-	// 	OpcodesMap[SHIFT_0xDD+0x6b] = instrDD__LD_REGL_E
+	// 	OpcodeDDCBMap[0x6b] = instrDD__LD_REGL_E
 	// 	/* LD REGISTERL,REGISTERH */
-	// 	OpcodesMap[SHIFT_0xDD+0x6c] = instrDD__LD_REGL_REGH
+	// 	OpcodeDDCBMap[0x6c] = instrDD__LD_REGL_REGH
 	// 	/* LD REGISTERL,REGISTERL */
-	// 	OpcodesMap[SHIFT_0xDD+0x6d] = instrDD__LD_REGL_REGL
+	// 	OpcodeDDCBMap[0x6d] = instrDD__LD_REGL_REGL
 	// 	/* LD L,(REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xDD+0x6e] = instrDD__LD_L_iREGpDD
+	// 	OpcodeDDCBMap[0x6e] = instrDD__LD_L_iREGpDD
 	// 	/* LD REGISTERL,A */
-	// 	OpcodesMap[SHIFT_0xDD+0x6f] = instrDD__LD_REGL_A
+	// 	OpcodeDDCBMap[0x6f] = instrDD__LD_REGL_A
 	// 	/* LD (REGISTER+dd),B */
-	// 	OpcodesMap[SHIFT_0xDD+0x70] = instrDD__LD_iREGpDD_B
+	// 	OpcodeDDCBMap[0x70] = instrDD__LD_iREGpDD_B
 	// 	/* LD (REGISTER+dd),C */
-	// 	OpcodesMap[SHIFT_0xDD+0x71] = instrDD__LD_iREGpDD_C
+	// 	OpcodeDDCBMap[0x71] = instrDD__LD_iREGpDD_C
 	// 	/* LD (REGISTER+dd),D */
-	// 	OpcodesMap[SHIFT_0xDD+0x72] = instrDD__LD_iREGpDD_D
+	// 	OpcodeDDCBMap[0x72] = instrDD__LD_iREGpDD_D
 	// 	/* LD (REGISTER+dd),E */
-	// 	OpcodesMap[SHIFT_0xDD+0x73] = instrDD__LD_iREGpDD_E
+	// 	OpcodeDDCBMap[0x73] = instrDD__LD_iREGpDD_E
 	// 	/* LD (REGISTER+dd),H */
-	// 	OpcodesMap[SHIFT_0xDD+0x74] = instrDD__LD_iREGpDD_H
+	// 	OpcodeDDCBMap[0x74] = instrDD__LD_iREGpDD_H
 	// 	/* LD (REGISTER+dd),L */
-	// 	OpcodesMap[SHIFT_0xDD+0x75] = instrDD__LD_iREGpDD_L
+	// 	OpcodeDDCBMap[0x75] = instrDD__LD_iREGpDD_L
 	// 	/* LD (REGISTER+dd),A */
-	// 	OpcodesMap[SHIFT_0xDD+0x77] = instrDD__LD_iREGpDD_A
+	// 	OpcodeDDCBMap[0x77] = instrDD__LD_iREGpDD_A
 	// 	/* LD A,REGISTERH */
-	// 	OpcodesMap[SHIFT_0xDD+0x7c] = instrDD__LD_A_REGH
+	// 	OpcodeDDCBMap[0x7c] = instrDD__LD_A_REGH
 	// 	/* LD A,REGISTERL */
-	// 	OpcodesMap[SHIFT_0xDD+0x7d] = instrDD__LD_A_REGL
+	// 	OpcodeDDCBMap[0x7d] = instrDD__LD_A_REGL
 	// 	/* LD A,(REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xDD+0x7e] = instrDD__LD_A_iREGpDD
+	// 	OpcodeDDCBMap[0x7e] = instrDD__LD_A_iREGpDD
 	// 	/* ADD A,REGISTERH */
-	// 	OpcodesMap[SHIFT_0xDD+0x84] = instrDD__ADD_A_REGH
+	// 	OpcodeDDCBMap[0x84] = instrDD__ADD_A_REGH
 	// 	/* ADD A,REGISTERL */
-	// 	OpcodesMap[SHIFT_0xDD+0x85] = instrDD__ADD_A_REGL
+	// 	OpcodeDDCBMap[0x85] = instrDD__ADD_A_REGL
 	// 	/* ADD A,(REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xDD+0x86] = instrDD__ADD_A_iREGpDD
+	// 	OpcodeDDCBMap[0x86] = instrDD__ADD_A_iREGpDD
 	// 	/* ADC A,REGISTERH */
-	// 	OpcodesMap[SHIFT_0xDD+0x8c] = instrDD__ADC_A_REGH
+	// 	OpcodeDDCBMap[0x8c] = instrDD__ADC_A_REGH
 	// 	/* ADC A,REGISTERL */
-	// 	OpcodesMap[SHIFT_0xDD+0x8d] = instrDD__ADC_A_REGL
+	// 	OpcodeDDCBMap[0x8d] = instrDD__ADC_A_REGL
 	// 	/* ADC A,(REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xDD+0x8e] = instrDD__ADC_A_iREGpDD
+	// 	OpcodeDDCBMap[0x8e] = instrDD__ADC_A_iREGpDD
 	// 	/* SUB A,REGISTERH */
-	// 	OpcodesMap[SHIFT_0xDD+0x94] = instrDD__SUB_A_REGH
+	// 	OpcodeDDCBMap[0x94] = instrDD__SUB_A_REGH
 	// 	/* SUB A,REGISTERL */
-	// 	OpcodesMap[SHIFT_0xDD+0x95] = instrDD__SUB_A_REGL
+	// 	OpcodeDDCBMap[0x95] = instrDD__SUB_A_REGL
 	// 	/* SUB A,(REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xDD+0x96] = instrDD__SUB_A_iREGpDD
+	// 	OpcodeDDCBMap[0x96] = instrDD__SUB_A_iREGpDD
 	// 	/* SBC A,REGISTERH */
-	// 	OpcodesMap[SHIFT_0xDD+0x9c] = instrDD__SBC_A_REGH
+	// 	OpcodeDDCBMap[0x9c] = instrDD__SBC_A_REGH
 	// 	/* SBC A,REGISTERL */
-	// 	OpcodesMap[SHIFT_0xDD+0x9d] = instrDD__SBC_A_REGL
+	// 	OpcodeDDCBMap[0x9d] = instrDD__SBC_A_REGL
 	// 	/* SBC A,(REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xDD+0x9e] = instrDD__SBC_A_iREGpDD
+	// 	OpcodeDDCBMap[0x9e] = instrDD__SBC_A_iREGpDD
 	// 	/* AND A,REGISTERH */
-	// 	OpcodesMap[SHIFT_0xDD+0xa4] = instrDD__AND_A_REGH
+	// 	OpcodeDDCBMap[0xa4] = instrDD__AND_A_REGH
 	// 	/* AND A,REGISTERL */
-	// 	OpcodesMap[SHIFT_0xDD+0xa5] = instrDD__AND_A_REGL
+	// 	OpcodeDDCBMap[0xa5] = instrDD__AND_A_REGL
 	// 	/* AND A,(REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xDD+0xa6] = instrDD__AND_A_iREGpDD
+	// 	OpcodeDDCBMap[0xa6] = instrDD__AND_A_iREGpDD
 	// 	/* XOR A,REGISTERH */
-	// 	OpcodesMap[SHIFT_0xDD+0xac] = instrDD__XOR_A_REGH
+	// 	OpcodeDDCBMap[0xac] = instrDD__XOR_A_REGH
 	// 	/* XOR A,REGISTERL */
-	// 	OpcodesMap[SHIFT_0xDD+0xad] = instrDD__XOR_A_REGL
+	// 	OpcodeDDCBMap[0xad] = instrDD__XOR_A_REGL
 	// 	/* XOR A,(REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xDD+0xae] = instrDD__XOR_A_iREGpDD
+	// 	OpcodeDDCBMap[0xae] = instrDD__XOR_A_iREGpDD
 	// 	/* OR A,REGISTERH */
-	// 	OpcodesMap[SHIFT_0xDD+0xb4] = instrDD__OR_A_REGH
+	// 	OpcodeDDCBMap[0xb4] = instrDD__OR_A_REGH
 	// 	/* OR A,REGISTERL */
-	// 	OpcodesMap[SHIFT_0xDD+0xb5] = instrDD__OR_A_REGL
+	// 	OpcodeDDCBMap[0xb5] = instrDD__OR_A_REGL
 	// 	/* OR A,(REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xDD+0xb6] = instrDD__OR_A_iREGpDD
+	// 	OpcodeDDCBMap[0xb6] = instrDD__OR_A_iREGpDD
 	// 	/* CP A,REGISTERH */
-	// 	OpcodesMap[SHIFT_0xDD+0xbc] = instrDD__CP_A_REGH
+	// 	OpcodeDDCBMap[0xbc] = instrDD__CP_A_REGH
 	// 	/* CP A,REGISTERL */
-	// 	OpcodesMap[SHIFT_0xDD+0xbd] = instrDD__CP_A_REGL
+	// 	OpcodeDDCBMap[0xbd] = instrDD__CP_A_REGL
 	// 	/* CP A,(REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xDD+0xbe] = instrDD__CP_A_iREGpDD
+	// 	OpcodeDDCBMap[0xbe] = instrDD__CP_A_iREGpDD
 	// 	/* shift DDFDCB */
 	OpcodeDDMap[0xcb] = instrDD__SHIFT_DDFDCB
 	// 	/* POP REGISTER */
-	// 	OpcodesMap[SHIFT_0xDD+0xe1] = instrDD__POP_REG
+	// 	OpcodeDDCBMap[0xe1] = instrDD__POP_REG
 	// 	/* EX (SP),REGISTER */
-	// 	OpcodesMap[SHIFT_0xDD+0xe3] = instrDD__EX_iSP_REG
+	// 	OpcodeDDCBMap[0xe3] = instrDD__EX_iSP_REG
 	// 	/* PUSH REGISTER */
-	// 	OpcodesMap[SHIFT_0xDD+0xe5] = instrDD__PUSH_REG
+	// 	OpcodeDDCBMap[0xe5] = instrDD__PUSH_REG
 	// 	/* JP REGISTER */
-	// 	OpcodesMap[SHIFT_0xDD+0xe9] = instrDD__JP_REG
+	// 	OpcodeDDCBMap[0xe9] = instrDD__JP_REG
 	// 	/* LD SP,REGISTER */
-	// 	OpcodesMap[SHIFT_0xDD+0xf9] = instrDD__LD_SP_REG
+	// 	OpcodeDDCBMap[0xf9] = instrDD__LD_SP_REG
 
 	// 	// END of 0xdd shifted opcodes
 
@@ -200,11 +200,12 @@ func initOpcodeDDMap() {
 // 	z.SetIX(joinBytes(b2, b1))
 // }
 
-// /* LD (nnnn),ix */
-// func instrDD__LD_iNNNN_REG(z *Z80, opcode byte) {
-// 	z.ld16nnrr(z.IXL, z.IXH)
-// 	// break
-// }
+/* LD (nnnn),ix */
+func instrDD__LD_iNNNN_REG(z *Z80, opcode byte) {
+	z.Tstates += 20
+	z.StoreIndex16(z.IXL, z.IXH)
+	// break
+}
 
 // /* INC ix */
 // func instrDD__INC_REG(z *Z80, opcode byte) {
@@ -234,11 +235,12 @@ func initOpcodeDDMap() {
 // 	z.add16(z.ix, z.IX())
 // }
 
-// /* LD ix,(nnnn) */
-// func instrDD__LD_REG_iNNNN(z *Z80, opcode byte) {
-// 	z.ld16rrnn(&z.IXL, &z.IXH)
-// 	// break
-// }
+/* LD ix,(nnnn) */
+func instrDD__LD_REG_iNNNN(z *Z80, opcode byte) {
+	z.Tstates += 20
+	z.LoadIndex16(&z.IXL, &z.IXH)
+	// break
+}
 
 // /* DEC ix */
 // func instrDD__DEC_REG(z *Z80, opcode byte) {

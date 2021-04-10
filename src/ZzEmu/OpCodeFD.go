@@ -4,177 +4,177 @@ func initOpcodeDFMap() {
 
 	// 	// BEGIN of 0xfd shifted opcodes
 	// 	/* ADD REGISTER,BC */
-	// 	OpcodesMap[SHIFT_0xFD+0x09] = instrFD__ADD_REG_BC
+	// 	OpcodeDFMap[0x09] = instrFD__ADD_REG_BC
 	// 	/* ADD REGISTER,DE */
-	// 	OpcodesMap[SHIFT_0xFD+0x19] = instrFD__ADD_REG_DE
+	// 	OpcodeDFMap[0x19] = instrFD__ADD_REG_DE
 	// 	/* LD REGISTER,nnnn */
-	// 	OpcodesMap[SHIFT_0xFD+0x21] = instrFD__LD_REG_NNNN
-	// 	/* LD (nnnn),REGISTER */
-	// 	OpcodesMap[SHIFT_0xFD+0x22] = instrFD__LD_iNNNN_REG
+	// 	OpcodeDFMap[0x21] = instrFD__LD_REG_NNNN
+	/* LD (nnnn),REGISTER */
+	OpcodeDFMap[0x22] = instrFD__LD_iNNNN_REG
 	// 	/* INC REGISTER */
-	// 	OpcodesMap[SHIFT_0xFD+0x23] = instrFD__INC_REG
+	// 	OpcodeDFMap[0x23] = instrFD__INC_REG
 	// 	/* INC REGISTERH */
-	// 	OpcodesMap[SHIFT_0xFD+0x24] = instrFD__INC_REGH
+	// 	OpcodeDFMap[0x24] = instrFD__INC_REGH
 	// 	/* DEC REGISTERH */
-	// 	OpcodesMap[SHIFT_0xFD+0x25] = instrFD__DEC_REGH
+	// 	OpcodeDFMap[0x25] = instrFD__DEC_REGH
 	// 	/* LD REGISTERH,nn */
-	// 	OpcodesMap[SHIFT_0xFD+0x26] = instrFD__LD_REGH_NN
+	// 	OpcodeDFMap[0x26] = instrFD__LD_REGH_NN
 	// 	/* ADD REGISTER,REGISTER */
-	// 	OpcodesMap[SHIFT_0xFD+0x29] = instrFD__ADD_REG_REG
-	// 	/* LD REGISTER,(nnnn) */
-	// 	OpcodesMap[SHIFT_0xFD+0x2a] = instrFD__LD_REG_iNNNN
+	// 	OpcodeDFMap[0x29] = instrFD__ADD_REG_REG
+	/* LD REGISTER,(nnnn) */
+	OpcodeDFMap[0x2a] = instrFD__LD_REG_iNNNN
 	// 	/* DEC REGISTER */
-	// 	OpcodesMap[SHIFT_0xFD+0x2b] = instrFD__DEC_REG
+	// 	OpcodeDFMap[0x2b] = instrFD__DEC_REG
 	// 	/* INC REGISTERL */
-	// 	OpcodesMap[SHIFT_0xFD+0x2c] = instrFD__INC_REGL
+	// 	OpcodeDFMap[0x2c] = instrFD__INC_REGL
 	// 	/* DEC REGISTERL */
-	// 	OpcodesMap[SHIFT_0xFD+0x2d] = instrFD__DEC_REGL
+	// 	OpcodeDFMap[0x2d] = instrFD__DEC_REGL
 	// 	/* LD REGISTERL,nn */
-	// 	OpcodesMap[SHIFT_0xFD+0x2e] = instrFD__LD_REGL_NN
+	// 	OpcodeDFMap[0x2e] = instrFD__LD_REGL_NN
 	// 	/* INC (REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xFD+0x34] = instrFD__INC_iREGpDD
+	// 	OpcodeDFMap[0x34] = instrFD__INC_iREGpDD
 	// 	/* DEC (REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xFD+0x35] = instrFD__DEC_iREGpDD
+	// 	OpcodeDFMap[0x35] = instrFD__DEC_iREGpDD
 	// 	/* LD (REGISTER+dd),nn */
-	// 	OpcodesMap[SHIFT_0xFD+0x36] = instrFD__LD_iREGpDD_NN
+	// 	OpcodeDFMap[0x36] = instrFD__LD_iREGpDD_NN
 	// 	/* ADD REGISTER,SP */
-	// 	OpcodesMap[SHIFT_0xFD+0x39] = instrFD__ADD_REG_SP
+	// 	OpcodeDFMap[0x39] = instrFD__ADD_REG_SP
 	// 	/* LD B,REGISTERH */
-	// 	OpcodesMap[SHIFT_0xFD+0x44] = instrFD__LD_B_REGH
+	// 	OpcodeDFMap[0x44] = instrFD__LD_B_REGH
 	// 	/* LD B,REGISTERL */
-	// 	OpcodesMap[SHIFT_0xFD+0x45] = instrFD__LD_B_REGL
+	// 	OpcodeDFMap[0x45] = instrFD__LD_B_REGL
 	// 	/* LD B,(REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xFD+0x46] = instrFD__LD_B_iREGpDD
+	// 	OpcodeDFMap[0x46] = instrFD__LD_B_iREGpDD
 	// 	/* LD C,REGISTERH */
-	// 	OpcodesMap[SHIFT_0xFD+0x4c] = instrFD__LD_C_REGH
+	// 	OpcodeDFMap[0x4c] = instrFD__LD_C_REGH
 	// 	/* LD C,REGISTERL */
-	// 	OpcodesMap[SHIFT_0xFD+0x4d] = instrFD__LD_C_REGL
+	// 	OpcodeDFMap[0x4d] = instrFD__LD_C_REGL
 	// 	/* LD C,(REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xFD+0x4e] = instrFD__LD_C_iREGpDD
+	// 	OpcodeDFMap[0x4e] = instrFD__LD_C_iREGpDD
 	// 	/* LD D,REGISTERH */
-	// 	OpcodesMap[SHIFT_0xFD+0x54] = instrFD__LD_D_REGH
+	// 	OpcodeDFMap[0x54] = instrFD__LD_D_REGH
 	// 	/* LD D,REGISTERL */
-	// 	OpcodesMap[SHIFT_0xFD+0x55] = instrFD__LD_D_REGL
+	// 	OpcodeDFMap[0x55] = instrFD__LD_D_REGL
 	// 	/* LD D,(REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xFD+0x56] = instrFD__LD_D_iREGpDD
+	// 	OpcodeDFMap[0x56] = instrFD__LD_D_iREGpDD
 	// 	/* LD E,REGISTERH */
-	// 	OpcodesMap[SHIFT_0xFD+0x5c] = instrFD__LD_E_REGH
+	// 	OpcodeDFMap[0x5c] = instrFD__LD_E_REGH
 	// 	/* LD E,REGISTERL */
-	// 	OpcodesMap[SHIFT_0xFD+0x5d] = instrFD__LD_E_REGL
+	// 	OpcodeDFMap[0x5d] = instrFD__LD_E_REGL
 	// 	/* LD E,(REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xFD+0x5e] = instrFD__LD_E_iREGpDD
+	// 	OpcodeDFMap[0x5e] = instrFD__LD_E_iREGpDD
 	// 	/* LD REGISTERH,B */
-	// 	OpcodesMap[SHIFT_0xFD+0x60] = instrFD__LD_REGH_B
+	// 	OpcodeDFMap[0x60] = instrFD__LD_REGH_B
 	// 	/* LD REGISTERH,C */
-	// 	OpcodesMap[SHIFT_0xFD+0x61] = instrFD__LD_REGH_C
+	// 	OpcodeDFMap[0x61] = instrFD__LD_REGH_C
 	// 	/* LD REGISTERH,D */
-	// 	OpcodesMap[SHIFT_0xFD+0x62] = instrFD__LD_REGH_D
+	// 	OpcodeDFMap[0x62] = instrFD__LD_REGH_D
 	// 	/* LD REGISTERH,E */
-	// 	OpcodesMap[SHIFT_0xFD+0x63] = instrFD__LD_REGH_E
+	// 	OpcodeDFMap[0x63] = instrFD__LD_REGH_E
 	// 	/* LD REGISTERH,REGISTERH */
-	// 	OpcodesMap[SHIFT_0xFD+0x64] = instrFD__LD_REGH_REGH
+	// 	OpcodeDFMap[0x64] = instrFD__LD_REGH_REGH
 	// 	/* LD REGISTERH,REGISTERL */
-	// 	OpcodesMap[SHIFT_0xFD+0x65] = instrFD__LD_REGH_REGL
+	// 	OpcodeDFMap[0x65] = instrFD__LD_REGH_REGL
 	// 	/* LD H,(REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xFD+0x66] = instrFD__LD_H_iREGpDD
+	// 	OpcodeDFMap[0x66] = instrFD__LD_H_iREGpDD
 	// 	/* LD REGISTERH,A */
-	// 	OpcodesMap[SHIFT_0xFD+0x67] = instrFD__LD_REGH_A
+	// 	OpcodeDFMap[0x67] = instrFD__LD_REGH_A
 	// 	/* LD REGISTERL,B */
-	// 	OpcodesMap[SHIFT_0xFD+0x68] = instrFD__LD_REGL_B
+	// 	OpcodeDFMap[0x68] = instrFD__LD_REGL_B
 	// 	/* LD REGISTERL,C */
-	// 	OpcodesMap[SHIFT_0xFD+0x69] = instrFD__LD_REGL_C
+	// 	OpcodeDFMap[0x69] = instrFD__LD_REGL_C
 	// 	/* LD REGISTERL,D */
-	// 	OpcodesMap[SHIFT_0xFD+0x6a] = instrFD__LD_REGL_D
+	// 	OpcodeDFMap[0x6a] = instrFD__LD_REGL_D
 	// 	/* LD REGISTERL,E */
-	// 	OpcodesMap[SHIFT_0xFD+0x6b] = instrFD__LD_REGL_E
+	// 	OpcodeDFMap[0x6b] = instrFD__LD_REGL_E
 	// 	/* LD REGISTERL,REGISTERH */
-	// 	OpcodesMap[SHIFT_0xFD+0x6c] = instrFD__LD_REGL_REGH
+	// 	OpcodeDFMap[0x6c] = instrFD__LD_REGL_REGH
 	// 	/* LD REGISTERL,REGISTERL */
-	// 	OpcodesMap[SHIFT_0xFD+0x6d] = instrFD__LD_REGL_REGL
+	// 	OpcodeDFMap[0x6d] = instrFD__LD_REGL_REGL
 	// 	/* LD L,(REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xFD+0x6e] = instrFD__LD_L_iREGpDD
+	// 	OpcodeDFMap[0x6e] = instrFD__LD_L_iREGpDD
 	// 	/* LD REGISTERL,A */
-	// 	OpcodesMap[SHIFT_0xFD+0x6f] = instrFD__LD_REGL_A
+	// 	OpcodeDFMap[0x6f] = instrFD__LD_REGL_A
 	// 	/* LD (REGISTER+dd),B */
-	// 	OpcodesMap[SHIFT_0xFD+0x70] = instrFD__LD_iREGpDD_B
+	// 	OpcodeDFMap[0x70] = instrFD__LD_iREGpDD_B
 	// 	/* LD (REGISTER+dd),C */
-	// 	OpcodesMap[SHIFT_0xFD+0x71] = instrFD__LD_iREGpDD_C
+	// 	OpcodeDFMap[0x71] = instrFD__LD_iREGpDD_C
 	// 	/* LD (REGISTER+dd),D */
-	// 	OpcodesMap[SHIFT_0xFD+0x72] = instrFD__LD_iREGpDD_D
+	// 	OpcodeDFMap[0x72] = instrFD__LD_iREGpDD_D
 	// 	/* LD (REGISTER+dd),E */
-	// 	OpcodesMap[SHIFT_0xFD+0x73] = instrFD__LD_iREGpDD_E
+	// 	OpcodeDFMap[0x73] = instrFD__LD_iREGpDD_E
 	// 	/* LD (REGISTER+dd),H */
-	// 	OpcodesMap[SHIFT_0xFD+0x74] = instrFD__LD_iREGpDD_H
+	// 	OpcodeDFMap[0x74] = instrFD__LD_iREGpDD_H
 	// 	/* LD (REGISTER+dd),L */
-	// 	OpcodesMap[SHIFT_0xFD+0x75] = instrFD__LD_iREGpDD_L
+	// 	OpcodeDFMap[0x75] = instrFD__LD_iREGpDD_L
 	// 	/* LD (REGISTER+dd),A */
-	// 	OpcodesMap[SHIFT_0xFD+0x77] = instrFD__LD_iREGpDD_A
+	// 	OpcodeDFMap[0x77] = instrFD__LD_iREGpDD_A
 	// 	/* LD A,REGISTERH */
-	// 	OpcodesMap[SHIFT_0xFD+0x7c] = instrFD__LD_A_REGH
+	// 	OpcodeDFMap[0x7c] = instrFD__LD_A_REGH
 	// 	/* LD A,REGISTERL */
-	// 	OpcodesMap[SHIFT_0xFD+0x7d] = instrFD__LD_A_REGL
+	// 	OpcodeDFMap[0x7d] = instrFD__LD_A_REGL
 	// 	/* LD A,(REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xFD+0x7e] = instrFD__LD_A_iREGpDD
+	// 	OpcodeDFMap[0x7e] = instrFD__LD_A_iREGpDD
 	// 	/* ADD A,REGISTERH */
-	// 	OpcodesMap[SHIFT_0xFD+0x84] = instrFD__ADD_A_REGH
+	// 	OpcodeDFMap[0x84] = instrFD__ADD_A_REGH
 	// 	/* ADD A,REGISTERL */
-	// 	OpcodesMap[SHIFT_0xFD+0x85] = instrFD__ADD_A_REGL
+	// 	OpcodeDFMap[0x85] = instrFD__ADD_A_REGL
 	// 	/* ADD A,(REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xFD+0x86] = instrFD__ADD_A_iREGpDD
+	// 	OpcodeDFMap[0x86] = instrFD__ADD_A_iREGpDD
 	// 	/* ADC A,REGISTERH */
-	// 	OpcodesMap[SHIFT_0xFD+0x8c] = instrFD__ADC_A_REGH
+	// 	OpcodeDFMap[0x8c] = instrFD__ADC_A_REGH
 	// 	/* ADC A,REGISTERL */
-	// 	OpcodesMap[SHIFT_0xFD+0x8d] = instrFD__ADC_A_REGL
+	// 	OpcodeDFMap[0x8d] = instrFD__ADC_A_REGL
 	// 	/* ADC A,(REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xFD+0x8e] = instrFD__ADC_A_iREGpDD
+	// 	OpcodeDFMap[0x8e] = instrFD__ADC_A_iREGpDD
 	// 	/* SUB A,REGISTERH */
-	// 	OpcodesMap[SHIFT_0xFD+0x94] = instrFD__SUB_A_REGH
+	// 	OpcodeDFMap[0x94] = instrFD__SUB_A_REGH
 	// 	/* SUB A,REGISTERL */
-	// 	OpcodesMap[SHIFT_0xFD+0x95] = instrFD__SUB_A_REGL
+	// 	OpcodeDFMap[0x95] = instrFD__SUB_A_REGL
 	// 	/* SUB A,(REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xFD+0x96] = instrFD__SUB_A_iREGpDD
+	// 	OpcodeDFMap[0x96] = instrFD__SUB_A_iREGpDD
 	// 	/* SBC A,REGISTERH */
-	// 	OpcodesMap[SHIFT_0xFD+0x9c] = instrFD__SBC_A_REGH
+	// 	OpcodeDFMap[0x9c] = instrFD__SBC_A_REGH
 	// 	/* SBC A,REGISTERL */
-	// 	OpcodesMap[SHIFT_0xFD+0x9d] = instrFD__SBC_A_REGL
+	// 	OpcodeDFMap[0x9d] = instrFD__SBC_A_REGL
 	// 	/* SBC A,(REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xFD+0x9e] = instrFD__SBC_A_iREGpDD
+	// 	OpcodeDFMap[0x9e] = instrFD__SBC_A_iREGpDD
 	// 	/* AND A,REGISTERH */
-	// 	OpcodesMap[SHIFT_0xFD+0xa4] = instrFD__AND_A_REGH
+	// 	OpcodeDFMap[0xa4] = instrFD__AND_A_REGH
 	// 	/* AND A,REGISTERL */
-	// 	OpcodesMap[SHIFT_0xFD+0xa5] = instrFD__AND_A_REGL
+	// 	OpcodeDFMap[0xa5] = instrFD__AND_A_REGL
 	// 	/* AND A,(REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xFD+0xa6] = instrFD__AND_A_iREGpDD
+	// 	OpcodeDFMap[0xa6] = instrFD__AND_A_iREGpDD
 	// 	/* XOR A,REGISTERH */
-	// 	OpcodesMap[SHIFT_0xFD+0xac] = instrFD__XOR_A_REGH
+	// 	OpcodeDFMap[0xac] = instrFD__XOR_A_REGH
 	// 	/* XOR A,REGISTERL */
-	// 	OpcodesMap[SHIFT_0xFD+0xad] = instrFD__XOR_A_REGL
+	// 	OpcodeDFMap[0xad] = instrFD__XOR_A_REGL
 	// 	/* XOR A,(REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xFD+0xae] = instrFD__XOR_A_iREGpDD
+	// 	OpcodeDFMap[0xae] = instrFD__XOR_A_iREGpDD
 	// 	/* OR A,REGISTERH */
-	// 	OpcodesMap[SHIFT_0xFD+0xb4] = instrFD__OR_A_REGH
+	// 	OpcodeDFMap[0xb4] = instrFD__OR_A_REGH
 	// 	/* OR A,REGISTERL */
-	// 	OpcodesMap[SHIFT_0xFD+0xb5] = instrFD__OR_A_REGL
+	// 	OpcodeDFMap[0xb5] = instrFD__OR_A_REGL
 	// 	/* OR A,(REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xFD+0xb6] = instrFD__OR_A_iREGpDD
+	// 	OpcodeDFMap[0xb6] = instrFD__OR_A_iREGpDD
 	// 	/* CP A,REGISTERH */
-	// 	OpcodesMap[SHIFT_0xFD+0xbc] = instrFD__CP_A_REGH
+	// 	OpcodeDFMap[0xbc] = instrFD__CP_A_REGH
 	// 	/* CP A,REGISTERL */
-	// 	OpcodesMap[SHIFT_0xFD+0xbd] = instrFD__CP_A_REGL
+	// 	OpcodeDFMap[0xbd] = instrFD__CP_A_REGL
 	// 	/* CP A,(REGISTER+dd) */
-	// 	OpcodesMap[SHIFT_0xFD+0xbe] = instrFD__CP_A_iREGpDD
+	// 	OpcodeDFMap[0xbe] = instrFD__CP_A_iREGpDD
 	// 	/* shift DDFDCB */
-	// 	OpcodesMap[SHIFT_0xFD+0xcb] = instrFD__SHIFT_DDFDCB
+	// 	OpcodeDFMap[0xcb] = instrFD__SHIFT_DDFDCB
 	// 	/* POP REGISTER */
-	// 	OpcodesMap[SHIFT_0xFD+0xe1] = instrFD__POP_REG
+	// 	OpcodeDFMap[0xe1] = instrFD__POP_REG
 	// 	/* EX (SP),REGISTER */
-	// 	OpcodesMap[SHIFT_0xFD+0xe3] = instrFD__EX_iSP_REG
+	// 	OpcodeDFMap[0xe3] = instrFD__EX_iSP_REG
 	// 	/* PUSH REGISTER */
-	// 	OpcodesMap[SHIFT_0xFD+0xe5] = instrFD__PUSH_REG
+	// 	OpcodeDFMap[0xe5] = instrFD__PUSH_REG
 	// 	/* JP REGISTER */
-	// 	OpcodesMap[SHIFT_0xFD+0xe9] = instrFD__JP_REG
+	// 	OpcodeDFMap[0xe9] = instrFD__JP_REG
 	// 	/* LD SP,REGISTER */
-	// 	OpcodesMap[SHIFT_0xFD+0xf9] = instrFD__LD_SP_REG
+	// 	OpcodeDFMap[0xf9] = instrFD__LD_SP_REG
 
 	// 	// END of 0xfd shifted opcodes
 }
@@ -200,11 +200,11 @@ func initOpcodeDFMap() {
 // 	z.SetIY(joinBytes(b2, b1))
 // }
 
-// /* LD (nnnn),iy */
-// func instrFD__LD_iNNNN_REG(z *Z80, opcode byte) {
-// 	z.ld16nnrr(z.IYL, z.IYH)
-// 	// break
-// }
+/* LD (nnnn),iy */
+func instrFD__LD_iNNNN_REG(z *Z80, opcode byte) {
+	z.Tstates += 20
+	z.StoreIndex16(z.IYL, z.IYH)
+}
 
 // /* INC iy */
 // func instrFD__INC_REG(z *Z80, opcode byte) {
@@ -234,11 +234,12 @@ func initOpcodeDFMap() {
 // 	z.add16(z.iy, z.IY())
 // }
 
-// /* LD iy,(nnnn) */
-// func instrFD__LD_REG_iNNNN(z *Z80, opcode byte) {
-// 	z.ld16rrnn(&z.IYL, &z.IYH)
-// 	// break
-// }
+/* LD iy,(nnnn) */
+func instrFD__LD_REG_iNNNN(z *Z80, opcode byte) {
+	z.Tstates += 20
+	z.LoadIndex16(&z.IYL, &z.IYH)
+	// break
+}
 
 // /* DEC iy */
 // func instrFD__DEC_REG(z *Z80, opcode byte) {
