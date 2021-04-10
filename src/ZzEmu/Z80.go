@@ -49,6 +49,8 @@ type Z80 struct {
 	Tstates             uint16
 	Halted              bool
 	interruptsEnabledAt int
+
+	rzxInstructionsOffset int // ??
 }
 
 // creates a new Z80 instance.
@@ -184,6 +186,15 @@ func (z80 *Z80) Sbc(value byte) {
 	var lookup byte = ((z80.A & 0x88) >> 3) | ((value & 0x88) >> 2) | byte((sbctemp&0x88)>>1)
 	z80.A = byte(sbctemp)
 	z80.F = ternOpB((sbctemp&0x100) != 0, FLAG_C, 0) | FLAG_N | halfcarrySubTable[lookup&0x07] | overflowSubTable[lookup>>4] | sz53Table[z80.A]
+}
+
+func (z80 *Z80) Sbc16(value uint16) { // ??
+	var sub16temp uint = uint(z80.HL.Get()) - uint(value) - (uint(z80.F) & FLAG_C)
+	var lookup byte = byte(((z80.HL.Get() & 0x8800) >> 11) | ((uint16(value) & 0x8800) >> 10) | ((uint16(sub16temp) & 0x8800) >> 9))
+
+	z80.HL.Set(uint16(sub16temp))
+
+	z80.F = ternOpB((sub16temp&0x10000) != 0, FLAG_C, 0) | FLAG_N | overflowSubTable[lookup>>4] | (z80.H & (FLAG_3 | FLAG_5 | FLAG_S)) | halfcarrySubTable[lookup&0x07] | ternOpB(z80.HL.Get() != 0, 0, FLAG_Z)
 }
 
 func (z80 *Z80) Inc(value *byte) { // TODO merge com IncR
