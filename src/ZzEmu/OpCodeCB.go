@@ -1,5 +1,29 @@
 package ZzEmu
 
+func getMaskBitReset(opcode byte) byte {
+	r := opcode & 0x07
+	switch r {
+	case 0:
+		return 0xfe
+	case 1:
+		return 0xfd
+	case 2:
+		return 0xfb
+	case 3:
+		return 0xf7
+	case 4:
+		return 0xef
+	case 5:
+		return 0xdf
+	case 6:
+		return 0xbf
+	case 7:
+		return 0x7f
+	}
+
+	return 0x0
+}
+
 func initOpcodeCBMap() {
 	// 	// BEGIN of 0xcb shifted opcodes
 	/* RLC B */
@@ -258,262 +282,262 @@ func initOpcodeCBMap() {
 	OpcodeCBMap[0x7e] = instrCB__BIT_b_iHL
 	/* BIT 7,A */
 	OpcodeCBMap[0x7f] = instrCB__BIT_b_r
-	// 	/* RES 0,B */
-	// 	OpcodeCBMap[0x80] = instrCB__RES_0_B
-	// 	/* RES 0,C */
-	// 	OpcodeCBMap[0x81] = instrCB__RES_0_C
-	// 	/* RES 0,D */
-	// 	OpcodeCBMap[0x82] = instrCB__RES_0_D
-	// 	/* RES 0,E */
-	// 	OpcodeCBMap[0x83] = instrCB__RES_0_E
-	// 	/* RES 0,H */
-	// 	OpcodeCBMap[0x84] = instrCB__RES_0_H
-	// 	/* RES 0,L */
-	// 	OpcodeCBMap[0x85] = instrCB__RES_0_L
-	// 	/* RES 0,(HL) */
-	// 	OpcodeCBMap[0x86] = instrCB__RES_0_iHL
-	// 	/* RES 0,A */
-	// 	OpcodeCBMap[0x87] = instrCB__RES_0_A
-	// 	/* RES 1,B */
-	// 	OpcodeCBMap[0x88] = instrCB__RES_1_B
-	// 	/* RES 1,C */
-	// 	OpcodeCBMap[0x89] = instrCB__RES_1_C
-	// 	/* RES 1,D */
-	// 	OpcodeCBMap[0x8a] = instrCB__RES_1_D
-	// 	/* RES 1,E */
-	// 	OpcodeCBMap[0x8b] = instrCB__RES_1_E
-	// 	/* RES 1,H */
-	// 	OpcodeCBMap[0x8c] = instrCB__RES_1_H
-	// 	/* RES 1,L */
-	// 	OpcodeCBMap[0x8d] = instrCB__RES_1_L
-	// 	/* RES 1,(HL) */
-	// 	OpcodeCBMap[0x8e] = instrCB__RES_1_iHL
-	// 	/* RES 1,A */
-	// 	OpcodeCBMap[0x8f] = instrCB__RES_1_A
-	// 	/* RES 2,B */
-	// 	OpcodeCBMap[0x90] = instrCB__RES_2_B
-	// 	/* RES 2,C */
-	// 	OpcodeCBMap[0x91] = instrCB__RES_2_C
-	// 	/* RES 2,D */
-	// 	OpcodeCBMap[0x92] = instrCB__RES_2_D
-	// 	/* RES 2,E */
-	// 	OpcodeCBMap[0x93] = instrCB__RES_2_E
-	// 	/* RES 2,H */
-	// 	OpcodeCBMap[0x94] = instrCB__RES_2_H
-	// 	/* RES 2,L */
-	// 	OpcodeCBMap[0x95] = instrCB__RES_2_L
-	// 	/* RES 2,(HL) */
-	// 	OpcodeCBMap[0x96] = instrCB__RES_2_iHL
-	// 	/* RES 2,A */
-	// 	OpcodeCBMap[0x97] = instrCB__RES_2_A
-	// 	/* RES 3,B */
-	// 	OpcodeCBMap[0x98] = instrCB__RES_3_B
-	// 	/* RES 3,C */
-	// 	OpcodeCBMap[0x99] = instrCB__RES_3_C
-	// 	/* RES 3,D */
-	// 	OpcodeCBMap[0x9a] = instrCB__RES_3_D
-	// 	/* RES 3,E */
-	// 	OpcodeCBMap[0x9b] = instrCB__RES_3_E
-	// 	/* RES 3,H */
-	// 	OpcodeCBMap[0x9c] = instrCB__RES_3_H
-	// 	/* RES 3,L */
-	// 	OpcodeCBMap[0x9d] = instrCB__RES_3_L
-	// 	/* RES 3,(HL) */
-	// 	OpcodeCBMap[0x9e] = instrCB__RES_3_iHL
-	// 	/* RES 3,A */
-	// 	OpcodeCBMap[0x9f] = instrCB__RES_3_A
-	// 	/* RES 4,B */
-	// 	OpcodeCBMap[0xa0] = instrCB__RES_4_B
-	// 	/* RES 4,C */
-	// 	OpcodeCBMap[0xa1] = instrCB__RES_4_C
-	// 	/* RES 4,D */
-	// 	OpcodeCBMap[0xa2] = instrCB__RES_4_D
-	// 	/* RES 4,E */
-	// 	OpcodeCBMap[0xa3] = instrCB__RES_4_E
-	// 	/* RES 4,H */
-	// 	OpcodeCBMap[0xa4] = instrCB__RES_4_H
-	// 	/* RES 4,L */
-	// 	OpcodeCBMap[0xa5] = instrCB__RES_4_L
-	// 	/* RES 4,(HL) */
-	// 	OpcodeCBMap[0xa6] = instrCB__RES_4_iHL
-	// 	/* RES 4,A */
-	// 	OpcodeCBMap[0xa7] = instrCB__RES_4_A
-	// 	/* RES 5,B */
-	// 	OpcodeCBMap[0xa8] = instrCB__RES_5_B
-	// 	/* RES 5,C */
-	// 	OpcodeCBMap[0xa9] = instrCB__RES_5_C
-	// 	/* RES 5,D */
-	// 	OpcodeCBMap[0xaa] = instrCB__RES_5_D
-	// 	/* RES 5,E */
-	// 	OpcodeCBMap[0xab] = instrCB__RES_5_E
-	// 	/* RES 5,H */
-	// 	OpcodeCBMap[0xac] = instrCB__RES_5_H
-	// 	/* RES 5,L */
-	// 	OpcodeCBMap[0xad] = instrCB__RES_5_L
-	// 	/* RES 5,(HL) */
-	// 	OpcodeCBMap[0xae] = instrCB__RES_5_iHL
-	// 	/* RES 5,A */
-	// 	OpcodeCBMap[0xaf] = instrCB__RES_5_A
-	// 	/* RES 6,B */
-	// 	OpcodeCBMap[0xb0] = instrCB__RES_6_B
-	// 	/* RES 6,C */
-	// 	OpcodeCBMap[0xb1] = instrCB__RES_6_C
-	// 	/* RES 6,D */
-	// 	OpcodeCBMap[0xb2] = instrCB__RES_6_D
-	// 	/* RES 6,E */
-	// 	OpcodeCBMap[0xb3] = instrCB__RES_6_E
-	// 	/* RES 6,H */
-	// 	OpcodeCBMap[0xb4] = instrCB__RES_6_H
-	// 	/* RES 6,L */
-	// 	OpcodeCBMap[0xb5] = instrCB__RES_6_L
-	// 	/* RES 6,(HL) */
-	// 	OpcodeCBMap[0xb6] = instrCB__RES_6_iHL
-	// 	/* RES 6,A */
-	// 	OpcodeCBMap[0xb7] = instrCB__RES_6_A
-	// 	/* RES 7,B */
-	// 	OpcodeCBMap[0xb8] = instrCB__RES_7_B
-	// 	/* RES 7,C */
-	// 	OpcodeCBMap[0xb9] = instrCB__RES_7_C
-	// 	/* RES 7,D */
-	// 	OpcodeCBMap[0xba] = instrCB__RES_7_D
-	// 	/* RES 7,E */
-	// 	OpcodeCBMap[0xbb] = instrCB__RES_7_E
-	// 	/* RES 7,H */
-	// 	OpcodeCBMap[0xbc] = instrCB__RES_7_H
-	// 	/* RES 7,L */
-	// 	OpcodeCBMap[0xbd] = instrCB__RES_7_L
-	// 	/* RES 7,(HL) */
-	// 	OpcodeCBMap[0xbe] = instrCB__RES_7_iHL
-	// 	/* RES 7,A */
-	// 	OpcodeCBMap[0xbf] = instrCB__RES_7_A
-	// 	/* SET 0,B */
-	// 	OpcodeCBMap[0xc0] = instrCB__SET_0_B
-	// 	/* SET 0,C */
-	// 	OpcodeCBMap[0xc1] = instrCB__SET_0_C
-	// 	/* SET 0,D */
-	// 	OpcodeCBMap[0xc2] = instrCB__SET_0_D
-	// 	/* SET 0,E */
-	// 	OpcodeCBMap[0xc3] = instrCB__SET_0_E
-	// 	/* SET 0,H */
-	// 	OpcodeCBMap[0xc4] = instrCB__SET_0_H
-	// 	/* SET 0,L */
-	// 	OpcodeCBMap[0xc5] = instrCB__SET_0_L
-	// 	/* SET 0,(HL) */
-	// 	OpcodeCBMap[0xc6] = instrCB__SET_0_iHL
-	// 	/* SET 0,A */
-	// 	OpcodeCBMap[0xc7] = instrCB__SET_0_A
-	// 	/* SET 1,B */
-	// 	OpcodeCBMap[0xc8] = instrCB__SET_1_B
-	// 	/* SET 1,C */
-	// 	OpcodeCBMap[0xc9] = instrCB__SET_1_C
-	// 	/* SET 1,D */
-	// 	OpcodeCBMap[0xca] = instrCB__SET_1_D
-	// 	/* SET 1,E */
-	// 	OpcodeCBMap[0xcb] = instrCB__SET_1_E
-	// 	/* SET 1,H */
-	// 	OpcodeCBMap[0xcc] = instrCB__SET_1_H
-	// 	/* SET 1,L */
-	// 	OpcodeCBMap[0xcd] = instrCB__SET_1_L
-	// 	/* SET 1,(HL) */
-	// 	OpcodeCBMap[0xce] = instrCB__SET_1_iHL
-	// 	/* SET 1,A */
-	// 	OpcodeCBMap[0xcf] = instrCB__SET_1_A
-	// 	/* SET 2,B */
-	// 	OpcodeCBMap[0xd0] = instrCB__SET_2_B
-	// 	/* SET 2,C */
-	// 	OpcodeCBMap[0xd1] = instrCB__SET_2_C
-	// 	/* SET 2,D */
-	// 	OpcodeCBMap[0xd2] = instrCB__SET_2_D
-	// 	/* SET 2,E */
-	// 	OpcodeCBMap[0xd3] = instrCB__SET_2_E
-	// 	/* SET 2,H */
-	// 	OpcodeCBMap[0xd4] = instrCB__SET_2_H
-	// 	/* SET 2,L */
-	// 	OpcodeCBMap[0xd5] = instrCB__SET_2_L
-	// 	/* SET 2,(HL) */
-	// 	OpcodeCBMap[0xd6] = instrCB__SET_2_iHL
-	// 	/* SET 2,A */
-	// 	OpcodeCBMap[0xd7] = instrCB__SET_2_A
-	// 	/* SET 3,B */
-	// 	OpcodeCBMap[0xd8] = instrCB__SET_3_B
-	// 	/* SET 3,C */
-	// 	OpcodeCBMap[0xd9] = instrCB__SET_3_C
-	// 	/* SET 3,D */
-	// 	OpcodeCBMap[0xda] = instrCB__SET_3_D
-	// 	/* SET 3,E */
-	// 	OpcodeCBMap[0xdb] = instrCB__SET_3_E
-	// 	/* SET 3,H */
-	// 	OpcodeCBMap[0xdc] = instrCB__SET_3_H
-	// 	/* SET 3,L */
-	// 	OpcodeCBMap[0xdd] = instrCB__SET_3_L
-	// 	/* SET 3,(HL) */
-	// 	OpcodeCBMap[0xde] = instrCB__SET_3_iHL
-	// 	/* SET 3,A */
-	// 	OpcodeCBMap[0xdf] = instrCB__SET_3_A
-	// 	/* SET 4,B */
-	// 	OpcodeCBMap[0xe0] = instrCB__SET_4_B
-	// 	/* SET 4,C */
-	// 	OpcodeCBMap[0xe1] = instrCB__SET_4_C
-	// 	/* SET 4,D */
-	// 	OpcodeCBMap[0xe2] = instrCB__SET_4_D
-	// 	/* SET 4,E */
-	// 	OpcodeCBMap[0xe3] = instrCB__SET_4_E
-	// 	/* SET 4,H */
-	// 	OpcodeCBMap[0xe4] = instrCB__SET_4_H
-	// 	/* SET 4,L */
-	// 	OpcodeCBMap[0xe5] = instrCB__SET_4_L
-	// 	/* SET 4,(HL) */
-	// 	OpcodeCBMap[0xe6] = instrCB__SET_4_iHL
-	// 	/* SET 4,A */
-	// 	OpcodeCBMap[0xe7] = instrCB__SET_4_A
-	// 	/* SET 5,B */
-	// 	OpcodeCBMap[0xe8] = instrCB__SET_5_B
-	// 	/* SET 5,C */
-	// 	OpcodeCBMap[0xe9] = instrCB__SET_5_C
-	// 	/* SET 5,D */
-	// 	OpcodeCBMap[0xea] = instrCB__SET_5_D
-	// 	/* SET 5,E */
-	// 	OpcodeCBMap[0xeb] = instrCB__SET_5_E
-	// 	/* SET 5,H */
-	// 	OpcodeCBMap[0xec] = instrCB__SET_5_H
-	// 	/* SET 5,L */
-	// 	OpcodeCBMap[0xed] = instrCB__SET_5_L
-	// 	/* SET 5,(HL) */
-	// 	OpcodeCBMap[0xee] = instrCB__SET_5_iHL
-	// 	/* SET 5,A */
-	// 	OpcodeCBMap[0xef] = instrCB__SET_5_A
-	// 	/* SET 6,B */
-	// 	OpcodeCBMap[0xf0] = instrCB__SET_6_B
-	// 	/* SET 6,C */
-	// 	OpcodeCBMap[0xf1] = instrCB__SET_6_C
-	// 	/* SET 6,D */
-	// 	OpcodeCBMap[0xf2] = instrCB__SET_6_D
-	// 	/* SET 6,E */
-	// 	OpcodeCBMap[0xf3] = instrCB__SET_6_E
-	// 	/* SET 6,H */
-	// 	OpcodeCBMap[0xf4] = instrCB__SET_6_H
-	// 	/* SET 6,L */
-	// 	OpcodeCBMap[0xf5] = instrCB__SET_6_L
-	// 	/* SET 6,(HL) */
-	// 	OpcodeCBMap[0xf6] = instrCB__SET_6_iHL
-	// 	/* SET 6,A */
-	// 	OpcodeCBMap[0xf7] = instrCB__SET_6_A
-	// 	/* SET 7,B */
-	// 	OpcodeCBMap[0xf8] = instrCB__SET_7_B
-	// 	/* SET 7,C */
-	// 	OpcodeCBMap[0xf9] = instrCB__SET_7_C
-	// 	/* SET 7,D */
-	// 	OpcodeCBMap[0xfa] = instrCB__SET_7_D
-	// 	/* SET 7,E */
-	// 	OpcodeCBMap[0xfb] = instrCB__SET_7_E
-	// 	/* SET 7,H */
-	// 	OpcodeCBMap[0xfc] = instrCB__SET_7_H
-	// 	/* SET 7,L */
-	// 	OpcodeCBMap[0xfd] = instrCB__SET_7_L
-	// 	/* SET 7,(HL) */
-	// 	OpcodeCBMap[0xfe] = instrCB__SET_7_iHL
-	// 	/* SET 7,A */
-	// 	OpcodeCBMap[0xff] = instrCB__SET_7_A
+	/* RES 0,B */
+	OpcodeCBMap[0x80] = instrCB__RES_b_r
+	/* RES 0,C */
+	OpcodeCBMap[0x81] = instrCB__RES_b_r
+	/* RES 0,D */
+	OpcodeCBMap[0x82] = instrCB__RES_b_r
+	/* RES 0,E */
+	OpcodeCBMap[0x83] = instrCB__RES_b_r
+	/* RES 0,H */
+	OpcodeCBMap[0x84] = instrCB__RES_b_r
+	/* RES 0,L */
+	OpcodeCBMap[0x85] = instrCB__RES_b_r
+	/* RES 0,(HL) */
+	OpcodeCBMap[0x86] = instrCB__RES_b_iHL
+	/* RES 0,A */
+	OpcodeCBMap[0x87] = instrCB__RES_b_r
+	/* RES 1,B */
+	OpcodeCBMap[0x88] = instrCB__RES_b_r
+	/* RES 1,C */
+	OpcodeCBMap[0x89] = instrCB__RES_b_r
+	/* RES 1,D */
+	OpcodeCBMap[0x8a] = instrCB__RES_b_r
+	/* RES 1,E */
+	OpcodeCBMap[0x8b] = instrCB__RES_b_r
+	/* RES 1,H */
+	OpcodeCBMap[0x8c] = instrCB__RES_b_r
+	/* RES 1,L */
+	OpcodeCBMap[0x8d] = instrCB__RES_b_r
+	/* RES 1,(HL) */
+	OpcodeCBMap[0x8e] = instrCB__RES_b_iHL
+	/* RES 1,A */
+	OpcodeCBMap[0x8f] = instrCB__RES_b_r
+	/* RES 2,B */
+	OpcodeCBMap[0x90] = instrCB__RES_b_r
+	/* RES 2,C */
+	OpcodeCBMap[0x91] = instrCB__RES_b_r
+	/* RES 2,D */
+	OpcodeCBMap[0x92] = instrCB__RES_b_r
+	/* RES 2,E */
+	OpcodeCBMap[0x93] = instrCB__RES_b_r
+	/* RES 2,H */
+	OpcodeCBMap[0x94] = instrCB__RES_b_r
+	/* RES 2,L */
+	OpcodeCBMap[0x95] = instrCB__RES_b_r
+	/* RES 2,(HL) */
+	OpcodeCBMap[0x96] = instrCB__RES_b_iHL
+	/* RES 2,A */
+	OpcodeCBMap[0x97] = instrCB__RES_b_r
+	/* RES 3,B */
+	OpcodeCBMap[0x98] = instrCB__RES_b_r
+	/* RES 3,C */
+	OpcodeCBMap[0x99] = instrCB__RES_b_r
+	/* RES 3,D */
+	OpcodeCBMap[0x9a] = instrCB__RES_b_r
+	/* RES 3,E */
+	OpcodeCBMap[0x9b] = instrCB__RES_b_r
+	/* RES 3,H */
+	OpcodeCBMap[0x9c] = instrCB__RES_b_r
+	/* RES 3,L */
+	OpcodeCBMap[0x9d] = instrCB__RES_b_r
+	/* RES 3,(HL) */
+	OpcodeCBMap[0x9e] = instrCB__RES_b_iHL
+	/* RES 3,A */
+	OpcodeCBMap[0x9f] = instrCB__RES_b_r
+	/* RES 4,B */
+	OpcodeCBMap[0xa0] = instrCB__RES_b_r
+	/* RES 4,C */
+	OpcodeCBMap[0xa1] = instrCB__RES_b_r
+	/* RES 4,D */
+	OpcodeCBMap[0xa2] = instrCB__RES_b_r
+	/* RES 4,E */
+	OpcodeCBMap[0xa3] = instrCB__RES_b_r
+	/* RES 4,H */
+	OpcodeCBMap[0xa4] = instrCB__RES_b_r
+	/* RES 4,L */
+	OpcodeCBMap[0xa5] = instrCB__RES_b_r
+	/* RES 4,(HL) */
+	OpcodeCBMap[0xa6] = instrCB__RES_b_iHL
+	/* RES 4,A */
+	OpcodeCBMap[0xa7] = instrCB__RES_b_r
+	/* RES 5,B */
+	OpcodeCBMap[0xa8] = instrCB__RES_b_r
+	/* RES 5,C */
+	OpcodeCBMap[0xa9] = instrCB__RES_b_r
+	/* RES 5,D */
+	OpcodeCBMap[0xaa] = instrCB__RES_b_r
+	/* RES 5,E */
+	OpcodeCBMap[0xab] = instrCB__RES_b_r
+	/* RES 5,H */
+	OpcodeCBMap[0xac] = instrCB__RES_b_r
+	/* RES 5,L */
+	OpcodeCBMap[0xad] = instrCB__RES_b_r
+	/* RES 5,(HL) */
+	OpcodeCBMap[0xae] = instrCB__RES_b_iHL
+	/* RES 5,A */
+	OpcodeCBMap[0xaf] = instrCB__RES_b_r
+	/* RES 6,B */
+	OpcodeCBMap[0xb0] = instrCB__RES_b_r
+	/* RES 6,C */
+	OpcodeCBMap[0xb1] = instrCB__RES_b_r
+	/* RES 6,D */
+	OpcodeCBMap[0xb2] = instrCB__RES_b_r
+	/* RES 6,E */
+	OpcodeCBMap[0xb3] = instrCB__RES_b_r
+	/* RES 6,H */
+	OpcodeCBMap[0xb4] = instrCB__RES_b_r
+	/* RES 6,L */
+	OpcodeCBMap[0xb5] = instrCB__RES_b_r
+	/* RES 6,(HL) */
+	OpcodeCBMap[0xb6] = instrCB__RES_b_iHL
+	/* RES 6,A */
+	OpcodeCBMap[0xb7] = instrCB__RES_b_r
+	/* RES 7,B */
+	OpcodeCBMap[0xb8] = instrCB__RES_b_r
+	/* RES 7,C */
+	OpcodeCBMap[0xb9] = instrCB__RES_b_r
+	/* RES 7,D */
+	OpcodeCBMap[0xba] = instrCB__RES_b_r
+	/* RES 7,E */
+	OpcodeCBMap[0xbb] = instrCB__RES_b_r
+	/* RES 7,H */
+	OpcodeCBMap[0xbc] = instrCB__RES_b_r
+	/* RES 7,L */
+	OpcodeCBMap[0xbd] = instrCB__RES_b_r
+	/* RES 7,(HL) */
+	OpcodeCBMap[0xbe] = instrCB__RES_b_iHL
+	/* RES 7,A */
+	OpcodeCBMap[0xbf] = instrCB__RES_b_r
+	/* SET 0,B */
+	OpcodeCBMap[0xc0] = instrCB__SET_b_r
+	/* SET 0,C */
+	OpcodeCBMap[0xc1] = instrCB__SET_b_r
+	/* SET 0,D */
+	OpcodeCBMap[0xc2] = instrCB__SET_b_r
+	/* SET 0,E */
+	OpcodeCBMap[0xc3] = instrCB__SET_b_r
+	/* SET 0,H */
+	OpcodeCBMap[0xc4] = instrCB__SET_b_r
+	/* SET 0,L */
+	OpcodeCBMap[0xc5] = instrCB__SET_b_r
+	/* SET 0,(HL) */
+	OpcodeCBMap[0xc6] = instrCB__SET_b_iHL
+	/* SET 0,A */
+	OpcodeCBMap[0xc7] = instrCB__SET_b_r
+	/* SET 1,B */
+	OpcodeCBMap[0xc8] = instrCB__SET_b_r
+	/* SET 1,C */
+	OpcodeCBMap[0xc9] = instrCB__SET_b_r
+	/* SET 1,D */
+	OpcodeCBMap[0xca] = instrCB__SET_b_r
+	/* SET 1,E */
+	OpcodeCBMap[0xcb] = instrCB__SET_b_r
+	/* SET 1,H */
+	OpcodeCBMap[0xcc] = instrCB__SET_b_r
+	/* SET 1,L */
+	OpcodeCBMap[0xcd] = instrCB__SET_b_r
+	/* SET 1,(HL) */
+	OpcodeCBMap[0xce] = instrCB__SET_b_iHL
+	/* SET 1,A */
+	OpcodeCBMap[0xcf] = instrCB__SET_b_r
+	/* SET 2,B */
+	OpcodeCBMap[0xd0] = instrCB__SET_b_r
+	/* SET 2,C */
+	OpcodeCBMap[0xd1] = instrCB__SET_b_r
+	/* SET 2,D */
+	OpcodeCBMap[0xd2] = instrCB__SET_b_r
+	/* SET 2,E */
+	OpcodeCBMap[0xd3] = instrCB__SET_b_r
+	/* SET 2,H */
+	OpcodeCBMap[0xd4] = instrCB__SET_b_r
+	/* SET 2,L */
+	OpcodeCBMap[0xd5] = instrCB__SET_b_r
+	/* SET 2,(HL) */
+	OpcodeCBMap[0xd6] = instrCB__SET_b_iHL
+	/* SET 2,A */
+	OpcodeCBMap[0xd7] = instrCB__SET_b_r
+	/* SET 3,B */
+	OpcodeCBMap[0xd8] = instrCB__SET_b_r
+	/* SET 3,C */
+	OpcodeCBMap[0xd9] = instrCB__SET_b_r
+	/* SET 3,D */
+	OpcodeCBMap[0xda] = instrCB__SET_b_r
+	/* SET 3,E */
+	OpcodeCBMap[0xdb] = instrCB__SET_b_r
+	/* SET 3,H */
+	OpcodeCBMap[0xdc] = instrCB__SET_b_r
+	/* SET 3,L */
+	OpcodeCBMap[0xdd] = instrCB__SET_b_r
+	/* SET 3,(HL) */
+	OpcodeCBMap[0xde] = instrCB__SET_b_iHL
+	/* SET 3,A */
+	OpcodeCBMap[0xdf] = instrCB__SET_b_r
+	/* SET 4,B */
+	OpcodeCBMap[0xe0] = instrCB__SET_b_r
+	/* SET 4,C */
+	OpcodeCBMap[0xe1] = instrCB__SET_b_r
+	/* SET 4,D */
+	OpcodeCBMap[0xe2] = instrCB__SET_b_r
+	/* SET 4,E */
+	OpcodeCBMap[0xe3] = instrCB__SET_b_r
+	/* SET 4,H */
+	OpcodeCBMap[0xe4] = instrCB__SET_b_r
+	/* SET 4,L */
+	OpcodeCBMap[0xe5] = instrCB__SET_b_r
+	/* SET 4,(HL) */
+	OpcodeCBMap[0xe6] = instrCB__SET_b_iHL
+	/* SET 4,A */
+	OpcodeCBMap[0xe7] = instrCB__SET_b_r
+	/* SET 5,B */
+	OpcodeCBMap[0xe8] = instrCB__SET_b_r
+	/* SET 5,C */
+	OpcodeCBMap[0xe9] = instrCB__SET_b_r
+	/* SET 5,D */
+	OpcodeCBMap[0xea] = instrCB__SET_b_r
+	/* SET 5,E */
+	OpcodeCBMap[0xeb] = instrCB__SET_b_r
+	/* SET 5,H */
+	OpcodeCBMap[0xec] = instrCB__SET_b_r
+	/* SET 5,L */
+	OpcodeCBMap[0xed] = instrCB__SET_b_r
+	/* SET 5,(HL) */
+	OpcodeCBMap[0xee] = instrCB__SET_b_iHL
+	/* SET 5,A */
+	OpcodeCBMap[0xef] = instrCB__SET_b_r
+	/* SET 6,B */
+	OpcodeCBMap[0xf0] = instrCB__SET_b_r
+	/* SET 6,C */
+	OpcodeCBMap[0xf1] = instrCB__SET_b_r
+	/* SET 6,D */
+	OpcodeCBMap[0xf2] = instrCB__SET_b_r
+	/* SET 6,E */
+	OpcodeCBMap[0xf3] = instrCB__SET_b_r
+	/* SET 6,H */
+	OpcodeCBMap[0xf4] = instrCB__SET_b_r
+	/* SET 6,L */
+	OpcodeCBMap[0xf5] = instrCB__SET_b_r
+	/* SET 6,(HL) */
+	OpcodeCBMap[0xf6] = instrCB__SET_b_iHL
+	/* SET 6,A */
+	OpcodeCBMap[0xf7] = instrCB__SET_b_r
+	/* SET 7,B */
+	OpcodeCBMap[0xf8] = instrCB__SET_b_r
+	/* SET 7,C */
+	OpcodeCBMap[0xf9] = instrCB__SET_b_r
+	/* SET 7,D */
+	OpcodeCBMap[0xfa] = instrCB__SET_b_r
+	/* SET 7,E */
+	OpcodeCBMap[0xfb] = instrCB__SET_b_r
+	/* SET 7,H */
+	OpcodeCBMap[0xfc] = instrCB__SET_b_r
+	/* SET 7,L */
+	OpcodeCBMap[0xfd] = instrCB__SET_b_r
+	/* SET 7,(HL) */
+	OpcodeCBMap[0xfe] = instrCB__SET_b_iHL
+	/* SET 7,A */
+	OpcodeCBMap[0xff] = instrCB__SET_b_r
 
 	// 	// END of 0xcb shifted opcodes
 }
@@ -663,676 +687,40 @@ func instrCB__BIT_b_iHL(z *Z80, opcode byte) {
 	z.bit(bitSel, bytetemp)
 }
 
-// /* RES 0,B */
-// func instrCB__RES_0_B(z *Z80, opcode byte) {
-// 	z.B &= 0xfe
-// }
-
-// /* RES 0,C */
-// func instrCB__RES_0_C(z *Z80, opcode byte) {
-// 	z.C &= 0xfe
-// }
-
-// /* RES 0,D */
-// func instrCB__RES_0_D(z *Z80, opcode byte) {
-// 	z.D &= 0xfe
-// }
-
-// /* RES 0,E */
-// func instrCB__RES_0_E(z *Z80, opcode byte) {
-// 	z.E &= 0xfe
-// }
-
-// /* RES 0,H */
-// func instrCB__RES_0_H(z *Z80, opcode byte) {
-// 	z.H &= 0xfe
-// }
-
-// /* RES 0,L */
-// func instrCB__RES_0_L(z *Z80, opcode byte) {
-// 	z.L &= 0xfe
-// }
-
-// /* RES 0,(HL) */
-// func instrCB__RES_0_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
-// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
-// 	z.Memory.Write(z.HL.Get(), bytetemp&0xfe)
-// }
-
-// /* RES 0,A */
-// func instrCB__RES_0_A(z *Z80, opcode byte) {
-// 	z.A &= 0xfe
-// }
-
-// /* RES 1,B */
-// func instrCB__RES_1_B(z *Z80, opcode byte) {
-// 	z.B &= 0xfd
-// }
-
-// /* RES 1,C */
-// func instrCB__RES_1_C(z *Z80, opcode byte) {
-// 	z.C &= 0xfd
-// }
-
-// /* RES 1,D */
-// func instrCB__RES_1_D(z *Z80, opcode byte) {
-// 	z.D &= 0xfd
-// }
-
-// /* RES 1,E */
-// func instrCB__RES_1_E(z *Z80, opcode byte) {
-// 	z.E &= 0xfd
-// }
-
-// /* RES 1,H */
-// func instrCB__RES_1_H(z *Z80, opcode byte) {
-// 	z.H &= 0xfd
-// }
-
-// /* RES 1,L */
-// func instrCB__RES_1_L(z *Z80, opcode byte) {
-// 	z.L &= 0xfd
-// }
-
-// /* RES 1,(HL) */
-// func instrCB__RES_1_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
-// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
-// 	z.Memory.Write(z.HL.Get(), bytetemp&0xfd)
-// }
-
-// /* RES 1,A */
-// func instrCB__RES_1_A(z *Z80, opcode byte) {
-// 	z.A &= 0xfd
-// }
-
-// /* RES 2,B */
-// func instrCB__RES_2_B(z *Z80, opcode byte) {
-// 	z.B &= 0xfb
-// }
-
-// /* RES 2,C */
-// func instrCB__RES_2_C(z *Z80, opcode byte) {
-// 	z.C &= 0xfb
-// }
-
-// /* RES 2,D */
-// func instrCB__RES_2_D(z *Z80, opcode byte) {
-// 	z.D &= 0xfb
-// }
-
-// /* RES 2,E */
-// func instrCB__RES_2_E(z *Z80, opcode byte) {
-// 	z.E &= 0xfb
-// }
-
-// /* RES 2,H */
-// func instrCB__RES_2_H(z *Z80, opcode byte) {
-// 	z.H &= 0xfb
-// }
-
-// /* RES 2,L */
-// func instrCB__RES_2_L(z *Z80, opcode byte) {
-// 	z.L &= 0xfb
-// }
-
-// /* RES 2,(HL) */
-// func instrCB__RES_2_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
-// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
-// 	z.Memory.Write(z.HL.Get(), bytetemp&0xfb)
-// }
-
-// /* RES 2,A */
-// func instrCB__RES_2_A(z *Z80, opcode byte) {
-// 	z.A &= 0xfb
-// }
-
-// /* RES 3,B */
-// func instrCB__RES_3_B(z *Z80, opcode byte) {
-// 	z.B &= 0xf7
-// }
-
-// /* RES 3,C */
-// func instrCB__RES_3_C(z *Z80, opcode byte) {
-// 	z.C &= 0xf7
-// }
-
-// /* RES 3,D */
-// func instrCB__RES_3_D(z *Z80, opcode byte) {
-// 	z.D &= 0xf7
-// }
-
-// /* RES 3,E */
-// func instrCB__RES_3_E(z *Z80, opcode byte) {
-// 	z.E &= 0xf7
-// }
-
-// /* RES 3,H */
-// func instrCB__RES_3_H(z *Z80, opcode byte) {
-// 	z.H &= 0xf7
-// }
-
-// /* RES 3,L */
-// func instrCB__RES_3_L(z *Z80, opcode byte) {
-// 	z.L &= 0xf7
-// }
-
-// /* RES 3,(HL) */
-// func instrCB__RES_3_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
-// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
-// 	z.Memory.Write(z.HL.Get(), bytetemp&0xf7)
-// }
-
-// /* RES 3,A */
-// func instrCB__RES_3_A(z *Z80, opcode byte) {
-// 	z.A &= 0xf7
-// }
-
-// /* RES 4,B */
-// func instrCB__RES_4_B(z *Z80, opcode byte) {
-// 	z.B &= 0xef
-// }
-
-// /* RES 4,C */
-// func instrCB__RES_4_C(z *Z80, opcode byte) {
-// 	z.C &= 0xef
-// }
-
-// /* RES 4,D */
-// func instrCB__RES_4_D(z *Z80, opcode byte) {
-// 	z.D &= 0xef
-// }
-
-// /* RES 4,E */
-// func instrCB__RES_4_E(z *Z80, opcode byte) {
-// 	z.E &= 0xef
-// }
-
-// /* RES 4,H */
-// func instrCB__RES_4_H(z *Z80, opcode byte) {
-// 	z.H &= 0xef
-// }
-
-// /* RES 4,L */
-// func instrCB__RES_4_L(z *Z80, opcode byte) {
-// 	z.L &= 0xef
-// }
-
-// /* RES 4,(HL) */
-// func instrCB__RES_4_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
-// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
-// 	z.Memory.Write(z.HL.Get(), bytetemp&0xef)
-// }
-
-// /* RES 4,A */
-// func instrCB__RES_4_A(z *Z80, opcode byte) {
-// 	z.A &= 0xef
-// }
-
-// /* RES 5,B */
-// func instrCB__RES_5_B(z *Z80, opcode byte) {
-// 	z.B &= 0xdf
-// }
-
-// /* RES 5,C */
-// func instrCB__RES_5_C(z *Z80, opcode byte) {
-// 	z.C &= 0xdf
-// }
-
-// /* RES 5,D */
-// func instrCB__RES_5_D(z *Z80, opcode byte) {
-// 	z.D &= 0xdf
-// }
-
-// /* RES 5,E */
-// func instrCB__RES_5_E(z *Z80, opcode byte) {
-// 	z.E &= 0xdf
-// }
-
-// /* RES 5,H */
-// func instrCB__RES_5_H(z *Z80, opcode byte) {
-// 	z.H &= 0xdf
-// }
-
-// /* RES 5,L */
-// func instrCB__RES_5_L(z *Z80, opcode byte) {
-// 	z.L &= 0xdf
-// }
-
-// /* RES 5,(HL) */
-// func instrCB__RES_5_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
-// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
-// 	z.Memory.Write(z.HL.Get(), bytetemp&0xdf)
-// }
-
-// /* RES 5,A */
-// func instrCB__RES_5_A(z *Z80, opcode byte) {
-// 	z.A &= 0xdf
-// }
-
-// /* RES 6,B */
-// func instrCB__RES_6_B(z *Z80, opcode byte) {
-// 	z.B &= 0xbf
-// }
-
-// /* RES 6,C */
-// func instrCB__RES_6_C(z *Z80, opcode byte) {
-// 	z.C &= 0xbf
-// }
-
-// /* RES 6,D */
-// func instrCB__RES_6_D(z *Z80, opcode byte) {
-// 	z.D &= 0xbf
-// }
-
-// /* RES 6,E */
-// func instrCB__RES_6_E(z *Z80, opcode byte) {
-// 	z.E &= 0xbf
-// }
-
-// /* RES 6,H */
-// func instrCB__RES_6_H(z *Z80, opcode byte) {
-// 	z.H &= 0xbf
-// }
-
-// /* RES 6,L */
-// func instrCB__RES_6_L(z *Z80, opcode byte) {
-// 	z.L &= 0xbf
-// }
-
-// /* RES 6,(HL) */
-// func instrCB__RES_6_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
-// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
-// 	z.Memory.Write(z.HL.Get(), bytetemp&0xbf)
-// }
-
-// /* RES 6,A */
-// func instrCB__RES_6_A(z *Z80, opcode byte) {
-// 	z.A &= 0xbf
-// }
-
-// /* RES 7,B */
-// func instrCB__RES_7_B(z *Z80, opcode byte) {
-// 	z.B &= 0x7f
-// }
-
-// /* RES 7,C */
-// func instrCB__RES_7_C(z *Z80, opcode byte) {
-// 	z.C &= 0x7f
-// }
-
-// /* RES 7,D */
-// func instrCB__RES_7_D(z *Z80, opcode byte) {
-// 	z.D &= 0x7f
-// }
-
-// /* RES 7,E */
-// func instrCB__RES_7_E(z *Z80, opcode byte) {
-// 	z.E &= 0x7f
-// }
-
-// /* RES 7,H */
-// func instrCB__RES_7_H(z *Z80, opcode byte) {
-// 	z.H &= 0x7f
-// }
-
-// /* RES 7,L */
-// func instrCB__RES_7_L(z *Z80, opcode byte) {
-// 	z.L &= 0x7f
-// }
-
-// /* RES 7,(HL) */
-// func instrCB__RES_7_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
-// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
-// 	z.Memory.Write(z.HL.Get(), bytetemp&0x7f)
-// }
-
-// /* RES 7,A */
-// func instrCB__RES_7_A(z *Z80, opcode byte) {
-// 	z.A &= 0x7f
-// }
-
-// /* SET 0,B */
-// func instrCB__SET_0_B(z *Z80, opcode byte) {
-// 	z.B |= 0x01
-// }
-
-// /* SET 0,C */
-// func instrCB__SET_0_C(z *Z80, opcode byte) {
-// 	z.C |= 0x01
-// }
-
-// /* SET 0,D */
-// func instrCB__SET_0_D(z *Z80, opcode byte) {
-// 	z.D |= 0x01
-// }
-
-// /* SET 0,E */
-// func instrCB__SET_0_E(z *Z80, opcode byte) {
-// 	z.E |= 0x01
-// }
-
-// /* SET 0,H */
-// func instrCB__SET_0_H(z *Z80, opcode byte) {
-// 	z.H |= 0x01
-// }
-
-// /* SET 0,L */
-// func instrCB__SET_0_L(z *Z80, opcode byte) {
-// 	z.L |= 0x01
-// }
-
-// /* SET 0,(HL) */
-// func instrCB__SET_0_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
-// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
-// 	z.Memory.Write(z.HL.Get(), bytetemp|0x01)
-// }
-
-// /* SET 0,A */
-// func instrCB__SET_0_A(z *Z80, opcode byte) {
-// 	z.A |= 0x01
-// }
-
-// /* SET 1,B */
-// func instrCB__SET_1_B(z *Z80, opcode byte) {
-// 	z.B |= 0x02
-// }
-
-// /* SET 1,C */
-// func instrCB__SET_1_C(z *Z80, opcode byte) {
-// 	z.C |= 0x02
-// }
-
-// /* SET 1,D */
-// func instrCB__SET_1_D(z *Z80, opcode byte) {
-// 	z.D |= 0x02
-// }
-
-// /* SET 1,E */
-// func instrCB__SET_1_E(z *Z80, opcode byte) {
-// 	z.E |= 0x02
-// }
-
-// /* SET 1,H */
-// func instrCB__SET_1_H(z *Z80, opcode byte) {
-// 	z.H |= 0x02
-// }
-
-// /* SET 1,L */
-// func instrCB__SET_1_L(z *Z80, opcode byte) {
-// 	z.L |= 0x02
-// }
-
-// /* SET 1,(HL) */
-// func instrCB__SET_1_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
-// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
-// 	z.Memory.Write(z.HL.Get(), bytetemp|0x02)
-// }
-
-// /* SET 1,A */
-// func instrCB__SET_1_A(z *Z80, opcode byte) {
-// 	z.A |= 0x02
-// }
-
-// /* SET 2,B */
-// func instrCB__SET_2_B(z *Z80, opcode byte) {
-// 	z.B |= 0x04
-// }
-
-// /* SET 2,C */
-// func instrCB__SET_2_C(z *Z80, opcode byte) {
-// 	z.C |= 0x04
-// }
-
-// /* SET 2,D */
-// func instrCB__SET_2_D(z *Z80, opcode byte) {
-// 	z.D |= 0x04
-// }
-
-// /* SET 2,E */
-// func instrCB__SET_2_E(z *Z80, opcode byte) {
-// 	z.E |= 0x04
-// }
-
-// /* SET 2,H */
-// func instrCB__SET_2_H(z *Z80, opcode byte) {
-// 	z.H |= 0x04
-// }
-
-// /* SET 2,L */
-// func instrCB__SET_2_L(z *Z80, opcode byte) {
-// 	z.L |= 0x04
-// }
-
-// /* SET 2,(HL) */
-// func instrCB__SET_2_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
-// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
-// 	z.Memory.Write(z.HL.Get(), bytetemp|0x04)
-// }
-
-// /* SET 2,A */
-// func instrCB__SET_2_A(z *Z80, opcode byte) {
-// 	z.A |= 0x04
-// }
-
-// /* SET 3,B */
-// func instrCB__SET_3_B(z *Z80, opcode byte) {
-// 	z.B |= 0x08
-// }
-
-// /* SET 3,C */
-// func instrCB__SET_3_C(z *Z80, opcode byte) {
-// 	z.C |= 0x08
-// }
-
-// /* SET 3,D */
-// func instrCB__SET_3_D(z *Z80, opcode byte) {
-// 	z.D |= 0x08
-// }
-
-// /* SET 3,E */
-// func instrCB__SET_3_E(z *Z80, opcode byte) {
-// 	z.E |= 0x08
-// }
-
-// /* SET 3,H */
-// func instrCB__SET_3_H(z *Z80, opcode byte) {
-// 	z.H |= 0x08
-// }
-
-// /* SET 3,L */
-// func instrCB__SET_3_L(z *Z80, opcode byte) {
-// 	z.L |= 0x08
-// }
-
-// /* SET 3,(HL) */
-// func instrCB__SET_3_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
-// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
-// 	z.Memory.Write(z.HL.Get(), bytetemp|0x08)
-// }
-
-// /* SET 3,A */
-// func instrCB__SET_3_A(z *Z80, opcode byte) {
-// 	z.A |= 0x08
-// }
-
-// /* SET 4,B */
-// func instrCB__SET_4_B(z *Z80, opcode byte) {
-// 	z.B |= 0x10
-// }
-
-// /* SET 4,C */
-// func instrCB__SET_4_C(z *Z80, opcode byte) {
-// 	z.C |= 0x10
-// }
-
-// /* SET 4,D */
-// func instrCB__SET_4_D(z *Z80, opcode byte) {
-// 	z.D |= 0x10
-// }
-
-// /* SET 4,E */
-// func instrCB__SET_4_E(z *Z80, opcode byte) {
-// 	z.E |= 0x10
-// }
-
-// /* SET 4,H */
-// func instrCB__SET_4_H(z *Z80, opcode byte) {
-// 	z.H |= 0x10
-// }
-
-// /* SET 4,L */
-// func instrCB__SET_4_L(z *Z80, opcode byte) {
-// 	z.L |= 0x10
-// }
-
-// /* SET 4,(HL) */
-// func instrCB__SET_4_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
-// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
-// 	z.Memory.Write(z.HL.Get(), bytetemp|0x10)
-// }
-
-// /* SET 4,A */
-// func instrCB__SET_4_A(z *Z80, opcode byte) {
-// 	z.A |= 0x10
-// }
-
-// /* SET 5,B */
-// func instrCB__SET_5_B(z *Z80, opcode byte) {
-// 	z.B |= 0x20
-// }
-
-// /* SET 5,C */
-// func instrCB__SET_5_C(z *Z80, opcode byte) {
-// 	z.C |= 0x20
-// }
-
-// /* SET 5,D */
-// func instrCB__SET_5_D(z *Z80, opcode byte) {
-// 	z.D |= 0x20
-// }
-
-// /* SET 5,E */
-// func instrCB__SET_5_E(z *Z80, opcode byte) {
-// 	z.E |= 0x20
-// }
-
-// /* SET 5,H */
-// func instrCB__SET_5_H(z *Z80, opcode byte) {
-// 	z.H |= 0x20
-// }
-
-// /* SET 5,L */
-// func instrCB__SET_5_L(z *Z80, opcode byte) {
-// 	z.L |= 0x20
-// }
-
-// /* SET 5,(HL) */
-// func instrCB__SET_5_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
-// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
-// 	z.Memory.Write(z.HL.Get(), bytetemp|0x20)
-// }
-
-// /* SET 5,A */
-// func instrCB__SET_5_A(z *Z80, opcode byte) {
-// 	z.A |= 0x20
-// }
-
-// /* SET 6,B */
-// func instrCB__SET_6_B(z *Z80, opcode byte) {
-// 	z.B |= 0x40
-// }
-
-// /* SET 6,C */
-// func instrCB__SET_6_C(z *Z80, opcode byte) {
-// 	z.C |= 0x40
-// }
-
-// /* SET 6,D */
-// func instrCB__SET_6_D(z *Z80, opcode byte) {
-// 	z.D |= 0x40
-// }
-
-// /* SET 6,E */
-// func instrCB__SET_6_E(z *Z80, opcode byte) {
-// 	z.E |= 0x40
-// }
-
-// /* SET 6,H */
-// func instrCB__SET_6_H(z *Z80, opcode byte) {
-// 	z.H |= 0x40
-// }
-
-// /* SET 6,L */
-// func instrCB__SET_6_L(z *Z80, opcode byte) {
-// 	z.L |= 0x40
-// }
-
-// /* SET 6,(HL) */
-// func instrCB__SET_6_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
-// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
-// 	z.Memory.Write(z.HL.Get(), bytetemp|0x40)
-// }
-
-// /* SET 6,A */
-// func instrCB__SET_6_A(z *Z80, opcode byte) {
-// 	z.A |= 0x40
-// }
-
-// /* SET 7,B */
-// func instrCB__SET_7_B(z *Z80, opcode byte) {
-// 	z.B |= 0x80
-// }
-
-// /* SET 7,C */
-// func instrCB__SET_7_C(z *Z80, opcode byte) {
-// 	z.C |= 0x80
-// }
-
-// /* SET 7,D */
-// func instrCB__SET_7_D(z *Z80, opcode byte) {
-// 	z.D |= 0x80
-// }
-
-// /* SET 7,E */
-// func instrCB__SET_7_E(z *Z80, opcode byte) {
-// 	z.E |= 0x80
-// }
-
-// /* SET 7,H */
-// func instrCB__SET_7_H(z *Z80, opcode byte) {
-// 	z.H |= 0x80
-// }
-
-// /* SET 7,L */
-// func instrCB__SET_7_L(z *Z80, opcode byte) {
-// 	z.L |= 0x80
-// }
-
-// /* SET 7,(HL) */
-// func instrCB__SET_7_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
-// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
-// 	z.Memory.Write(z.HL.Get(), bytetemp|0x80)
-// }
-
-// /* SET 7,A */
-// func instrCB__SET_7_A(z *Z80, opcode byte) {
-// 	z.A |= 0x80
-// }
-
-// //--
+/* RES b,n */
+func instrCB__RES_b_r(z *Z80, opcode byte) {
+	z.Tstates += 8
+	var reg *byte = z.GetPrtRegisterValByte(opcode)
+	var bitSel byte = (opcode & 0x38) >> 3
+	*reg &= getMaskBitReset(bitSel)
+
+}
+
+/* RES b,(HL) */
+func instrCB__RES_b_iHL(z *Z80, opcode byte) {
+	z.Tstates += 15
+	var bytetemp byte = z.Memory.Read(z.HL.Get())
+	var bitSel byte = (opcode & 0x38) >> 3
+	mask := getMaskBitReset(bitSel)
+	//z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
+	z.Memory.Write(z.HL.Get(), bytetemp&mask)
+}
+
+/* SET b,r */
+func instrCB__SET_b_r(z *Z80, opcode byte) {
+	z.Tstates += 8
+	var reg *byte = z.GetPrtRegisterValByte(opcode)
+	var bitSel byte = (opcode & 0x38) >> 3
+	*reg |= ^getMaskBitReset(bitSel)
+}
+
+/* SET b,(HL) */
+func instrCB__SET_b_iHL(z *Z80, opcode byte) {
+
+	z.Tstates += 15
+	var bytetemp byte = z.Memory.Read(z.HL.Get())
+	var bitSel byte = (opcode & 0x38) >> 3
+	mask := ^getMaskBitReset(bitSel)
+	//z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
+	z.Memory.Write(z.HL.Get(), bytetemp|mask)
+}
