@@ -4,149 +4,149 @@ func initOpcodeEDMap() {
 
 	// 	// BEGIN of 0xed shifted opcodes
 	// 	/* IN B,(C) */
-	// 	OpcodesMap[SHIFT_0xED+0x40] = instrED__IN_B_iC
-	// 	/* OUT (C),B */
-	// 	OpcodesMap[SHIFT_0xED+0x41] = instrED__OUT_iC_B
+	// 	OpcodeEDMap[0x40] = instrED__IN_B_iC
+	/* OUT (C),B */
+	OpcodeEDMap[0x41] = instrED__OUT_iC_B
 	// 	/* SBC HL,BC */
-	// 	OpcodesMap[SHIFT_0xED+0x42] = instrED__SBC_HL_BC
+	// 	OpcodeEDMap[0x42] = instrED__SBC_HL_BC
 	// 	/* LD (nnnn),BC */
-	// 	OpcodesMap[SHIFT_0xED+0x43] = instrED__LD_iNNNN_BC
-	// 	/* NEG */
-	// 	OpcodesMap[SHIFT_0xED+0x7c] = instrED__NEG
+	// 	OpcodeEDMap[0x43] = instrED__LD_iNNNN_BC
+	/* NEG */
+	OpcodeEDMap[0x7c] = instrED__NEG
 	// 	// Fallthrough cases
-	// 	OpcodesMap[SHIFT_0xED+0x44] = OpcodesMap[SHIFT_0xED+0x7c]
-	// 	OpcodesMap[SHIFT_0xED+0x4c] = OpcodesMap[SHIFT_0xED+0x7c]
-	// 	OpcodesMap[SHIFT_0xED+0x54] = OpcodesMap[SHIFT_0xED+0x7c]
-	// 	OpcodesMap[SHIFT_0xED+0x5c] = OpcodesMap[SHIFT_0xED+0x7c]
-	// 	OpcodesMap[SHIFT_0xED+0x64] = OpcodesMap[SHIFT_0xED+0x7c]
-	// 	OpcodesMap[SHIFT_0xED+0x6c] = OpcodesMap[SHIFT_0xED+0x7c]
-	// 	OpcodesMap[SHIFT_0xED+0x74] = OpcodesMap[SHIFT_0xED+0x7c]
-	// 	/* RETN */
-	// 	OpcodesMap[SHIFT_0xED+0x7d] = instrED__RETN
+	// 	OpcodeEDMap[0x44] = OpcodeEDMap[0x7c]
+	// 	OpcodeEDMap[0x4c] = OpcodeEDMap[0x7c]
+	// 	OpcodeEDMap[0x54] = OpcodeEDMap[0x7c]
+	// 	OpcodeEDMap[0x5c] = OpcodeEDMap[0x7c]
+	// 	OpcodeEDMap[0x64] = OpcodeEDMap[0x7c]
+	// 	OpcodeEDMap[0x6c] = OpcodeEDMap[0x7c]
+	// 	OpcodeEDMap[0x74] = OpcodeEDMap[0x7c]
+	/* RETN */
+	OpcodeEDMap[0x7d] = instrED__RETN
 	// 	// Fallthrough cases
-	// 	OpcodesMap[SHIFT_0xED+0x45] = OpcodesMap[SHIFT_0xED+0x7d]
-	// 	OpcodesMap[SHIFT_0xED+0x4d] = OpcodesMap[SHIFT_0xED+0x7d]
-	// 	OpcodesMap[SHIFT_0xED+0x55] = OpcodesMap[SHIFT_0xED+0x7d]
-	// 	OpcodesMap[SHIFT_0xED+0x5d] = OpcodesMap[SHIFT_0xED+0x7d]
-	// 	OpcodesMap[SHIFT_0xED+0x65] = OpcodesMap[SHIFT_0xED+0x7d]
-	// 	OpcodesMap[SHIFT_0xED+0x6d] = OpcodesMap[SHIFT_0xED+0x7d]
-	// 	OpcodesMap[SHIFT_0xED+0x75] = OpcodesMap[SHIFT_0xED+0x7d]
-	// 	/* IM 0 */
-	// 	OpcodesMap[SHIFT_0xED+0x6e] = instrED__IM_0
+	// 	OpcodeEDMap[0x45] = OpcodeEDMap[0x7d]
+	// 	OpcodeEDMap[0x4d] = OpcodeEDMap[0x7d]
+	// 	OpcodeEDMap[0x55] = OpcodeEDMap[0x7d]
+	// 	OpcodeEDMap[0x5d] = OpcodeEDMap[0x7d]
+	// 	OpcodeEDMap[0x65] = OpcodeEDMap[0x7d]
+	// 	OpcodeEDMap[0x6d] = OpcodeEDMap[0x7d]
+	// 	OpcodeEDMap[0x75] = OpcodeEDMap[0x7d]
+	/* IM 0 */
+	OpcodeEDMap[0x6e] = instrED__IM_0
 	// 	// Fallthrough cases
-	// 	OpcodesMap[SHIFT_0xED+0x46] = OpcodesMap[SHIFT_0xED+0x6e]
-	// 	OpcodesMap[SHIFT_0xED+0x4e] = OpcodesMap[SHIFT_0xED+0x6e]
-	// 	OpcodesMap[SHIFT_0xED+0x66] = OpcodesMap[SHIFT_0xED+0x6e]
+	// 	OpcodeEDMap[0x46] = OpcodeEDMap[0x6e]
+	// 	OpcodeEDMap[0x4e] = OpcodeEDMap[0x6e]
+	// 	OpcodeEDMap[0x66] = OpcodeEDMap[0x6e]
 	// 	/* LD I,A */
-	// 	OpcodesMap[SHIFT_0xED+0x47] = instrED__LD_I_A
+	// 	OpcodeEDMap[0x47] = instrED__LD_I_A
 	// 	/* IN C,(C) */
-	// 	OpcodesMap[SHIFT_0xED+0x48] = instrED__IN_C_iC
+	// 	OpcodeEDMap[0x48] = instrED__IN_C_iC
 	// 	/* OUT (C),C */
-	// 	OpcodesMap[SHIFT_0xED+0x49] = instrED__OUT_iC_C
+	OpcodeEDMap[0x49] = instrED__OUT_iC_C
 	// 	/* ADC HL,BC */
-	// 	OpcodesMap[SHIFT_0xED+0x4a] = instrED__ADC_HL_BC
+	// 	OpcodeEDMap[0x4a] = instrED__ADC_HL_BC
 	// 	/* LD BC,(nnnn) */
-	// 	OpcodesMap[SHIFT_0xED+0x4b] = instrED__LD_BC_iNNNN
+	// 	OpcodeEDMap[0x4b] = instrED__LD_BC_iNNNN
 	// 	/* LD R,A */
-	// 	OpcodesMap[SHIFT_0xED+0x4f] = instrED__LD_R_A
+	// 	OpcodeEDMap[0x4f] = instrED__LD_R_A
 	// 	/* IN D,(C) */
-	// 	OpcodesMap[SHIFT_0xED+0x50] = instrED__IN_D_iC
-	// 	/* OUT (C),D */
-	// 	OpcodesMap[SHIFT_0xED+0x51] = instrED__OUT_iC_D
+	// 	OpcodeEDMap[0x50] = instrED__IN_D_iC
+	/* OUT (C),D */
+	OpcodeEDMap[0x51] = instrED__OUT_iC_D
 	// 	/* SBC HL,DE */
-	// 	OpcodesMap[SHIFT_0xED+0x52] = instrED__SBC_HL_DE
+	// 	OpcodeEDMap[0x52] = instrED__SBC_HL_DE
 	// 	/* LD (nnnn),DE */
-	// 	OpcodesMap[SHIFT_0xED+0x53] = instrED__LD_iNNNN_DE
-	// 	/* IM 1 */
-	// 	OpcodesMap[SHIFT_0xED+0x76] = instrED__IM_1
+	// 	OpcodeEDMap[0x53] = instrED__LD_iNNNN_DE
+	/* IM 1 */
+	OpcodeEDMap[0x76] = instrED__IM_1
 	// 	// Fallthrough cases
-	// 	OpcodesMap[SHIFT_0xED+0x56] = OpcodesMap[SHIFT_0xED+0x76]
+	// 	OpcodeEDMap[0x56] = OpcodeEDMap[0x76]
 	// 	/* LD A,I */
-	// 	OpcodesMap[SHIFT_0xED+0x57] = instrED__LD_A_I
+	// 	OpcodeEDMap[0x57] = instrED__LD_A_I
 	// 	/* IN E,(C) */
-	// 	OpcodesMap[SHIFT_0xED+0x58] = instrED__IN_E_iC
+	// 	OpcodeEDMap[0x58] = instrED__IN_E_iC
 	// 	/* OUT (C),E */
-	// 	OpcodesMap[SHIFT_0xED+0x59] = instrED__OUT_iC_E
+	// 	OpcodeEDMap[0x59] = instrED__OUT_iC_E
 	// 	/* ADC HL,DE */
-	// 	OpcodesMap[SHIFT_0xED+0x5a] = instrED__ADC_HL_DE
+	// 	OpcodeEDMap[0x5a] = instrED__ADC_HL_DE
 	// 	/* LD DE,(nnnn) */
-	// 	OpcodesMap[SHIFT_0xED+0x5b] = instrED__LD_DE_iNNNN
-	// 	/* IM 2 */
-	// 	OpcodesMap[SHIFT_0xED+0x7e] = instrED__IM_2
+	// 	OpcodeEDMap[0x5b] = instrED__LD_DE_iNNNN
+	/* IM 2 */
+	OpcodeEDMap[0x7e] = instrED__IM_2
 	// 	// Fallthrough cases
-	// 	OpcodesMap[SHIFT_0xED+0x5e] = OpcodesMap[SHIFT_0xED+0x7e]
+	// 	OpcodeEDMap[0x5e] = OpcodeEDMap[0x7e]
 	// 	/* LD A,R */
-	// 	OpcodesMap[SHIFT_0xED+0x5f] = instrED__LD_A_R
+	// 	OpcodeEDMap[0x5f] = instrED__LD_A_R
 	// 	/* IN H,(C) */
-	// 	OpcodesMap[SHIFT_0xED+0x60] = instrED__IN_H_iC
-	// 	/* OUT (C),H */
-	// 	OpcodesMap[SHIFT_0xED+0x61] = instrED__OUT_iC_H
+	// 	OpcodeEDMap[0x60] = instrED__IN_H_iC
+	/* OUT (C),H */
+	OpcodeEDMap[0x61] = instrED__OUT_iC_H
 	// 	/* SBC HL,HL */
-	// 	OpcodesMap[SHIFT_0xED+0x62] = instrED__SBC_HL_HL
+	// 	OpcodeEDMap[0x62] = instrED__SBC_HL_HL
 	// 	/* LD (nnnn),HL */
-	// 	OpcodesMap[SHIFT_0xED+0x63] = instrED__LD_iNNNN_HL
+	// 	OpcodeEDMap[0x63] = instrED__LD_iNNNN_HL
 	// 	/* RRD */
-	// 	OpcodesMap[SHIFT_0xED+0x67] = instrED__RRD
+	// 	OpcodeEDMap[0x67] = instrED__RRD
 	// 	/* IN L,(C) */
-	// 	OpcodesMap[SHIFT_0xED+0x68] = instrED__IN_L_iC
-	// 	/* OUT (C),L */
-	// 	OpcodesMap[SHIFT_0xED+0x69] = instrED__OUT_iC_L
+	// 	OpcodeEDMap[0x68] = instrED__IN_L_iC
+	/* OUT (C),L */
+	OpcodeEDMap[0x69] = instrED__OUT_iC_L
 	// 	/* ADC HL,HL */
-	// 	OpcodesMap[SHIFT_0xED+0x6a] = instrED__ADC_HL_HL
+	// 	OpcodeEDMap[0x6a] = instrED__ADC_HL_HL
 	// 	/* LD HL,(nnnn) */
-	// 	OpcodesMap[SHIFT_0xED+0x6b] = instrED__LD_HL_iNNNN
+	// 	OpcodeEDMap[0x6b] = instrED__LD_HL_iNNNN
 	// 	/* RLD */
-	// 	OpcodesMap[SHIFT_0xED+0x6f] = instrED__RLD
+	// 	OpcodeEDMap[0x6f] = instrED__RLD
 	// 	/* IN F,(C) */
-	// 	OpcodesMap[SHIFT_0xED+0x70] = instrED__IN_F_iC
-	// 	/* OUT (C),0 */
-	// 	OpcodesMap[SHIFT_0xED+0x71] = instrED__OUT_iC_0
+	// 	OpcodeEDMap[0x70] = instrED__IN_F_iC
+	/* OUT (C),0 */
+	OpcodeEDMap[0x71] = instrED__OUT_iC_0
 	// 	/* SBC HL,SP */
-	// 	OpcodesMap[SHIFT_0xED+0x72] = instrED__SBC_HL_SP
+	// 	OpcodeEDMap[0x72] = instrED__SBC_HL_SP
 	// 	/* LD (nnnn),SP */
-	// 	OpcodesMap[SHIFT_0xED+0x73] = instrED__LD_iNNNN_SP
+	// 	OpcodeEDMap[0x73] = instrED__LD_iNNNN_SP
 	// 	/* IN A,(C) */
-	// 	OpcodesMap[SHIFT_0xED+0x78] = instrED__IN_A_iC
-	// 	/* OUT (C),A */
-	// 	OpcodesMap[SHIFT_0xED+0x79] = instrED__OUT_iC_A
+	// 	OpcodeEDMap[0x78] = instrED__IN_A_iC
+	/* OUT (C),A */
+	OpcodeEDMap[0x79] = instrED__OUT_iC_A
 	// 	/* ADC HL,SP */
-	// 	OpcodesMap[SHIFT_0xED+0x7a] = instrED__ADC_HL_SP
+	// 	OpcodeEDMap[0x7a] = instrED__ADC_HL_SP
 	// 	/* LD SP,(nnnn) */
 	OpcodeEDMap[0x7b] = instrED__LD_SP_iNNNN
 	// 	/* LDI */
-	// 	OpcodesMap[SHIFT_0xED+0xa0] = instrED__LDI
+	// 	OpcodeEDMap[0xa0] = instrED__LDI
 	// 	/* CPI */
-	// 	OpcodesMap[SHIFT_0xED+0xa1] = instrED__CPI
+	// 	OpcodeEDMap[0xa1] = instrED__CPI
 	// 	/* INI */
-	// 	OpcodesMap[SHIFT_0xED+0xa2] = instrED__INI
+	// 	OpcodeEDMap[0xa2] = instrED__INI
 	// 	/* OUTI */
-	// 	OpcodesMap[SHIFT_0xED+0xa3] = instrED__OUTI
+	// 	OpcodeEDMap[0xa3] = instrED__OUTI
 	// 	/* LDD */
-	// 	OpcodesMap[SHIFT_0xED+0xa8] = instrED__LDD
+	// 	OpcodeEDMap[0xa8] = instrED__LDD
 	// 	/* CPD */
-	// 	OpcodesMap[SHIFT_0xED+0xa9] = instrED__CPD
+	// 	OpcodeEDMap[0xa9] = instrED__CPD
 	// 	/* IND */
-	// 	OpcodesMap[SHIFT_0xED+0xaa] = instrED__IND
+	// 	OpcodeEDMap[0xaa] = instrED__IND
 	// 	/* OUTD */
-	// 	OpcodesMap[SHIFT_0xED+0xab] = instrED__OUTD
+	// 	OpcodeEDMap[0xab] = instrED__OUTD
 	// 	/* LDIR */
-	// 	OpcodesMap[SHIFT_0xED+0xb0] = instrED__LDIR
+	// 	OpcodeEDMap[0xb0] = instrED__LDIR
 	// 	/* CPIR */
-	// 	OpcodesMap[SHIFT_0xED+0xb1] = instrED__CPIR
+	// 	OpcodeEDMap[0xb1] = instrED__CPIR
 	// 	/* INIR */
-	// 	OpcodesMap[SHIFT_0xED+0xb2] = instrED__INIR
+	// 	OpcodeEDMap[0xb2] = instrED__INIR
 	// 	/* OTIR */
-	// 	OpcodesMap[SHIFT_0xED+0xb3] = instrED__OTIR
+	// 	OpcodeEDMap[0xb3] = instrED__OTIR
 	// 	/* LDDR */
-	// 	OpcodesMap[SHIFT_0xED+0xb8] = instrED__LDDR
+	// 	OpcodeEDMap[0xb8] = instrED__LDDR
 	// 	/* CPDR */
-	// 	OpcodesMap[SHIFT_0xED+0xb9] = instrED__CPDR
+	// 	OpcodeEDMap[0xb9] = instrED__CPDR
 	// 	/* INDR */
-	// 	OpcodesMap[SHIFT_0xED+0xba] = instrED__INDR
+	// 	OpcodeEDMap[0xba] = instrED__INDR
 	// 	/* OTDR */
-	// 	OpcodesMap[SHIFT_0xED+0xbb] = instrED__OTDR
+	// 	OpcodeEDMap[0xbb] = instrED__OTDR
 	// 	/* slttrap */
-	// 	OpcodesMap[SHIFT_0xED+0xfb] = instrED__SLTTRAP
+	// 	OpcodeEDMap[0xfb] = instrED__SLTTRAP
 
 	// 	// END of 0xed shifted opcodes
 }
@@ -156,10 +156,11 @@ func initOpcodeEDMap() {
 // 	z.in(&z.B, z.BC())
 // }
 
-// /* OUT (C),B */
-// func instrED__OUT_iC_B(z *Z80, opcode byte) {
-// 	z.writePort(z.BC(), z.B)
-// }
+/* OUT (C),B */
+func instrED__OUT_iC_B(z *Z80, opcode byte) {
+	z.Tstates += 12
+	z.writePort(z.BC.Get(), z.B)
+}
 
 // /* SBC HL,BC */
 // func instrED__SBC_HL_BC(z *Z80, opcode byte) {
@@ -173,23 +174,26 @@ func initOpcodeEDMap() {
 // 	// break
 // }
 
-// /* NEG */
-// func instrED__NEG(z *Z80, opcode byte) {
-// 	bytetemp := z.A
-// 	z.A = 0
-// 	z.sub(bytetemp)
-// }
+/* NEG */
+func instrED__NEG(z *Z80, opcode byte) {
+	z.Tstates += 8
+	bytetemp := z.A
+	z.A = 0
+	z.Sub(bytetemp)
+}
 
-// /* RETN */
-// func instrED__RETN(z *Z80, opcode byte) {
-// 	z.IFF1 = z.IFF2
-// 	z.ret()
-// }
+/* RETN */
+func instrED__RETN(z *Z80, opcode byte) {
+	z.Tstates += 14
+	z.IFF1 = z.IFF2
+	z.pc = z.Pop16()
+}
 
-// /* IM 0 */
-// func instrED__IM_0(z *Z80, opcode byte) {
-// 	z.IM = 0
-// }
+/* IM 0 */
+func instrED__IM_0(z *Z80, opcode byte) {
+	z.Tstates += 8
+	z.IM = 0
+}
 
 // /* LD I,A */
 // func instrED__LD_I_A(z *Z80, opcode byte) {
@@ -202,10 +206,11 @@ func initOpcodeEDMap() {
 // 	z.in(&z.C, z.BC())
 // }
 
-// /* OUT (C),C */
-// func instrED__OUT_iC_C(z *Z80, opcode byte) {
-// 	z.writePort(z.BC(), z.C)
-// }
+/* OUT (C),C */
+func instrED__OUT_iC_C(z *Z80, opcode byte) {
+	z.Tstates += 12
+	z.writePort(z.BC.Get(), z.C)
+}
 
 // /* ADC HL,BC */
 // func instrED__ADC_HL_BC(z *Z80, opcode byte) {
@@ -232,10 +237,11 @@ func initOpcodeEDMap() {
 // 	z.in(&z.D, z.BC())
 // }
 
-// /* OUT (C),D */
-// func instrED__OUT_iC_D(z *Z80, opcode byte) {
-// 	z.writePort(z.BC(), z.D)
-// }
+/* OUT (C),D */
+func instrED__OUT_iC_D(z *Z80, opcode byte) {
+	z.Tstates += 12
+	z.writePort(z.BC.Get(), z.D)
+}
 
 // /* SBC HL,DE */
 // func instrED__SBC_HL_DE(z *Z80, opcode byte) {
@@ -249,10 +255,11 @@ func initOpcodeEDMap() {
 // 	// break
 // }
 
-// /* IM 1 */
-// func instrED__IM_1(z *Z80, opcode byte) {
-// 	z.IM = 1
-// }
+/* IM 1 */
+func instrED__IM_1(z *Z80, opcode byte) {
+	z.Tstates += 8
+	z.IM = 1
+}
 
 // /* LD A,I */
 // func instrED__LD_A_I(z *Z80, opcode byte) {
@@ -283,10 +290,11 @@ func initOpcodeEDMap() {
 // 	// break
 // }
 
-// /* IM 2 */
-// func instrED__IM_2(z *Z80, opcode byte) {
-// 	z.IM = 2
-// }
+/* IM 2 */
+func instrED__IM_2(z *Z80, opcode byte) {
+	z.Tstates += 8
+	z.IM = 2
+}
 
 // /* LD A,R */
 // func instrED__LD_A_R(z *Z80, opcode byte) {
@@ -300,10 +308,11 @@ func initOpcodeEDMap() {
 // 	z.in(&z.H, z.BC())
 // }
 
-// /* OUT (C),H */
-// func instrED__OUT_iC_H(z *Z80, opcode byte) {
-// 	z.writePort(z.BC(), z.H)
-// }
+/* OUT (C),H */
+func instrED__OUT_iC_H(z *Z80, opcode byte) {
+	z.Tstates += 12
+	z.writePort(z.BC.Get(), z.H)
+}
 
 // /* SBC HL,HL */
 // func instrED__SBC_HL_HL(z *Z80, opcode byte) {
@@ -331,10 +340,11 @@ func initOpcodeEDMap() {
 // 	z.in(&z.L, z.BC())
 // }
 
-// /* OUT (C),L */
-// func instrED__OUT_iC_L(z *Z80, opcode byte) {
-// 	z.writePort(z.BC(), z.L)
-// }
+/* OUT (C),L */
+func instrED__OUT_iC_L(z *Z80, opcode byte) {
+	z.Tstates += 12
+	z.writePort(z.BC.Get(), z.L)
+}
 
 // /* ADC HL,HL */
 // func instrED__ADC_HL_HL(z *Z80, opcode byte) {
@@ -363,10 +373,11 @@ func initOpcodeEDMap() {
 // 	z.in(&bytetemp, z.BC())
 // }
 
-// /* OUT (C),0 */
-// func instrED__OUT_iC_0(z *Z80, opcode byte) {
-// 	z.writePort(z.BC(), 0)
-// }
+/* OUT (C),0 */
+func instrED__OUT_iC_0(z *Z80, opcode byte) {
+	z.Tstates += 12
+	z.writePort(z.BC.Get(), 0)
+}
 
 // /* SBC HL,SP */
 // func instrED__SBC_HL_SP(z *Z80, opcode byte) {
@@ -386,10 +397,11 @@ func initOpcodeEDMap() {
 // 	z.in(&z.A, z.BC())
 // }
 
-// /* OUT (C),A */
-// func instrED__OUT_iC_A(z *Z80, opcode byte) {
-// 	z.writePort(z.BC(), z.A)
-// }
+/* OUT (C),A */
+func instrED__OUT_iC_A(z *Z80, opcode byte) {
+	z.Tstates += 12
+	z.writePort(z.BC.Get(), z.A)
+}
 
 // /* ADC HL,SP */
 // func instrED__ADC_HL_SP(z *Z80, opcode byte) {
