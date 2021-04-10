@@ -1,5 +1,7 @@
 package ZzEmu
 
+import "strconv"
+
 // The flags
 const FLAG_C = 0x01
 const FLAG_N = 0x02
@@ -93,6 +95,10 @@ func (z80 *Z80) Reset() {
 	z80.Tstates = 0
 	z80.Halted = false
 	z80.interruptsEnabledAt = 0
+}
+
+func invalidOpcode(z80 *Z80, opcode byte) {
+	panic("Opcode invalido: " + strconv.Itoa(int(opcode)))
 }
 
 //--- flow controll

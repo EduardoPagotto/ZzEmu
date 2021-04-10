@@ -688,11 +688,8 @@ func instrDD__LD_REG_iNNNN(z *Z80, opcode byte) {
 
 // /* shift DDFDCB */
 func instrDD__SHIFT_DDFDCB(z *Z80, opcode byte) {
-
-	opcode2 := z.Memory.Read(z.pc)
-	z.R = (z.R + 1) & 0x7f // FIXME: Precisa ???
-	z.pc++
-
+	opcode2 := z.Load8()
+	z.R++
 	OpcodeDDCBMap[opcode2](z, opcode2)
 }
 

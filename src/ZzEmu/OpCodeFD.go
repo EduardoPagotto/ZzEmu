@@ -163,8 +163,8 @@ func initOpcodeDFMap() {
 	// 	OpcodeDFMap[0xbd] = instrFD__CP_A_REGL
 	// 	/* CP A,(REGISTER+dd) */
 	// 	OpcodeDFMap[0xbe] = instrFD__CP_A_iREGpDD
-	// 	/* shift DDFDCB */
-	// 	OpcodeDFMap[0xcb] = instrFD__SHIFT_DDFDCB
+	/* shift DDFDCB */
+	OpcodeDFMap[0xcb] = instrFD__SHIFT_DDFDCB
 	/* POP REGISTER */
 	OpcodeDFMap[0xe1] = instrFD__POP_REG
 	// 	/* EX (SP),REGISTER */
@@ -690,9 +690,12 @@ func instrFD__ADD_A_REGL(z *Z80, opcode byte) {
 // 	z.cp(bytetemp)
 // }
 
-// /* shift DDFDCB */
-// func instrFD__SHIFT_DDFDCB(z *Z80, opcode byte) {
-// }
+/* shift DDFDCB */
+func instrFD__SHIFT_DDFDCB(z *Z80, opcode byte) {
+	opcode2 := z.Load8()
+	z.R++
+	OpcodeFDCBMap[opcode2](z, opcode2)
+}
 
 /* POP iy */
 func instrFD__POP_REG(z *Z80, opcode byte) {

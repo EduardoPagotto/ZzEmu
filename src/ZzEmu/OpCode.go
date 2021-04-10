@@ -1012,11 +1012,8 @@ func instr__JP_Z_NNNN(z *Z80, opcode byte) {
 
 /* shift CB */
 func instr__SHIFT_CB(z *Z80, opcode byte) {
-
-	opcode2 := z.Memory.Read(z.pc)
-	z.R = (z.R + 1) & 0x7f // FIXME: Precisa ???
-	z.pc++
-
+	opcode2 := z.Load8()
+	z.R++
 	OpcodeCBMap[opcode2](z, opcode2)
 }
 
@@ -1183,12 +1180,14 @@ func instr__CALL_C_NNNN(z *Z80, opcode byte) {
 
 // /* shift DD */
 func instr__SHIFT_DD(z *Z80, opcode byte) {
-
-	opcode2 := z.Memory.Read(z.pc)
-	z.R = (z.R + 1) & 0x7f // FIXME: Precisa ???
-	z.pc++
-
-	OpcodeDDMap[opcode2](z, opcode2)
+	opcode2 := z.Load8()
+	z.R++
+	if f := OpcodeDDMap[opcode2]; f != nil {
+		f(z, opcode2)
+	} else {
+		/* Instruction did not involve H or L */
+		OpcodeMap[opcode2](z, opcode2) // FIXME: verificar!!!!!
+	}
 }
 
 /* SBC A,nn */
@@ -1335,12 +1334,13 @@ func instr__CALL_PE_NNNN(z *Z80, opcode byte) {
 
 // /* shift ED */
 func instr__SHIFT_ED(z *Z80, opcode byte) {
-
-	opcode2 := z.Memory.Read(z.pc)
-	z.R = (z.R + 1) & 0x7f // FIXME: Precisa ???
-	z.pc++
-
-	OpcodeEDMap[opcode2](z, opcode2)
+	opcode2 := z.Load8()
+	z.R++
+	if f := OpcodeEDMap[opcode2]; f != nil {
+		f(z, opcode2)
+	} else {
+		invalidOpcode(z, opcode2)
+	}
 }
 
 /* XOR A,nn */
@@ -1478,11 +1478,14 @@ func instr__CALL_M_NNNN(z *Z80, opcode byte) {
 // /* shift FD */
 func instr__SHIFT_FD(z *Z80, opcode byte) {
 
-	opcode2 := z.Memory.Read(z.pc)
-	z.R = (z.R + 1) & 0x7f // FIXME: Precisa ???
-	z.pc++
-
-	OpcodeDFMap[opcode2](z, opcode2)
+	opcode2 := z.Load8()
+	z.R++
+	if f := OpcodeDFMap[opcode2]; f != nil {
+		f(z, opcode)
+	} else {
+		/* Instruction did not involve H or L */
+		OpcodeMap[opcode2](z, opcode2) // FIXME: verificar se é isto mesmo!!!
+	}
 }
 
 /* CP nn */
