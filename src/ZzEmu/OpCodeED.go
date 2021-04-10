@@ -43,8 +43,8 @@ func initOpcodeEDMap() {
 	OpcodeEDMap[0x48] = instrED__IN_C_iC
 	// 	/* OUT (C),C */
 	OpcodeEDMap[0x49] = instrED__OUT_iC_C
-	// 	/* ADC HL,BC */
-	// 	OpcodeEDMap[0x4a] = instrED__ADC_HL_BC
+	/* ADC HL,BC */
+	OpcodeEDMap[0x4a] = instrED__ADC_HL_BC
 	/* LD BC,(nnnn) */
 	OpcodeEDMap[0x4b] = instrED__LD_BC_iNNNN
 	/* LD R,A */
@@ -67,8 +67,8 @@ func initOpcodeEDMap() {
 	OpcodeEDMap[0x58] = instrED__IN_E_iC
 	/* OUT (C),E */
 	OpcodeEDMap[0x59] = instrED__OUT_iC_E
-	// 	/* ADC HL,DE */
-	// 	OpcodeEDMap[0x5a] = instrED__ADC_HL_DE
+	/* ADC HL,DE */
+	OpcodeEDMap[0x5a] = instrED__ADC_HL_DE
 	/* LD DE,(nnnn) */
 	OpcodeEDMap[0x5b] = instrED__LD_DE_iNNNN
 	/* IM 2 */
@@ -91,8 +91,8 @@ func initOpcodeEDMap() {
 	OpcodeEDMap[0x68] = instrED__IN_L_iC
 	/* OUT (C),L */
 	OpcodeEDMap[0x69] = instrED__OUT_iC_L
-	// 	/* ADC HL,HL */
-	// 	OpcodeEDMap[0x6a] = instrED__ADC_HL_HL
+	/* ADC HL,HL */
+	OpcodeEDMap[0x6a] = instrED__ADC_HL_HL
 	/* LD HL,(nnnn) */
 	OpcodeEDMap[0x6b] = instrED__LD_HL_iNNNN
 	// 	/* RLD */
@@ -109,8 +109,8 @@ func initOpcodeEDMap() {
 	OpcodeEDMap[0x78] = instrED__IN_A_iC
 	/* OUT (C),A */
 	OpcodeEDMap[0x79] = instrED__OUT_iC_A
-	// 	/* ADC HL,SP */
-	// 	OpcodeEDMap[0x7a] = instrED__ADC_HL_SP
+	/* ADC HL,SP */
+	OpcodeEDMap[0x7a] = instrED__ADC_HL_SP
 	/* LD SP,(nnnn) */
 	OpcodeEDMap[0x7b] = instrED__LD_SP_iNNNN
 	// 	/* LDI */
@@ -216,11 +216,12 @@ func instrED__OUT_iC_C(z *Z80, opcode byte) {
 	z.writePort(z.BC.Get(), z.C)
 }
 
-// /* ADC HL,BC */
-// func instrED__ADC_HL_BC(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq_loop(z.IR(), 1, 7)
-// 	z.adc16(z.BC.Get())
-// }
+/* ADC HL,BC */
+func instrED__ADC_HL_BC(z *Z80, opcode byte) {
+	//z.memory.ContendReadNoMreq_loop(z.IR(), 1, 7)
+	z.Tstates += 15
+	z.Adc16(z.BC.Get())
+}
 
 /* LD BC,(nnnn) */
 func instrED__LD_BC_iNNNN(z *Z80, opcode byte) {
@@ -288,11 +289,12 @@ func instrED__OUT_iC_E(z *Z80, opcode byte) {
 	z.writePort(z.BC.Get(), z.E)
 }
 
-// /* ADC HL,DE */
-// func instrED__ADC_HL_DE(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq_loop(z.IR(), 1, 7)
-// 	z.adc16(z.DE.Get())
-// }
+/* ADC HL,DE */
+func instrED__ADC_HL_DE(z *Z80, opcode byte) {
+	//z.memory.ContendReadNoMreq_loop(z.IR(), 1, 7)
+	z.Tstates += 15
+	z.Adc16(z.DE.Get())
+}
 
 /* LD DE,(nnnn) */
 func instrED__LD_DE_iNNNN(z *Z80, opcode byte) {
@@ -360,11 +362,12 @@ func instrED__OUT_iC_L(z *Z80, opcode byte) {
 	z.writePort(z.BC.Get(), z.L)
 }
 
-// /* ADC HL,HL */
-// func instrED__ADC_HL_HL(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq_loop(z.IR(), 1, 7)
-// 	z.adc16(z.HL.Get())
-// }
+/* ADC HL,HL */
+func instrED__ADC_HL_HL(z *Z80, opcode byte) {
+	z.Tstates += 15
+	//z.memory.ContendReadNoMreq_loop(z.IR(), 1, 7)
+	z.Adc16(z.HL.Get())
+}
 
 /* LD HL,(nnnn) */
 func instrED__LD_HL_iNNNN(z *Z80, opcode byte) {
@@ -420,11 +423,12 @@ func instrED__OUT_iC_A(z *Z80, opcode byte) {
 	z.writePort(z.BC.Get(), z.A)
 }
 
-// /* ADC HL,SP */
-// func instrED__ADC_HL_SP(z *Z80, opcode byte) {
-// 	z.memory.ContendReadNoMreq_loop(z.IR(), 1, 7)
-// 	z.adc16(z.SP())
-// }
+/* ADC HL,SP */
+func instrED__ADC_HL_SP(z *Z80, opcode byte) {
+	z.Tstates += 15
+	//z.memory.ContendReadNoMreq_loop(z.IR(), 1, 7)
+	z.Adc16(z.sp)
+}
 
 // /* LD SP,(nnnn) */
 func instrED__LD_SP_iNNNN(z *Z80, opcode byte) {
