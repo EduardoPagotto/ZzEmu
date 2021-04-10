@@ -34,102 +34,102 @@ func initOpcodeCBMap() {
 	OpcodeCBMap[0x0e] = instrCB__RRC_iHL
 	/* RRC A */
 	OpcodeCBMap[0x0f] = instrCB__RRC_r
-	// 	/* RL B */
-	// 	OpcodeCBMap[0x10] = instrCB__RL_B
-	// 	/* RL C */
-	// 	OpcodeCBMap[0x11] = instrCB__RL_C
-	// 	/* RL D */
-	// 	OpcodeCBMap[0x12] = instrCB__RL_D
-	// 	/* RL E */
-	// 	OpcodeCBMap[0x13] = instrCB__RL_E
-	// 	/* RL H */
-	// 	OpcodeCBMap[0x14] = instrCB__RL_H
-	// 	/* RL L */
-	// 	OpcodeCBMap[0x15] = instrCB__RL_L
-	// 	/* RL (HL) */
-	// 	OpcodeCBMap[0x16] = instrCB__RL_iHL
-	// 	/* RL A */
-	// 	OpcodeCBMap[0x17] = instrCB__RL_A
-	// 	/* RR B */
-	// 	OpcodeCBMap[0x18] = instrCB__RR_B
-	// 	/* RR C */
-	// 	OpcodeCBMap[0x19] = instrCB__RR_C
-	// 	/* RR D */
-	// 	OpcodeCBMap[0x1a] = instrCB__RR_D
-	// 	/* RR E */
-	// 	OpcodeCBMap[0x1b] = instrCB__RR_E
-	// 	/* RR H */
-	// 	OpcodeCBMap[0x1c] = instrCB__RR_H
-	// 	/* RR L */
-	// 	OpcodeCBMap[0x1d] = instrCB__RR_L
-	// 	/* RR (HL) */
-	// 	OpcodeCBMap[0x1e] = instrCB__RR_iHL
-	// 	/* RR A */
-	// 	OpcodeCBMap[0x1f] = instrCB__RR_A
-	// 	/* SLA B */
-	// 	OpcodeCBMap[0x20] = instrCB__SLA_B
-	// 	/* SLA C */
-	// 	OpcodeCBMap[0x21] = instrCB__SLA_C
-	// 	/* SLA D */
-	// 	OpcodeCBMap[0x22] = instrCB__SLA_D
-	// 	/* SLA E */
-	// 	OpcodeCBMap[0x23] = instrCB__SLA_E
-	// 	/* SLA H */
-	// 	OpcodeCBMap[0x24] = instrCB__SLA_H
-	// 	/* SLA L */
-	// 	OpcodeCBMap[0x25] = instrCB__SLA_L
-	// 	/* SLA (HL) */
-	// 	OpcodeCBMap[0x26] = instrCB__SLA_iHL
-	// 	/* SLA A */
-	// 	OpcodeCBMap[0x27] = instrCB__SLA_A
-	// 	/* SRA B */
-	// 	OpcodeCBMap[0x28] = instrCB__SRA_B
-	// 	/* SRA C */
-	// 	OpcodeCBMap[0x29] = instrCB__SRA_C
-	// 	/* SRA D */
-	// 	OpcodeCBMap[0x2a] = instrCB__SRA_D
-	// 	/* SRA E */
-	// 	OpcodeCBMap[0x2b] = instrCB__SRA_E
-	// 	/* SRA H */
-	// 	OpcodeCBMap[0x2c] = instrCB__SRA_H
-	// 	/* SRA L */
-	// 	OpcodeCBMap[0x2d] = instrCB__SRA_L
-	// 	/* SRA (HL) */
-	// 	OpcodeCBMap[0x2e] = instrCB__SRA_iHL
-	// 	/* SRA A */
-	// 	OpcodeCBMap[0x2f] = instrCB__SRA_A
-	// 	/* SLL B */
-	// 	OpcodeCBMap[0x30] = instrCB__SLL_B
-	// 	/* SLL C */
-	// 	OpcodeCBMap[0x31] = instrCB__SLL_C
-	// 	/* SLL D */
-	// 	OpcodeCBMap[0x32] = instrCB__SLL_D
-	// 	/* SLL E */
-	// 	OpcodeCBMap[0x33] = instrCB__SLL_E
-	// 	/* SLL H */
-	// 	OpcodeCBMap[0x34] = instrCB__SLL_H
-	// 	/* SLL L */
-	// 	OpcodeCBMap[0x35] = instrCB__SLL_L
-	// 	/* SLL (HL) */
-	// 	OpcodeCBMap[0x36] = instrCB__SLL_iHL
-	// 	/* SLL A */
-	// 	OpcodeCBMap[0x37] = instrCB__SLL_A
-	// 	/* SRL B */
-	// 	OpcodeCBMap[0x38] = instrCB__SRL_B
-	// 	/* SRL C */
-	// 	OpcodeCBMap[0x39] = instrCB__SRL_C
-	// 	/* SRL D */
-	// 	OpcodeCBMap[0x3a] = instrCB__SRL_D
-	// 	/* SRL E */
-	// 	OpcodeCBMap[0x3b] = instrCB__SRL_E
-	// 	/* SRL H */
-	// 	OpcodeCBMap[0x3c] = instrCB__SRL_H
-	// 	/* SRL L */
-	// 	OpcodeCBMap[0x3d] = instrCB__SRL_L
-	// 	/* SRL (HL) */
-	// 	OpcodeCBMap[0x3e] = instrCB__SRL_iHL
-	// 	/* SRL A */
-	// 	OpcodeCBMap[0x3f] = instrCB__SRL_A
+	/* RL B */
+	OpcodeCBMap[0x10] = instrCB__RL_r
+	/* RL C */
+	OpcodeCBMap[0x11] = instrCB__RL_r
+	/* RL D */
+	OpcodeCBMap[0x12] = instrCB__RL_r
+	/* RL E */
+	OpcodeCBMap[0x13] = instrCB__RL_r
+	/* RL H */
+	OpcodeCBMap[0x14] = instrCB__RL_r
+	/* RL L */
+	OpcodeCBMap[0x15] = instrCB__RL_r
+	/* RL (HL) */
+	OpcodeCBMap[0x16] = instrCB__RL_iHL
+	/* RL A */
+	OpcodeCBMap[0x17] = instrCB__RL_r
+	/* RR B */
+	OpcodeCBMap[0x18] = instrCB__RR_r
+	/* RR C */
+	OpcodeCBMap[0x19] = instrCB__RR_r
+	/* RR D */
+	OpcodeCBMap[0x1a] = instrCB__RR_r
+	/* RR E */
+	OpcodeCBMap[0x1b] = instrCB__RR_r
+	/* RR H */
+	OpcodeCBMap[0x1c] = instrCB__RR_r
+	/* RR L */
+	OpcodeCBMap[0x1d] = instrCB__RR_r
+	/* RR (HL) */
+	OpcodeCBMap[0x1e] = instrCB__RR_iHL
+	/* RR A */
+	OpcodeCBMap[0x1f] = instrCB__RR_r
+	/* SLA B */
+	OpcodeCBMap[0x20] = instrCB__SLA_r
+	/* SLA C */
+	OpcodeCBMap[0x21] = instrCB__SLA_r
+	/* SLA D */
+	OpcodeCBMap[0x22] = instrCB__SLA_r
+	/* SLA E */
+	OpcodeCBMap[0x23] = instrCB__SLA_r
+	/* SLA H */
+	OpcodeCBMap[0x24] = instrCB__SLA_r
+	/* SLA L */
+	OpcodeCBMap[0x25] = instrCB__SLA_r
+	/* SLA (HL) */
+	OpcodeCBMap[0x26] = instrCB__SLA_iHL
+	/* SLA A */
+	OpcodeCBMap[0x27] = instrCB__SLA_r
+	/* SRA B */
+	OpcodeCBMap[0x28] = instrCB__SRA_r
+	/* SRA C */
+	OpcodeCBMap[0x29] = instrCB__SRA_r
+	/* SRA D */
+	OpcodeCBMap[0x2a] = instrCB__SRA_r
+	/* SRA E */
+	OpcodeCBMap[0x2b] = instrCB__SRA_r
+	/* SRA H */
+	OpcodeCBMap[0x2c] = instrCB__SRA_r
+	/* SRA L */
+	OpcodeCBMap[0x2d] = instrCB__SRA_r
+	/* SRA (HL) */
+	OpcodeCBMap[0x2e] = instrCB__SRA_iHL
+	/* SRA A */
+	OpcodeCBMap[0x2f] = instrCB__SRA_r
+	/* SLL B */
+	OpcodeCBMap[0x30] = instrCB__SLL_r
+	/* SLL C */
+	OpcodeCBMap[0x31] = instrCB__SLL_r
+	/* SLL D */
+	OpcodeCBMap[0x32] = instrCB__SLL_r
+	/* SLL E */
+	OpcodeCBMap[0x33] = instrCB__SLL_r
+	/* SLL H */
+	OpcodeCBMap[0x34] = instrCB__SLL_r
+	/* SLL L */
+	OpcodeCBMap[0x35] = instrCB__SLL_r
+	/* SLL (HL) */
+	OpcodeCBMap[0x36] = instrCB__SLL_iHL
+	/* SLL A */
+	OpcodeCBMap[0x37] = instrCB__SLL_r
+	/* SRL B */
+	OpcodeCBMap[0x38] = instrCB__SRL_r
+	/* SRL C */
+	OpcodeCBMap[0x39] = instrCB__SRL_r
+	/* SRL D */
+	OpcodeCBMap[0x3a] = instrCB__SRL_r
+	/* SRL E */
+	OpcodeCBMap[0x3b] = instrCB__SRL_r
+	/* SRL H */
+	OpcodeCBMap[0x3c] = instrCB__SRL_r
+	/* SRL L */
+	OpcodeCBMap[0x3d] = instrCB__SRL_r
+	/* SRL (HL) */
+	OpcodeCBMap[0x3e] = instrCB__SRL_iHL
+	/* SRL A */
+	OpcodeCBMap[0x3f] = instrCB__SRL_r
 	// 	/* BIT 0,B */
 	// 	OpcodeCBMap[0x40] = instrCB__BIT_0_B
 	// 	/* BIT 0,C */
@@ -529,7 +529,7 @@ func instrCB__RLC_r(z *Z80, opcode byte) {
 func instrCB__RLC_iHL(z *Z80, opcode byte) {
 	z.Tstates += 16
 	var bytetemp byte = z.Memory.Read(z.HL.Get())
-	//z.memory.ContendReadNoMreq(z.HL(), 1)
+	//z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
 	bytetemp = z.rlc(bytetemp)
 	z.Memory.Write(z.HL.Get(), bytetemp)
 }
@@ -545,268 +545,106 @@ func instrCB__RRC_r(z *Z80, opcode byte) {
 func instrCB__RRC_iHL(z *Z80, opcode byte) {
 	z.Tstates += 15
 	var bytetemp byte = z.Memory.Read(z.HL.Get())
-	//z.memory.ContendReadNoMreq(z.HL(), 1)
+	//z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
 	bytetemp = z.rrc(bytetemp)
 	z.Memory.Write(z.HL.Get(), bytetemp)
 }
 
-// /* RL B */
-// func instrCB__RL_B(z *Z80, opcode byte) {
-// 	z.B = z.rl(z.B)
-// }
+/* RL r */
+func instrCB__RL_r(z *Z80, opcode byte) {
+	z.Tstates += 8
+	var reg *byte = z.GetPrtRegisterValByte(opcode)
+	*reg = z.rl(*reg)
+}
 
-// /* RL C */
-// func instrCB__RL_C(z *Z80, opcode byte) {
-// 	z.C = z.rl(z.C)
-// }
+/* RL (HL) */
+func instrCB__RL_iHL(z *Z80, opcode byte) {
+	z.Tstates += 15
+	var bytetemp byte = z.Memory.Read(z.HL.Get())
+	//z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
+	bytetemp = z.rl(bytetemp)
+	z.Memory.Write(z.HL.Get(), bytetemp)
+}
 
-// /* RL D */
-// func instrCB__RL_D(z *Z80, opcode byte) {
-// 	z.D = z.rl(z.D)
-// }
+/* RR r */
+func instrCB__RR_r(z *Z80, opcode byte) {
+	z.Tstates += 8
+	var reg *byte = z.GetPrtRegisterValByte(opcode)
+	*reg = z.rr(*reg)
+}
 
-// /* RL E */
-// func instrCB__RL_E(z *Z80, opcode byte) {
-// 	z.E = z.rl(z.E)
-// }
+/* RR (HL) */
+func instrCB__RR_iHL(z *Z80, opcode byte) {
+	z.Tstates += 15
+	var bytetemp byte = z.Memory.Read(z.HL.Get())
+	//z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
+	bytetemp = z.rr(bytetemp)
+	z.Memory.Write(z.HL.Get(), bytetemp)
+}
 
-// /* RL H */
-// func instrCB__RL_H(z *Z80, opcode byte) {
-// 	z.H = z.rl(z.H)
-// }
+/* SLA r */
+func instrCB__SLA_r(z *Z80, opcode byte) {
+	z.Tstates += 8
+	var reg *byte = z.GetPrtRegisterValByte(opcode)
+	*reg = z.sla(*reg)
+}
 
-// /* RL L */
-// func instrCB__RL_L(z *Z80, opcode byte) {
-// 	z.L = z.rl(z.L)
-// }
+/* SLA (HL) */
+func instrCB__SLA_iHL(z *Z80, opcode byte) {
+	z.Tstates += 15
+	var bytetemp byte = z.Memory.Read(z.HL.Get())
+	//z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
+	bytetemp = z.sla(bytetemp)
+	z.Memory.Write(z.HL.Get(), bytetemp)
+}
 
-// /* RL (HL) */
-// func instrCB__RL_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.HL())
-// 	z.memory.ContendReadNoMreq(z.HL(), 1)
-// 	bytetemp = z.rl(bytetemp)
-// 	z.memory.WriteByte(z.HL(), bytetemp)
-// }
+/* SRA r */
+func instrCB__SRA_r(z *Z80, opcode byte) {
+	z.Tstates += 8
+	var reg *byte = z.GetPrtRegisterValByte(opcode)
+	*reg = z.sra(*reg)
+}
 
-// /* RL A */
-// func instrCB__RL_A(z *Z80, opcode byte) {
-// 	z.A = z.rl(z.A)
-// }
+/* SRA (HL) */
+func instrCB__SRA_iHL(z *Z80, opcode byte) {
+	z.Tstates += 15
+	var bytetemp byte = z.Memory.Read(z.HL.Get())
+	//z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
+	bytetemp = z.sra(bytetemp)
+	z.Memory.Write(z.HL.Get(), bytetemp)
+}
 
-// /* RR B */
-// func instrCB__RR_B(z *Z80, opcode byte) {
-// 	z.B = z.rr(z.B)
-// }
+/* SLL B */
+func instrCB__SLL_r(z *Z80, opcode byte) {
+	z.Tstates += 8
+	var reg *byte = z.GetPrtRegisterValByte(opcode)
+	*reg = z.sll(*reg)
+}
 
-// /* RR C */
-// func instrCB__RR_C(z *Z80, opcode byte) {
-// 	z.C = z.rr(z.C)
-// }
+/* SLL (HL) */
+func instrCB__SLL_iHL(z *Z80, opcode byte) {
+	z.Tstates += 15
+	var bytetemp byte = z.Memory.Read(z.HL.Get())
+	//z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
+	bytetemp = z.sll(bytetemp)
+	z.Memory.Write(z.HL.Get(), bytetemp)
+}
 
-// /* RR D */
-// func instrCB__RR_D(z *Z80, opcode byte) {
-// 	z.D = z.rr(z.D)
-// }
+/* SRL r */
+func instrCB__SRL_r(z *Z80, opcode byte) {
+	z.Tstates += 8
+	var reg *byte = z.GetPrtRegisterValByte(opcode)
+	*reg = z.srl(*reg)
+}
 
-// /* RR E */
-// func instrCB__RR_E(z *Z80, opcode byte) {
-// 	z.E = z.rr(z.E)
-// }
-
-// /* RR H */
-// func instrCB__RR_H(z *Z80, opcode byte) {
-// 	z.H = z.rr(z.H)
-// }
-
-// /* RR L */
-// func instrCB__RR_L(z *Z80, opcode byte) {
-// 	z.L = z.rr(z.L)
-// }
-
-// /* RR (HL) */
-// func instrCB__RR_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.HL())
-// 	z.memory.ContendReadNoMreq(z.HL(), 1)
-// 	bytetemp = z.rr(bytetemp)
-// 	z.memory.WriteByte(z.HL(), bytetemp)
-// }
-
-// /* RR A */
-// func instrCB__RR_A(z *Z80, opcode byte) {
-// 	z.A = z.rr(z.A)
-// }
-
-// /* SLA B */
-// func instrCB__SLA_B(z *Z80, opcode byte) {
-// 	z.B = z.sla(z.B)
-// }
-
-// /* SLA C */
-// func instrCB__SLA_C(z *Z80, opcode byte) {
-// 	z.C = z.sla(z.C)
-// }
-
-// /* SLA D */
-// func instrCB__SLA_D(z *Z80, opcode byte) {
-// 	z.D = z.sla(z.D)
-// }
-
-// /* SLA E */
-// func instrCB__SLA_E(z *Z80, opcode byte) {
-// 	z.E = z.sla(z.E)
-// }
-
-// /* SLA H */
-// func instrCB__SLA_H(z *Z80, opcode byte) {
-// 	z.H = z.sla(z.H)
-// }
-
-// /* SLA L */
-// func instrCB__SLA_L(z *Z80, opcode byte) {
-// 	z.L = z.sla(z.L)
-// }
-
-// /* SLA (HL) */
-// func instrCB__SLA_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.HL())
-// 	z.memory.ContendReadNoMreq(z.HL(), 1)
-// 	bytetemp = z.sla(bytetemp)
-// 	z.memory.WriteByte(z.HL(), bytetemp)
-// }
-
-// /* SLA A */
-// func instrCB__SLA_A(z *Z80, opcode byte) {
-// 	z.A = z.sla(z.A)
-// }
-
-// /* SRA B */
-// func instrCB__SRA_B(z *Z80, opcode byte) {
-// 	z.B = z.sra(z.B)
-// }
-
-// /* SRA C */
-// func instrCB__SRA_C(z *Z80, opcode byte) {
-// 	z.C = z.sra(z.C)
-// }
-
-// /* SRA D */
-// func instrCB__SRA_D(z *Z80, opcode byte) {
-// 	z.D = z.sra(z.D)
-// }
-
-// /* SRA E */
-// func instrCB__SRA_E(z *Z80, opcode byte) {
-// 	z.E = z.sra(z.E)
-// }
-
-// /* SRA H */
-// func instrCB__SRA_H(z *Z80, opcode byte) {
-// 	z.H = z.sra(z.H)
-// }
-
-// /* SRA L */
-// func instrCB__SRA_L(z *Z80, opcode byte) {
-// 	z.L = z.sra(z.L)
-// }
-
-// /* SRA (HL) */
-// func instrCB__SRA_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.HL())
-// 	z.memory.ContendReadNoMreq(z.HL(), 1)
-// 	bytetemp = z.sra(bytetemp)
-// 	z.memory.WriteByte(z.HL(), bytetemp)
-// }
-
-// /* SRA A */
-// func instrCB__SRA_A(z *Z80, opcode byte) {
-// 	z.A = z.sra(z.A)
-// }
-
-// /* SLL B */
-// func instrCB__SLL_B(z *Z80, opcode byte) {
-// 	z.B = z.sll(z.B)
-// }
-
-// /* SLL C */
-// func instrCB__SLL_C(z *Z80, opcode byte) {
-// 	z.C = z.sll(z.C)
-// }
-
-// /* SLL D */
-// func instrCB__SLL_D(z *Z80, opcode byte) {
-// 	z.D = z.sll(z.D)
-// }
-
-// /* SLL E */
-// func instrCB__SLL_E(z *Z80, opcode byte) {
-// 	z.E = z.sll(z.E)
-// }
-
-// /* SLL H */
-// func instrCB__SLL_H(z *Z80, opcode byte) {
-// 	z.H = z.sll(z.H)
-// }
-
-// /* SLL L */
-// func instrCB__SLL_L(z *Z80, opcode byte) {
-// 	z.L = z.sll(z.L)
-// }
-
-// /* SLL (HL) */
-// func instrCB__SLL_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.HL())
-// 	z.memory.ContendReadNoMreq(z.HL(), 1)
-// 	bytetemp = z.sll(bytetemp)
-// 	z.memory.WriteByte(z.HL(), bytetemp)
-// }
-
-// /* SLL A */
-// func instrCB__SLL_A(z *Z80, opcode byte) {
-// 	z.A = z.sll(z.A)
-// }
-
-// /* SRL B */
-// func instrCB__SRL_B(z *Z80, opcode byte) {
-// 	z.B = z.srl(z.B)
-// }
-
-// /* SRL C */
-// func instrCB__SRL_C(z *Z80, opcode byte) {
-// 	z.C = z.srl(z.C)
-// }
-
-// /* SRL D */
-// func instrCB__SRL_D(z *Z80, opcode byte) {
-// 	z.D = z.srl(z.D)
-// }
-
-// /* SRL E */
-// func instrCB__SRL_E(z *Z80, opcode byte) {
-// 	z.E = z.srl(z.E)
-// }
-
-// /* SRL H */
-// func instrCB__SRL_H(z *Z80, opcode byte) {
-// 	z.H = z.srl(z.H)
-// }
-
-// /* SRL L */
-// func instrCB__SRL_L(z *Z80, opcode byte) {
-// 	z.L = z.srl(z.L)
-// }
-
-// /* SRL (HL) */
-// func instrCB__SRL_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.HL())
-// 	z.memory.ContendReadNoMreq(z.HL(), 1)
-// 	bytetemp = z.srl(bytetemp)
-// 	z.memory.WriteByte(z.HL(), bytetemp)
-// }
-
-// /* SRL A */
-// func instrCB__SRL_A(z *Z80, opcode byte) {
-// 	z.A = z.srl(z.A)
-// }
+/* SRL (HL) */
+func instrCB__SRL_iHL(z *Z80, opcode byte) {
+	z.Tstates += 15
+	var bytetemp byte = z.Memory.Read(z.HL.Get())
+	//z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
+	bytetemp = z.srl(bytetemp)
+	z.Memory.Write(z.HL.Get(), bytetemp)
+}
 
 // /* BIT 0,B */
 // func instrCB__BIT_0_B(z *Z80, opcode byte) {
@@ -840,8 +678,8 @@ func instrCB__RRC_iHL(z *Z80, opcode byte) {
 
 // /* BIT 0,(HL) */
 // func instrCB__BIT_0_iHL(z *Z80, opcode byte) {
-// 	bytetemp := z.memory.ReadByte(z.HL())
-// 	z.memory.ContendReadNoMreq(z.HL(), 1)
+// 	bytetemp := z.Memory.Read(z.HL.Get())
+// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
 // 	z.bit(0, bytetemp)
 // }
 
@@ -882,8 +720,8 @@ func instrCB__RRC_iHL(z *Z80, opcode byte) {
 
 // /* BIT 1,(HL) */
 // func instrCB__BIT_1_iHL(z *Z80, opcode byte) {
-// 	bytetemp := z.memory.ReadByte(z.HL())
-// 	z.memory.ContendReadNoMreq(z.HL(), 1)
+// 	bytetemp := z.Memory.Read(z.HL.Get())
+// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
 // 	z.bit(1, bytetemp)
 // }
 
@@ -924,8 +762,8 @@ func instrCB__RRC_iHL(z *Z80, opcode byte) {
 
 // /* BIT 2,(HL) */
 // func instrCB__BIT_2_iHL(z *Z80, opcode byte) {
-// 	bytetemp := z.memory.ReadByte(z.HL())
-// 	z.memory.ContendReadNoMreq(z.HL(), 1)
+// 	bytetemp := z.Memory.Read(z.HL.Get())
+// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
 // 	z.bit(2, bytetemp)
 // }
 
@@ -966,8 +804,8 @@ func instrCB__RRC_iHL(z *Z80, opcode byte) {
 
 // /* BIT 3,(HL) */
 // func instrCB__BIT_3_iHL(z *Z80, opcode byte) {
-// 	bytetemp := z.memory.ReadByte(z.HL())
-// 	z.memory.ContendReadNoMreq(z.HL(), 1)
+// 	bytetemp := z.Memory.Read(z.HL.Get())
+// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
 // 	z.bit(3, bytetemp)
 // }
 
@@ -1008,8 +846,8 @@ func instrCB__RRC_iHL(z *Z80, opcode byte) {
 
 // /* BIT 4,(HL) */
 // func instrCB__BIT_4_iHL(z *Z80, opcode byte) {
-// 	bytetemp := z.memory.ReadByte(z.HL())
-// 	z.memory.ContendReadNoMreq(z.HL(), 1)
+// 	bytetemp := z.Memory.Read(z.HL.Get())
+// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
 // 	z.bit(4, bytetemp)
 // }
 
@@ -1050,8 +888,8 @@ func instrCB__RRC_iHL(z *Z80, opcode byte) {
 
 // /* BIT 5,(HL) */
 // func instrCB__BIT_5_iHL(z *Z80, opcode byte) {
-// 	bytetemp := z.memory.ReadByte(z.HL())
-// 	z.memory.ContendReadNoMreq(z.HL(), 1)
+// 	bytetemp := z.Memory.Read(z.HL.Get())
+// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
 // 	z.bit(5, bytetemp)
 // }
 
@@ -1092,8 +930,8 @@ func instrCB__RRC_iHL(z *Z80, opcode byte) {
 
 // /* BIT 6,(HL) */
 // func instrCB__BIT_6_iHL(z *Z80, opcode byte) {
-// 	bytetemp := z.memory.ReadByte(z.HL())
-// 	z.memory.ContendReadNoMreq(z.HL(), 1)
+// 	bytetemp := z.Memory.Read(z.HL.Get())
+// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
 // 	z.bit(6, bytetemp)
 // }
 
@@ -1134,8 +972,8 @@ func instrCB__RRC_iHL(z *Z80, opcode byte) {
 
 // /* BIT 7,(HL) */
 // func instrCB__BIT_7_iHL(z *Z80, opcode byte) {
-// 	bytetemp := z.memory.ReadByte(z.HL())
-// 	z.memory.ContendReadNoMreq(z.HL(), 1)
+// 	bytetemp := z.Memory.Read(z.HL.Get())
+// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
 // 	z.bit(7, bytetemp)
 // }
 
@@ -1176,9 +1014,9 @@ func instrCB__RRC_iHL(z *Z80, opcode byte) {
 
 // /* RES 0,(HL) */
 // func instrCB__RES_0_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.HL())
-// 	z.memory.ContendReadNoMreq(z.HL(), 1)
-// 	z.memory.WriteByte(z.HL(), bytetemp&0xfe)
+// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
+// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
+// 	z.Memory.Write(z.HL.Get(), bytetemp&0xfe)
 // }
 
 // /* RES 0,A */
@@ -1218,9 +1056,9 @@ func instrCB__RRC_iHL(z *Z80, opcode byte) {
 
 // /* RES 1,(HL) */
 // func instrCB__RES_1_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.HL())
-// 	z.memory.ContendReadNoMreq(z.HL(), 1)
-// 	z.memory.WriteByte(z.HL(), bytetemp&0xfd)
+// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
+// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
+// 	z.Memory.Write(z.HL.Get(), bytetemp&0xfd)
 // }
 
 // /* RES 1,A */
@@ -1260,9 +1098,9 @@ func instrCB__RRC_iHL(z *Z80, opcode byte) {
 
 // /* RES 2,(HL) */
 // func instrCB__RES_2_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.HL())
-// 	z.memory.ContendReadNoMreq(z.HL(), 1)
-// 	z.memory.WriteByte(z.HL(), bytetemp&0xfb)
+// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
+// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
+// 	z.Memory.Write(z.HL.Get(), bytetemp&0xfb)
 // }
 
 // /* RES 2,A */
@@ -1302,9 +1140,9 @@ func instrCB__RRC_iHL(z *Z80, opcode byte) {
 
 // /* RES 3,(HL) */
 // func instrCB__RES_3_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.HL())
-// 	z.memory.ContendReadNoMreq(z.HL(), 1)
-// 	z.memory.WriteByte(z.HL(), bytetemp&0xf7)
+// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
+// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
+// 	z.Memory.Write(z.HL.Get(), bytetemp&0xf7)
 // }
 
 // /* RES 3,A */
@@ -1344,9 +1182,9 @@ func instrCB__RRC_iHL(z *Z80, opcode byte) {
 
 // /* RES 4,(HL) */
 // func instrCB__RES_4_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.HL())
-// 	z.memory.ContendReadNoMreq(z.HL(), 1)
-// 	z.memory.WriteByte(z.HL(), bytetemp&0xef)
+// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
+// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
+// 	z.Memory.Write(z.HL.Get(), bytetemp&0xef)
 // }
 
 // /* RES 4,A */
@@ -1386,9 +1224,9 @@ func instrCB__RRC_iHL(z *Z80, opcode byte) {
 
 // /* RES 5,(HL) */
 // func instrCB__RES_5_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.HL())
-// 	z.memory.ContendReadNoMreq(z.HL(), 1)
-// 	z.memory.WriteByte(z.HL(), bytetemp&0xdf)
+// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
+// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
+// 	z.Memory.Write(z.HL.Get(), bytetemp&0xdf)
 // }
 
 // /* RES 5,A */
@@ -1428,9 +1266,9 @@ func instrCB__RRC_iHL(z *Z80, opcode byte) {
 
 // /* RES 6,(HL) */
 // func instrCB__RES_6_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.HL())
-// 	z.memory.ContendReadNoMreq(z.HL(), 1)
-// 	z.memory.WriteByte(z.HL(), bytetemp&0xbf)
+// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
+// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
+// 	z.Memory.Write(z.HL.Get(), bytetemp&0xbf)
 // }
 
 // /* RES 6,A */
@@ -1470,9 +1308,9 @@ func instrCB__RRC_iHL(z *Z80, opcode byte) {
 
 // /* RES 7,(HL) */
 // func instrCB__RES_7_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.HL())
-// 	z.memory.ContendReadNoMreq(z.HL(), 1)
-// 	z.memory.WriteByte(z.HL(), bytetemp&0x7f)
+// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
+// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
+// 	z.Memory.Write(z.HL.Get(), bytetemp&0x7f)
 // }
 
 // /* RES 7,A */
@@ -1512,9 +1350,9 @@ func instrCB__RRC_iHL(z *Z80, opcode byte) {
 
 // /* SET 0,(HL) */
 // func instrCB__SET_0_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.HL())
-// 	z.memory.ContendReadNoMreq(z.HL(), 1)
-// 	z.memory.WriteByte(z.HL(), bytetemp|0x01)
+// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
+// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
+// 	z.Memory.Write(z.HL.Get(), bytetemp|0x01)
 // }
 
 // /* SET 0,A */
@@ -1554,9 +1392,9 @@ func instrCB__RRC_iHL(z *Z80, opcode byte) {
 
 // /* SET 1,(HL) */
 // func instrCB__SET_1_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.HL())
-// 	z.memory.ContendReadNoMreq(z.HL(), 1)
-// 	z.memory.WriteByte(z.HL(), bytetemp|0x02)
+// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
+// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
+// 	z.Memory.Write(z.HL.Get(), bytetemp|0x02)
 // }
 
 // /* SET 1,A */
@@ -1596,9 +1434,9 @@ func instrCB__RRC_iHL(z *Z80, opcode byte) {
 
 // /* SET 2,(HL) */
 // func instrCB__SET_2_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.HL())
-// 	z.memory.ContendReadNoMreq(z.HL(), 1)
-// 	z.memory.WriteByte(z.HL(), bytetemp|0x04)
+// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
+// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
+// 	z.Memory.Write(z.HL.Get(), bytetemp|0x04)
 // }
 
 // /* SET 2,A */
@@ -1638,9 +1476,9 @@ func instrCB__RRC_iHL(z *Z80, opcode byte) {
 
 // /* SET 3,(HL) */
 // func instrCB__SET_3_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.HL())
-// 	z.memory.ContendReadNoMreq(z.HL(), 1)
-// 	z.memory.WriteByte(z.HL(), bytetemp|0x08)
+// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
+// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
+// 	z.Memory.Write(z.HL.Get(), bytetemp|0x08)
 // }
 
 // /* SET 3,A */
@@ -1680,9 +1518,9 @@ func instrCB__RRC_iHL(z *Z80, opcode byte) {
 
 // /* SET 4,(HL) */
 // func instrCB__SET_4_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.HL())
-// 	z.memory.ContendReadNoMreq(z.HL(), 1)
-// 	z.memory.WriteByte(z.HL(), bytetemp|0x10)
+// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
+// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
+// 	z.Memory.Write(z.HL.Get(), bytetemp|0x10)
 // }
 
 // /* SET 4,A */
@@ -1722,9 +1560,9 @@ func instrCB__RRC_iHL(z *Z80, opcode byte) {
 
 // /* SET 5,(HL) */
 // func instrCB__SET_5_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.HL())
-// 	z.memory.ContendReadNoMreq(z.HL(), 1)
-// 	z.memory.WriteByte(z.HL(), bytetemp|0x20)
+// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
+// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
+// 	z.Memory.Write(z.HL.Get(), bytetemp|0x20)
 // }
 
 // /* SET 5,A */
@@ -1764,9 +1602,9 @@ func instrCB__RRC_iHL(z *Z80, opcode byte) {
 
 // /* SET 6,(HL) */
 // func instrCB__SET_6_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.HL())
-// 	z.memory.ContendReadNoMreq(z.HL(), 1)
-// 	z.memory.WriteByte(z.HL(), bytetemp|0x40)
+// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
+// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
+// 	z.Memory.Write(z.HL.Get(), bytetemp|0x40)
 // }
 
 // /* SET 6,A */
@@ -1806,9 +1644,9 @@ func instrCB__RRC_iHL(z *Z80, opcode byte) {
 
 // /* SET 7,(HL) */
 // func instrCB__SET_7_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.HL())
-// 	z.memory.ContendReadNoMreq(z.HL(), 1)
-// 	z.memory.WriteByte(z.HL(), bytetemp|0x80)
+// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
+// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
+// 	z.Memory.Write(z.HL.Get(), bytetemp|0x80)
 // }
 
 // /* SET 7,A */
