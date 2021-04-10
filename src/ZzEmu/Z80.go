@@ -334,6 +334,26 @@ func (z80 *Z80) srl(value byte) byte {
 	return value
 }
 
+func (z80 *Z80) bit(bit, value byte) {
+	z80.F = (z80.F & FLAG_C) | FLAG_H | (value & (FLAG_3 | FLAG_5))
+	if value&(0x01<<bit) == 0 {
+		z80.F |= FLAG_P | FLAG_Z
+	}
+	if bit == 7 && (value&0x80) != 0 {
+		z80.F |= FLAG_S
+	}
+}
+
+func (z80 *Z80) biti(bit, value byte, address uint16) {
+	z80.F = (z80.F & FLAG_C) | FLAG_H | (byte(address>>8) & (FLAG_3 | FLAG_5))
+	if value&(0x01<<bit) == 0 {
+		z80.F |= FLAG_P | FLAG_Z
+	}
+	if (bit == 7) && (value&0x80) != 0 {
+		z80.F |= FLAG_S
+	}
+}
+
 //-- register select to opcode
 
 func (z80 *Z80) GetRegisterValByte(opcode byte) byte {

@@ -130,134 +130,134 @@ func initOpcodeCBMap() {
 	OpcodeCBMap[0x3e] = instrCB__SRL_iHL
 	/* SRL A */
 	OpcodeCBMap[0x3f] = instrCB__SRL_r
-	// 	/* BIT 0,B */
-	// 	OpcodeCBMap[0x40] = instrCB__BIT_0_B
-	// 	/* BIT 0,C */
-	// 	OpcodeCBMap[0x41] = instrCB__BIT_0_C
-	// 	/* BIT 0,D */
-	// 	OpcodeCBMap[0x42] = instrCB__BIT_0_D
-	// 	/* BIT 0,E */
-	// 	OpcodeCBMap[0x43] = instrCB__BIT_0_E
-	// 	/* BIT 0,H */
-	// 	OpcodeCBMap[0x44] = instrCB__BIT_0_H
-	// 	/* BIT 0,L */
-	// 	OpcodeCBMap[0x45] = instrCB__BIT_0_L
-	// 	/* BIT 0,(HL) */
-	// 	OpcodeCBMap[0x46] = instrCB__BIT_0_iHL
-	// 	/* BIT 0,A */
-	// 	OpcodeCBMap[0x47] = instrCB__BIT_0_A
-	// 	/* BIT 1,B */
-	// 	OpcodeCBMap[0x48] = instrCB__BIT_1_B
-	// 	/* BIT 1,C */
-	// 	OpcodeCBMap[0x49] = instrCB__BIT_1_C
-	// 	/* BIT 1,D */
-	// 	OpcodeCBMap[0x4a] = instrCB__BIT_1_D
-	// 	/* BIT 1,E */
-	// 	OpcodeCBMap[0x4b] = instrCB__BIT_1_E
-	// 	/* BIT 1,H */
-	// 	OpcodeCBMap[0x4c] = instrCB__BIT_1_H
-	// 	/* BIT 1,L */
-	// 	OpcodeCBMap[0x4d] = instrCB__BIT_1_L
-	// 	/* BIT 1,(HL) */
-	// 	OpcodeCBMap[0x4e] = instrCB__BIT_1_iHL
-	// 	/* BIT 1,A */
-	// 	OpcodeCBMap[0x4f] = instrCB__BIT_1_A
-	// 	/* BIT 2,B */
-	// 	OpcodeCBMap[0x50] = instrCB__BIT_2_B
-	// 	/* BIT 2,C */
-	// 	OpcodeCBMap[0x51] = instrCB__BIT_2_C
-	// 	/* BIT 2,D */
-	// 	OpcodeCBMap[0x52] = instrCB__BIT_2_D
-	// 	/* BIT 2,E */
-	// 	OpcodeCBMap[0x53] = instrCB__BIT_2_E
-	// 	/* BIT 2,H */
-	// 	OpcodeCBMap[0x54] = instrCB__BIT_2_H
-	// 	/* BIT 2,L */
-	// 	OpcodeCBMap[0x55] = instrCB__BIT_2_L
-	// 	/* BIT 2,(HL) */
-	// 	OpcodeCBMap[0x56] = instrCB__BIT_2_iHL
-	// 	/* BIT 2,A */
-	// 	OpcodeCBMap[0x57] = instrCB__BIT_2_A
-	// 	/* BIT 3,B */
-	// 	OpcodeCBMap[0x58] = instrCB__BIT_3_B
-	// 	/* BIT 3,C */
-	// 	OpcodeCBMap[0x59] = instrCB__BIT_3_C
-	// 	/* BIT 3,D */
-	// 	OpcodeCBMap[0x5a] = instrCB__BIT_3_D
-	// 	/* BIT 3,E */
-	// 	OpcodeCBMap[0x5b] = instrCB__BIT_3_E
-	// 	/* BIT 3,H */
-	// 	OpcodeCBMap[0x5c] = instrCB__BIT_3_H
-	// 	/* BIT 3,L */
-	// 	OpcodeCBMap[0x5d] = instrCB__BIT_3_L
-	// 	/* BIT 3,(HL) */
-	// 	OpcodeCBMap[0x5e] = instrCB__BIT_3_iHL
-	// 	/* BIT 3,A */
-	// 	OpcodeCBMap[0x5f] = instrCB__BIT_3_A
-	// 	/* BIT 4,B */
-	// 	OpcodeCBMap[0x60] = instrCB__BIT_4_B
-	// 	/* BIT 4,C */
-	// 	OpcodeCBMap[0x61] = instrCB__BIT_4_C
-	// 	/* BIT 4,D */
-	// 	OpcodeCBMap[0x62] = instrCB__BIT_4_D
-	// 	/* BIT 4,E */
-	// 	OpcodeCBMap[0x63] = instrCB__BIT_4_E
-	// 	/* BIT 4,H */
-	// 	OpcodeCBMap[0x64] = instrCB__BIT_4_H
-	// 	/* BIT 4,L */
-	// 	OpcodeCBMap[0x65] = instrCB__BIT_4_L
-	// 	/* BIT 4,(HL) */
-	// 	OpcodeCBMap[0x66] = instrCB__BIT_4_iHL
-	// 	/* BIT 4,A */
-	// 	OpcodeCBMap[0x67] = instrCB__BIT_4_A
-	// 	/* BIT 5,B */
-	// 	OpcodeCBMap[0x68] = instrCB__BIT_5_B
-	// 	/* BIT 5,C */
-	// 	OpcodeCBMap[0x69] = instrCB__BIT_5_C
-	// 	/* BIT 5,D */
-	// 	OpcodeCBMap[0x6a] = instrCB__BIT_5_D
-	// 	/* BIT 5,E */
-	// 	OpcodeCBMap[0x6b] = instrCB__BIT_5_E
-	// 	/* BIT 5,H */
-	// 	OpcodeCBMap[0x6c] = instrCB__BIT_5_H
-	// 	/* BIT 5,L */
-	// 	OpcodeCBMap[0x6d] = instrCB__BIT_5_L
-	// 	/* BIT 5,(HL) */
-	// 	OpcodeCBMap[0x6e] = instrCB__BIT_5_iHL
-	// 	/* BIT 5,A */
-	// 	OpcodeCBMap[0x6f] = instrCB__BIT_5_A
-	// 	/* BIT 6,B */
-	// 	OpcodeCBMap[0x70] = instrCB__BIT_6_B
-	// 	/* BIT 6,C */
-	// 	OpcodeCBMap[0x71] = instrCB__BIT_6_C
-	// 	/* BIT 6,D */
-	// 	OpcodeCBMap[0x72] = instrCB__BIT_6_D
-	// 	/* BIT 6,E */
-	// 	OpcodeCBMap[0x73] = instrCB__BIT_6_E
-	// 	/* BIT 6,H */
-	// 	OpcodeCBMap[0x74] = instrCB__BIT_6_H
-	// 	/* BIT 6,L */
-	// 	OpcodeCBMap[0x75] = instrCB__BIT_6_L
-	// 	/* BIT 6,(HL) */
-	// 	OpcodeCBMap[0x76] = instrCB__BIT_6_iHL
-	// 	/* BIT 6,A */
-	// 	OpcodeCBMap[0x77] = instrCB__BIT_6_A
-	// 	/* BIT 7,B */
-	// 	OpcodeCBMap[0x78] = instrCB__BIT_7_B
-	// 	/* BIT 7,C */
-	// 	OpcodeCBMap[0x79] = instrCB__BIT_7_C
-	// 	/* BIT 7,D */
-	// 	OpcodeCBMap[0x7a] = instrCB__BIT_7_D
-	// 	/* BIT 7,E */
-	// 	OpcodeCBMap[0x7b] = instrCB__BIT_7_E
-	// 	/* BIT 7,H */
-	// 	OpcodeCBMap[0x7c] = instrCB__BIT_7_H
-	// 	/* BIT 7,L */
-	// 	OpcodeCBMap[0x7d] = instrCB__BIT_7_L
-	// 	/* BIT 7,(HL) */
-	// 	OpcodeCBMap[0x7e] = instrCB__BIT_7_iHL
-	// 	/* BIT 7,A */
-	// 	OpcodeCBMap[0x7f] = instrCB__BIT_7_A
+	/* BIT 0,B */
+	OpcodeCBMap[0x40] = instrCB__BIT_b_r
+	/* BIT 0,C */
+	OpcodeCBMap[0x41] = instrCB__BIT_b_r
+	/* BIT 0,D */
+	OpcodeCBMap[0x42] = instrCB__BIT_b_r
+	/* BIT 0,E */
+	OpcodeCBMap[0x43] = instrCB__BIT_b_r
+	/* BIT 0,H */
+	OpcodeCBMap[0x44] = instrCB__BIT_b_r
+	/* BIT 0,L */
+	OpcodeCBMap[0x45] = instrCB__BIT_b_r
+	/* BIT 0,(HL) */
+	OpcodeCBMap[0x46] = instrCB__BIT_b_iHL
+	/* BIT 0,A */
+	OpcodeCBMap[0x47] = instrCB__BIT_b_r
+	/* BIT 1,B */
+	OpcodeCBMap[0x48] = instrCB__BIT_b_r
+	/* BIT 1,C */
+	OpcodeCBMap[0x49] = instrCB__BIT_b_r
+	/* BIT 1,D */
+	OpcodeCBMap[0x4a] = instrCB__BIT_b_r
+	/* BIT 1,E */
+	OpcodeCBMap[0x4b] = instrCB__BIT_b_r
+	/* BIT 1,H */
+	OpcodeCBMap[0x4c] = instrCB__BIT_b_r
+	/* BIT 1,L */
+	OpcodeCBMap[0x4d] = instrCB__BIT_b_r
+	/* BIT 1,(HL) */
+	OpcodeCBMap[0x4e] = instrCB__BIT_b_iHL
+	/* BIT 1,A */
+	OpcodeCBMap[0x4f] = instrCB__BIT_b_r
+	/* BIT 2,B */
+	OpcodeCBMap[0x50] = instrCB__BIT_b_r
+	/* BIT 2,C */
+	OpcodeCBMap[0x51] = instrCB__BIT_b_r
+	/* BIT 2,D */
+	OpcodeCBMap[0x52] = instrCB__BIT_b_r
+	/* BIT 2,E */
+	OpcodeCBMap[0x53] = instrCB__BIT_b_r
+	/* BIT 2,H */
+	OpcodeCBMap[0x54] = instrCB__BIT_b_r
+	/* BIT 2,L */
+	OpcodeCBMap[0x55] = instrCB__BIT_b_r
+	/* BIT 2,(HL) */
+	OpcodeCBMap[0x56] = instrCB__BIT_b_iHL
+	/* BIT 2,A */
+	OpcodeCBMap[0x57] = instrCB__BIT_b_r
+	/* BIT 3,B */
+	OpcodeCBMap[0x58] = instrCB__BIT_b_r
+	/* BIT 3,C */
+	OpcodeCBMap[0x59] = instrCB__BIT_b_r
+	/* BIT 3,D */
+	OpcodeCBMap[0x5a] = instrCB__BIT_b_r
+	/* BIT 3,E */
+	OpcodeCBMap[0x5b] = instrCB__BIT_b_r
+	/* BIT 3,H */
+	OpcodeCBMap[0x5c] = instrCB__BIT_b_r
+	/* BIT 3,L */
+	OpcodeCBMap[0x5d] = instrCB__BIT_b_r
+	/* BIT 3,(HL) */
+	OpcodeCBMap[0x5e] = instrCB__BIT_b_iHL
+	/* BIT 3,A */
+	OpcodeCBMap[0x5f] = instrCB__BIT_b_r
+	/* BIT 4,B */
+	OpcodeCBMap[0x60] = instrCB__BIT_b_r
+	/* BIT 4,C */
+	OpcodeCBMap[0x61] = instrCB__BIT_b_r
+	/* BIT 4,D */
+	OpcodeCBMap[0x62] = instrCB__BIT_b_r
+	/* BIT 4,E */
+	OpcodeCBMap[0x63] = instrCB__BIT_b_r
+	/* BIT 4,H */
+	OpcodeCBMap[0x64] = instrCB__BIT_b_r
+	/* BIT 4,L */
+	OpcodeCBMap[0x65] = instrCB__BIT_b_r
+	/* BIT 4,(HL) */
+	OpcodeCBMap[0x66] = instrCB__BIT_b_iHL
+	/* BIT 4,A */
+	OpcodeCBMap[0x67] = instrCB__BIT_b_r
+	/* BIT 5,B */
+	OpcodeCBMap[0x68] = instrCB__BIT_b_r
+	/* BIT 5,C */
+	OpcodeCBMap[0x69] = instrCB__BIT_b_r
+	/* BIT 5,D */
+	OpcodeCBMap[0x6a] = instrCB__BIT_b_r
+	/* BIT 5,E */
+	OpcodeCBMap[0x6b] = instrCB__BIT_b_r
+	/* BIT 5,H */
+	OpcodeCBMap[0x6c] = instrCB__BIT_b_r
+	/* BIT 5,L */
+	OpcodeCBMap[0x6d] = instrCB__BIT_b_r
+	/* BIT 5,(HL) */
+	OpcodeCBMap[0x6e] = instrCB__BIT_b_iHL
+	/* BIT 5,A */
+	OpcodeCBMap[0x6f] = instrCB__BIT_b_r
+	/* BIT 6,B */
+	OpcodeCBMap[0x70] = instrCB__BIT_b_r
+	/* BIT 6,C */
+	OpcodeCBMap[0x71] = instrCB__BIT_b_r
+	/* BIT 6,D */
+	OpcodeCBMap[0x72] = instrCB__BIT_b_r
+	/* BIT 6,E */
+	OpcodeCBMap[0x73] = instrCB__BIT_b_r
+	/* BIT 6,H */
+	OpcodeCBMap[0x74] = instrCB__BIT_b_r
+	/* BIT 6,L */
+	OpcodeCBMap[0x75] = instrCB__BIT_b_r
+	/* BIT 6,(HL) */
+	OpcodeCBMap[0x76] = instrCB__BIT_b_iHL
+	/* BIT 6,A */
+	OpcodeCBMap[0x77] = instrCB__BIT_b_r
+	/* BIT 7,B */
+	OpcodeCBMap[0x78] = instrCB__BIT_b_r
+	/* BIT 7,C */
+	OpcodeCBMap[0x79] = instrCB__BIT_b_r
+	/* BIT 7,D */
+	OpcodeCBMap[0x7a] = instrCB__BIT_b_r
+	/* BIT 7,E */
+	OpcodeCBMap[0x7b] = instrCB__BIT_b_r
+	/* BIT 7,H */
+	OpcodeCBMap[0x7c] = instrCB__BIT_b_r
+	/* BIT 7,L */
+	OpcodeCBMap[0x7d] = instrCB__BIT_b_r
+	/* BIT 7,(HL) */
+	OpcodeCBMap[0x7e] = instrCB__BIT_b_iHL
+	/* BIT 7,A */
+	OpcodeCBMap[0x7f] = instrCB__BIT_b_r
 	// 	/* RES 0,B */
 	// 	OpcodeCBMap[0x80] = instrCB__RES_0_B
 	// 	/* RES 0,C */
@@ -646,341 +646,22 @@ func instrCB__SRL_iHL(z *Z80, opcode byte) {
 	z.Memory.Write(z.HL.Get(), bytetemp)
 }
 
-// /* BIT 0,B */
-// func instrCB__BIT_0_B(z *Z80, opcode byte) {
-// 	z.bit(0, z.B)
-// }
+/* BIT b,r */
+func instrCB__BIT_b_r(z *Z80, opcode byte) {
+	var reg *byte = z.GetPrtRegisterValByte(opcode)
+	var bitSel byte = (opcode & 0x38) >> 3
+	z.Tstates += 8
+	z.bit(bitSel, *reg)
+}
 
-// /* BIT 0,C */
-// func instrCB__BIT_0_C(z *Z80, opcode byte) {
-// 	z.bit(0, z.C)
-// }
-
-// /* BIT 0,D */
-// func instrCB__BIT_0_D(z *Z80, opcode byte) {
-// 	z.bit(0, z.D)
-// }
-
-// /* BIT 0,E */
-// func instrCB__BIT_0_E(z *Z80, opcode byte) {
-// 	z.bit(0, z.E)
-// }
-
-// /* BIT 0,H */
-// func instrCB__BIT_0_H(z *Z80, opcode byte) {
-// 	z.bit(0, z.H)
-// }
-
-// /* BIT 0,L */
-// func instrCB__BIT_0_L(z *Z80, opcode byte) {
-// 	z.bit(0, z.L)
-// }
-
-// /* BIT 0,(HL) */
-// func instrCB__BIT_0_iHL(z *Z80, opcode byte) {
-// 	bytetemp := z.Memory.Read(z.HL.Get())
-// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
-// 	z.bit(0, bytetemp)
-// }
-
-// /* BIT 0,A */
-// func instrCB__BIT_0_A(z *Z80, opcode byte) {
-// 	z.bit(0, z.A)
-// }
-
-// /* BIT 1,B */
-// func instrCB__BIT_1_B(z *Z80, opcode byte) {
-// 	z.bit(1, z.B)
-// }
-
-// /* BIT 1,C */
-// func instrCB__BIT_1_C(z *Z80, opcode byte) {
-// 	z.bit(1, z.C)
-// }
-
-// /* BIT 1,D */
-// func instrCB__BIT_1_D(z *Z80, opcode byte) {
-// 	z.bit(1, z.D)
-// }
-
-// /* BIT 1,E */
-// func instrCB__BIT_1_E(z *Z80, opcode byte) {
-// 	z.bit(1, z.E)
-// }
-
-// /* BIT 1,H */
-// func instrCB__BIT_1_H(z *Z80, opcode byte) {
-// 	z.bit(1, z.H)
-// }
-
-// /* BIT 1,L */
-// func instrCB__BIT_1_L(z *Z80, opcode byte) {
-// 	z.bit(1, z.L)
-// }
-
-// /* BIT 1,(HL) */
-// func instrCB__BIT_1_iHL(z *Z80, opcode byte) {
-// 	bytetemp := z.Memory.Read(z.HL.Get())
-// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
-// 	z.bit(1, bytetemp)
-// }
-
-// /* BIT 1,A */
-// func instrCB__BIT_1_A(z *Z80, opcode byte) {
-// 	z.bit(1, z.A)
-// }
-
-// /* BIT 2,B */
-// func instrCB__BIT_2_B(z *Z80, opcode byte) {
-// 	z.bit(2, z.B)
-// }
-
-// /* BIT 2,C */
-// func instrCB__BIT_2_C(z *Z80, opcode byte) {
-// 	z.bit(2, z.C)
-// }
-
-// /* BIT 2,D */
-// func instrCB__BIT_2_D(z *Z80, opcode byte) {
-// 	z.bit(2, z.D)
-// }
-
-// /* BIT 2,E */
-// func instrCB__BIT_2_E(z *Z80, opcode byte) {
-// 	z.bit(2, z.E)
-// }
-
-// /* BIT 2,H */
-// func instrCB__BIT_2_H(z *Z80, opcode byte) {
-// 	z.bit(2, z.H)
-// }
-
-// /* BIT 2,L */
-// func instrCB__BIT_2_L(z *Z80, opcode byte) {
-// 	z.bit(2, z.L)
-// }
-
-// /* BIT 2,(HL) */
-// func instrCB__BIT_2_iHL(z *Z80, opcode byte) {
-// 	bytetemp := z.Memory.Read(z.HL.Get())
-// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
-// 	z.bit(2, bytetemp)
-// }
-
-// /* BIT 2,A */
-// func instrCB__BIT_2_A(z *Z80, opcode byte) {
-// 	z.bit(2, z.A)
-// }
-
-// /* BIT 3,B */
-// func instrCB__BIT_3_B(z *Z80, opcode byte) {
-// 	z.bit(3, z.B)
-// }
-
-// /* BIT 3,C */
-// func instrCB__BIT_3_C(z *Z80, opcode byte) {
-// 	z.bit(3, z.C)
-// }
-
-// /* BIT 3,D */
-// func instrCB__BIT_3_D(z *Z80, opcode byte) {
-// 	z.bit(3, z.D)
-// }
-
-// /* BIT 3,E */
-// func instrCB__BIT_3_E(z *Z80, opcode byte) {
-// 	z.bit(3, z.E)
-// }
-
-// /* BIT 3,H */
-// func instrCB__BIT_3_H(z *Z80, opcode byte) {
-// 	z.bit(3, z.H)
-// }
-
-// /* BIT 3,L */
-// func instrCB__BIT_3_L(z *Z80, opcode byte) {
-// 	z.bit(3, z.L)
-// }
-
-// /* BIT 3,(HL) */
-// func instrCB__BIT_3_iHL(z *Z80, opcode byte) {
-// 	bytetemp := z.Memory.Read(z.HL.Get())
-// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
-// 	z.bit(3, bytetemp)
-// }
-
-// /* BIT 3,A */
-// func instrCB__BIT_3_A(z *Z80, opcode byte) {
-// 	z.bit(3, z.A)
-// }
-
-// /* BIT 4,B */
-// func instrCB__BIT_4_B(z *Z80, opcode byte) {
-// 	z.bit(4, z.B)
-// }
-
-// /* BIT 4,C */
-// func instrCB__BIT_4_C(z *Z80, opcode byte) {
-// 	z.bit(4, z.C)
-// }
-
-// /* BIT 4,D */
-// func instrCB__BIT_4_D(z *Z80, opcode byte) {
-// 	z.bit(4, z.D)
-// }
-
-// /* BIT 4,E */
-// func instrCB__BIT_4_E(z *Z80, opcode byte) {
-// 	z.bit(4, z.E)
-// }
-
-// /* BIT 4,H */
-// func instrCB__BIT_4_H(z *Z80, opcode byte) {
-// 	z.bit(4, z.H)
-// }
-
-// /* BIT 4,L */
-// func instrCB__BIT_4_L(z *Z80, opcode byte) {
-// 	z.bit(4, z.L)
-// }
-
-// /* BIT 4,(HL) */
-// func instrCB__BIT_4_iHL(z *Z80, opcode byte) {
-// 	bytetemp := z.Memory.Read(z.HL.Get())
-// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
-// 	z.bit(4, bytetemp)
-// }
-
-// /* BIT 4,A */
-// func instrCB__BIT_4_A(z *Z80, opcode byte) {
-// 	z.bit(4, z.A)
-// }
-
-// /* BIT 5,B */
-// func instrCB__BIT_5_B(z *Z80, opcode byte) {
-// 	z.bit(5, z.B)
-// }
-
-// /* BIT 5,C */
-// func instrCB__BIT_5_C(z *Z80, opcode byte) {
-// 	z.bit(5, z.C)
-// }
-
-// /* BIT 5,D */
-// func instrCB__BIT_5_D(z *Z80, opcode byte) {
-// 	z.bit(5, z.D)
-// }
-
-// /* BIT 5,E */
-// func instrCB__BIT_5_E(z *Z80, opcode byte) {
-// 	z.bit(5, z.E)
-// }
-
-// /* BIT 5,H */
-// func instrCB__BIT_5_H(z *Z80, opcode byte) {
-// 	z.bit(5, z.H)
-// }
-
-// /* BIT 5,L */
-// func instrCB__BIT_5_L(z *Z80, opcode byte) {
-// 	z.bit(5, z.L)
-// }
-
-// /* BIT 5,(HL) */
-// func instrCB__BIT_5_iHL(z *Z80, opcode byte) {
-// 	bytetemp := z.Memory.Read(z.HL.Get())
-// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
-// 	z.bit(5, bytetemp)
-// }
-
-// /* BIT 5,A */
-// func instrCB__BIT_5_A(z *Z80, opcode byte) {
-// 	z.bit(5, z.A)
-// }
-
-// /* BIT 6,B */
-// func instrCB__BIT_6_B(z *Z80, opcode byte) {
-// 	z.bit(6, z.B)
-// }
-
-// /* BIT 6,C */
-// func instrCB__BIT_6_C(z *Z80, opcode byte) {
-// 	z.bit(6, z.C)
-// }
-
-// /* BIT 6,D */
-// func instrCB__BIT_6_D(z *Z80, opcode byte) {
-// 	z.bit(6, z.D)
-// }
-
-// /* BIT 6,E */
-// func instrCB__BIT_6_E(z *Z80, opcode byte) {
-// 	z.bit(6, z.E)
-// }
-
-// /* BIT 6,H */
-// func instrCB__BIT_6_H(z *Z80, opcode byte) {
-// 	z.bit(6, z.H)
-// }
-
-// /* BIT 6,L */
-// func instrCB__BIT_6_L(z *Z80, opcode byte) {
-// 	z.bit(6, z.L)
-// }
-
-// /* BIT 6,(HL) */
-// func instrCB__BIT_6_iHL(z *Z80, opcode byte) {
-// 	bytetemp := z.Memory.Read(z.HL.Get())
-// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
-// 	z.bit(6, bytetemp)
-// }
-
-// /* BIT 6,A */
-// func instrCB__BIT_6_A(z *Z80, opcode byte) {
-// 	z.bit(6, z.A)
-// }
-
-// /* BIT 7,B */
-// func instrCB__BIT_7_B(z *Z80, opcode byte) {
-// 	z.bit(7, z.B)
-// }
-
-// /* BIT 7,C */
-// func instrCB__BIT_7_C(z *Z80, opcode byte) {
-// 	z.bit(7, z.C)
-// }
-
-// /* BIT 7,D */
-// func instrCB__BIT_7_D(z *Z80, opcode byte) {
-// 	z.bit(7, z.D)
-// }
-
-// /* BIT 7,E */
-// func instrCB__BIT_7_E(z *Z80, opcode byte) {
-// 	z.bit(7, z.E)
-// }
-
-// /* BIT 7,H */
-// func instrCB__BIT_7_H(z *Z80, opcode byte) {
-// 	z.bit(7, z.H)
-// }
-
-// /* BIT 7,L */
-// func instrCB__BIT_7_L(z *Z80, opcode byte) {
-// 	z.bit(7, z.L)
-// }
-
-// /* BIT 7,(HL) */
-// func instrCB__BIT_7_iHL(z *Z80, opcode byte) {
-// 	bytetemp := z.Memory.Read(z.HL.Get())
-// 	z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
-// 	z.bit(7, bytetemp)
-// }
-
-// /* BIT 7,A */
-// func instrCB__BIT_7_A(z *Z80, opcode byte) {
-// 	z.bit(7, z.A)
-// }
+/* BIT b,(HL) */
+func instrCB__BIT_b_iHL(z *Z80, opcode byte) {
+	var bitSel byte = (opcode & 0x38) >> 3
+	z.Tstates += 12
+	bytetemp := z.Memory.Read(z.HL.Get())
+	//z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
+	z.bit(bitSel, bytetemp)
+}
 
 // /* RES 0,B */
 // func instrCB__RES_0_B(z *Z80, opcode byte) {
