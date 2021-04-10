@@ -19,8 +19,9 @@ var (
 	OpcodeCBMap   [256]func(z *Z80, opcode byte)
 	OpcodeDDMap   [256]func(z *Z80, opcode byte)
 	OpcodeDDCBMap [256]func(z *Z80, opcode byte)
-	OpcodeDFMap   [256]func(z *Z80, opcode byte)
 	OpcodeEDMap   [256]func(z *Z80, opcode byte)
+	OpcodeDFMap   [256]func(z *Z80, opcode byte)
+	OpcodeFDCBMap [256]func(z *Z80, opcode byte)
 )
 
 type Z80 struct {
@@ -75,6 +76,7 @@ func NewZ80(memory Memory, port PortAccessor) *Z80 {
 	initOpcodeDDCBMap()
 	initOpcodeDFMap()
 	initOpcodeEDMap()
+	//initOpcodeFDCBMap()
 
 	z80.Reset()
 	return z80
@@ -300,16 +302,6 @@ func (z80 *Z80) StoreIndex8(reg byte) {
 	z80.Memory.Write(addr, reg)
 }
 
-//--- IO
-
-func (z80 *Z80) readPort(address uint16) byte {
-	return z80.Port.ReadPort(address)
-}
-
-func (z80 *Z80) writePort(address uint16, b byte) {
-	z80.Port.WritePort(address, b)
-}
-
 //-- bit shift
 
 func (z80 *Z80) rlc(value byte) byte {
@@ -385,6 +377,16 @@ func (z80 *Z80) biti(bit, value byte, address uint16) {
 	if (bit == 7) && (value&0x80) != 0 {
 		z80.F |= FLAG_S
 	}
+}
+
+//--- IO
+
+func (z80 *Z80) readPort(address uint16) byte {
+	return z80.Port.ReadPort(address)
+}
+
+func (z80 *Z80) writePort(address uint16, b byte) {
+	z80.Port.WritePort(address, b)
 }
 
 //-- register select to opcode
