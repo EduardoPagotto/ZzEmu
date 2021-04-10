@@ -123,30 +123,30 @@ func initOpcodeEDMap() {
 	OpcodeEDMap[0xa3] = instrED__OUTI
 	/* LDD */
 	OpcodeEDMap[0xa8] = instrED__LDD
-	// 	/* CPD */
-	// 	OpcodeEDMap[0xa9] = instrED__CPD
-	// 	/* IND */
-	// 	OpcodeEDMap[0xaa] = instrED__IND
-	// 	/* OUTD */
-	// 	OpcodeEDMap[0xab] = instrED__OUTD
-	// 	/* LDIR */
-	// 	OpcodeEDMap[0xb0] = instrED__LDIR
-	// 	/* CPIR */
-	// 	OpcodeEDMap[0xb1] = instrED__CPIR
-	// 	/* INIR */
-	// 	OpcodeEDMap[0xb2] = instrED__INIR
-	// 	/* OTIR */
-	// 	OpcodeEDMap[0xb3] = instrED__OTIR
-	// 	/* LDDR */
-	// 	OpcodeEDMap[0xb8] = instrED__LDDR
-	// 	/* CPDR */
-	// 	OpcodeEDMap[0xb9] = instrED__CPDR
-	// 	/* INDR */
-	// 	OpcodeEDMap[0xba] = instrED__INDR
-	// 	/* OTDR */
-	// 	OpcodeEDMap[0xbb] = instrED__OTDR
-	// 	/* slttrap */
-	// 	OpcodeEDMap[0xfb] = instrED__SLTTRAP
+	/* CPD */
+	OpcodeEDMap[0xa9] = instrED__CPD
+	/* IND */
+	OpcodeEDMap[0xaa] = instrED__IND
+	/* OUTD */
+	OpcodeEDMap[0xab] = instrED__OUTD
+	/* LDIR */
+	OpcodeEDMap[0xb0] = instrED__LDIR
+	/* CPIR */
+	OpcodeEDMap[0xb1] = instrED__CPIR
+	/* INIR */
+	OpcodeEDMap[0xb2] = instrED__INIR
+	/* OTIR */
+	OpcodeEDMap[0xb3] = instrED__OTIR
+	/* LDDR */
+	OpcodeEDMap[0xb8] = instrED__LDDR
+	/* CPDR */
+	OpcodeEDMap[0xb9] = instrED__CPDR
+	/* INDR */
+	OpcodeEDMap[0xba] = instrED__INDR
+	/* OTDR */
+	OpcodeEDMap[0xbb] = instrED__OTDR
+	/* slttrap */
+	OpcodeEDMap[0xfb] = instrED__SLTTRAP
 
 	// 	// END of 0xed shifted opcodes
 }
@@ -520,202 +520,222 @@ func instrED__LDD(z *Z80, opcode byte) {
 		ternOpB((bytetemp&0x02) != 0, FLAG_5, 0)
 }
 
-// /* CPD */
-// func instrED__CPD(z *Z80, opcode byte) {
-// 	var value byte = z.Memory.Read(z.HL.Get())
-// 	var bytetemp byte = z.A - value
-// 	var lookup byte = ((z.A & 0x08) >> 3) | (((value) & 0x08) >> 2) | ((bytetemp & 0x08) >> 1)
-// 	z.Memory.ContendReadNoMreq_loop(z.HL.Get(), 1, 5)
-// 	z.DecHL()
-// 	z.DecBC()
-// 	z.F = (z.F & FLAG_C) | ternOpB(z.BC.Get() != 0, FLAG_V|FLAG_N, FLAG_N) | halfcarrySubTable[lookup] | ternOpB(bytetemp != 0, 0, FLAG_Z) | (bytetemp & FLAG_S)
-// 	if (z.F & FLAG_H) != 0 {
-// 		bytetemp--
-// 	}
-// 	z.F |= (bytetemp & FLAG_3) | ternOpB((bytetemp&0x02) != 0, FLAG_5, 0)
-// }
+/* CPD */
+func instrED__CPD(z *Z80, opcode byte) {
+	z.Tstates += 16
+	var value byte = z.Memory.Read(z.HL.Get())
+	var bytetemp byte = z.A - value
+	var lookup byte = ((z.A & 0x08) >> 3) | (((value) & 0x08) >> 2) | ((bytetemp & 0x08) >> 1)
+	//z.Memory.ContendReadNoMreq_loop(z.HL.Get(), 1, 5)
+	z.HL.Dec() //DecHL()
+	z.BC.Dec() // DecBC()
+	z.F = (z.F & FLAG_C) | ternOpB(z.BC.Get() != 0, FLAG_V|FLAG_N, FLAG_N) | halfcarrySubTable[lookup] | ternOpB(bytetemp != 0, 0, FLAG_Z) | (bytetemp & FLAG_S)
+	if (z.F & FLAG_H) != 0 {
+		bytetemp--
+	}
+	z.F |= (bytetemp & FLAG_3) | ternOpB((bytetemp&0x02) != 0, FLAG_5, 0)
+}
 
-// /* IND */
-// func instrED__IND(z *Z80, opcode byte) {
-// 	z.Memory.ContendReadNoMreq(z.IR(), 1)
-// 	var initemp byte = z.readPort(z.BC.Get())
-// 	z.Memory.Write(z.HL.Get(), initemp)
+/* IND */
+func instrED__IND(z *Z80, opcode byte) {
+	z.Tstates += 16
+	//z.Memory.ContendReadNoMreq(z.IR(), 1)
+	var initemp byte = z.readPort(z.BC.Get())
+	z.Memory.Write(z.HL.Get(), initemp)
 
-// 	z.B--
-// 	z.DecHL()
-// 	var initemp2 byte = initemp + z.C - 1
-// 	z.F = ternOpB((initemp&0x80) != 0, FLAG_N, 0) |
-// 		ternOpB(initemp2 < initemp, FLAG_H|FLAG_C, 0) |
-// 		ternOpB(parityTable[(initemp2&0x07)^z.B] != 0, FLAG_P, 0) |
-// 		sz53Table[z.B]
-// }
+	z.B--
+	z.HL.Dec()
+	var initemp2 byte = initemp + z.C - 1
+	z.F = ternOpB((initemp&0x80) != 0, FLAG_N, 0) |
+		ternOpB(initemp2 < initemp, FLAG_H|FLAG_C, 0) |
+		ternOpB(parityTable[(initemp2&0x07)^z.B] != 0, FLAG_P, 0) |
+		sz53Table[z.B]
+}
 
-// /* OUTD */
-// func instrED__OUTD(z *Z80, opcode byte) {
-// 	z.Memory.ContendReadNoMreq(z.IR(), 1)
-// 	var outitemp byte = z.Memory.Read(z.HL.Get())
-// 	z.B-- /* This does happen first, despite what the specs say */
-// 	z.writePort(z.BC.Get(), outitemp)
+/* OUTD */
+func instrED__OUTD(z *Z80, opcode byte) {
+	z.Tstates += 16
+	//z.Memory.ContendReadNoMreq(z.IR(), 1)
+	var outitemp byte = z.Memory.Read(z.HL.Get())
+	z.B-- /* This does happen first, despite what the specs say */
+	z.writePort(z.BC.Get(), outitemp)
 
-// 	z.DecHL()
-// 	var outitemp2 byte = outitemp + z.L
-// 	z.F = ternOpB((outitemp&0x80) != 0, FLAG_N, 0) |
-// 		ternOpB(outitemp2 < outitemp, FLAG_H|FLAG_C, 0) |
-// 		ternOpB(parityTable[(outitemp2&0x07)^z.B] != 0, FLAG_P, 0) |
-// 		sz53Table[z.B]
-// }
+	z.HL.Dec()
+	var outitemp2 byte = outitemp + z.L
+	z.F = ternOpB((outitemp&0x80) != 0, FLAG_N, 0) |
+		ternOpB(outitemp2 < outitemp, FLAG_H|FLAG_C, 0) |
+		ternOpB(parityTable[(outitemp2&0x07)^z.B] != 0, FLAG_P, 0) |
+		sz53Table[z.B]
+}
 
-// /* LDIR */
-// func instrED__LDIR(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
-// 	z.Memory.Write(z.DE.Get(), bytetemp)
-// 	z.Memory.ContendWriteNoMreq_loop(z.DE.Get(), 1, 2)
-// 	z.DecBC()
-// 	bytetemp += z.A
-// 	z.F = (z.F & (FLAG_C | FLAG_Z | FLAG_S)) | ternOpB(z.BC.Get() != 0, FLAG_V, 0) | (bytetemp & FLAG_3) | ternOpB((bytetemp&0x02 != 0), FLAG_5, 0)
-// 	if z.BC.Get() != 0 {
-// 		z.Memory.ContendWriteNoMreq_loop(z.DE.Get(), 1, 5)
-// 		z.DecPC(2)
-// 	}
-// 	z.IncHL()
-// 	z.IncDE()
-// }
+/* LDIR */
+func instrED__LDIR(z *Z80, opcode byte) {
+	z.Tstates += 16
+	var bytetemp byte = z.Memory.Read(z.HL.Get())
+	z.Memory.Write(z.DE.Get(), bytetemp)
+	//z.Memory.ContendWriteNoMreq_loop(z.DE.Get(), 1, 2)
+	z.BC.Dec()
+	bytetemp += z.A
+	z.F = (z.F & (FLAG_C | FLAG_Z | FLAG_S)) | ternOpB(z.BC.Get() != 0, FLAG_V, 0) | (bytetemp & FLAG_3) | ternOpB((bytetemp&0x02 != 0), FLAG_5, 0)
+	if z.BC.Get() != 0 {
+		//z.Memory.ContendWriteNoMreq_loop(z.DE.Get(), 1, 5)
+		z.pc -= 2      //DecPC(2)
+		z.Tstates += 5 // Testar
+	}
+	z.HL.Inc()
+	z.DE.Inc()
+}
 
-// /* CPIR */
-// func instrED__CPIR(z *Z80, opcode byte) {
-// 	var value byte = z.Memory.Read(z.HL.Get())
-// 	var bytetemp byte = z.A - value
-// 	var lookup byte = ((z.A & 0x08) >> 3) | (((value) & 0x08) >> 2) | ((bytetemp & 0x08) >> 1)
-// 	z.Memory.ContendReadNoMreq_loop(z.HL.Get(), 1, 5)
-// 	z.DecBC()
-// 	z.F = (z.F & FLAG_C) | (ternOpB(z.BC.Get() != 0, (FLAG_V | FLAG_N), FLAG_N)) | halfcarrySubTable[lookup] | (ternOpB(bytetemp != 0, 0, FLAG_Z)) | (bytetemp & FLAG_S)
-// 	if (z.F & FLAG_H) != 0 {
-// 		bytetemp--
-// 	}
-// 	z.F |= (bytetemp & FLAG_3) | ternOpB((bytetemp&0x02) != 0, FLAG_5, 0)
-// 	if (z.F & (FLAG_V | FLAG_Z)) == FLAG_V {
-// 		z.Memory.ContendReadNoMreq_loop(z.HL.Get(), 1, 5)
-// 		z.DecPC(2)
-// 	}
-// 	z.IncHL()
-// }
+/* CPIR */
+func instrED__CPIR(z *Z80, opcode byte) {
+	z.Tstates += 16
+	var value byte = z.Memory.Read(z.HL.Get())
+	var bytetemp byte = z.A - value
+	var lookup byte = ((z.A & 0x08) >> 3) | (((value) & 0x08) >> 2) | ((bytetemp & 0x08) >> 1)
+	//z.Memory.ContendReadNoMreq_loop(z.HL.Get(), 1, 5)
+	z.BC.Dec()
+	z.F = (z.F & FLAG_C) | (ternOpB(z.BC.Get() != 0, (FLAG_V | FLAG_N), FLAG_N)) | halfcarrySubTable[lookup] | (ternOpB(bytetemp != 0, 0, FLAG_Z)) | (bytetemp & FLAG_S)
+	if (z.F & FLAG_H) != 0 {
+		bytetemp--
+	}
+	z.F |= (bytetemp & FLAG_3) | ternOpB((bytetemp&0x02) != 0, FLAG_5, 0)
+	if (z.F & (FLAG_V | FLAG_Z)) == FLAG_V {
+		//z.Memory.ContendReadNoMreq_loop(z.HL.Get(), 1, 5)
+		z.pc -= 2      //z.pc -= 2
+		z.Tstates += 5 // Testar
+	}
+	z.HL.Inc()
+}
 
-// /* INIR */
-// func instrED__INIR(z *Z80, opcode byte) {
-// 	z.Memory.ContendReadNoMreq(z.IR(), 1)
-// 	var initemp byte = z.readPort(z.BC.Get())
-// 	z.Memory.Write(z.HL.Get(), initemp)
+/* INIR */
+func instrED__INIR(z *Z80, opcode byte) {
+	z.Tstates += 16
+	//z.Memory.ContendReadNoMreq(z.IR(), 1)
+	var initemp byte = z.readPort(z.BC.Get())
+	z.Memory.Write(z.HL.Get(), initemp)
 
-// 	z.B--
-// 	var initemp2 byte = initemp + z.C + 1
-// 	z.F = ternOpB(initemp&0x80 != 0, FLAG_N, 0) |
-// 		ternOpB(initemp2 < initemp, FLAG_H|FLAG_C, 0) |
-// 		ternOpB(parityTable[(initemp2&0x07)^z.B] != 0, FLAG_P, 0) |
-// 		sz53Table[z.B]
+	z.B--
+	var initemp2 byte = initemp + z.C + 1
+	z.F = ternOpB(initemp&0x80 != 0, FLAG_N, 0) |
+		ternOpB(initemp2 < initemp, FLAG_H|FLAG_C, 0) |
+		ternOpB(parityTable[(initemp2&0x07)^z.B] != 0, FLAG_P, 0) |
+		sz53Table[z.B]
 
-// 	if z.B != 0 {
-// 		z.Memory.ContendWriteNoMreq_loop(z.HL.Get(), 1, 5)
-// 		z.DecPC(2)
-// 	}
-// 	z.IncHL()
-// }
+	if z.B != 0 {
+		//z.Memory.ContendWriteNoMreq_loop(z.HL.Get(), 1, 5)
+		z.pc -= 2
+		z.Tstates += 5
+	}
+	z.HL.Inc()
+}
 
-// /* OTIR */
-// func instrED__OTIR(z *Z80, opcode byte) {
-// 	z.Memory.ContendReadNoMreq(z.IR(), 1)
-// 	var outitemp byte = z.Memory.Read(z.HL.Get())
-// 	z.B-- /* This does happen first, despite what the specs say */
-// 	z.writePort(z.BC.Get(), outitemp)
+/* OTIR */
+func instrED__OTIR(z *Z80, opcode byte) {
+	z.Tstates += 16
+	//z.Memory.ContendReadNoMreq(z.IR(), 1)
+	var outitemp byte = z.Memory.Read(z.HL.Get())
+	z.B-- /* This does happen first, despite what the specs say */
+	z.writePort(z.BC.Get(), outitemp)
 
-// 	z.IncHL()
-// 	var outitemp2 byte = outitemp + z.L
-// 	z.F = ternOpB((outitemp&0x80) != 0, FLAG_N, 0) |
-// 		ternOpB(outitemp2 < outitemp, FLAG_H|FLAG_C, 0) |
-// 		ternOpB(parityTable[(outitemp2&0x07)^z.B] != 0, FLAG_P, 0) |
-// 		sz53Table[z.B]
+	z.HL.Inc()
+	var outitemp2 byte = outitemp + z.L
+	z.F = ternOpB((outitemp&0x80) != 0, FLAG_N, 0) |
+		ternOpB(outitemp2 < outitemp, FLAG_H|FLAG_C, 0) |
+		ternOpB(parityTable[(outitemp2&0x07)^z.B] != 0, FLAG_P, 0) |
+		sz53Table[z.B]
 
-// 	if z.B != 0 {
-// 		z.Memory.ContendReadNoMreq_loop(z.BC.Get(), 1, 5)
-// 		z.DecPC(2)
-// 	}
-// }
+	if z.B != 0 {
+		//z.Memory.ContendReadNoMreq_loop(z.BC.Get(), 1, 5)
+		z.pc -= 2
+		z.Tstates += 5
+	}
+}
 
-// /* LDDR */
-// func instrED__LDDR(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.Memory.Read(z.HL.Get())
-// 	z.Memory.Write(z.DE.Get(), bytetemp)
-// 	z.Memory.ContendWriteNoMreq_loop(z.DE.Get(), 1, 2)
-// 	z.DecBC()
-// 	bytetemp += z.A
-// 	z.F = (z.F & (FLAG_C | FLAG_Z | FLAG_S)) | ternOpB(z.BC.Get() != 0, FLAG_V, 0) | (bytetemp & FLAG_3) | ternOpB((bytetemp&0x02 != 0), FLAG_5, 0)
-// 	if z.BC.Get() != 0 {
-// 		z.Memory.ContendWriteNoMreq_loop(z.DE.Get(), 1, 5)
-// 		z.DecPC(2)
-// 	}
-// 	z.DecHL()
-// 	z.DecDE()
-// }
+/* LDDR */
+func instrED__LDDR(z *Z80, opcode byte) {
+	z.Tstates += 16
+	var bytetemp byte = z.Memory.Read(z.HL.Get())
+	z.Memory.Write(z.DE.Get(), bytetemp)
+	//z.Memory.ContendWriteNoMreq_loop(z.DE.Get(), 1, 2)
+	z.BC.Dec()
+	bytetemp += z.A
+	z.F = (z.F & (FLAG_C | FLAG_Z | FLAG_S)) | ternOpB(z.BC.Get() != 0, FLAG_V, 0) | (bytetemp & FLAG_3) | ternOpB((bytetemp&0x02 != 0), FLAG_5, 0)
+	if z.BC.Get() != 0 {
+		//z.Memory.ContendWriteNoMreq_loop(z.DE.Get(), 1, 5)
+		z.pc -= 2
+		z.Tstates += 5
+	}
+	z.HL.Dec()
+	z.DE.Dec()
+}
 
-// /* CPDR */
-// func instrED__CPDR(z *Z80, opcode byte) {
-// 	var value byte = z.Memory.Read(z.HL.Get())
-// 	var bytetemp byte = z.A - value
-// 	var lookup byte = ((z.A & 0x08) >> 3) | (((value) & 0x08) >> 2) | ((bytetemp & 0x08) >> 1)
-// 	z.Memory.ContendReadNoMreq_loop(z.HL.Get(), 1, 5)
-// 	z.DecBC()
-// 	z.F = (z.F & FLAG_C) | (ternOpB(z.BC.Get() != 0, (FLAG_V | FLAG_N), FLAG_N)) | halfcarrySubTable[lookup] | (ternOpB(bytetemp != 0, 0, FLAG_Z)) | (bytetemp & FLAG_S)
-// 	if (z.F & FLAG_H) != 0 {
-// 		bytetemp--
-// 	}
-// 	z.F |= (bytetemp & FLAG_3) | ternOpB((bytetemp&0x02) != 0, FLAG_5, 0)
-// 	if (z.F & (FLAG_V | FLAG_Z)) == FLAG_V {
-// 		z.Memory.ContendReadNoMreq_loop(z.HL.Get(), 1, 5)
-// 		z.DecPC(2)
-// 	}
-// 	z.DecHL()
-// }
+/* CPDR */
+func instrED__CPDR(z *Z80, opcode byte) {
+	z.Tstates += 16
+	var value byte = z.Memory.Read(z.HL.Get())
+	var bytetemp byte = z.A - value
+	var lookup byte = ((z.A & 0x08) >> 3) | (((value) & 0x08) >> 2) | ((bytetemp & 0x08) >> 1)
+	//z.Memory.ContendReadNoMreq_loop(z.HL.Get(), 1, 5)
+	z.BC.Dec()
+	z.F = (z.F & FLAG_C) | (ternOpB(z.BC.Get() != 0, (FLAG_V | FLAG_N), FLAG_N)) | halfcarrySubTable[lookup] | (ternOpB(bytetemp != 0, 0, FLAG_Z)) | (bytetemp & FLAG_S)
+	if (z.F & FLAG_H) != 0 {
+		bytetemp--
+	}
+	z.F |= (bytetemp & FLAG_3) | ternOpB((bytetemp&0x02) != 0, FLAG_5, 0)
+	if (z.F & (FLAG_V | FLAG_Z)) == FLAG_V {
+		//z.Memory.ContendReadNoMreq_loop(z.HL.Get(), 1, 5)
+		z.pc -= 2
+		z.Tstates += 5
+	}
+	z.HL.Dec()
+}
 
-// /* INDR */
-// func instrED__INDR(z *Z80, opcode byte) {
-// 	z.Memory.ContendReadNoMreq(z.IR(), 1)
-// 	var initemp byte = z.readPort(z.BC.Get())
-// 	z.Memory.Write(z.HL.Get(), initemp)
+/* INDR */
+func instrED__INDR(z *Z80, opcode byte) {
+	z.Tstates += 16
+	//z.Memory.ContendReadNoMreq(z.IR(), 1)
+	var initemp byte = z.readPort(z.BC.Get())
+	z.Memory.Write(z.HL.Get(), initemp)
 
-// 	z.B--
-// 	var initemp2 byte = initemp + z.C - 1
-// 	z.F = ternOpB(initemp&0x80 != 0, FLAG_N, 0) |
-// 		ternOpB(initemp2 < initemp, FLAG_H|FLAG_C, 0) |
-// 		ternOpB(parityTable[(initemp2&0x07)^z.B] != 0, FLAG_P, 0) |
-// 		sz53Table[z.B]
+	z.B--
+	var initemp2 byte = initemp + z.C - 1
+	z.F = ternOpB(initemp&0x80 != 0, FLAG_N, 0) |
+		ternOpB(initemp2 < initemp, FLAG_H|FLAG_C, 0) |
+		ternOpB(parityTable[(initemp2&0x07)^z.B] != 0, FLAG_P, 0) |
+		sz53Table[z.B]
 
-// 	if z.B != 0 {
-// 		z.Memory.ContendWriteNoMreq_loop(z.HL.Get(), 1, 5)
-// 		z.DecPC(2)
-// 	}
-// 	z.DecHL()
-// }
+	if z.B != 0 {
+		//z.Memory.ContendWriteNoMreq_loop(z.HL.Get(), 1, 5)
+		z.pc -= 2
+		z.Tstates += 5
+	}
+	z.HL.Dec()
+}
 
-// /* OTDR */
-// func instrED__OTDR(z *Z80, opcode byte) {
-// 	z.Memory.ContendReadNoMreq(z.IR(), 1)
-// 	var outitemp byte = z.Memory.Read(z.HL.Get())
-// 	z.B-- /* This does happen first, despite what the specs say */
-// 	z.writePort(z.BC.Get(), outitemp)
+/* OTDR */
+func instrED__OTDR(z *Z80, opcode byte) {
+	z.Tstates += 16
+	//z.Memory.ContendReadNoMreq(z.IR(), 1)
+	var outitemp byte = z.Memory.Read(z.HL.Get())
+	z.B-- /* This does happen first, despite what the specs say */
+	z.writePort(z.BC.Get(), outitemp)
 
-// 	z.DecHL()
-// 	var outitemp2 byte = outitemp + z.L
-// 	z.F = ternOpB((outitemp&0x80) != 0, FLAG_N, 0) |
-// 		ternOpB(outitemp2 < outitemp, FLAG_H|FLAG_C, 0) |
-// 		ternOpB(parityTable[(outitemp2&0x07)^z.B] != 0, FLAG_P, 0) |
-// 		sz53Table[z.B]
+	z.HL.Dec()
+	var outitemp2 byte = outitemp + z.L
+	z.F = ternOpB((outitemp&0x80) != 0, FLAG_N, 0) |
+		ternOpB(outitemp2 < outitemp, FLAG_H|FLAG_C, 0) |
+		ternOpB(parityTable[(outitemp2&0x07)^z.B] != 0, FLAG_P, 0) |
+		sz53Table[z.B]
 
-// 	if z.B != 0 {
-// 		z.Memory.ContendReadNoMreq_loop(z.BC.Get(), 1, 5)
-// 		z.DecPC(2)
-// 	}
-// }
+	if z.B != 0 {
+		//z.Memory.ContendReadNoMreq_loop(z.BC.Get(), 1, 5)
+		z.pc -= 2
+		z.Tstates += 5
+	}
+}
 
-// /* slttrap */
-// func instrED__SLTTRAP(z *Z80, opcode byte) {
-// 	z.sltTrap(int16(z.HL.Get()), z.A)
-// }
+/* slttrap */
+func instrED__SLTTRAP(z *Z80, opcode byte) {
+	z.Tstates += 4 //????
+	z.sltTrap(int16(z.HL.Get()), z.A)
+}

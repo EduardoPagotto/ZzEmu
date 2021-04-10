@@ -105,6 +105,11 @@ func invalidOpcode(z80 *Z80, opcode byte) {
 
 //--- flow controll
 
+func (z80 *Z80) sltTrap(address int16, level byte) int {
+	// Dummy implementation
+	return 0
+}
+
 func (z80 *Z80) Call() {
 	z80.Tstates += 17
 	newpc := z80.Load16()
