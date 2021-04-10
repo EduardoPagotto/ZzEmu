@@ -2,38 +2,38 @@ package ZzEmu
 
 func initOpcodeCBMap() {
 	// 	// BEGIN of 0xcb shifted opcodes
-	// 	/* RLC B */
+	/* RLC B */
 	OpcodeCBMap[0x00] = instrCB__RLC_r
-	// 	/* RLC C */
+	/* RLC C */
 	OpcodeCBMap[0x01] = instrCB__RLC_r
-	// 	/* RLC D */
+	/* RLC D */
 	OpcodeCBMap[0x02] = instrCB__RLC_r
-	// 	/* RLC E */
+	/* RLC E */
 	OpcodeCBMap[0x03] = instrCB__RLC_r
-	// 	/* RLC H */
+	/* RLC H */
 	OpcodeCBMap[0x04] = instrCB__RLC_r
-	// 	/* RLC L */
+	/* RLC L */
 	OpcodeCBMap[0x05] = instrCB__RLC_r
-	// 	/* RLC (HL) */
+	/* RLC (HL) */
 	OpcodeCBMap[0x06] = instrCB__RLC_iHL
-	// 	/* RLC A */
+	/* RLC A */
 	OpcodeCBMap[0x07] = instrCB__RLC_r
-	// 	/* RRC B */
-	// 	OpcodeCBMap[0x08] = instrCB__RRC_B
-	// 	/* RRC C */
-	// 	OpcodeCBMap[0x09] = instrCB__RRC_C
-	// 	/* RRC D */
-	// 	OpcodeCBMap[0x0a] = instrCB__RRC_D
-	// 	/* RRC E */
-	// 	OpcodeCBMap[0x0b] = instrCB__RRC_E
-	// 	/* RRC H */
-	// 	OpcodeCBMap[0x0c] = instrCB__RRC_H
-	// 	/* RRC L */
-	// 	OpcodeCBMap[0x0d] = instrCB__RRC_L
-	// 	/* RRC (HL) */
-	// 	OpcodeCBMap[0x0e] = instrCB__RRC_iHL
-	// 	/* RRC A */
-	// 	OpcodeCBMap[0x0f] = instrCB__RRC_A
+	/* RRC B */
+	OpcodeCBMap[0x08] = instrCB__RRC_r
+	/* RRC C */
+	OpcodeCBMap[0x09] = instrCB__RRC_r
+	/* RRC D */
+	OpcodeCBMap[0x0a] = instrCB__RRC_r
+	/* RRC E */
+	OpcodeCBMap[0x0b] = instrCB__RRC_r
+	/* RRC H */
+	OpcodeCBMap[0x0c] = instrCB__RRC_r
+	/* RRC L */
+	OpcodeCBMap[0x0d] = instrCB__RRC_r
+	/* RRC (HL) */
+	OpcodeCBMap[0x0e] = instrCB__RRC_iHL
+	/* RRC A */
+	OpcodeCBMap[0x0f] = instrCB__RRC_r
 	// 	/* RL B */
 	// 	OpcodeCBMap[0x10] = instrCB__RL_B
 	// 	/* RL C */
@@ -534,48 +534,21 @@ func instrCB__RLC_iHL(z *Z80, opcode byte) {
 	z.Memory.Write(z.HL.Get(), bytetemp)
 }
 
-// /* RRC B */
-// func instrCB__RRC_B(z *Z80, opcode byte) {
-// 	z.B = z.rrc(z.B)
-// }
+/* RRC r */
+func instrCB__RRC_r(z *Z80, opcode byte) {
+	z.Tstates += 8
+	var reg *byte = z.GetPrtRegisterValByte(opcode)
+	*reg = z.rrc(*reg)
+}
 
-// /* RRC C */
-// func instrCB__RRC_C(z *Z80, opcode byte) {
-// 	z.C = z.rrc(z.C)
-// }
-
-// /* RRC D */
-// func instrCB__RRC_D(z *Z80, opcode byte) {
-// 	z.D = z.rrc(z.D)
-// }
-
-// /* RRC E */
-// func instrCB__RRC_E(z *Z80, opcode byte) {
-// 	z.E = z.rrc(z.E)
-// }
-
-// /* RRC H */
-// func instrCB__RRC_H(z *Z80, opcode byte) {
-// 	z.H = z.rrc(z.H)
-// }
-
-// /* RRC L */
-// func instrCB__RRC_L(z *Z80, opcode byte) {
-// 	z.L = z.rrc(z.L)
-// }
-
-// /* RRC (HL) */
-// func instrCB__RRC_iHL(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.HL())
-// 	z.memory.ContendReadNoMreq(z.HL(), 1)
-// 	bytetemp = z.rrc(bytetemp)
-// 	z.memory.WriteByte(z.HL(), bytetemp)
-// }
-
-// /* RRC A */
-// func instrCB__RRC_A(z *Z80, opcode byte) {
-// 	z.A = z.rrc(z.A)
-// }
+/* RRC (HL) */
+func instrCB__RRC_iHL(z *Z80, opcode byte) {
+	z.Tstates += 15
+	var bytetemp byte = z.Memory.Read(z.HL.Get())
+	//z.memory.ContendReadNoMreq(z.HL(), 1)
+	bytetemp = z.rrc(bytetemp)
+	z.Memory.Write(z.HL.Get(), bytetemp)
+}
 
 // /* RL B */
 // func instrCB__RL_B(z *Z80, opcode byte) {

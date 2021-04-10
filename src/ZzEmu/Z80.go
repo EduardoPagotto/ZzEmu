@@ -285,6 +285,27 @@ func (z80 *Z80) rlc(value byte) byte {
 	return value
 }
 
+func (z80 *Z80) rrc(value byte) byte {
+	z80.F = value & FLAG_C
+	value = (value >> 1) | (value << 7)
+	z80.F |= sz53pTable[value]
+	return value
+}
+
+func (z80 *Z80) rr(value byte) byte {
+	rrtemp := value
+	value = (value >> 1) | (z80.F << 7)
+	z80.F = (rrtemp & FLAG_C) | sz53pTable[value]
+	return value
+}
+
+func (z80 *Z80) rl(value byte) byte {
+	rltemp := value
+	value = (value << 1) | (z80.F & FLAG_C)
+	z80.F = (rltemp >> 7) | sz53pTable[value]
+	return value
+}
+
 //-- register select to opcode
 
 func (z80 *Z80) GetRegisterValByte(opcode byte) byte {
