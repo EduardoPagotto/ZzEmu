@@ -1,29 +1,5 @@
 package ZzEmu
 
-func getMaskBitReset(opcode byte) byte {
-	r := opcode & 0x07
-	switch r {
-	case 0:
-		return 0xfe
-	case 1:
-		return 0xfd
-	case 2:
-		return 0xfb
-	case 3:
-		return 0xf7
-	case 4:
-		return 0xef
-	case 5:
-		return 0xdf
-	case 6:
-		return 0xbf
-	case 7:
-		return 0x7f
-	}
-
-	return 0x0
-}
-
 func initOpcodeCBMap() {
 	// 	// BEGIN of 0xcb shifted opcodes
 	/* RLC B */
