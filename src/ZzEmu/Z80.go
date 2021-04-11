@@ -20,10 +20,10 @@ var (
 	OpcodeMap     [256]func(z *Z80, opcode byte)
 	OpcodeCBMap   [256]func(z *Z80, opcode byte)
 	OpcodeDDMap   [256]func(z *Z80, opcode byte)
-	OpcodeDDCBMap [256]func(z *Z80, opcode byte)
+	OpcodeDDCBMap [256]func(z *Z80, opcode, oldOpcode, offset byte)
 	OpcodeEDMap   [256]func(z *Z80, opcode byte)
 	OpcodeDFMap   [256]func(z *Z80, opcode byte)
-	OpcodeFDCBMap [256]func(z *Z80, opcode byte)
+	//OpcodeFDCBMap [256]func(z *Z80, opcode byte)
 )
 
 type Z80 struct {
@@ -76,11 +76,10 @@ func NewZ80(memory Memory, port PortAccessor) *Z80 {
 
 	initOpcodes()
 	initOpcodeCBMap()
-	initOpcodeDDMap()
-	initOpcodeDDCBMap()
-	initOpcodeDFMap()
 	initOpcodeEDMap()
-	//initOpcodeFDCBMap()
+	initOpcodeDDMap()
+	initOpcodeFDMap()
+	initOpcodeDDCBFDCBMap()
 
 	z80.Reset()
 	return z80

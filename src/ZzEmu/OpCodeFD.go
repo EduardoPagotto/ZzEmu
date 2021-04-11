@@ -1,6 +1,6 @@
 package ZzEmu
 
-func initOpcodeDFMap() {
+func initOpcodeFDMap() {
 
 	// BEGIN of 0xfd shifted opcodes
 	/* ADD REGISTER,BC */
@@ -687,9 +687,10 @@ func instrFD__CP_A_iREGpDD(z *Z80, opcode byte) {
 /* shift DDFDCB */
 func instrFD__SHIFT_DDFDCB(z *Z80, opcode byte) {
 	z.Tstates += 4
+	offset := z.Load8()
 	opcode2 := z.Load8()
 	z.R++
-	OpcodeFDCBMap[opcode2](z, opcode2)
+	OpcodeDDCBMap[opcode2](z, opcode2, opcode, offset)
 }
 
 /* POP iy */

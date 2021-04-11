@@ -1,6 +1,6 @@
 package ZzEmu
 
-func initOpcodeDDCBMap() {
+func initOpcodeDDCBFDCBMap() {
 
 	// 	// BEGIN of 0xddfdcb shifted opcodes
 	// 	/* LD B,RLC (REGISTER+dd) */
