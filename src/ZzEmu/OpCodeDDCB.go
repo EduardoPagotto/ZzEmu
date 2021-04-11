@@ -474,1466 +474,1466 @@ func initOpcodeDDCBMap() {
 
 // /* LD B,RLC (REGISTER+dd) */
 // func instrDDCB__LD_B_RLC_iREGpDD(z *Z80, opcode byte) {
-// 	z.B = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.B = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.B = z.rlc(z.B)
-// 	z.memory.WriteByte(z.tempaddr, z.B)
+// 	z.Memory.Write(z.tempaddr, z.B)
 // }
 
 // /* LD C,RLC (REGISTER+dd) */
 // func instrDDCB__LD_C_RLC_iREGpDD(z *Z80, opcode byte) {
-// 	z.C = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.C = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.C = z.rlc(z.C)
-// 	z.memory.WriteByte(z.tempaddr, z.C)
+// 	z.Memory.Write(z.tempaddr, z.C)
 // }
 
 // /* LD D,RLC (REGISTER+dd) */
 // func instrDDCB__LD_D_RLC_iREGpDD(z *Z80, opcode byte) {
-// 	z.D = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.D = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.D = z.rlc(z.D)
-// 	z.memory.WriteByte(z.tempaddr, z.D)
+// 	z.Memory.Write(z.tempaddr, z.D)
 // }
 
 // /* LD E,RLC (REGISTER+dd) */
 // func instrDDCB__LD_E_RLC_iREGpDD(z *Z80, opcode byte) {
-// 	z.E = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.E = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.E = z.rlc(z.E)
-// 	z.memory.WriteByte(z.tempaddr, z.E)
+// 	z.Memory.Write(z.tempaddr, z.E)
 // }
 
 // /* LD H,RLC (REGISTER+dd) */
 // func instrDDCB__LD_H_RLC_iREGpDD(z *Z80, opcode byte) {
-// 	z.H = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.H = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.H = z.rlc(z.H)
-// 	z.memory.WriteByte(z.tempaddr, z.H)
+// 	z.Memory.Write(z.tempaddr, z.H)
 // }
 
 // /* LD L,RLC (REGISTER+dd) */
 // func instrDDCB__LD_L_RLC_iREGpDD(z *Z80, opcode byte) {
-// 	z.L = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.L = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.L = z.rlc(z.L)
-// 	z.memory.WriteByte(z.tempaddr, z.L)
+// 	z.Memory.Write(z.tempaddr, z.L)
 // }
 
 // /* RLC (REGISTER+dd) */
 // func instrDDCB__RLC_iREGpDD(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	var bytetemp byte = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	bytetemp = z.rlc(bytetemp)
-// 	z.memory.WriteByte(z.tempaddr, bytetemp)
+// 	z.Memory.Write(z.tempaddr, bytetemp)
 // }
 
 // /* LD A,RLC (REGISTER+dd) */
 // func instrDDCB__LD_A_RLC_iREGpDD(z *Z80, opcode byte) {
-// 	z.A = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.A = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.A = z.rlc(z.A)
-// 	z.memory.WriteByte(z.tempaddr, z.A)
+// 	z.Memory.Write(z.tempaddr, z.A)
 // }
 
 // /* LD B,RRC (REGISTER+dd) */
 // func instrDDCB__LD_B_RRC_iREGpDD(z *Z80, opcode byte) {
-// 	z.B = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.B = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.B = z.rrc(z.B)
-// 	z.memory.WriteByte(z.tempaddr, z.B)
+// 	z.Memory.Write(z.tempaddr, z.B)
 // }
 
 // /* LD C,RRC (REGISTER+dd) */
 // func instrDDCB__LD_C_RRC_iREGpDD(z *Z80, opcode byte) {
-// 	z.C = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.C = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.C = z.rrc(z.C)
-// 	z.memory.WriteByte(z.tempaddr, z.C)
+// 	z.Memory.Write(z.tempaddr, z.C)
 // }
 
 // /* LD D,RRC (REGISTER+dd) */
 // func instrDDCB__LD_D_RRC_iREGpDD(z *Z80, opcode byte) {
-// 	z.D = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.D = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.D = z.rrc(z.D)
-// 	z.memory.WriteByte(z.tempaddr, z.D)
+// 	z.Memory.Write(z.tempaddr, z.D)
 // }
 
 // /* LD E,RRC (REGISTER+dd) */
 // func instrDDCB__LD_E_RRC_iREGpDD(z *Z80, opcode byte) {
-// 	z.E = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.E = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.E = z.rrc(z.E)
-// 	z.memory.WriteByte(z.tempaddr, z.E)
+// 	z.Memory.Write(z.tempaddr, z.E)
 // }
 
 // /* LD H,RRC (REGISTER+dd) */
 // func instrDDCB__LD_H_RRC_iREGpDD(z *Z80, opcode byte) {
-// 	z.H = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.H = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.H = z.rrc(z.H)
-// 	z.memory.WriteByte(z.tempaddr, z.H)
+// 	z.Memory.Write(z.tempaddr, z.H)
 // }
 
 // /* LD L,RRC (REGISTER+dd) */
 // func instrDDCB__LD_L_RRC_iREGpDD(z *Z80, opcode byte) {
-// 	z.L = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.L = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.L = z.rrc(z.L)
-// 	z.memory.WriteByte(z.tempaddr, z.L)
+// 	z.Memory.Write(z.tempaddr, z.L)
 // }
 
 // /* RRC (REGISTER+dd) */
 // func instrDDCB__RRC_iREGpDD(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	var bytetemp byte = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	bytetemp = z.rrc(bytetemp)
-// 	z.memory.WriteByte(z.tempaddr, bytetemp)
+// 	z.Memory.Write(z.tempaddr, bytetemp)
 // }
 
 // /* LD A,RRC (REGISTER+dd) */
 // func instrDDCB__LD_A_RRC_iREGpDD(z *Z80, opcode byte) {
-// 	z.A = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.A = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.A = z.rrc(z.A)
-// 	z.memory.WriteByte(z.tempaddr, z.A)
+// 	z.Memory.Write(z.tempaddr, z.A)
 // }
 
 // /* LD B,RL (REGISTER+dd) */
 // func instrDDCB__LD_B_RL_iREGpDD(z *Z80, opcode byte) {
-// 	z.B = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.B = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.B = z.rl(z.B)
-// 	z.memory.WriteByte(z.tempaddr, z.B)
+// 	z.Memory.Write(z.tempaddr, z.B)
 // }
 
 // /* LD C,RL (REGISTER+dd) */
 // func instrDDCB__LD_C_RL_iREGpDD(z *Z80, opcode byte) {
-// 	z.C = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.C = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.C = z.rl(z.C)
-// 	z.memory.WriteByte(z.tempaddr, z.C)
+// 	z.Memory.Write(z.tempaddr, z.C)
 // }
 
 // /* LD D,RL (REGISTER+dd) */
 // func instrDDCB__LD_D_RL_iREGpDD(z *Z80, opcode byte) {
-// 	z.D = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.D = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.D = z.rl(z.D)
-// 	z.memory.WriteByte(z.tempaddr, z.D)
+// 	z.Memory.Write(z.tempaddr, z.D)
 // }
 
 // /* LD E,RL (REGISTER+dd) */
 // func instrDDCB__LD_E_RL_iREGpDD(z *Z80, opcode byte) {
-// 	z.E = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.E = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.E = z.rl(z.E)
-// 	z.memory.WriteByte(z.tempaddr, z.E)
+// 	z.Memory.Write(z.tempaddr, z.E)
 // }
 
 // /* LD H,RL (REGISTER+dd) */
 // func instrDDCB__LD_H_RL_iREGpDD(z *Z80, opcode byte) {
-// 	z.H = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.H = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.H = z.rl(z.H)
-// 	z.memory.WriteByte(z.tempaddr, z.H)
+// 	z.Memory.Write(z.tempaddr, z.H)
 // }
 
 // /* LD L,RL (REGISTER+dd) */
 // func instrDDCB__LD_L_RL_iREGpDD(z *Z80, opcode byte) {
-// 	z.L = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.L = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.L = z.rl(z.L)
-// 	z.memory.WriteByte(z.tempaddr, z.L)
+// 	z.Memory.Write(z.tempaddr, z.L)
 // }
 
 // /* RL (REGISTER+dd) */
 // func instrDDCB__RL_iREGpDD(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	var bytetemp byte = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	bytetemp = z.rl(bytetemp)
-// 	z.memory.WriteByte(z.tempaddr, bytetemp)
+// 	z.Memory.Write(z.tempaddr, bytetemp)
 // }
 
 // /* LD A,RL (REGISTER+dd) */
 // func instrDDCB__LD_A_RL_iREGpDD(z *Z80, opcode byte) {
-// 	z.A = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.A = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.A = z.rl(z.A)
-// 	z.memory.WriteByte(z.tempaddr, z.A)
+// 	z.Memory.Write(z.tempaddr, z.A)
 // }
 
 // /* LD B,RR (REGISTER+dd) */
 // func instrDDCB__LD_B_RR_iREGpDD(z *Z80, opcode byte) {
-// 	z.B = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.B = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.B = z.rr(z.B)
-// 	z.memory.WriteByte(z.tempaddr, z.B)
+// 	z.Memory.Write(z.tempaddr, z.B)
 // }
 
 // /* LD C,RR (REGISTER+dd) */
 // func instrDDCB__LD_C_RR_iREGpDD(z *Z80, opcode byte) {
-// 	z.C = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.C = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.C = z.rr(z.C)
-// 	z.memory.WriteByte(z.tempaddr, z.C)
+// 	z.Memory.Write(z.tempaddr, z.C)
 // }
 
 // /* LD D,RR (REGISTER+dd) */
 // func instrDDCB__LD_D_RR_iREGpDD(z *Z80, opcode byte) {
-// 	z.D = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.D = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.D = z.rr(z.D)
-// 	z.memory.WriteByte(z.tempaddr, z.D)
+// 	z.Memory.Write(z.tempaddr, z.D)
 // }
 
 // /* LD E,RR (REGISTER+dd) */
 // func instrDDCB__LD_E_RR_iREGpDD(z *Z80, opcode byte) {
-// 	z.E = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.E = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.E = z.rr(z.E)
-// 	z.memory.WriteByte(z.tempaddr, z.E)
+// 	z.Memory.Write(z.tempaddr, z.E)
 // }
 
 // /* LD H,RR (REGISTER+dd) */
 // func instrDDCB__LD_H_RR_iREGpDD(z *Z80, opcode byte) {
-// 	z.H = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.H = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.H = z.rr(z.H)
-// 	z.memory.WriteByte(z.tempaddr, z.H)
+// 	z.Memory.Write(z.tempaddr, z.H)
 // }
 
 // /* LD L,RR (REGISTER+dd) */
 // func instrDDCB__LD_L_RR_iREGpDD(z *Z80, opcode byte) {
-// 	z.L = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.L = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.L = z.rr(z.L)
-// 	z.memory.WriteByte(z.tempaddr, z.L)
+// 	z.Memory.Write(z.tempaddr, z.L)
 // }
 
 // /* RR (REGISTER+dd) */
 // func instrDDCB__RR_iREGpDD(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	var bytetemp byte = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	bytetemp = z.rr(bytetemp)
-// 	z.memory.WriteByte(z.tempaddr, bytetemp)
+// 	z.Memory.Write(z.tempaddr, bytetemp)
 // }
 
 // /* LD A,RR (REGISTER+dd) */
 // func instrDDCB__LD_A_RR_iREGpDD(z *Z80, opcode byte) {
-// 	z.A = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.A = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.A = z.rr(z.A)
-// 	z.memory.WriteByte(z.tempaddr, z.A)
+// 	z.Memory.Write(z.tempaddr, z.A)
 // }
 
 // /* LD B,SLA (REGISTER+dd) */
 // func instrDDCB__LD_B_SLA_iREGpDD(z *Z80, opcode byte) {
-// 	z.B = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.B = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.B = z.sla(z.B)
-// 	z.memory.WriteByte(z.tempaddr, z.B)
+// 	z.Memory.Write(z.tempaddr, z.B)
 // }
 
 // /* LD C,SLA (REGISTER+dd) */
 // func instrDDCB__LD_C_SLA_iREGpDD(z *Z80, opcode byte) {
-// 	z.C = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.C = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.C = z.sla(z.C)
-// 	z.memory.WriteByte(z.tempaddr, z.C)
+// 	z.Memory.Write(z.tempaddr, z.C)
 // }
 
 // /* LD D,SLA (REGISTER+dd) */
 // func instrDDCB__LD_D_SLA_iREGpDD(z *Z80, opcode byte) {
-// 	z.D = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.D = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.D = z.sla(z.D)
-// 	z.memory.WriteByte(z.tempaddr, z.D)
+// 	z.Memory.Write(z.tempaddr, z.D)
 // }
 
 // /* LD E,SLA (REGISTER+dd) */
 // func instrDDCB__LD_E_SLA_iREGpDD(z *Z80, opcode byte) {
-// 	z.E = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.E = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.E = z.sla(z.E)
-// 	z.memory.WriteByte(z.tempaddr, z.E)
+// 	z.Memory.Write(z.tempaddr, z.E)
 // }
 
 // /* LD H,SLA (REGISTER+dd) */
 // func instrDDCB__LD_H_SLA_iREGpDD(z *Z80, opcode byte) {
-// 	z.H = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.H = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.H = z.sla(z.H)
-// 	z.memory.WriteByte(z.tempaddr, z.H)
+// 	z.Memory.Write(z.tempaddr, z.H)
 // }
 
 // /* LD L,SLA (REGISTER+dd) */
 // func instrDDCB__LD_L_SLA_iREGpDD(z *Z80, opcode byte) {
-// 	z.L = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.L = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.L = z.sla(z.L)
-// 	z.memory.WriteByte(z.tempaddr, z.L)
+// 	z.Memory.Write(z.tempaddr, z.L)
 // }
 
 // /* SLA (REGISTER+dd) */
 // func instrDDCB__SLA_iREGpDD(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	var bytetemp byte = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	bytetemp = z.sla(bytetemp)
-// 	z.memory.WriteByte(z.tempaddr, bytetemp)
+// 	z.Memory.Write(z.tempaddr, bytetemp)
 // }
 
 // /* LD A,SLA (REGISTER+dd) */
 // func instrDDCB__LD_A_SLA_iREGpDD(z *Z80, opcode byte) {
-// 	z.A = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.A = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.A = z.sla(z.A)
-// 	z.memory.WriteByte(z.tempaddr, z.A)
+// 	z.Memory.Write(z.tempaddr, z.A)
 // }
 
 // /* LD B,SRA (REGISTER+dd) */
 // func instrDDCB__LD_B_SRA_iREGpDD(z *Z80, opcode byte) {
-// 	z.B = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.B = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.B = z.sra(z.B)
-// 	z.memory.WriteByte(z.tempaddr, z.B)
+// 	z.Memory.Write(z.tempaddr, z.B)
 // }
 
 // /* LD C,SRA (REGISTER+dd) */
 // func instrDDCB__LD_C_SRA_iREGpDD(z *Z80, opcode byte) {
-// 	z.C = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.C = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.C = z.sra(z.C)
-// 	z.memory.WriteByte(z.tempaddr, z.C)
+// 	z.Memory.Write(z.tempaddr, z.C)
 // }
 
 // /* LD D,SRA (REGISTER+dd) */
 // func instrDDCB__LD_D_SRA_iREGpDD(z *Z80, opcode byte) {
-// 	z.D = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.D = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.D = z.sra(z.D)
-// 	z.memory.WriteByte(z.tempaddr, z.D)
+// 	z.Memory.Write(z.tempaddr, z.D)
 // }
 
 // /* LD E,SRA (REGISTER+dd) */
 // func instrDDCB__LD_E_SRA_iREGpDD(z *Z80, opcode byte) {
-// 	z.E = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.E = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.E = z.sra(z.E)
-// 	z.memory.WriteByte(z.tempaddr, z.E)
+// 	z.Memory.Write(z.tempaddr, z.E)
 // }
 
 // /* LD H,SRA (REGISTER+dd) */
 // func instrDDCB__LD_H_SRA_iREGpDD(z *Z80, opcode byte) {
-// 	z.H = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.H = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.H = z.sra(z.H)
-// 	z.memory.WriteByte(z.tempaddr, z.H)
+// 	z.Memory.Write(z.tempaddr, z.H)
 // }
 
 // /* LD L,SRA (REGISTER+dd) */
 // func instrDDCB__LD_L_SRA_iREGpDD(z *Z80, opcode byte) {
-// 	z.L = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.L = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.L = z.sra(z.L)
-// 	z.memory.WriteByte(z.tempaddr, z.L)
+// 	z.Memory.Write(z.tempaddr, z.L)
 // }
 
 // /* SRA (REGISTER+dd) */
 // func instrDDCB__SRA_iREGpDD(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	var bytetemp byte = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	bytetemp = z.sra(bytetemp)
-// 	z.memory.WriteByte(z.tempaddr, bytetemp)
+// 	z.Memory.Write(z.tempaddr, bytetemp)
 // }
 
 // /* LD A,SRA (REGISTER+dd) */
 // func instrDDCB__LD_A_SRA_iREGpDD(z *Z80, opcode byte) {
-// 	z.A = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.A = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.A = z.sra(z.A)
-// 	z.memory.WriteByte(z.tempaddr, z.A)
+// 	z.Memory.Write(z.tempaddr, z.A)
 // }
 
 // /* LD B,SLL (REGISTER+dd) */
 // func instrDDCB__LD_B_SLL_iREGpDD(z *Z80, opcode byte) {
-// 	z.B = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.B = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.B = z.sll(z.B)
-// 	z.memory.WriteByte(z.tempaddr, z.B)
+// 	z.Memory.Write(z.tempaddr, z.B)
 // }
 
 // /* LD C,SLL (REGISTER+dd) */
 // func instrDDCB__LD_C_SLL_iREGpDD(z *Z80, opcode byte) {
-// 	z.C = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.C = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.C = z.sll(z.C)
-// 	z.memory.WriteByte(z.tempaddr, z.C)
+// 	z.Memory.Write(z.tempaddr, z.C)
 // }
 
 // /* LD D,SLL (REGISTER+dd) */
 // func instrDDCB__LD_D_SLL_iREGpDD(z *Z80, opcode byte) {
-// 	z.D = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.D = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.D = z.sll(z.D)
-// 	z.memory.WriteByte(z.tempaddr, z.D)
+// 	z.Memory.Write(z.tempaddr, z.D)
 // }
 
 // /* LD E,SLL (REGISTER+dd) */
 // func instrDDCB__LD_E_SLL_iREGpDD(z *Z80, opcode byte) {
-// 	z.E = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.E = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.E = z.sll(z.E)
-// 	z.memory.WriteByte(z.tempaddr, z.E)
+// 	z.Memory.Write(z.tempaddr, z.E)
 // }
 
 // /* LD H,SLL (REGISTER+dd) */
 // func instrDDCB__LD_H_SLL_iREGpDD(z *Z80, opcode byte) {
-// 	z.H = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.H = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.H = z.sll(z.H)
-// 	z.memory.WriteByte(z.tempaddr, z.H)
+// 	z.Memory.Write(z.tempaddr, z.H)
 // }
 
 // /* LD L,SLL (REGISTER+dd) */
 // func instrDDCB__LD_L_SLL_iREGpDD(z *Z80, opcode byte) {
-// 	z.L = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.L = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.L = z.sll(z.L)
-// 	z.memory.WriteByte(z.tempaddr, z.L)
+// 	z.Memory.Write(z.tempaddr, z.L)
 // }
 
 // /* SLL (REGISTER+dd) */
 // func instrDDCB__SLL_iREGpDD(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	var bytetemp byte = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	bytetemp = z.sll(bytetemp)
-// 	z.memory.WriteByte(z.tempaddr, bytetemp)
+// 	z.Memory.Write(z.tempaddr, bytetemp)
 // }
 
 // /* LD A,SLL (REGISTER+dd) */
 // func instrDDCB__LD_A_SLL_iREGpDD(z *Z80, opcode byte) {
-// 	z.A = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.A = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.A = z.sll(z.A)
-// 	z.memory.WriteByte(z.tempaddr, z.A)
+// 	z.Memory.Write(z.tempaddr, z.A)
 // }
 
 // /* LD B,SRL (REGISTER+dd) */
 // func instrDDCB__LD_B_SRL_iREGpDD(z *Z80, opcode byte) {
-// 	z.B = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.B = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.B = z.srl(z.B)
-// 	z.memory.WriteByte(z.tempaddr, z.B)
+// 	z.Memory.Write(z.tempaddr, z.B)
 // }
 
 // /* LD C,SRL (REGISTER+dd) */
 // func instrDDCB__LD_C_SRL_iREGpDD(z *Z80, opcode byte) {
-// 	z.C = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.C = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.C = z.srl(z.C)
-// 	z.memory.WriteByte(z.tempaddr, z.C)
+// 	z.Memory.Write(z.tempaddr, z.C)
 // }
 
 // /* LD D,SRL (REGISTER+dd) */
 // func instrDDCB__LD_D_SRL_iREGpDD(z *Z80, opcode byte) {
-// 	z.D = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.D = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.D = z.srl(z.D)
-// 	z.memory.WriteByte(z.tempaddr, z.D)
+// 	z.Memory.Write(z.tempaddr, z.D)
 // }
 
 // /* LD E,SRL (REGISTER+dd) */
 // func instrDDCB__LD_E_SRL_iREGpDD(z *Z80, opcode byte) {
-// 	z.E = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.E = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.E = z.srl(z.E)
-// 	z.memory.WriteByte(z.tempaddr, z.E)
+// 	z.Memory.Write(z.tempaddr, z.E)
 // }
 
 // /* LD H,SRL (REGISTER+dd) */
 // func instrDDCB__LD_H_SRL_iREGpDD(z *Z80, opcode byte) {
-// 	z.H = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.H = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.H = z.srl(z.H)
-// 	z.memory.WriteByte(z.tempaddr, z.H)
+// 	z.Memory.Write(z.tempaddr, z.H)
 // }
 
 // /* LD L,SRL (REGISTER+dd) */
 // func instrDDCB__LD_L_SRL_iREGpDD(z *Z80, opcode byte) {
-// 	z.L = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.L = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.L = z.srl(z.L)
-// 	z.memory.WriteByte(z.tempaddr, z.L)
+// 	z.Memory.Write(z.tempaddr, z.L)
 // }
 
 // /* SRL (REGISTER+dd) */
 // func instrDDCB__SRL_iREGpDD(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	var bytetemp byte = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	bytetemp = z.srl(bytetemp)
-// 	z.memory.WriteByte(z.tempaddr, bytetemp)
+// 	z.Memory.Write(z.tempaddr, bytetemp)
 // }
 
 // /* LD A,SRL (REGISTER+dd) */
 // func instrDDCB__LD_A_SRL_iREGpDD(z *Z80, opcode byte) {
-// 	z.A = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.A = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.A = z.srl(z.A)
-// 	z.memory.WriteByte(z.tempaddr, z.A)
+// 	z.Memory.Write(z.tempaddr, z.A)
 // }
 
 // /* BIT 0,(REGISTER+dd) */
 // func instrDDCB__BIT_0_iREGpDD(z *Z80, opcode byte) {
-// 	bytetemp := z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	bytetemp := z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.biti(0, bytetemp, z.tempaddr)
 // }
 
 // /* BIT 1,(REGISTER+dd) */
 // func instrDDCB__BIT_1_iREGpDD(z *Z80, opcode byte) {
-// 	bytetemp := z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	bytetemp := z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.biti(1, bytetemp, z.tempaddr)
 // }
 
 // /* BIT 2,(REGISTER+dd) */
 // func instrDDCB__BIT_2_iREGpDD(z *Z80, opcode byte) {
-// 	bytetemp := z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	bytetemp := z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.biti(2, bytetemp, z.tempaddr)
 // }
 
 // /* BIT 3,(REGISTER+dd) */
 // func instrDDCB__BIT_3_iREGpDD(z *Z80, opcode byte) {
-// 	bytetemp := z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	bytetemp := z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.biti(3, bytetemp, z.tempaddr)
 // }
 
 // /* BIT 4,(REGISTER+dd) */
 // func instrDDCB__BIT_4_iREGpDD(z *Z80, opcode byte) {
-// 	bytetemp := z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	bytetemp := z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.biti(4, bytetemp, z.tempaddr)
 // }
 
 // /* BIT 5,(REGISTER+dd) */
 // func instrDDCB__BIT_5_iREGpDD(z *Z80, opcode byte) {
-// 	bytetemp := z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	bytetemp := z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.biti(5, bytetemp, z.tempaddr)
 // }
 
 // /* BIT 6,(REGISTER+dd) */
 // func instrDDCB__BIT_6_iREGpDD(z *Z80, opcode byte) {
-// 	bytetemp := z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	bytetemp := z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.biti(6, bytetemp, z.tempaddr)
 // }
 
 // /* BIT 7,(REGISTER+dd) */
 // func instrDDCB__BIT_7_iREGpDD(z *Z80, opcode byte) {
-// 	bytetemp := z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	bytetemp := z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
 // 	z.biti(7, bytetemp, z.tempaddr)
 // }
 
 // /* LD B,RES 0,(REGISTER+dd) */
 // func instrDDCB__LD_B_RES_0_iREGpDD(z *Z80, opcode byte) {
-// 	z.B = z.memory.ReadByte(z.tempaddr) & 0xfe
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.B)
+// 	z.B = z.Memory.Read(z.tempaddr) & 0xfe
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.B)
 // }
 
 // /* LD C,RES 0,(REGISTER+dd) */
 // func instrDDCB__LD_C_RES_0_iREGpDD(z *Z80, opcode byte) {
-// 	z.C = z.memory.ReadByte(z.tempaddr) & 0xfe
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.C)
+// 	z.C = z.Memory.Read(z.tempaddr) & 0xfe
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.C)
 // }
 
 // /* LD D,RES 0,(REGISTER+dd) */
 // func instrDDCB__LD_D_RES_0_iREGpDD(z *Z80, opcode byte) {
-// 	z.D = z.memory.ReadByte(z.tempaddr) & 0xfe
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.D)
+// 	z.D = z.Memory.Read(z.tempaddr) & 0xfe
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.D)
 // }
 
 // /* LD E,RES 0,(REGISTER+dd) */
 // func instrDDCB__LD_E_RES_0_iREGpDD(z *Z80, opcode byte) {
-// 	z.E = z.memory.ReadByte(z.tempaddr) & 0xfe
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.E)
+// 	z.E = z.Memory.Read(z.tempaddr) & 0xfe
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.E)
 // }
 
 // /* LD H,RES 0,(REGISTER+dd) */
 // func instrDDCB__LD_H_RES_0_iREGpDD(z *Z80, opcode byte) {
-// 	z.H = z.memory.ReadByte(z.tempaddr) & 0xfe
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.H)
+// 	z.H = z.Memory.Read(z.tempaddr) & 0xfe
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.H)
 // }
 
 // /* LD L,RES 0,(REGISTER+dd) */
 // func instrDDCB__LD_L_RES_0_iREGpDD(z *Z80, opcode byte) {
-// 	z.L = z.memory.ReadByte(z.tempaddr) & 0xfe
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.L)
+// 	z.L = z.Memory.Read(z.tempaddr) & 0xfe
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.L)
 // }
 
 // /* RES 0,(REGISTER+dd) */
 // func instrDDCB__RES_0_iREGpDD(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, bytetemp&0xfe)
+// 	var bytetemp byte = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, bytetemp&0xfe)
 // }
 
 // /* LD A,RES 0,(REGISTER+dd) */
 // func instrDDCB__LD_A_RES_0_iREGpDD(z *Z80, opcode byte) {
-// 	z.A = z.memory.ReadByte(z.tempaddr) & 0xfe
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.A)
+// 	z.A = z.Memory.Read(z.tempaddr) & 0xfe
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.A)
 // }
 
 // /* LD B,RES 1,(REGISTER+dd) */
 // func instrDDCB__LD_B_RES_1_iREGpDD(z *Z80, opcode byte) {
-// 	z.B = z.memory.ReadByte(z.tempaddr) & 0xfd
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.B)
+// 	z.B = z.Memory.Read(z.tempaddr) & 0xfd
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.B)
 // }
 
 // /* LD C,RES 1,(REGISTER+dd) */
 // func instrDDCB__LD_C_RES_1_iREGpDD(z *Z80, opcode byte) {
-// 	z.C = z.memory.ReadByte(z.tempaddr) & 0xfd
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.C)
+// 	z.C = z.Memory.Read(z.tempaddr) & 0xfd
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.C)
 // }
 
 // /* LD D,RES 1,(REGISTER+dd) */
 // func instrDDCB__LD_D_RES_1_iREGpDD(z *Z80, opcode byte) {
-// 	z.D = z.memory.ReadByte(z.tempaddr) & 0xfd
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.D)
+// 	z.D = z.Memory.Read(z.tempaddr) & 0xfd
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.D)
 // }
 
 // /* LD E,RES 1,(REGISTER+dd) */
 // func instrDDCB__LD_E_RES_1_iREGpDD(z *Z80, opcode byte) {
-// 	z.E = z.memory.ReadByte(z.tempaddr) & 0xfd
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.E)
+// 	z.E = z.Memory.Read(z.tempaddr) & 0xfd
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.E)
 // }
 
 // /* LD H,RES 1,(REGISTER+dd) */
 // func instrDDCB__LD_H_RES_1_iREGpDD(z *Z80, opcode byte) {
-// 	z.H = z.memory.ReadByte(z.tempaddr) & 0xfd
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.H)
+// 	z.H = z.Memory.Read(z.tempaddr) & 0xfd
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.H)
 // }
 
 // /* LD L,RES 1,(REGISTER+dd) */
 // func instrDDCB__LD_L_RES_1_iREGpDD(z *Z80, opcode byte) {
-// 	z.L = z.memory.ReadByte(z.tempaddr) & 0xfd
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.L)
+// 	z.L = z.Memory.Read(z.tempaddr) & 0xfd
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.L)
 // }
 
 // /* RES 1,(REGISTER+dd) */
 // func instrDDCB__RES_1_iREGpDD(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, bytetemp&0xfd)
+// 	var bytetemp byte = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, bytetemp&0xfd)
 // }
 
 // /* LD A,RES 1,(REGISTER+dd) */
 // func instrDDCB__LD_A_RES_1_iREGpDD(z *Z80, opcode byte) {
-// 	z.A = z.memory.ReadByte(z.tempaddr) & 0xfd
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.A)
+// 	z.A = z.Memory.Read(z.tempaddr) & 0xfd
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.A)
 // }
 
 // /* LD B,RES 2,(REGISTER+dd) */
 // func instrDDCB__LD_B_RES_2_iREGpDD(z *Z80, opcode byte) {
-// 	z.B = z.memory.ReadByte(z.tempaddr) & 0xfb
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.B)
+// 	z.B = z.Memory.Read(z.tempaddr) & 0xfb
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.B)
 // }
 
 // /* LD C,RES 2,(REGISTER+dd) */
 // func instrDDCB__LD_C_RES_2_iREGpDD(z *Z80, opcode byte) {
-// 	z.C = z.memory.ReadByte(z.tempaddr) & 0xfb
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.C)
+// 	z.C = z.Memory.Read(z.tempaddr) & 0xfb
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.C)
 // }
 
 // /* LD D,RES 2,(REGISTER+dd) */
 // func instrDDCB__LD_D_RES_2_iREGpDD(z *Z80, opcode byte) {
-// 	z.D = z.memory.ReadByte(z.tempaddr) & 0xfb
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.D)
+// 	z.D = z.Memory.Read(z.tempaddr) & 0xfb
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.D)
 // }
 
 // /* LD E,RES 2,(REGISTER+dd) */
 // func instrDDCB__LD_E_RES_2_iREGpDD(z *Z80, opcode byte) {
-// 	z.E = z.memory.ReadByte(z.tempaddr) & 0xfb
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.E)
+// 	z.E = z.Memory.Read(z.tempaddr) & 0xfb
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.E)
 // }
 
 // /* LD H,RES 2,(REGISTER+dd) */
 // func instrDDCB__LD_H_RES_2_iREGpDD(z *Z80, opcode byte) {
-// 	z.H = z.memory.ReadByte(z.tempaddr) & 0xfb
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.H)
+// 	z.H = z.Memory.Read(z.tempaddr) & 0xfb
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.H)
 // }
 
 // /* LD L,RES 2,(REGISTER+dd) */
 // func instrDDCB__LD_L_RES_2_iREGpDD(z *Z80, opcode byte) {
-// 	z.L = z.memory.ReadByte(z.tempaddr) & 0xfb
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.L)
+// 	z.L = z.Memory.Read(z.tempaddr) & 0xfb
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.L)
 // }
 
 // /* RES 2,(REGISTER+dd) */
 // func instrDDCB__RES_2_iREGpDD(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, bytetemp&0xfb)
+// 	var bytetemp byte = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, bytetemp&0xfb)
 // }
 
 // /* LD A,RES 2,(REGISTER+dd) */
 // func instrDDCB__LD_A_RES_2_iREGpDD(z *Z80, opcode byte) {
-// 	z.A = z.memory.ReadByte(z.tempaddr) & 0xfb
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.A)
+// 	z.A = z.Memory.Read(z.tempaddr) & 0xfb
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.A)
 // }
 
 // /* LD B,RES 3,(REGISTER+dd) */
 // func instrDDCB__LD_B_RES_3_iREGpDD(z *Z80, opcode byte) {
-// 	z.B = z.memory.ReadByte(z.tempaddr) & 0xf7
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.B)
+// 	z.B = z.Memory.Read(z.tempaddr) & 0xf7
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.B)
 // }
 
 // /* LD C,RES 3,(REGISTER+dd) */
 // func instrDDCB__LD_C_RES_3_iREGpDD(z *Z80, opcode byte) {
-// 	z.C = z.memory.ReadByte(z.tempaddr) & 0xf7
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.C)
+// 	z.C = z.Memory.Read(z.tempaddr) & 0xf7
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.C)
 // }
 
 // /* LD D,RES 3,(REGISTER+dd) */
 // func instrDDCB__LD_D_RES_3_iREGpDD(z *Z80, opcode byte) {
-// 	z.D = z.memory.ReadByte(z.tempaddr) & 0xf7
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.D)
+// 	z.D = z.Memory.Read(z.tempaddr) & 0xf7
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.D)
 // }
 
 // /* LD E,RES 3,(REGISTER+dd) */
 // func instrDDCB__LD_E_RES_3_iREGpDD(z *Z80, opcode byte) {
-// 	z.E = z.memory.ReadByte(z.tempaddr) & 0xf7
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.E)
+// 	z.E = z.Memory.Read(z.tempaddr) & 0xf7
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.E)
 // }
 
 // /* LD H,RES 3,(REGISTER+dd) */
 // func instrDDCB__LD_H_RES_3_iREGpDD(z *Z80, opcode byte) {
-// 	z.H = z.memory.ReadByte(z.tempaddr) & 0xf7
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.H)
+// 	z.H = z.Memory.Read(z.tempaddr) & 0xf7
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.H)
 // }
 
 // /* LD L,RES 3,(REGISTER+dd) */
 // func instrDDCB__LD_L_RES_3_iREGpDD(z *Z80, opcode byte) {
-// 	z.L = z.memory.ReadByte(z.tempaddr) & 0xf7
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.L)
+// 	z.L = z.Memory.Read(z.tempaddr) & 0xf7
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.L)
 // }
 
 // /* RES 3,(REGISTER+dd) */
 // func instrDDCB__RES_3_iREGpDD(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, bytetemp&0xf7)
+// 	var bytetemp byte = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, bytetemp&0xf7)
 // }
 
 // /* LD A,RES 3,(REGISTER+dd) */
 // func instrDDCB__LD_A_RES_3_iREGpDD(z *Z80, opcode byte) {
-// 	z.A = z.memory.ReadByte(z.tempaddr) & 0xf7
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.A)
+// 	z.A = z.Memory.Read(z.tempaddr) & 0xf7
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.A)
 // }
 
 // /* LD B,RES 4,(REGISTER+dd) */
 // func instrDDCB__LD_B_RES_4_iREGpDD(z *Z80, opcode byte) {
-// 	z.B = z.memory.ReadByte(z.tempaddr) & 0xef
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.B)
+// 	z.B = z.Memory.Read(z.tempaddr) & 0xef
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.B)
 // }
 
 // /* LD C,RES 4,(REGISTER+dd) */
 // func instrDDCB__LD_C_RES_4_iREGpDD(z *Z80, opcode byte) {
-// 	z.C = z.memory.ReadByte(z.tempaddr) & 0xef
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.C)
+// 	z.C = z.Memory.Read(z.tempaddr) & 0xef
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.C)
 // }
 
 // /* LD D,RES 4,(REGISTER+dd) */
 // func instrDDCB__LD_D_RES_4_iREGpDD(z *Z80, opcode byte) {
-// 	z.D = z.memory.ReadByte(z.tempaddr) & 0xef
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.D)
+// 	z.D = z.Memory.Read(z.tempaddr) & 0xef
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.D)
 // }
 
 // /* LD E,RES 4,(REGISTER+dd) */
 // func instrDDCB__LD_E_RES_4_iREGpDD(z *Z80, opcode byte) {
-// 	z.E = z.memory.ReadByte(z.tempaddr) & 0xef
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.E)
+// 	z.E = z.Memory.Read(z.tempaddr) & 0xef
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.E)
 // }
 
 // /* LD H,RES 4,(REGISTER+dd) */
 // func instrDDCB__LD_H_RES_4_iREGpDD(z *Z80, opcode byte) {
-// 	z.H = z.memory.ReadByte(z.tempaddr) & 0xef
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.H)
+// 	z.H = z.Memory.Read(z.tempaddr) & 0xef
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.H)
 // }
 
 // /* LD L,RES 4,(REGISTER+dd) */
 // func instrDDCB__LD_L_RES_4_iREGpDD(z *Z80, opcode byte) {
-// 	z.L = z.memory.ReadByte(z.tempaddr) & 0xef
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.L)
+// 	z.L = z.Memory.Read(z.tempaddr) & 0xef
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.L)
 // }
 
 // /* RES 4,(REGISTER+dd) */
 // func instrDDCB__RES_4_iREGpDD(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, bytetemp&0xef)
+// 	var bytetemp byte = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, bytetemp&0xef)
 // }
 
 // /* LD A,RES 4,(REGISTER+dd) */
 // func instrDDCB__LD_A_RES_4_iREGpDD(z *Z80, opcode byte) {
-// 	z.A = z.memory.ReadByte(z.tempaddr) & 0xef
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.A)
+// 	z.A = z.Memory.Read(z.tempaddr) & 0xef
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.A)
 // }
 
 // /* LD B,RES 5,(REGISTER+dd) */
 // func instrDDCB__LD_B_RES_5_iREGpDD(z *Z80, opcode byte) {
-// 	z.B = z.memory.ReadByte(z.tempaddr) & 0xdf
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.B)
+// 	z.B = z.Memory.Read(z.tempaddr) & 0xdf
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.B)
 // }
 
 // /* LD C,RES 5,(REGISTER+dd) */
 // func instrDDCB__LD_C_RES_5_iREGpDD(z *Z80, opcode byte) {
-// 	z.C = z.memory.ReadByte(z.tempaddr) & 0xdf
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.C)
+// 	z.C = z.Memory.Read(z.tempaddr) & 0xdf
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.C)
 // }
 
 // /* LD D,RES 5,(REGISTER+dd) */
 // func instrDDCB__LD_D_RES_5_iREGpDD(z *Z80, opcode byte) {
-// 	z.D = z.memory.ReadByte(z.tempaddr) & 0xdf
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.D)
+// 	z.D = z.Memory.Read(z.tempaddr) & 0xdf
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.D)
 // }
 
 // /* LD E,RES 5,(REGISTER+dd) */
 // func instrDDCB__LD_E_RES_5_iREGpDD(z *Z80, opcode byte) {
-// 	z.E = z.memory.ReadByte(z.tempaddr) & 0xdf
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.E)
+// 	z.E = z.Memory.Read(z.tempaddr) & 0xdf
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.E)
 // }
 
 // /* LD H,RES 5,(REGISTER+dd) */
 // func instrDDCB__LD_H_RES_5_iREGpDD(z *Z80, opcode byte) {
-// 	z.H = z.memory.ReadByte(z.tempaddr) & 0xdf
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.H)
+// 	z.H = z.Memory.Read(z.tempaddr) & 0xdf
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.H)
 // }
 
 // /* LD L,RES 5,(REGISTER+dd) */
 // func instrDDCB__LD_L_RES_5_iREGpDD(z *Z80, opcode byte) {
-// 	z.L = z.memory.ReadByte(z.tempaddr) & 0xdf
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.L)
+// 	z.L = z.Memory.Read(z.tempaddr) & 0xdf
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.L)
 // }
 
 // /* RES 5,(REGISTER+dd) */
 // func instrDDCB__RES_5_iREGpDD(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, bytetemp&0xdf)
+// 	var bytetemp byte = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, bytetemp&0xdf)
 // }
 
 // /* LD A,RES 5,(REGISTER+dd) */
 // func instrDDCB__LD_A_RES_5_iREGpDD(z *Z80, opcode byte) {
-// 	z.A = z.memory.ReadByte(z.tempaddr) & 0xdf
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.A)
+// 	z.A = z.Memory.Read(z.tempaddr) & 0xdf
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.A)
 // }
 
 // /* LD B,RES 6,(REGISTER+dd) */
 // func instrDDCB__LD_B_RES_6_iREGpDD(z *Z80, opcode byte) {
-// 	z.B = z.memory.ReadByte(z.tempaddr) & 0xbf
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.B)
+// 	z.B = z.Memory.Read(z.tempaddr) & 0xbf
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.B)
 // }
 
 // /* LD C,RES 6,(REGISTER+dd) */
 // func instrDDCB__LD_C_RES_6_iREGpDD(z *Z80, opcode byte) {
-// 	z.C = z.memory.ReadByte(z.tempaddr) & 0xbf
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.C)
+// 	z.C = z.Memory.Read(z.tempaddr) & 0xbf
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.C)
 // }
 
 // /* LD D,RES 6,(REGISTER+dd) */
 // func instrDDCB__LD_D_RES_6_iREGpDD(z *Z80, opcode byte) {
-// 	z.D = z.memory.ReadByte(z.tempaddr) & 0xbf
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.D)
+// 	z.D = z.Memory.Read(z.tempaddr) & 0xbf
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.D)
 // }
 
 // /* LD E,RES 6,(REGISTER+dd) */
 // func instrDDCB__LD_E_RES_6_iREGpDD(z *Z80, opcode byte) {
-// 	z.E = z.memory.ReadByte(z.tempaddr) & 0xbf
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.E)
+// 	z.E = z.Memory.Read(z.tempaddr) & 0xbf
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.E)
 // }
 
 // /* LD H,RES 6,(REGISTER+dd) */
 // func instrDDCB__LD_H_RES_6_iREGpDD(z *Z80, opcode byte) {
-// 	z.H = z.memory.ReadByte(z.tempaddr) & 0xbf
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.H)
+// 	z.H = z.Memory.Read(z.tempaddr) & 0xbf
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.H)
 // }
 
 // /* LD L,RES 6,(REGISTER+dd) */
 // func instrDDCB__LD_L_RES_6_iREGpDD(z *Z80, opcode byte) {
-// 	z.L = z.memory.ReadByte(z.tempaddr) & 0xbf
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.L)
+// 	z.L = z.Memory.Read(z.tempaddr) & 0xbf
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.L)
 // }
 
 // /* RES 6,(REGISTER+dd) */
 // func instrDDCB__RES_6_iREGpDD(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, bytetemp&0xbf)
+// 	var bytetemp byte = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, bytetemp&0xbf)
 // }
 
 // /* LD A,RES 6,(REGISTER+dd) */
 // func instrDDCB__LD_A_RES_6_iREGpDD(z *Z80, opcode byte) {
-// 	z.A = z.memory.ReadByte(z.tempaddr) & 0xbf
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.A)
+// 	z.A = z.Memory.Read(z.tempaddr) & 0xbf
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.A)
 // }
 
 // /* LD B,RES 7,(REGISTER+dd) */
 // func instrDDCB__LD_B_RES_7_iREGpDD(z *Z80, opcode byte) {
-// 	z.B = z.memory.ReadByte(z.tempaddr) & 0x7f
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.B)
+// 	z.B = z.Memory.Read(z.tempaddr) & 0x7f
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.B)
 // }
 
 // /* LD C,RES 7,(REGISTER+dd) */
 // func instrDDCB__LD_C_RES_7_iREGpDD(z *Z80, opcode byte) {
-// 	z.C = z.memory.ReadByte(z.tempaddr) & 0x7f
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.C)
+// 	z.C = z.Memory.Read(z.tempaddr) & 0x7f
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.C)
 // }
 
 // /* LD D,RES 7,(REGISTER+dd) */
 // func instrDDCB__LD_D_RES_7_iREGpDD(z *Z80, opcode byte) {
-// 	z.D = z.memory.ReadByte(z.tempaddr) & 0x7f
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.D)
+// 	z.D = z.Memory.Read(z.tempaddr) & 0x7f
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.D)
 // }
 
 // /* LD E,RES 7,(REGISTER+dd) */
 // func instrDDCB__LD_E_RES_7_iREGpDD(z *Z80, opcode byte) {
-// 	z.E = z.memory.ReadByte(z.tempaddr) & 0x7f
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.E)
+// 	z.E = z.Memory.Read(z.tempaddr) & 0x7f
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.E)
 // }
 
 // /* LD H,RES 7,(REGISTER+dd) */
 // func instrDDCB__LD_H_RES_7_iREGpDD(z *Z80, opcode byte) {
-// 	z.H = z.memory.ReadByte(z.tempaddr) & 0x7f
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.H)
+// 	z.H = z.Memory.Read(z.tempaddr) & 0x7f
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.H)
 // }
 
 // /* LD L,RES 7,(REGISTER+dd) */
 // func instrDDCB__LD_L_RES_7_iREGpDD(z *Z80, opcode byte) {
-// 	z.L = z.memory.ReadByte(z.tempaddr) & 0x7f
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.L)
+// 	z.L = z.Memory.Read(z.tempaddr) & 0x7f
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.L)
 // }
 
 // /* RES 7,(REGISTER+dd) */
 // func instrDDCB__RES_7_iREGpDD(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, bytetemp&0x7f)
+// 	var bytetemp byte = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, bytetemp&0x7f)
 // }
 
 // /* LD A,RES 7,(REGISTER+dd) */
 // func instrDDCB__LD_A_RES_7_iREGpDD(z *Z80, opcode byte) {
-// 	z.A = z.memory.ReadByte(z.tempaddr) & 0x7f
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.A)
+// 	z.A = z.Memory.Read(z.tempaddr) & 0x7f
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.A)
 // }
 
 // /* LD B,SET 0,(REGISTER+dd) */
 // func instrDDCB__LD_B_SET_0_iREGpDD(z *Z80, opcode byte) {
-// 	z.B = z.memory.ReadByte(z.tempaddr) | 0x01
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.B)
+// 	z.B = z.Memory.Read(z.tempaddr) | 0x01
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.B)
 // }
 
 // /* LD C,SET 0,(REGISTER+dd) */
 // func instrDDCB__LD_C_SET_0_iREGpDD(z *Z80, opcode byte) {
-// 	z.C = z.memory.ReadByte(z.tempaddr) | 0x01
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.C)
+// 	z.C = z.Memory.Read(z.tempaddr) | 0x01
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.C)
 // }
 
 // /* LD D,SET 0,(REGISTER+dd) */
 // func instrDDCB__LD_D_SET_0_iREGpDD(z *Z80, opcode byte) {
-// 	z.D = z.memory.ReadByte(z.tempaddr) | 0x01
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.D)
+// 	z.D = z.Memory.Read(z.tempaddr) | 0x01
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.D)
 // }
 
 // /* LD E,SET 0,(REGISTER+dd) */
 // func instrDDCB__LD_E_SET_0_iREGpDD(z *Z80, opcode byte) {
-// 	z.E = z.memory.ReadByte(z.tempaddr) | 0x01
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.E)
+// 	z.E = z.Memory.Read(z.tempaddr) | 0x01
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.E)
 // }
 
 // /* LD H,SET 0,(REGISTER+dd) */
 // func instrDDCB__LD_H_SET_0_iREGpDD(z *Z80, opcode byte) {
-// 	z.H = z.memory.ReadByte(z.tempaddr) | 0x01
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.H)
+// 	z.H = z.Memory.Read(z.tempaddr) | 0x01
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.H)
 // }
 
 // /* LD L,SET 0,(REGISTER+dd) */
 // func instrDDCB__LD_L_SET_0_iREGpDD(z *Z80, opcode byte) {
-// 	z.L = z.memory.ReadByte(z.tempaddr) | 0x01
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.L)
+// 	z.L = z.Memory.Read(z.tempaddr) | 0x01
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.L)
 // }
 
 // /* SET 0,(REGISTER+dd) */
 // func instrDDCB__SET_0_iREGpDD(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, bytetemp|0x01)
+// 	var bytetemp byte = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, bytetemp|0x01)
 // }
 
 // /* LD A,SET 0,(REGISTER+dd) */
 // func instrDDCB__LD_A_SET_0_iREGpDD(z *Z80, opcode byte) {
-// 	z.A = z.memory.ReadByte(z.tempaddr) | 0x01
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.A)
+// 	z.A = z.Memory.Read(z.tempaddr) | 0x01
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.A)
 // }
 
 // /* LD B,SET 1,(REGISTER+dd) */
 // func instrDDCB__LD_B_SET_1_iREGpDD(z *Z80, opcode byte) {
-// 	z.B = z.memory.ReadByte(z.tempaddr) | 0x02
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.B)
+// 	z.B = z.Memory.Read(z.tempaddr) | 0x02
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.B)
 // }
 
 // /* LD C,SET 1,(REGISTER+dd) */
 // func instrDDCB__LD_C_SET_1_iREGpDD(z *Z80, opcode byte) {
-// 	z.C = z.memory.ReadByte(z.tempaddr) | 0x02
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.C)
+// 	z.C = z.Memory.Read(z.tempaddr) | 0x02
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.C)
 // }
 
 // /* LD D,SET 1,(REGISTER+dd) */
 // func instrDDCB__LD_D_SET_1_iREGpDD(z *Z80, opcode byte) {
-// 	z.D = z.memory.ReadByte(z.tempaddr) | 0x02
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.D)
+// 	z.D = z.Memory.Read(z.tempaddr) | 0x02
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.D)
 // }
 
 // /* LD E,SET 1,(REGISTER+dd) */
 // func instrDDCB__LD_E_SET_1_iREGpDD(z *Z80, opcode byte) {
-// 	z.E = z.memory.ReadByte(z.tempaddr) | 0x02
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.E)
+// 	z.E = z.Memory.Read(z.tempaddr) | 0x02
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.E)
 // }
 
 // /* LD H,SET 1,(REGISTER+dd) */
 // func instrDDCB__LD_H_SET_1_iREGpDD(z *Z80, opcode byte) {
-// 	z.H = z.memory.ReadByte(z.tempaddr) | 0x02
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.H)
+// 	z.H = z.Memory.Read(z.tempaddr) | 0x02
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.H)
 // }
 
 // /* LD L,SET 1,(REGISTER+dd) */
 // func instrDDCB__LD_L_SET_1_iREGpDD(z *Z80, opcode byte) {
-// 	z.L = z.memory.ReadByte(z.tempaddr) | 0x02
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.L)
+// 	z.L = z.Memory.Read(z.tempaddr) | 0x02
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.L)
 // }
 
 // /* SET 1,(REGISTER+dd) */
 // func instrDDCB__SET_1_iREGpDD(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, bytetemp|0x02)
+// 	var bytetemp byte = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, bytetemp|0x02)
 // }
 
 // /* LD A,SET 1,(REGISTER+dd) */
 // func instrDDCB__LD_A_SET_1_iREGpDD(z *Z80, opcode byte) {
-// 	z.A = z.memory.ReadByte(z.tempaddr) | 0x02
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.A)
+// 	z.A = z.Memory.Read(z.tempaddr) | 0x02
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.A)
 // }
 
 // /* LD B,SET 2,(REGISTER+dd) */
 // func instrDDCB__LD_B_SET_2_iREGpDD(z *Z80, opcode byte) {
-// 	z.B = z.memory.ReadByte(z.tempaddr) | 0x04
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.B)
+// 	z.B = z.Memory.Read(z.tempaddr) | 0x04
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.B)
 // }
 
 // /* LD C,SET 2,(REGISTER+dd) */
 // func instrDDCB__LD_C_SET_2_iREGpDD(z *Z80, opcode byte) {
-// 	z.C = z.memory.ReadByte(z.tempaddr) | 0x04
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.C)
+// 	z.C = z.Memory.Read(z.tempaddr) | 0x04
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.C)
 // }
 
 // /* LD D,SET 2,(REGISTER+dd) */
 // func instrDDCB__LD_D_SET_2_iREGpDD(z *Z80, opcode byte) {
-// 	z.D = z.memory.ReadByte(z.tempaddr) | 0x04
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.D)
+// 	z.D = z.Memory.Read(z.tempaddr) | 0x04
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.D)
 // }
 
 // /* LD E,SET 2,(REGISTER+dd) */
 // func instrDDCB__LD_E_SET_2_iREGpDD(z *Z80, opcode byte) {
-// 	z.E = z.memory.ReadByte(z.tempaddr) | 0x04
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.E)
+// 	z.E = z.Memory.Read(z.tempaddr) | 0x04
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.E)
 // }
 
 // /* LD H,SET 2,(REGISTER+dd) */
 // func instrDDCB__LD_H_SET_2_iREGpDD(z *Z80, opcode byte) {
-// 	z.H = z.memory.ReadByte(z.tempaddr) | 0x04
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.H)
+// 	z.H = z.Memory.Read(z.tempaddr) | 0x04
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.H)
 // }
 
 // /* LD L,SET 2,(REGISTER+dd) */
 // func instrDDCB__LD_L_SET_2_iREGpDD(z *Z80, opcode byte) {
-// 	z.L = z.memory.ReadByte(z.tempaddr) | 0x04
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.L)
+// 	z.L = z.Memory.Read(z.tempaddr) | 0x04
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.L)
 // }
 
 // /* SET 2,(REGISTER+dd) */
 // func instrDDCB__SET_2_iREGpDD(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, bytetemp|0x04)
+// 	var bytetemp byte = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, bytetemp|0x04)
 // }
 
 // /* LD A,SET 2,(REGISTER+dd) */
 // func instrDDCB__LD_A_SET_2_iREGpDD(z *Z80, opcode byte) {
-// 	z.A = z.memory.ReadByte(z.tempaddr) | 0x04
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.A)
+// 	z.A = z.Memory.Read(z.tempaddr) | 0x04
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.A)
 // }
 
 // /* LD B,SET 3,(REGISTER+dd) */
 // func instrDDCB__LD_B_SET_3_iREGpDD(z *Z80, opcode byte) {
-// 	z.B = z.memory.ReadByte(z.tempaddr) | 0x08
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.B)
+// 	z.B = z.Memory.Read(z.tempaddr) | 0x08
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.B)
 // }
 
 // /* LD C,SET 3,(REGISTER+dd) */
 // func instrDDCB__LD_C_SET_3_iREGpDD(z *Z80, opcode byte) {
-// 	z.C = z.memory.ReadByte(z.tempaddr) | 0x08
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.C)
+// 	z.C = z.Memory.Read(z.tempaddr) | 0x08
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.C)
 // }
 
 // /* LD D,SET 3,(REGISTER+dd) */
 // func instrDDCB__LD_D_SET_3_iREGpDD(z *Z80, opcode byte) {
-// 	z.D = z.memory.ReadByte(z.tempaddr) | 0x08
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.D)
+// 	z.D = z.Memory.Read(z.tempaddr) | 0x08
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.D)
 // }
 
 // /* LD E,SET 3,(REGISTER+dd) */
 // func instrDDCB__LD_E_SET_3_iREGpDD(z *Z80, opcode byte) {
-// 	z.E = z.memory.ReadByte(z.tempaddr) | 0x08
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.E)
+// 	z.E = z.Memory.Read(z.tempaddr) | 0x08
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.E)
 // }
 
 // /* LD H,SET 3,(REGISTER+dd) */
 // func instrDDCB__LD_H_SET_3_iREGpDD(z *Z80, opcode byte) {
-// 	z.H = z.memory.ReadByte(z.tempaddr) | 0x08
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.H)
+// 	z.H = z.Memory.Read(z.tempaddr) | 0x08
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.H)
 // }
 
 // /* LD L,SET 3,(REGISTER+dd) */
 // func instrDDCB__LD_L_SET_3_iREGpDD(z *Z80, opcode byte) {
-// 	z.L = z.memory.ReadByte(z.tempaddr) | 0x08
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.L)
+// 	z.L = z.Memory.Read(z.tempaddr) | 0x08
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.L)
 // }
 
 // /* SET 3,(REGISTER+dd) */
 // func instrDDCB__SET_3_iREGpDD(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, bytetemp|0x08)
+// 	var bytetemp byte = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, bytetemp|0x08)
 // }
 
 // /* LD A,SET 3,(REGISTER+dd) */
 // func instrDDCB__LD_A_SET_3_iREGpDD(z *Z80, opcode byte) {
-// 	z.A = z.memory.ReadByte(z.tempaddr) | 0x08
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.A)
+// 	z.A = z.Memory.Read(z.tempaddr) | 0x08
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.A)
 // }
 
 // /* LD B,SET 4,(REGISTER+dd) */
 // func instrDDCB__LD_B_SET_4_iREGpDD(z *Z80, opcode byte) {
-// 	z.B = z.memory.ReadByte(z.tempaddr) | 0x10
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.B)
+// 	z.B = z.Memory.Read(z.tempaddr) | 0x10
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.B)
 // }
 
 // /* LD C,SET 4,(REGISTER+dd) */
 // func instrDDCB__LD_C_SET_4_iREGpDD(z *Z80, opcode byte) {
-// 	z.C = z.memory.ReadByte(z.tempaddr) | 0x10
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.C)
+// 	z.C = z.Memory.Read(z.tempaddr) | 0x10
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.C)
 // }
 
 // /* LD D,SET 4,(REGISTER+dd) */
 // func instrDDCB__LD_D_SET_4_iREGpDD(z *Z80, opcode byte) {
-// 	z.D = z.memory.ReadByte(z.tempaddr) | 0x10
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.D)
+// 	z.D = z.Memory.Read(z.tempaddr) | 0x10
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.D)
 // }
 
 // /* LD E,SET 4,(REGISTER+dd) */
 // func instrDDCB__LD_E_SET_4_iREGpDD(z *Z80, opcode byte) {
-// 	z.E = z.memory.ReadByte(z.tempaddr) | 0x10
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.E)
+// 	z.E = z.Memory.Read(z.tempaddr) | 0x10
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.E)
 // }
 
 // /* LD H,SET 4,(REGISTER+dd) */
 // func instrDDCB__LD_H_SET_4_iREGpDD(z *Z80, opcode byte) {
-// 	z.H = z.memory.ReadByte(z.tempaddr) | 0x10
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.H)
+// 	z.H = z.Memory.Read(z.tempaddr) | 0x10
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.H)
 // }
 
 // /* LD L,SET 4,(REGISTER+dd) */
 // func instrDDCB__LD_L_SET_4_iREGpDD(z *Z80, opcode byte) {
-// 	z.L = z.memory.ReadByte(z.tempaddr) | 0x10
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.L)
+// 	z.L = z.Memory.Read(z.tempaddr) | 0x10
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.L)
 // }
 
 // /* SET 4,(REGISTER+dd) */
 // func instrDDCB__SET_4_iREGpDD(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, bytetemp|0x10)
+// 	var bytetemp byte = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, bytetemp|0x10)
 // }
 
 // /* LD A,SET 4,(REGISTER+dd) */
 // func instrDDCB__LD_A_SET_4_iREGpDD(z *Z80, opcode byte) {
-// 	z.A = z.memory.ReadByte(z.tempaddr) | 0x10
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.A)
+// 	z.A = z.Memory.Read(z.tempaddr) | 0x10
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.A)
 // }
 
 // /* LD B,SET 5,(REGISTER+dd) */
 // func instrDDCB__LD_B_SET_5_iREGpDD(z *Z80, opcode byte) {
-// 	z.B = z.memory.ReadByte(z.tempaddr) | 0x20
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.B)
+// 	z.B = z.Memory.Read(z.tempaddr) | 0x20
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.B)
 // }
 
 // /* LD C,SET 5,(REGISTER+dd) */
 // func instrDDCB__LD_C_SET_5_iREGpDD(z *Z80, opcode byte) {
-// 	z.C = z.memory.ReadByte(z.tempaddr) | 0x20
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.C)
+// 	z.C = z.Memory.Read(z.tempaddr) | 0x20
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.C)
 // }
 
 // /* LD D,SET 5,(REGISTER+dd) */
 // func instrDDCB__LD_D_SET_5_iREGpDD(z *Z80, opcode byte) {
-// 	z.D = z.memory.ReadByte(z.tempaddr) | 0x20
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.D)
+// 	z.D = z.Memory.Read(z.tempaddr) | 0x20
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.D)
 // }
 
 // /* LD E,SET 5,(REGISTER+dd) */
 // func instrDDCB__LD_E_SET_5_iREGpDD(z *Z80, opcode byte) {
-// 	z.E = z.memory.ReadByte(z.tempaddr) | 0x20
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.E)
+// 	z.E = z.Memory.Read(z.tempaddr) | 0x20
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.E)
 // }
 
 // /* LD H,SET 5,(REGISTER+dd) */
 // func instrDDCB__LD_H_SET_5_iREGpDD(z *Z80, opcode byte) {
-// 	z.H = z.memory.ReadByte(z.tempaddr) | 0x20
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.H)
+// 	z.H = z.Memory.Read(z.tempaddr) | 0x20
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.H)
 // }
 
 // /* LD L,SET 5,(REGISTER+dd) */
 // func instrDDCB__LD_L_SET_5_iREGpDD(z *Z80, opcode byte) {
-// 	z.L = z.memory.ReadByte(z.tempaddr) | 0x20
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.L)
+// 	z.L = z.Memory.Read(z.tempaddr) | 0x20
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.L)
 // }
 
 // /* SET 5,(REGISTER+dd) */
 // func instrDDCB__SET_5_iREGpDD(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, bytetemp|0x20)
+// 	var bytetemp byte = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, bytetemp|0x20)
 // }
 
 // /* LD A,SET 5,(REGISTER+dd) */
 // func instrDDCB__LD_A_SET_5_iREGpDD(z *Z80, opcode byte) {
-// 	z.A = z.memory.ReadByte(z.tempaddr) | 0x20
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.A)
+// 	z.A = z.Memory.Read(z.tempaddr) | 0x20
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.A)
 // }
 
 // /* LD B,SET 6,(REGISTER+dd) */
 // func instrDDCB__LD_B_SET_6_iREGpDD(z *Z80, opcode byte) {
-// 	z.B = z.memory.ReadByte(z.tempaddr) | 0x40
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.B)
+// 	z.B = z.Memory.Read(z.tempaddr) | 0x40
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.B)
 // }
 
 // /* LD C,SET 6,(REGISTER+dd) */
 // func instrDDCB__LD_C_SET_6_iREGpDD(z *Z80, opcode byte) {
-// 	z.C = z.memory.ReadByte(z.tempaddr) | 0x40
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.C)
+// 	z.C = z.Memory.Read(z.tempaddr) | 0x40
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.C)
 // }
 
 // /* LD D,SET 6,(REGISTER+dd) */
 // func instrDDCB__LD_D_SET_6_iREGpDD(z *Z80, opcode byte) {
-// 	z.D = z.memory.ReadByte(z.tempaddr) | 0x40
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.D)
+// 	z.D = z.Memory.Read(z.tempaddr) | 0x40
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.D)
 // }
 
 // /* LD E,SET 6,(REGISTER+dd) */
 // func instrDDCB__LD_E_SET_6_iREGpDD(z *Z80, opcode byte) {
-// 	z.E = z.memory.ReadByte(z.tempaddr) | 0x40
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.E)
+// 	z.E = z.Memory.Read(z.tempaddr) | 0x40
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.E)
 // }
 
 // /* LD H,SET 6,(REGISTER+dd) */
 // func instrDDCB__LD_H_SET_6_iREGpDD(z *Z80, opcode byte) {
-// 	z.H = z.memory.ReadByte(z.tempaddr) | 0x40
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.H)
+// 	z.H = z.Memory.Read(z.tempaddr) | 0x40
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.H)
 // }
 
 // /* LD L,SET 6,(REGISTER+dd) */
 // func instrDDCB__LD_L_SET_6_iREGpDD(z *Z80, opcode byte) {
-// 	z.L = z.memory.ReadByte(z.tempaddr) | 0x40
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.L)
+// 	z.L = z.Memory.Read(z.tempaddr) | 0x40
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.L)
 // }
 
 // /* SET 6,(REGISTER+dd) */
 // func instrDDCB__SET_6_iREGpDD(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, bytetemp|0x40)
+// 	var bytetemp byte = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, bytetemp|0x40)
 // }
 
 // /* LD A,SET 6,(REGISTER+dd) */
 // func instrDDCB__LD_A_SET_6_iREGpDD(z *Z80, opcode byte) {
-// 	z.A = z.memory.ReadByte(z.tempaddr) | 0x40
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.A)
+// 	z.A = z.Memory.Read(z.tempaddr) | 0x40
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.A)
 // }
 
 // /* LD B,SET 7,(REGISTER+dd) */
 // func instrDDCB__LD_B_SET_7_iREGpDD(z *Z80, opcode byte) {
-// 	z.B = z.memory.ReadByte(z.tempaddr) | 0x80
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.B)
+// 	z.B = z.Memory.Read(z.tempaddr) | 0x80
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.B)
 // }
 
 // /* LD C,SET 7,(REGISTER+dd) */
 // func instrDDCB__LD_C_SET_7_iREGpDD(z *Z80, opcode byte) {
-// 	z.C = z.memory.ReadByte(z.tempaddr) | 0x80
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.C)
+// 	z.C = z.Memory.Read(z.tempaddr) | 0x80
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.C)
 // }
 
 // /* LD D,SET 7,(REGISTER+dd) */
 // func instrDDCB__LD_D_SET_7_iREGpDD(z *Z80, opcode byte) {
-// 	z.D = z.memory.ReadByte(z.tempaddr) | 0x80
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.D)
+// 	z.D = z.Memory.Read(z.tempaddr) | 0x80
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.D)
 // }
 
 // /* LD E,SET 7,(REGISTER+dd) */
 // func instrDDCB__LD_E_SET_7_iREGpDD(z *Z80, opcode byte) {
-// 	z.E = z.memory.ReadByte(z.tempaddr) | 0x80
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.E)
+// 	z.E = z.Memory.Read(z.tempaddr) | 0x80
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.E)
 // }
 
 // /* LD H,SET 7,(REGISTER+dd) */
 // func instrDDCB__LD_H_SET_7_iREGpDD(z *Z80, opcode byte) {
-// 	z.H = z.memory.ReadByte(z.tempaddr) | 0x80
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.H)
+// 	z.H = z.Memory.Read(z.tempaddr) | 0x80
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.H)
 // }
 
 // /* LD L,SET 7,(REGISTER+dd) */
 // func instrDDCB__LD_L_SET_7_iREGpDD(z *Z80, opcode byte) {
-// 	z.L = z.memory.ReadByte(z.tempaddr) | 0x80
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.L)
+// 	z.L = z.Memory.Read(z.tempaddr) | 0x80
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.L)
 // }
 
 // /* SET 7,(REGISTER+dd) */
 // func instrDDCB__SET_7_iREGpDD(z *Z80, opcode byte) {
-// 	var bytetemp byte = z.memory.ReadByte(z.tempaddr)
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, bytetemp|0x80)
+// 	var bytetemp byte = z.Memory.Read(z.tempaddr)
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, bytetemp|0x80)
 // }
 
 // /* LD A,SET 7,(REGISTER+dd) */
 // func instrDDCB__LD_A_SET_7_iREGpDD(z *Z80, opcode byte) {
-// 	z.A = z.memory.ReadByte(z.tempaddr) | 0x80
-// 	z.memory.ContendReadNoMreq(z.tempaddr, 1)
-// 	z.memory.WriteByte(z.tempaddr, z.A)
+// 	z.A = z.Memory.Read(z.tempaddr) | 0x80
+// 	z.Memory.ContendReadNoMreq(z.tempaddr, 1)
+// 	z.Memory.Write(z.tempaddr, z.A)
 // }
 
 //--
