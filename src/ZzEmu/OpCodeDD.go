@@ -1,35 +1,35 @@
 package ZzEmu
 
 func initOpcodeDDMap() {
-	// 	// BEGIN of 0xdd shifted opcodes
-	// 	/* ADD REGISTER,BC */
-	// 	OpcodeDDCBMap[0x09] = instrDD__ADD_REG_BC
-	// 	/* ADD REGISTER,DE */
-	// 	OpcodeDDCBMap[0x19] = instrDD__ADD_REG_DE
-	// 	/* LD REGISTER,nnnn */
-	// 	OpcodeDDCBMap[0x21] = instrDD__LD_REG_NNNN
+	// BEGIN of 0xdd shifted opcodes
+	/* ADD REGISTER,BC */
+	OpcodeDDCBMap[0x09] = instrDD__ADD_REG_BC
+	/* ADD REGISTER,DE */
+	OpcodeDDCBMap[0x19] = instrDD__ADD_REG_DE
+	/* LD REGISTER,nnnn */
+	OpcodeDDCBMap[0x21] = instrDD__LD_REG_NNNN
 	/* LD (nnnn),REGISTER */
 	OpcodeDDCBMap[0x22] = instrDD__LD_iNNNN_REG
-	// 	/* INC REGISTER */
-	// 	OpcodeDDCBMap[0x23] = instrDD__INC_REG
-	// 	/* INC REGISTERH */
-	// 	OpcodeDDCBMap[0x24] = instrDD__INC_REGH
-	// 	/* DEC REGISTERH */
-	// 	OpcodeDDCBMap[0x25] = instrDD__DEC_REGH
-	// 	/* LD REGISTERH,nn */
-	// 	OpcodeDDCBMap[0x26] = instrDD__LD_REGH_NN
-	// 	/* ADD REGISTER,REGISTER */
-	// 	OpcodeDDCBMap[0x29] = instrDD__ADD_REG_REG
+	/* INC REGISTER */
+	OpcodeDDCBMap[0x23] = instrDD__INC_REG
+	/* INC REGISTERH */
+	OpcodeDDCBMap[0x24] = instrDD__INC_REGH
+	/* DEC REGISTERH */
+	OpcodeDDCBMap[0x25] = instrDD__DEC_REGH
+	/* LD REGISTERH,nn */
+	OpcodeDDCBMap[0x26] = instrDD__LD_REGH_NN
+	/* ADD REGISTER,REGISTER */
+	OpcodeDDCBMap[0x29] = instrDD__ADD_REG_REG
 	/* LD REGISTER,(nnnn) */
 	OpcodeDDCBMap[0x2a] = instrDD__LD_REG_iNNNN
-	// 	/* DEC REGISTER */
-	// 	OpcodeDDCBMap[0x2b] = instrDD__DEC_REG
-	// 	/* INC REGISTERL */
-	// 	OpcodeDDCBMap[0x2c] = instrDD__INC_REGL
-	// 	/* DEC REGISTERL */
-	// 	OpcodeDDCBMap[0x2d] = instrDD__DEC_REGL
-	// 	/* LD REGISTERL,nn */
-	// 	OpcodeDDCBMap[0x2e] = instrDD__LD_REGL_NN
+	/* DEC REGISTER */
+	OpcodeDDCBMap[0x2b] = instrDD__DEC_REG
+	/* INC REGISTERL */
+	OpcodeDDCBMap[0x2c] = instrDD__INC_REGL
+	/* DEC REGISTERL */
+	OpcodeDDCBMap[0x2d] = instrDD__DEC_REGL
+	/* LD REGISTERL,nn */
+	OpcodeDDCBMap[0x2e] = instrDD__LD_REGL_NN
 	// 	/* INC (REGISTER+dd) */
 	// 	OpcodeDDCBMap[0x34] = instrDD__INC_iREGpDD
 	// 	/* DEC (REGISTER+dd) */
@@ -179,26 +179,26 @@ func initOpcodeDDMap() {
 
 }
 
-// /* ADD ix,BC */
-// func instrDD__ADD_REG_BC(z *Z80, opcode byte) {
-// 	z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 7)
-// 	z.add16(z.ix, z.BC())
-// }
+/* ADD ix,BC */
+func instrDD__ADD_REG_BC(z *Z80, opcode byte) {
+	z.Tstates += 15
+	//z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 7)
+	z.Add16(z.IX, z.BC.Get())
+}
 
-// /* ADD ix,DE */
-// func instrDD__ADD_REG_DE(z *Z80, opcode byte) {
-// 	z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 7)
-// 	z.add16(z.ix, z.DE())
-// }
+/* ADD ix,DE */
+func instrDD__ADD_REG_DE(z *Z80, opcode byte) {
+	z.Tstates += 15
+	//z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 7)
+	z.Add16(z.IX, z.DE.Get())
+}
 
-// /* LD ix,nnnn */
-// func instrDD__LD_REG_NNNN(z *Z80, opcode byte) {
-// 	b1 := z.Memory.Read(z.pc)
-// 	z.IncPC(1)
-// 	b2 := z.Memory.Read(z.pc)
-// 	z.IncPC(1)
-// 	z.SetIX(joinBytes(b2, b1))
-// }
+/* LD ix,nnnn */
+func instrDD__LD_REG_NNNN(z *Z80, opcode byte) {
+	z.Tstates += 14
+	val := z.Load16()
+	z.IX.Set(val)
+}
 
 /* LD (nnnn),ix */
 func instrDD__LD_iNNNN_REG(z *Z80, opcode byte) {
