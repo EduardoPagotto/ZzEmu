@@ -228,21 +228,6 @@ func (z80 *Z80) Dec(ptrValue *byte) { // TODO merge com DecR
 	z80.F |= ternOpB((*ptrValue) == 0x7f, FLAG_V, 0) | sz53Table[(*ptrValue)]
 }
 
-// MERDA!!!!!!!
-// func (z80 *Z80) IncR(opcode byte) {
-// 	var ptrReg *byte = z80.GetPrtRegisterValByte(opcode)
-// 	(*ptrReg)++
-// 	z80.F = (z80.F & FLAG_C) | (ternOpB((*ptrReg) == 0x80, FLAG_V, 0)) | (ternOpB(((*ptrReg)&0x0f) != 0, 0, FLAG_H)) | sz53Table[(*ptrReg)]
-// }
-
-// func (z80 *Z80) DecR(opcode byte) {
-
-// 	var ptrReg *byte = z80.GetPrtRegisterValByte(opcode)
-// 	z80.F = (z80.F & FLAG_C) | (ternOpB((*ptrReg)&0x0f != 0, 0, FLAG_H)) | FLAG_N
-// 	(*ptrReg)--
-// 	z80.F |= (ternOpB((*ptrReg) == 0x7f, FLAG_V, 0)) | sz53Table[(*ptrReg)]
-// }
-
 //-- memory
 
 /*

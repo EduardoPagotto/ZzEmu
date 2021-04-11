@@ -56,3 +56,8 @@ code --install-extension mborik.z80-macroasm
 code --install-extension mohsen1.prettify-json
 code --install-extension QiaoJie.binary-viewer
 ```
+
+
+## Testar:
+DJNZ offset
+JR offset

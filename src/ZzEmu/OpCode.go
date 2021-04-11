@@ -280,14 +280,15 @@ func instr__INC_BC(z *Z80, opcode byte) {
 }
 
 func instr__INC_B(z *Z80, opcode byte) {
-	// TODO testar se flagas funcinam
 	z.Tstates += 4
-	z.IncR(0) //0 = B
+	var pReg *byte = z.GetPrtRegisterValByte(0)
+	z.Inc(pReg)
 }
 
 func instr__DEC_B(z *Z80, opcode byte) {
 	z.Tstates += 4
-	z.DecR(0)
+	var pReg *byte = z.GetPrtRegisterValByte(0)
+	z.Dec(pReg)
 }
 
 func instr__LD_B_NN(z *Z80, opcode byte) {
@@ -334,13 +335,15 @@ func instr__DEC_BC(z *Z80, opcode byte) {
 /* INC C */
 func instr__INC_C(z *Z80, opcode byte) {
 	z.Tstates += 4
-	z.IncR(1)
+	var pReg *byte = z.GetPrtRegisterValByte(1)
+	z.Inc(pReg)
 }
 
 /* DEC C */
 func instr__DEC_C(z *Z80, opcode byte) {
 	z.Tstates += 4
-	z.DecR(1)
+	var pReg *byte = z.GetPrtRegisterValByte(1)
+	z.Dec(pReg)
 }
 
 // /* LD C,nn */
@@ -369,7 +372,7 @@ func instr__DJNZ_OFFSET(z *Z80, opcode byte) {
 		z.Tstates += 8
 		z.pc++
 	}
-	//z.IncPC(1)
+	//z.IncPC(1) // TESTAR!!!!!!
 }
 
 /* LD DE,nnnn */
@@ -395,13 +398,15 @@ func instr__INC_DE(z *Z80, opcode byte) {
 /* INC D */
 func instr__INC_D(z *Z80, opcode byte) {
 	z.Tstates += 4
-	z.IncR(2)
+	var pReg *byte = z.GetPrtRegisterValByte(2)
+	z.Inc(pReg)
 }
 
 /* DEC D */
 func instr__DEC_D(z *Z80, opcode byte) {
 	z.Tstates += 4
-	z.DecR(2)
+	var pReg *byte = z.GetPrtRegisterValByte(2)
+	z.Dec(pReg)
 }
 
 // /* LD D,nn */
@@ -446,13 +451,15 @@ func instr__DEC_DE(z *Z80, opcode byte) {
 /* INC E */
 func instr__INC_E(z *Z80, opcode byte) {
 	z.Tstates += 4
-	z.IncR(3)
+	var pReg *byte = z.GetPrtRegisterValByte(3)
+	z.Inc(pReg)
 }
 
 /* DEC E */
 func instr__DEC_E(z *Z80, opcode byte) {
 	z.Tstates += 4
-	z.DecR(3)
+	var pReg *byte = z.GetPrtRegisterValByte(3)
+	z.Dec(pReg)
 }
 
 // /* LD E,nn */
@@ -504,13 +511,15 @@ func instr__INC_HL(z *Z80, opcode byte) {
 /* INC H */
 func instr__INC_H(z *Z80, opcode byte) {
 	z.Tstates += 4
-	z.IncR(4)
+	var pReg *byte = z.GetPrtRegisterValByte(4)
+	z.Inc(pReg)
 }
 
 /* DEC H */
 func instr__DEC_H(z *Z80, opcode byte) {
 	z.Tstates += 4
-	z.DecR(4)
+	var pReg *byte = z.GetPrtRegisterValByte(4)
+	z.Dec(pReg)
 }
 
 // /* LD H,nn */
@@ -576,13 +585,15 @@ func instr__DEC_HL(z *Z80, opcode byte) {
 /* INC L */
 func instr__INC_L(z *Z80, opcode byte) {
 	z.Tstates += 4
-	z.IncR(5)
+	var pReg *byte = z.GetPrtRegisterValByte(5)
+	z.Inc(pReg)
 }
 
 /* DEC L */
 func instr__DEC_L(z *Z80, opcode byte) {
 	z.Tstates += 4
-	z.DecR(5)
+	var pReg *byte = z.GetPrtRegisterValByte(5)
+	z.Dec(pReg)
 }
 
 // /* LD L,nn */
@@ -697,13 +708,15 @@ func instr__DEC_SP(z *Z80, opcode byte) {
 /* INC A */
 func instr__INC_A(z *Z80, opcode byte) {
 	z.Tstates += 4
-	z.IncR(7)
+	var pReg *byte = z.GetPrtRegisterValByte(7)
+	z.Inc(pReg)
 }
 
 /* DEC A */
 func instr__DEC_A(z *Z80, opcode byte) {
 	z.Tstates += 4
-	z.DecR(7)
+	var pReg *byte = z.GetPrtRegisterValByte(7)
+	z.Dec(pReg)
 }
 
 // /* LD A,nn */
@@ -740,6 +753,7 @@ func instr__LD_C_r(z *Z80, opcode byte) {
 
 /* LD C,(HL) */
 func instr__LD_C_iHL(z *Z80, opcode byte) {
+	z.Tstates += 7
 	z.C = z.Memory.Read(z.HL.Get())
 }
 
@@ -799,6 +813,7 @@ func instr__LD_iHL_r(z *Z80, opcode byte) {
 
 // /* HALT */
 func instr__HALT(z *Z80, opcode byte) {
+	z.Tstates += 4
 	z.Halted = true
 	z.pc++
 }
@@ -995,7 +1010,6 @@ func instr__RET_Z(z *Z80, opcode byte) {
 func instr__RET(z *Z80, opcode byte) {
 	z.Tstates += 10
 	z.pc = z.Pop16()
-
 }
 
 /* JP Z,nnnn */
@@ -1012,6 +1026,7 @@ func instr__JP_Z_NNNN(z *Z80, opcode byte) {
 
 /* shift CB */
 func instr__SHIFT_CB(z *Z80, opcode byte) {
+	z.Tstates += 4
 	opcode2 := z.Load8()
 	z.R++
 	OpcodeCBMap[opcode2](z, opcode2)
@@ -1180,6 +1195,7 @@ func instr__CALL_C_NNNN(z *Z80, opcode byte) {
 
 // /* shift DD */
 func instr__SHIFT_DD(z *Z80, opcode byte) {
+	z.Tstates += 4
 	opcode2 := z.Load8()
 	z.R++
 	if f := OpcodeDDMap[opcode2]; f != nil {
@@ -1334,6 +1350,7 @@ func instr__CALL_PE_NNNN(z *Z80, opcode byte) {
 
 // /* shift ED */
 func instr__SHIFT_ED(z *Z80, opcode byte) {
+	z.Tstates += 4
 	opcode2 := z.Load8()
 	z.R++
 	if f := OpcodeEDMap[opcode2]; f != nil {
@@ -1388,6 +1405,7 @@ func instr__JP_P_NNNN(z *Z80, opcode byte) {
 
 // /* DI */
 func instr__DI(z *Z80, opcode byte) {
+	z.Tstates += 4
 	z.IFF1, z.IFF2 = 0, 0
 }
 
@@ -1477,7 +1495,7 @@ func instr__CALL_M_NNNN(z *Z80, opcode byte) {
 
 // /* shift FD */
 func instr__SHIFT_FD(z *Z80, opcode byte) {
-
+	z.Tstates += 4
 	opcode2 := z.Load8()
 	z.R++
 	if f := OpcodeDFMap[opcode2]; f != nil {

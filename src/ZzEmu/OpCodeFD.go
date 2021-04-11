@@ -232,6 +232,7 @@ func instrFD__LD_REGH_NN(z *Z80, opcode byte) {
 
 /* ADD iy,iy */
 func instrFD__ADD_REG_REG(z *Z80, opcode byte) {
+	z.Tstates += 15
 	//z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 7)
 	z.Add16(z.IY, z.IY.Get())
 }
@@ -685,6 +686,7 @@ func instrFD__CP_A_iREGpDD(z *Z80, opcode byte) {
 
 /* shift DDFDCB */
 func instrFD__SHIFT_DDFDCB(z *Z80, opcode byte) {
+	z.Tstates += 4
 	opcode2 := z.Load8()
 	z.R++
 	OpcodeFDCBMap[opcode2](z, opcode2)
