@@ -211,30 +211,37 @@ func (z80 *Z80) Sbc16(value uint16) { // ??
 	z80.F = ternOpB((sub16temp&0x10000) != 0, FLAG_C, 0) | FLAG_N | overflowSubTable[lookup>>4] | (z80.H & (FLAG_3 | FLAG_5 | FLAG_S)) | halfcarrySubTable[lookup&0x07] | ternOpB(z80.HL.Get() != 0, 0, FLAG_Z)
 }
 
-func (z80 *Z80) Inc(value *byte) { // TODO merge com IncR
-	*value++
-	z80.F = (z80.F & FLAG_C) | ternOpB(*value == 0x80, FLAG_V, 0) | ternOpB((*value&0x0f) != 0, 0, FLAG_H) | sz53Table[(*value)]
+/*
+Incrementa o conteudo do ponteiro referente ao registro
+*/
+func (z80 *Z80) Inc(ptrValue *byte) { // TODO merge com IncR
+	(*ptrValue)++
+	z80.F = (z80.F & FLAG_C) | ternOpB((*ptrValue) == 0x80, FLAG_V, 0) | ternOpB((*ptrValue&0x0f) != 0, 0, FLAG_H) | sz53Table[(*ptrValue)]
 }
 
-func (z80 *Z80) Dec(value *byte) { // TODO merge com DecR
-	z80.F = (z80.F & FLAG_C) | ternOpB((*value&0x0f) != 0, 0, FLAG_H) | FLAG_N
-	*value--
-	z80.F |= ternOpB(*value == 0x7f, FLAG_V, 0) | sz53Table[*value]
+/*
+Decrementa o conteudo do ponteiro referente ao registro
+*/
+func (z80 *Z80) Dec(ptrValue *byte) { // TODO merge com DecR
+	z80.F = (z80.F & FLAG_C) | ternOpB(((*ptrValue)&0x0f) != 0, 0, FLAG_H) | FLAG_N
+	(*ptrValue)--
+	z80.F |= ternOpB((*ptrValue) == 0x7f, FLAG_V, 0) | sz53Table[(*ptrValue)]
 }
 
-func (z80 *Z80) IncR(opcode byte) {
-	var ptrReg *byte = z80.GetPrtRegisterValByte(opcode)
-	(*ptrReg)++
-	z80.F = (z80.F & FLAG_C) | (ternOpB((*ptrReg) == 0x80, FLAG_V, 0)) | (ternOpB(((*ptrReg)&0x0f) != 0, 0, FLAG_H)) | sz53Table[(*ptrReg)]
-}
+// MERDA!!!!!!!
+// func (z80 *Z80) IncR(opcode byte) {
+// 	var ptrReg *byte = z80.GetPrtRegisterValByte(opcode)
+// 	(*ptrReg)++
+// 	z80.F = (z80.F & FLAG_C) | (ternOpB((*ptrReg) == 0x80, FLAG_V, 0)) | (ternOpB(((*ptrReg)&0x0f) != 0, 0, FLAG_H)) | sz53Table[(*ptrReg)]
+// }
 
-func (z80 *Z80) DecR(opcode byte) {
+// func (z80 *Z80) DecR(opcode byte) {
 
-	var ptrReg *byte = z80.GetPrtRegisterValByte(opcode)
-	z80.F = (z80.F & FLAG_C) | (ternOpB((*ptrReg)&0x0f != 0, 0, FLAG_H)) | FLAG_N
-	(*ptrReg)--
-	z80.F |= (ternOpB((*ptrReg) == 0x7f, FLAG_V, 0)) | sz53Table[(*ptrReg)]
-}
+// 	var ptrReg *byte = z80.GetPrtRegisterValByte(opcode)
+// 	z80.F = (z80.F & FLAG_C) | (ternOpB((*ptrReg)&0x0f != 0, 0, FLAG_H)) | FLAG_N
+// 	(*ptrReg)--
+// 	z80.F |= (ternOpB((*ptrReg) == 0x7f, FLAG_V, 0)) | sz53Table[(*ptrReg)]
+// }
 
 //-- memory
 
