@@ -30,14 +30,14 @@ func initOpcodeDDMap() {
 	OpcodeDDCBMap[0x2d] = instrDD__DEC_REGL
 	/* LD REGISTERL,nn */
 	OpcodeDDCBMap[0x2e] = instrDD__LD_REGL_NN
-	// 	/* INC (REGISTER+dd) */
-	// 	OpcodeDDCBMap[0x34] = instrDD__INC_iREGpDD
-	// 	/* DEC (REGISTER+dd) */
-	// 	OpcodeDDCBMap[0x35] = instrDD__DEC_iREGpDD
-	// 	/* LD (REGISTER+dd),nn */
-	// 	OpcodeDDCBMap[0x36] = instrDD__LD_iREGpDD_NN
-	// 	/* ADD REGISTER,SP */
-	// 	OpcodeDDCBMap[0x39] = instrDD__ADD_REG_SP
+	/* INC (REGISTER+dd) */
+	OpcodeDDCBMap[0x34] = instrDD__INC_iREGpDD
+	/* DEC (REGISTER+dd) */
+	OpcodeDDCBMap[0x35] = instrDD__DEC_iREGpDD
+	/* LD (REGISTER+dd),nn */
+	OpcodeDDCBMap[0x36] = instrDD__LD_iREGpDD_NN
+	/* ADD REGISTER,SP */
+	OpcodeDDCBMap[0x39] = instrDD__ADD_REG_SP
 	/* LD B,REGISTERH */
 	OpcodeDDCBMap[0x44] = instrDD__LD_B_REGH
 	/* LD B,REGISTERL */
@@ -138,31 +138,31 @@ func initOpcodeDDMap() {
 	OpcodeDDCBMap[0x9d] = instrDD__SBC_A_REGL
 	/* SBC A,(REGISTER+dd) */
 	OpcodeDDCBMap[0x9e] = instrDD__SBC_A_iREGpDD
-	// 	/* AND A,REGISTERH */
-	// 	OpcodeDDCBMap[0xa4] = instrDD__AND_A_REGH
-	// 	/* AND A,REGISTERL */
-	// 	OpcodeDDCBMap[0xa5] = instrDD__AND_A_REGL
-	// 	/* AND A,(REGISTER+dd) */
-	// 	OpcodeDDCBMap[0xa6] = instrDD__AND_A_iREGpDD
-	// 	/* XOR A,REGISTERH */
-	// 	OpcodeDDCBMap[0xac] = instrDD__XOR_A_REGH
-	// 	/* XOR A,REGISTERL */
-	// 	OpcodeDDCBMap[0xad] = instrDD__XOR_A_REGL
-	// 	/* XOR A,(REGISTER+dd) */
-	// 	OpcodeDDCBMap[0xae] = instrDD__XOR_A_iREGpDD
-	// 	/* OR A,REGISTERH */
-	// 	OpcodeDDCBMap[0xb4] = instrDD__OR_A_REGH
-	// 	/* OR A,REGISTERL */
-	// 	OpcodeDDCBMap[0xb5] = instrDD__OR_A_REGL
-	// 	/* OR A,(REGISTER+dd) */
-	// 	OpcodeDDCBMap[0xb6] = instrDD__OR_A_iREGpDD
-	// 	/* CP A,REGISTERH */
-	// 	OpcodeDDCBMap[0xbc] = instrDD__CP_A_REGH
-	// 	/* CP A,REGISTERL */
-	// 	OpcodeDDCBMap[0xbd] = instrDD__CP_A_REGL
-	// 	/* CP A,(REGISTER+dd) */
-	// 	OpcodeDDCBMap[0xbe] = instrDD__CP_A_iREGpDD
-	// 	/* shift DDFDCB */
+	/* AND A,REGISTERH */
+	OpcodeDDCBMap[0xa4] = instrDD__AND_A_REGH
+	/* AND A,REGISTERL */
+	OpcodeDDCBMap[0xa5] = instrDD__AND_A_REGL
+	/* AND A,(REGISTER+dd) */
+	OpcodeDDCBMap[0xa6] = instrDD__AND_A_iREGpDD
+	/* XOR A,REGISTERH */
+	OpcodeDDCBMap[0xac] = instrDD__XOR_A_REGH
+	/* XOR A,REGISTERL */
+	OpcodeDDCBMap[0xad] = instrDD__XOR_A_REGL
+	/* XOR A,(REGISTER+dd) */
+	OpcodeDDCBMap[0xae] = instrDD__XOR_A_iREGpDD
+	/* OR A,REGISTERH */
+	OpcodeDDCBMap[0xb4] = instrDD__OR_A_REGH
+	/* OR A,REGISTERL */
+	OpcodeDDCBMap[0xb5] = instrDD__OR_A_REGL
+	/* OR A,(REGISTER+dd) */
+	OpcodeDDCBMap[0xb6] = instrDD__OR_A_iREGpDD
+	/* CP A,REGISTERH */
+	OpcodeDDCBMap[0xbc] = instrDD__CP_A_REGH
+	/* CP A,REGISTERL */
+	OpcodeDDCBMap[0xbd] = instrDD__CP_A_REGL
+	/* CP A,(REGISTER+dd) */
+	OpcodeDDCBMap[0xbe] = instrDD__CP_A_iREGpDD
+	/* shift DDFDCB */
 	OpcodeDDMap[0xcb] = instrDD__SHIFT_DDFDCB
 	/* POP REGISTER */
 	OpcodeDDCBMap[0xe1] = instrDD__POP_REG
@@ -271,45 +271,48 @@ func instrDD__LD_REGL_NN(z *Z80, opcode byte) {
 	z.IXL = z.Load8() //z.Memory.Read(z.pc)
 }
 
-// /* INC (ix+dd) */
-// func instrDD__INC_iREGpDD(z *Z80, opcode byte) {
-// 	var offset byte = z.Memory.Read(z.pc)
-// 	z.Memory.ContendReadNoMreq_loop(z.pc, 1, 5)
-// 	z.IncPC(1)
-// 	var wordtemp uint16 = z.IX.Get() + uint16(signExtend(offset))
-// 	var bytetemp byte = z.Memory.Read(wordtemp)
-// 	z.Memory.ContendReadNoMreq(wordtemp, 1)
-// 	z.inc(&bytetemp)
-// 	z.Memory.Write(wordtemp, bytetemp)
-// }
+/* INC (ix+dd) */
+func instrDD__INC_iREGpDD(z *Z80, opcode byte) {
+	z.Tstates += 23
+	var offset byte = z.Load8() //z.Memory.Read(z.pc)
+	//z.Memory.ContendReadNoMreq_loop(z.pc, 1, 5)
+	var wordtemp uint16 = z.IX.Get() + uint16(signExtend(offset))
+	var bytetemp byte = z.Memory.Read(wordtemp)
+	//z.Memory.ContendReadNoMreq(wordtemp, 1)
+	z.Inc(&bytetemp)
+	z.Memory.Write(wordtemp, bytetemp)
+}
 
-// /* DEC (ix+dd) */
-// func instrDD__DEC_iREGpDD(z *Z80, opcode byte) {
-// 	var offset byte = z.Memory.Read(z.pc)
-// 	z.Memory.ContendReadNoMreq_loop(z.pc, 1, 5)
-// 	z.IncPC(1)
-// 	var wordtemp uint16 = z.IX.Get() + uint16(signExtend(offset))
-// 	var bytetemp byte = z.Memory.Read(wordtemp)
-// 	z.Memory.ContendReadNoMreq(wordtemp, 1)
-// 	z.dec(&bytetemp)
-// 	z.Memory.Write(wordtemp, bytetemp)
-// }
+/* DEC (ix+dd) */
+func instrDD__DEC_iREGpDD(z *Z80, opcode byte) {
+	z.Tstates += 23
+	var offset byte = z.Load8() //z.Memory.Read(z.pc)
+	//z.Memory.ContendReadNoMreq_loop(z.pc, 1, 5)
+	//z.IncPC(1)
+	var wordtemp uint16 = z.IX.Get() + uint16(signExtend(offset))
+	var bytetemp byte = z.Memory.Read(wordtemp)
+	//z.Memory.ContendReadNoMreq(wordtemp, 1)
+	z.Dec(&bytetemp)
+	z.Memory.Write(wordtemp, bytetemp)
+}
 
-// /* LD (ix+dd),nn */
-// func instrDD__LD_iREGpDD_NN(z *Z80, opcode byte) {
-// 	offset := z.Memory.Read(z.pc)
-// 	z.IncPC(1)
-// 	value := z.Memory.Read(z.pc)
-// 	z.Memory.ContendReadNoMreq_loop(z.pc, 1, 2)
-// 	z.IncPC(1)
-// 	z.Memory.Write(z.IX.Get()+uint16(signExtend(offset)), value)
-// }
+/* LD (ix+dd),nn */
+func instrDD__LD_iREGpDD_NN(z *Z80, opcode byte) {
+	z.Tstates += 19
+	offset := z.Load8() //z.Memory.Read(z.pc)
+	// z.IncPC(1)
+	value := z.Load8() //z.Memory.Read(z.pc)
+	//z.Memory.ContendReadNoMreq_loop(z.pc, 1, 2)
+	//z.IncPC(1)
+	z.Memory.Write(z.IX.Get()+uint16(signExtend(offset)), value)
+}
 
-// /* ADD ix,SP */
-// func instrDD__ADD_REG_SP(z *Z80, opcode byte) {
-// 	z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 7)
-// 	z.add16(z.ix, z.SP())
-// }
+/* ADD ix,SP */
+func instrDD__ADD_REG_SP(z *Z80, opcode byte) {
+	z.Tstates += 15
+	//z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 7)
+	z.Add16(z.IX, z.sp)
+}
 
 /* LD B,IXH */
 func instrDD__LD_B_REGH(z *Z80, opcode byte) {
@@ -602,81 +605,88 @@ func instrDD__SBC_A_iREGpDD(z *Z80, opcode byte) {
 	z.Sbc(bytetemp)
 }
 
-// /* AND A,IXH */
-// func instrDD__AND_A_REGH(z *Z80, opcode byte) {
-// 	z.and(z.IXH)
-// }
+/* AND A,IXH */
+func instrDD__AND_A_REGH(z *Z80, opcode byte) {
+	z.Tstates += 8
+	z.And(z.IXH)
+}
 
-// /* AND A,IXL */
-// func instrDD__AND_A_REGL(z *Z80, opcode byte) {
-// 	z.and(z.IXL)
-// }
+/* AND A,IXL */
+func instrDD__AND_A_REGL(z *Z80, opcode byte) {
+	z.Tstates += 8
+	z.And(z.IXL)
+}
 
-// /* AND A,(ix+dd) */
-// func instrDD__AND_A_iREGpDD(z *Z80, opcode byte) {
-// 	var offset byte = z.Memory.Read(z.pc)
-// 	z.Memory.ContendReadNoMreq_loop(z.pc, 1, 5)
-// 	z.IncPC(1)
-// 	var bytetemp byte = z.Memory.Read(z.IX.Get() + uint16(signExtend(offset)))
-// 	z.and(bytetemp)
-// }
+/* AND A,(ix+dd) */
+func instrDD__AND_A_iREGpDD(z *Z80, opcode byte) {
+	z.Tstates += 19
+	var offset byte = z.Load8() //z.Memory.Read(z.pc)
+	//z.Memory.ContendReadNoMreq_loop(z.pc, 1, 5)
+	var bytetemp byte = z.Memory.Read(z.IX.Get() + uint16(signExtend(offset)))
+	z.And(bytetemp)
+}
 
-// /* XOR A,IXH */
-// func instrDD__XOR_A_REGH(z *Z80, opcode byte) {
-// 	z.xor(z.IXH)
-// }
+/* XOR A,IXH */
+func instrDD__XOR_A_REGH(z *Z80, opcode byte) {
+	z.Tstates += 8
+	z.Xor(z.IXH)
+}
 
-// /* XOR A,IXL */
-// func instrDD__XOR_A_REGL(z *Z80, opcode byte) {
-// 	z.xor(z.IXL)
-// }
+/* XOR A,IXL */
+func instrDD__XOR_A_REGL(z *Z80, opcode byte) {
+	z.Tstates += 8
+	z.Xor(z.IXL)
+}
 
-// /* XOR A,(ix+dd) */
-// func instrDD__XOR_A_iREGpDD(z *Z80, opcode byte) {
-// 	var offset byte = z.Memory.Read(z.pc)
-// 	z.Memory.ContendReadNoMreq_loop(z.pc, 1, 5)
-// 	z.IncPC(1)
-// 	var bytetemp byte = z.Memory.Read(z.IX.Get() + uint16(signExtend(offset)))
-// 	z.xor(bytetemp)
-// }
+/* XOR A,(ix+dd) */
+func instrDD__XOR_A_iREGpDD(z *Z80, opcode byte) {
+	z.Tstates += 19
+	var offset byte = z.Load8() //z.Memory.Read(z.pc)
+	//z.Memory.ContendReadNoMreq_loop(z.pc, 1, 5)
+	var bytetemp byte = z.Memory.Read(z.IX.Get() + uint16(signExtend(offset)))
+	z.Xor(bytetemp)
+}
 
-// /* OR A,IXH */
-// func instrDD__OR_A_REGH(z *Z80, opcode byte) {
-// 	z.or(z.IXH)
-// }
+/* OR A,IXH */
+func instrDD__OR_A_REGH(z *Z80, opcode byte) {
+	z.Tstates += 8
+	z.Or(z.IXH)
+}
 
-// /* OR A,IXL */
-// func instrDD__OR_A_REGL(z *Z80, opcode byte) {
-// 	z.or(z.IXL)
-// }
+/* OR A,IXL */
+func instrDD__OR_A_REGL(z *Z80, opcode byte) {
+	z.Tstates += 8
+	z.Or(z.IXL)
+}
 
-// /* OR A,(ix+dd) */
-// func instrDD__OR_A_iREGpDD(z *Z80, opcode byte) {
-// 	var offset byte = z.Memory.Read(z.pc)
-// 	z.Memory.ContendReadNoMreq_loop(z.pc, 1, 5)
-// 	z.IncPC(1)
-// 	var bytetemp byte = z.Memory.Read(z.IX.Get() + uint16(signExtend(offset)))
-// 	z.or(bytetemp)
-// }
+/* OR A,(ix+dd) */
+func instrDD__OR_A_iREGpDD(z *Z80, opcode byte) {
+	z.Tstates += 19
+	var offset byte = z.Memory.Read(z.pc)
+	//z.Memory.ContendReadNoMreq_loop(z.pc, 1, 5)
+	var bytetemp byte = z.Memory.Read(z.IX.Get() + uint16(signExtend(offset)))
+	z.Or(bytetemp)
+}
 
-// /* CP A,IXH */
-// func instrDD__CP_A_REGH(z *Z80, opcode byte) {
-// 	z.cp(z.IXH)
-// }
+/* CP A,IXH */
+func instrDD__CP_A_REGH(z *Z80, opcode byte) {
+	z.Tstates += 8
+	z.Cp(z.IXH)
+}
 
-// /* CP A,IXL */
-// func instrDD__CP_A_REGL(z *Z80, opcode byte) {
-// 	z.cp(z.IXL)
-// }
+/* CP A,IXL */
+func instrDD__CP_A_REGL(z *Z80, opcode byte) {
+	z.Tstates += 8
+	z.Cp(z.IXL)
+}
 
-// /* CP A,(ix+dd) */
-// func instrDD__CP_A_iREGpDD(z *Z80, opcode byte) {
-// 	var offset byte = z.Memory.Read(z.pc)
-// 	z.Memory.ContendReadNoMreq_loop(z.pc, 1, 5)
-// 	z.IncPC(1)
-// 	var bytetemp byte = z.Memory.Read(z.IX.Get() + uint16(signExtend(offset)))
-// 	z.cp(bytetemp)
-// }
+/* CP A,(ix+dd) */
+func instrDD__CP_A_iREGpDD(z *Z80, opcode byte) {
+	var offset byte = z.Load8() //z.Memory.Read(z.pc)
+	//z.Memory.ContendReadNoMreq_loop(z.pc, 1, 5)
+	var bytetemp byte = z.Memory.Read(z.IX.Get() + uint16(signExtend(offset)))
+	z.Cp(bytetemp)
+}
 
 // /* shift DDFDCB */
 func instrDD__SHIFT_DDFDCB(z *Z80, opcode byte) {
