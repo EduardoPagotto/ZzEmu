@@ -207,33 +207,37 @@ func instrDD__LD_iNNNN_REG(z *Z80, opcode byte) {
 	// break
 }
 
-// /* INC ix */
-// func instrDD__INC_REG(z *Z80, opcode byte) {
-// 	z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
-// 	z.IncIX()
-// }
+/* INC ix */
+func instrDD__INC_REG(z *Z80, opcode byte) {
+	z.Tstates += 8
+	//z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
+	z.IX.Inc() //z.IncIX()
+}
 
-// /* INC IXH */
-// func instrDD__INC_REGH(z *Z80, opcode byte) {
-// 	z.incIXH()
-// }
+/* INC IXH */
+func instrDD__INC_REGH(z *Z80, opcode byte) {
+	z.Tstates += 8
+	z.IXH++ // incIXH()
+}
 
-// /* DEC IXH */
-// func instrDD__DEC_REGH(z *Z80, opcode byte) {
-// 	z.decIXH()
-// }
+/* DEC IXH */
+func instrDD__DEC_REGH(z *Z80, opcode byte) {
+	z.Tstates += 8
+	z.IXH-- //decIXH()
+}
 
-// /* LD IXH,nn */
-// func instrDD__LD_REGH_NN(z *Z80, opcode byte) {
-// 	z.IXH = z.Memory.Read(z.pc)
-// 	z.IncPC(1)
-// }
+/* LD IXH,nn */
+func instrDD__LD_REGH_NN(z *Z80, opcode byte) {
+	z.Tstates += 14
+	z.IXH = z.Load8() //z.Memory.Read(z.pc)
+}
 
-// /* ADD ix,ix */
-// func instrDD__ADD_REG_REG(z *Z80, opcode byte) {
-// 	z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 7)
-// 	z.add16(z.ix, z.IX.Get())
-// }
+/* ADD ix,ix */
+func instrDD__ADD_REG_REG(z *Z80, opcode byte) {
+	z.Tstates += 15
+	// z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 7)
+	z.Add16(z.IX, z.IX.Get())
+}
 
 /* LD ix,(nnnn) */
 func instrDD__LD_REG_iNNNN(z *Z80, opcode byte) {
@@ -242,27 +246,30 @@ func instrDD__LD_REG_iNNNN(z *Z80, opcode byte) {
 	// break
 }
 
-// /* DEC ix */
-// func instrDD__DEC_REG(z *Z80, opcode byte) {
-// 	z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
-// 	z.DecIX()
-// }
+/* DEC ix */
+func instrDD__DEC_REG(z *Z80, opcode byte) {
+	z.Tstates += 10
+	//z.Memory.ContendReadNoMreq_loop(z.IR(), 1, 2)
+	z.IX.Dec()
+}
 
-// /* INC IXL */
-// func instrDD__INC_REGL(z *Z80, opcode byte) {
-// 	z.incIXL()
-// }
+/* INC IXL */
+func instrDD__INC_REGL(z *Z80, opcode byte) {
+	z.Tstates += 8
+	z.IXL++
+}
 
-// /* DEC IXL */
-// func instrDD__DEC_REGL(z *Z80, opcode byte) {
-// 	z.decIXL()
-// }
+/* DEC IXL */
+func instrDD__DEC_REGL(z *Z80, opcode byte) {
+	z.Tstates += 8
+	z.IXL-- // decIXL()
+}
 
-// /* LD IXL,nn */
-// func instrDD__LD_REGL_NN(z *Z80, opcode byte) {
-// 	z.IXL = z.Memory.Read(z.pc)
-// 	z.IncPC(1)
-// }
+/* LD IXL,nn */
+func instrDD__LD_REGL_NN(z *Z80, opcode byte) {
+	z.Tstates += 14
+	z.IXL = z.Load8() //z.Memory.Read(z.pc)
+}
 
 // /* INC (ix+dd) */
 // func instrDD__INC_iREGpDD(z *Z80, opcode byte) {
