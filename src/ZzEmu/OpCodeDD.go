@@ -689,10 +689,10 @@ func instrDD__CP_A_iREGpDD(z *Z80, opcode byte) {
 // /* shift DDFDCB */
 func instrDD__SHIFT_DDFDCB(z *Z80, opcode byte) {
 	z.Tstates += 4
-	offset := z.Load8()
+	addr := z.IX.Get() + uint16(signExtend(z.Load8()))
 	opcode2 := z.Load8()
 	z.R++
-	OpcodeDDCBMap[opcode2](z, opcode2, opcode, offset)
+	OpcodeDDCBMap[opcode2](z, opcode2, addr)
 }
 
 /* POP ix */

@@ -20,7 +20,7 @@ var (
 	OpcodeMap     [256]func(z *Z80, opcode byte)
 	OpcodeCBMap   [256]func(z *Z80, opcode byte)
 	OpcodeDDMap   [256]func(z *Z80, opcode byte)
-	OpcodeDDCBMap [256]func(z *Z80, opcode, oldOpcode, offset byte)
+	OpcodeDDCBMap [256]func(z *Z80, opcode byte, address uint16)
 	OpcodeEDMap   [256]func(z *Z80, opcode byte)
 	OpcodeDFMap   [256]func(z *Z80, opcode byte)
 	//OpcodeFDCBMap [256]func(z *Z80, opcode byte)
