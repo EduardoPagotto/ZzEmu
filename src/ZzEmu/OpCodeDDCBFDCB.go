@@ -131,86 +131,86 @@ func initOpcodeDDCBFDCBMap() {
 	OpcodeDDCBMap[0x3e] = instrDDCB__SRL_iREGpDD
 	/* LD A,SRL (REGISTER+dd) */
 	OpcodeDDCBMap[0x3f] = instrDDCB__LD_r_SRL_iREGpDD
-	// 	/* BIT 0,(REGISTER+dd) */
-	// 	OpcodeDDCBMap[0x47] = instrDDCB__BIT_0_iREGpDD
-	// 	// Fallthrough cases
-	// 	OpcodeDDCBMap[0x40] = OpcodeDDCBMap[0x47]
-	// 	OpcodeDDCBMap[0x41] = OpcodeDDCBMap[0x47]
-	// 	OpcodeDDCBMap[0x42] = OpcodeDDCBMap[0x47]
-	// 	OpcodeDDCBMap[0x43] = OpcodeDDCBMap[0x47]
-	// 	OpcodeDDCBMap[0x44] = OpcodeDDCBMap[0x47]
-	// 	OpcodeDDCBMap[0x45] = OpcodeDDCBMap[0x47]
-	// 	OpcodeDDCBMap[0x46] = OpcodeDDCBMap[0x47]
-	// 	/* BIT 1,(REGISTER+dd) */
-	// 	OpcodeDDCBMap[0x4f] = instrDDCB__BIT_1_iREGpDD
-	// 	// Fallthrough cases
-	// 	OpcodeDDCBMap[0x48] = OpcodeDDCBMap[0x4f]
-	// 	OpcodeDDCBMap[0x49] = OpcodeDDCBMap[0x4f]
-	// 	OpcodeDDCBMap[0x4a] = OpcodeDDCBMap[0x4f]
-	// 	OpcodeDDCBMap[0x4b] = OpcodeDDCBMap[0x4f]
-	// 	OpcodeDDCBMap[0x4c] = OpcodeDDCBMap[0x4f]
-	// 	OpcodeDDCBMap[0x4d] = OpcodeDDCBMap[0x4f]
-	// 	OpcodeDDCBMap[0x4e] = OpcodeDDCBMap[0x4f]
-	// 	/* BIT 2,(REGISTER+dd) */
-	// 	OpcodeDDCBMap[0x57] = instrDDCB__BIT_2_iREGpDD
-	// 	// Fallthrough cases
-	// 	OpcodeDDCBMap[0x50] = OpcodeDDCBMap[0x57]
-	// 	OpcodeDDCBMap[0x51] = OpcodeDDCBMap[0x57]
-	// 	OpcodeDDCBMap[0x52] = OpcodeDDCBMap[0x57]
-	// 	OpcodeDDCBMap[0x53] = OpcodeDDCBMap[0x57]
-	// 	OpcodeDDCBMap[0x54] = OpcodeDDCBMap[0x57]
-	// 	OpcodeDDCBMap[0x55] = OpcodeDDCBMap[0x57]
-	// 	OpcodeDDCBMap[0x56] = OpcodeDDCBMap[0x57]
-	// 	/* BIT 3,(REGISTER+dd) */
-	// 	OpcodeDDCBMap[0x5f] = instrDDCB__BIT_3_iREGpDD
-	// 	// Fallthrough cases
-	// 	OpcodeDDCBMap[0x58] = OpcodeDDCBMap[0x5f]
-	// 	OpcodeDDCBMap[0x59] = OpcodeDDCBMap[0x5f]
-	// 	OpcodeDDCBMap[0x5a] = OpcodeDDCBMap[0x5f]
-	// 	OpcodeDDCBMap[0x5b] = OpcodeDDCBMap[0x5f]
-	// 	OpcodeDDCBMap[0x5c] = OpcodeDDCBMap[0x5f]
-	// 	OpcodeDDCBMap[0x5d] = OpcodeDDCBMap[0x5f]
-	// 	OpcodeDDCBMap[0x5e] = OpcodeDDCBMap[0x5f]
-	// 	/* BIT 4,(REGISTER+dd) */
-	// 	OpcodeDDCBMap[0x67] = instrDDCB__BIT_4_iREGpDD
-	// 	// Fallthrough cases
-	// 	OpcodeDDCBMap[0x60] = OpcodeDDCBMap[0x67]
-	// 	OpcodeDDCBMap[0x61] = OpcodeDDCBMap[0x67]
-	// 	OpcodeDDCBMap[0x62] = OpcodeDDCBMap[0x67]
-	// 	OpcodeDDCBMap[0x63] = OpcodeDDCBMap[0x67]
-	// 	OpcodeDDCBMap[0x64] = OpcodeDDCBMap[0x67]
-	// 	OpcodeDDCBMap[0x65] = OpcodeDDCBMap[0x67]
-	// 	OpcodeDDCBMap[0x66] = OpcodeDDCBMap[0x67]
-	// 	/* BIT 5,(REGISTER+dd) */
-	// 	OpcodeDDCBMap[0x6f] = instrDDCB__BIT_5_iREGpDD
-	// 	// Fallthrough cases
-	// 	OpcodeDDCBMap[0x68] = OpcodeDDCBMap[0x6f]
-	// 	OpcodeDDCBMap[0x69] = OpcodeDDCBMap[0x6f]
-	// 	OpcodeDDCBMap[0x6a] = OpcodeDDCBMap[0x6f]
-	// 	OpcodeDDCBMap[0x6b] = OpcodeDDCBMap[0x6f]
-	// 	OpcodeDDCBMap[0x6c] = OpcodeDDCBMap[0x6f]
-	// 	OpcodeDDCBMap[0x6d] = OpcodeDDCBMap[0x6f]
-	// 	OpcodeDDCBMap[0x6e] = OpcodeDDCBMap[0x6f]
-	// 	/* BIT 6,(REGISTER+dd) */
-	// 	OpcodeDDCBMap[0x77] = instrDDCB__BIT_6_iREGpDD
-	// 	// Fallthrough cases
-	// 	OpcodeDDCBMap[0x70] = OpcodeDDCBMap[0x77]
-	// 	OpcodeDDCBMap[0x71] = OpcodeDDCBMap[0x77]
-	// 	OpcodeDDCBMap[0x72] = OpcodeDDCBMap[0x77]
-	// 	OpcodeDDCBMap[0x73] = OpcodeDDCBMap[0x77]
-	// 	OpcodeDDCBMap[0x74] = OpcodeDDCBMap[0x77]
-	// 	OpcodeDDCBMap[0x75] = OpcodeDDCBMap[0x77]
-	// 	OpcodeDDCBMap[0x76] = OpcodeDDCBMap[0x77]
-	// 	/* BIT 7,(REGISTER+dd) */
-	// 	OpcodeDDCBMap[0x7f] = instrDDCB__BIT_7_iREGpDD
-	// 	// Fallthrough cases
-	// 	OpcodeDDCBMap[0x78] = OpcodeDDCBMap[0x7f]
-	// 	OpcodeDDCBMap[0x79] = OpcodeDDCBMap[0x7f]
-	// 	OpcodeDDCBMap[0x7a] = OpcodeDDCBMap[0x7f]
-	// 	OpcodeDDCBMap[0x7b] = OpcodeDDCBMap[0x7f]
-	// 	OpcodeDDCBMap[0x7c] = OpcodeDDCBMap[0x7f]
-	// 	OpcodeDDCBMap[0x7d] = OpcodeDDCBMap[0x7f]
-	// 	OpcodeDDCBMap[0x7e] = OpcodeDDCBMap[0x7f]
+	/* BIT 0,(REGISTER+dd) */
+	OpcodeDDCBMap[0x47] = instrDDCB__BIT_0_iREGpDD
+	// Fallthrough cases
+	OpcodeDDCBMap[0x40] = OpcodeDDCBMap[0x47]
+	OpcodeDDCBMap[0x41] = OpcodeDDCBMap[0x47]
+	OpcodeDDCBMap[0x42] = OpcodeDDCBMap[0x47]
+	OpcodeDDCBMap[0x43] = OpcodeDDCBMap[0x47]
+	OpcodeDDCBMap[0x44] = OpcodeDDCBMap[0x47]
+	OpcodeDDCBMap[0x45] = OpcodeDDCBMap[0x47]
+	OpcodeDDCBMap[0x46] = OpcodeDDCBMap[0x47]
+	/* BIT 1,(REGISTER+dd) */
+	OpcodeDDCBMap[0x4f] = instrDDCB__BIT_1_iREGpDD
+	// Fallthrough cases
+	OpcodeDDCBMap[0x48] = OpcodeDDCBMap[0x4f]
+	OpcodeDDCBMap[0x49] = OpcodeDDCBMap[0x4f]
+	OpcodeDDCBMap[0x4a] = OpcodeDDCBMap[0x4f]
+	OpcodeDDCBMap[0x4b] = OpcodeDDCBMap[0x4f]
+	OpcodeDDCBMap[0x4c] = OpcodeDDCBMap[0x4f]
+	OpcodeDDCBMap[0x4d] = OpcodeDDCBMap[0x4f]
+	OpcodeDDCBMap[0x4e] = OpcodeDDCBMap[0x4f]
+	/* BIT 2,(REGISTER+dd) */
+	OpcodeDDCBMap[0x57] = instrDDCB__BIT_2_iREGpDD
+	// Fallthrough cases
+	OpcodeDDCBMap[0x50] = OpcodeDDCBMap[0x57]
+	OpcodeDDCBMap[0x51] = OpcodeDDCBMap[0x57]
+	OpcodeDDCBMap[0x52] = OpcodeDDCBMap[0x57]
+	OpcodeDDCBMap[0x53] = OpcodeDDCBMap[0x57]
+	OpcodeDDCBMap[0x54] = OpcodeDDCBMap[0x57]
+	OpcodeDDCBMap[0x55] = OpcodeDDCBMap[0x57]
+	OpcodeDDCBMap[0x56] = OpcodeDDCBMap[0x57]
+	/* BIT 3,(REGISTER+dd) */
+	OpcodeDDCBMap[0x5f] = instrDDCB__BIT_3_iREGpDD
+	// Fallthrough cases
+	OpcodeDDCBMap[0x58] = OpcodeDDCBMap[0x5f]
+	OpcodeDDCBMap[0x59] = OpcodeDDCBMap[0x5f]
+	OpcodeDDCBMap[0x5a] = OpcodeDDCBMap[0x5f]
+	OpcodeDDCBMap[0x5b] = OpcodeDDCBMap[0x5f]
+	OpcodeDDCBMap[0x5c] = OpcodeDDCBMap[0x5f]
+	OpcodeDDCBMap[0x5d] = OpcodeDDCBMap[0x5f]
+	OpcodeDDCBMap[0x5e] = OpcodeDDCBMap[0x5f]
+	/* BIT 4,(REGISTER+dd) */
+	OpcodeDDCBMap[0x67] = instrDDCB__BIT_4_iREGpDD
+	// Fallthrough cases
+	OpcodeDDCBMap[0x60] = OpcodeDDCBMap[0x67]
+	OpcodeDDCBMap[0x61] = OpcodeDDCBMap[0x67]
+	OpcodeDDCBMap[0x62] = OpcodeDDCBMap[0x67]
+	OpcodeDDCBMap[0x63] = OpcodeDDCBMap[0x67]
+	OpcodeDDCBMap[0x64] = OpcodeDDCBMap[0x67]
+	OpcodeDDCBMap[0x65] = OpcodeDDCBMap[0x67]
+	OpcodeDDCBMap[0x66] = OpcodeDDCBMap[0x67]
+	/* BIT 5,(REGISTER+dd) */
+	OpcodeDDCBMap[0x6f] = instrDDCB__BIT_5_iREGpDD
+	// Fallthrough cases
+	OpcodeDDCBMap[0x68] = OpcodeDDCBMap[0x6f]
+	OpcodeDDCBMap[0x69] = OpcodeDDCBMap[0x6f]
+	OpcodeDDCBMap[0x6a] = OpcodeDDCBMap[0x6f]
+	OpcodeDDCBMap[0x6b] = OpcodeDDCBMap[0x6f]
+	OpcodeDDCBMap[0x6c] = OpcodeDDCBMap[0x6f]
+	OpcodeDDCBMap[0x6d] = OpcodeDDCBMap[0x6f]
+	OpcodeDDCBMap[0x6e] = OpcodeDDCBMap[0x6f]
+	/* BIT 6,(REGISTER+dd) */
+	OpcodeDDCBMap[0x77] = instrDDCB__BIT_6_iREGpDD
+	// Fallthrough cases
+	OpcodeDDCBMap[0x70] = OpcodeDDCBMap[0x77]
+	OpcodeDDCBMap[0x71] = OpcodeDDCBMap[0x77]
+	OpcodeDDCBMap[0x72] = OpcodeDDCBMap[0x77]
+	OpcodeDDCBMap[0x73] = OpcodeDDCBMap[0x77]
+	OpcodeDDCBMap[0x74] = OpcodeDDCBMap[0x77]
+	OpcodeDDCBMap[0x75] = OpcodeDDCBMap[0x77]
+	OpcodeDDCBMap[0x76] = OpcodeDDCBMap[0x77]
+	/* BIT 7,(REGISTER+dd) */
+	OpcodeDDCBMap[0x7f] = instrDDCB__BIT_7_iREGpDD
+	// Fallthrough cases
+	OpcodeDDCBMap[0x78] = OpcodeDDCBMap[0x7f]
+	OpcodeDDCBMap[0x79] = OpcodeDDCBMap[0x7f]
+	OpcodeDDCBMap[0x7a] = OpcodeDDCBMap[0x7f]
+	OpcodeDDCBMap[0x7b] = OpcodeDDCBMap[0x7f]
+	OpcodeDDCBMap[0x7c] = OpcodeDDCBMap[0x7f]
+	OpcodeDDCBMap[0x7d] = OpcodeDDCBMap[0x7f]
+	OpcodeDDCBMap[0x7e] = OpcodeDDCBMap[0x7f]
 	/* LD B,RES 0,(REGISTER+dd) */
 	OpcodeDDCBMap[0x80] = instrDDCB__LD_r_RES_b_iREGpDD
 	/* LD C,RES 0,(REGISTER+dd) */
@@ -470,8 +470,6 @@ func initOpcodeDDCBFDCBMap() {
 
 }
 
-//--
-
 /* LD r,RLC (REGISTER+dd) */
 func instrDDCB__LD_r_RLC_iREGpDD(z *Z80, opcode byte, address uint16) {
 
@@ -656,61 +654,85 @@ func instrDDCB__SRL_iREGpDD(z *Z80, opcode byte, address uint16) {
 	z.Memory.Write(address, bytetemp)
 }
 
-// /* BIT 0,(REGISTER+dd) */
-// func instrDDCB__BIT_0_iREGpDD(z *Z80, opcode byte, address uint16) {
-// 	bytetemp := z.Memory.Read(address)
-// 	z.Memory.ContendReadNoMreq(address, 1)
-// 	z.biti(0, bytetemp, address)
-// }
+/* BIT 0,(REGISTER+dd) */
+func instrDDCB__BIT_0_iREGpDD(z *Z80, opcode byte, address uint16) {
 
-// /* BIT 1,(REGISTER+dd) */
-// func instrDDCB__BIT_1_iREGpDD(z *Z80, opcode byte, address uint16) {
-// 	bytetemp := z.Memory.Read(address)
-// 	z.Memory.ContendReadNoMreq(address, 1)
-// 	z.biti(1, bytetemp, address)
-// }
+	z.Tstates += 15 //FIXME ??
 
-// /* BIT 2,(REGISTER+dd) */
-// func instrDDCB__BIT_2_iREGpDD(z *Z80, opcode byte, address uint16) {
-// 	bytetemp := z.Memory.Read(address)
-// 	z.Memory.ContendReadNoMreq(address, 1)
-// 	z.biti(2, bytetemp, address)
-// }
+	bytetemp := z.Memory.Read(address)
+	//z.Memory.ContendReadNoMreq(address, 1)
+	z.biti(0, bytetemp, address)
+}
 
-// /* BIT 3,(REGISTER+dd) */
-// func instrDDCB__BIT_3_iREGpDD(z *Z80, opcode byte, address uint16) {
-// 	bytetemp := z.Memory.Read(address)
-// 	z.Memory.ContendReadNoMreq(address, 1)
-// 	z.biti(3, bytetemp, address)
-// }
+/* BIT 1,(REGISTER+dd) */
+func instrDDCB__BIT_1_iREGpDD(z *Z80, opcode byte, address uint16) {
 
-// /* BIT 4,(REGISTER+dd) */
-// func instrDDCB__BIT_4_iREGpDD(z *Z80, opcode byte, address uint16) {
-// 	bytetemp := z.Memory.Read(address)
-// 	z.Memory.ContendReadNoMreq(address, 1)
-// 	z.biti(4, bytetemp, address)
-// }
+	z.Tstates += 15 //FIXME ??
 
-// /* BIT 5,(REGISTER+dd) */
-// func instrDDCB__BIT_5_iREGpDD(z *Z80, opcode byte, address uint16) {
-// 	bytetemp := z.Memory.Read(address)
-// 	z.Memory.ContendReadNoMreq(address, 1)
-// 	z.biti(5, bytetemp, address)
-// }
+	bytetemp := z.Memory.Read(address)
+	//z.Memory.ContendReadNoMreq(address, 1)
+	z.biti(1, bytetemp, address)
+}
 
-// /* BIT 6,(REGISTER+dd) */
-// func instrDDCB__BIT_6_iREGpDD(z *Z80, opcode byte, address uint16) {
-// 	bytetemp := z.Memory.Read(address)
-// 	z.Memory.ContendReadNoMreq(address, 1)
-// 	z.biti(6, bytetemp, address)
-// }
+/* BIT 2,(REGISTER+dd) */
+func instrDDCB__BIT_2_iREGpDD(z *Z80, opcode byte, address uint16) {
 
-// /* BIT 7,(REGISTER+dd) */
-// func instrDDCB__BIT_7_iREGpDD(z *Z80, opcode byte, address uint16) {
-// 	bytetemp := z.Memory.Read(address)
-// 	z.Memory.ContendReadNoMreq(address, 1)
-// 	z.biti(7, bytetemp, address)
-// }
+	z.Tstates += 15 //FIXME ??
+
+	bytetemp := z.Memory.Read(address)
+	//z.Memory.ContendReadNoMreq(address, 1)
+	z.biti(2, bytetemp, address)
+}
+
+/* BIT 3,(REGISTER+dd) */
+func instrDDCB__BIT_3_iREGpDD(z *Z80, opcode byte, address uint16) {
+
+	z.Tstates += 15 //FIXME ??
+
+	bytetemp := z.Memory.Read(address)
+	//z.Memory.ContendReadNoMreq(address, 1)
+	z.biti(3, bytetemp, address)
+}
+
+/* BIT 4,(REGISTER+dd) */
+func instrDDCB__BIT_4_iREGpDD(z *Z80, opcode byte, address uint16) {
+
+	z.Tstates += 15 //FIXME ??
+
+	bytetemp := z.Memory.Read(address)
+	//z.Memory.ContendReadNoMreq(address, 1)
+	z.biti(4, bytetemp, address)
+}
+
+/* BIT 5,(REGISTER+dd) */
+func instrDDCB__BIT_5_iREGpDD(z *Z80, opcode byte, address uint16) {
+
+	z.Tstates += 15 //FIXME ??
+
+	bytetemp := z.Memory.Read(address)
+	//z.Memory.ContendReadNoMreq(address, 1)
+	z.biti(5, bytetemp, address)
+}
+
+/* BIT 6,(REGISTER+dd) */
+func instrDDCB__BIT_6_iREGpDD(z *Z80, opcode byte, address uint16) {
+
+	z.Tstates += 15 //FIXME ??
+
+	bytetemp := z.Memory.Read(address)
+	//z.Memory.ContendReadNoMreq(address, 1)
+	z.biti(6, bytetemp, address)
+}
+
+/* BIT 7,(REGISTER+dd) */
+func instrDDCB__BIT_7_iREGpDD(z *Z80, opcode byte, address uint16) {
+
+	z.Tstates += 15 //FIXME ??
+
+	bytetemp := z.Memory.Read(address)
+	//z.Memory.ContendReadNoMreq(address, 1)
+	z.biti(7, bytetemp, address)
+}
 
 /* LD r,RES b,(REGISTER+dd) */
 func instrDDCB__LD_r_RES_b_iREGpDD(z *Z80, opcode byte, address uint16) {
