@@ -1,9 +1,12 @@
 package ZzEmu
 
-const TotROM = 0x1000
-const StartRAM = 0x2000
-const SizeRAM = 0x1000
-const TotRAM = StartRAM + SizeRAM - 1
+const TotROM = 16   //0x0100
+const StartRAM = 16 //0x100
+const SizeRAM = 16  //0x0100
+
+const TopAddr = StartRAM + SizeRAM // usado pelo stackpointer
+const TotRAM = TopAddr - StartRAM
+
 const TotIO = 0x16
 
 var (

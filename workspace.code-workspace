@@ -17,7 +17,7 @@
         "tasks": [
             {
                 "label": "build",
-                "command": "go build -o ./bin ${file}",
+                "command": "go build -o ./bin/zzemu ./src/Main.go",
                 "group": {
                     "kind": "build",
                     "isDefault": true
@@ -26,7 +26,7 @@
             },
             {
                 "label": "install",
-                "command": "go install -v ${file}",
+                "command": "go install -v ./src/Main.go",
                 "group": "build"
             },
             {
@@ -40,7 +40,7 @@
             },
             {
                 "label": "rungo",
-                "command": "go run -v ${file}",
+                "command": "go run -v ./src/Main.go",
                 "group": {
                     "kind": "build",
                     "isDefault": true
@@ -52,11 +52,12 @@
         "version": "0.2.0",
         "configurations": [
             {
-                "name": "Launch file",
+                "name": "Launch executable",
                 "type": "go",
                 "request": "launch",
-                "mode": "debug",
-                "program": "${file}"
+                "mode": "auto",
+                "program": "${file}",
+                "cwd": "${workspaceFolder}",
             }
         ],
         "compounds": []
