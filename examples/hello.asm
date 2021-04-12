@@ -1,12 +1,25 @@
 ; Primeiro Teste
-org 0x0000
-main:   LD SP, 0x0020    ; Top Memoria
+org 0x8000
+start:  
+        LD SP, 0x0030    ; Top Memoria
         LD HL, 0x1234    ; 
-        PUSH HL
         LD DE, 0x5678
-        PUSH de
-        NOP
+        PUSH HL
+        PUSH DE
+        CALL valret
+        Jr fim
+        nop
+        nop
+valret:
         POP HL
         POP DE
-        HALT
-
+        RET     
+fim:
+        nop
+        halt
+        
+; Data
+defb    0xff,0xff
+;line1:    defb ' primeira,',13,'$'
+;line2_3:  defb ' segunda,',13,'terceita,',13,'$'
+;line4:    defb ' quarta.',13,13,'$'
