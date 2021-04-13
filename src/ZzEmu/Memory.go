@@ -8,16 +8,17 @@ type MemoryInterface interface {
 }
 
 type CpuMemory struct {
-	console *Console
+	ram *[TotROM]byte
+	rom *[TotRAM]byte
 }
 
 func (mem *CpuMemory) Read(address uint16) byte {
 
 	if address < TotROM {
-		return mem.console.ROM[address]
+		return mem.rom[address]
 	} else if (address >= StartRAM) && (address < TopAddr) {
 		addrFinal := address % StartRAM
-		return mem.console.RAM[addrFinal]
+		return mem.ram[addrFinal]
 	} else {
 		log.Fatal("Memoria fora de range", address)
 	}
@@ -28,7 +29,7 @@ func (mem *CpuMemory) Read(address uint16) byte {
 func (mem *CpuMemory) Write(address uint16, value byte) {
 	if (address >= StartRAM) && (address < TopAddr) {
 		addrFinal := address % StartRAM
-		mem.console.RAM[addrFinal] = value
+		mem.ram[addrFinal] = value
 		return
 	}
 

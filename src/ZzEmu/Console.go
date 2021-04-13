@@ -9,10 +9,6 @@ const TotRAM = TopAddr - StartRAM
 
 const TotIO = 0x16
 
-var (
-	events []string
-)
-
 type Console struct {
 	CPU *Z80
 	ROM [TotROM]byte
@@ -20,22 +16,20 @@ type Console struct {
 	IO  [TotIO]byte
 }
 
-func CreateCPU(console *Console) *Z80 {
-	cpu := NewZ80(NewCPUMemory(console), NewCPUPort(console))
-	return cpu
-}
-
 func NewCPUMemory(console *Console) MemoryInterface {
-	return &CpuMemory{console}
+	return &CpuMemory{rom: &console.ROM, ram: &console.RAM}
 }
 
 func NewCPUPort(console *Console) PortInterface {
-	return &CpuPort{console}
+	return &CpuPort{io: &console.IO}
 }
 
-// FIXME: lugar esquisito
-func contendPort(z80 *Z80, time uint) {
-	// tstates_p := &z80.Tstates
-	// *tstates_p += time
-	z80.Tstates += uint16(time)
+func NewConsole() *Console {
+
+	console := Console{}
+	var mem MemoryInterface = NewCPUMemory(&console) //&CpuMemory{rom: &console.ROM, ram: &console.RAM}
+	var port PortInterface = NewCPUPort(&console)    //&CpuPort{io: &console.IO}
+	console.CPU = NewZ80(mem, port)
+
+	return &console
 }

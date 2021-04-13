@@ -46,8 +46,8 @@ func main() {
 	tot := len(buffer)
 	fmt.Println("Carregado Programa: " + pgm + " Tamanho: " + strconv.FormatInt(int64(tot), 10))
 
-	var console *ZzEmu.Console = new(ZzEmu.Console)
-	var cpu *ZzEmu.Z80 = ZzEmu.CreateCPU(console)
+	var console *ZzEmu.Console = ZzEmu.NewConsole()
+	var cpu = console.CPU
 
 	copy(console.ROM[:], buffer)
 
