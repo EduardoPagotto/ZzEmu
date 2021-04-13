@@ -1,25 +1,24 @@
 ; Primeiro Teste
-org 0x8000
-start:  
-        LD SP, 0x0030    ; Top Memoria
-        LD HL, 0x1234    ; 
-        LD DE, 0x5678
-        PUSH HL
-        PUSH DE
-        CALL valret
-        Jr fim
-        nop
-        nop
-valret:
-        POP HL
-        POP DE
-        RET     
-fim:
-        nop
-        halt
-        
+org 0x0000
+
+ram:        equ 0100h   ; Inicio da ram, cfg em Console.TotROM
+top:        equ 0200h   ; Fim da ram, cfg em Console.TotROM + Connsole.SizeRAM
+
+start:  LD SP, top      ; fixa o SP no fima da memoria ram
+        LD A, 0x10
+        LD (ram), A
+        LD A, 0x0
+        LD A,(ram)
+        CP 0x10
+        JP NZ,fim
+        DI
+        ; rst     0x0
+fim:    halt
 ; Data
-defb    0xff,0xff
+; ram_top:        defw 0x0030
+ds              10, 0xee
+defb            0xff,0xff,0xff
 ;line1:    defb ' primeira,',13,'$'
 ;line2_3:  defb ' segunda,',13,'terceita,',13,'$'
 ;line4:    defb ' quarta.',13,13,'$'
+end

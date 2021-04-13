@@ -425,7 +425,7 @@ func instr__RLA(z *Z80, opcode byte) {
 
 /* JR offset */
 func instr__JR_OFFSET(z *Z80, opcode byte) {
-	z.Jr() //FIXME TESTARRRRRR
+	z.Jr()
 }
 
 /* ADD HL,DE */
