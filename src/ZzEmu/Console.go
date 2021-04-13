@@ -25,12 +25,12 @@ func CreateCPU(console *Console) *Z80 {
 	return cpu
 }
 
-func NewCPUMemory(console *Console) Memory {
-	return &cpuMemory{console}
+func NewCPUMemory(console *Console) MemoryInterface {
+	return &CpuMemory{console}
 }
 
-func NewCPUPort(console *Console) PortAccessor {
-	return &cpuPort{console}
+func NewCPUPort(console *Console) PortInterface {
+	return &CpuPort{console}
 }
 
 // FIXME: lugar esquisito

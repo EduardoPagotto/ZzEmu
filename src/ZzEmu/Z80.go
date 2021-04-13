@@ -27,8 +27,8 @@ var (
 )
 
 type Z80 struct {
-	Memory Memory
-	Port   PortAccessor
+	Memory MemoryInterface
+	Port   PortInterface
 	//Cycles uint64
 
 	A, F, B, C, D, E, H, L         byte
@@ -54,7 +54,7 @@ type Z80 struct {
 }
 
 // creates a new Z80 instance.
-func NewZ80(memory Memory, port PortAccessor) *Z80 {
+func NewZ80(memory MemoryInterface, port PortInterface) *Z80 {
 	var z80 *Z80 = new(Z80)
 	z80.Memory = memory
 	z80.Port = port

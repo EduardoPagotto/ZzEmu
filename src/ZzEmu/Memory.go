@@ -2,16 +2,16 @@ package ZzEmu
 
 import "log"
 
-type Memory interface {
+type MemoryInterface interface {
 	Read(address uint16) byte
 	Write(address uint16, value byte)
 }
 
-type cpuMemory struct {
+type CpuMemory struct {
 	console *Console
 }
 
-func (mem *cpuMemory) Read(address uint16) byte {
+func (mem *CpuMemory) Read(address uint16) byte {
 
 	if address < TotROM {
 		return mem.console.ROM[address]
@@ -25,7 +25,7 @@ func (mem *cpuMemory) Read(address uint16) byte {
 	return 0
 }
 
-func (mem *cpuMemory) Write(address uint16, value byte) {
+func (mem *CpuMemory) Write(address uint16, value byte) {
 	if (address >= StartRAM) && (address < TopAddr) {
 		addrFinal := address % StartRAM
 		mem.console.RAM[addrFinal] = value

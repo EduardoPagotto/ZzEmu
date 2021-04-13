@@ -2,7 +2,7 @@ package ZzEmu
 
 import "fmt"
 
-type PortAccessor interface {
+type PortInterface interface {
 	ReadPort(address uint16) byte
 	WritePort(address uint16, b byte)
 	ReadPortInternal(address uint16, contend bool) byte
@@ -11,11 +11,11 @@ type PortAccessor interface {
 	ContendPortPostio(address uint16)
 }
 
-type cpuPort struct {
+type CpuPort struct {
 	console *Console
 }
 
-func (p *cpuPort) ReadPortInternal(address uint16, contend bool) byte {
+func (p *CpuPort) ReadPortInternal(address uint16, contend bool) byte {
 	if contend {
 		p.ContendPortPreio(address)
 	}
@@ -29,11 +29,11 @@ func (p *cpuPort) ReadPortInternal(address uint16, contend bool) byte {
 	return r
 }
 
-func (p *cpuPort) ReadPort(port uint16) byte {
+func (p *CpuPort) ReadPort(port uint16) byte {
 	return p.ReadPortInternal(port, true)
 }
 
-func (p *cpuPort) WritePortInternal(address uint16, b byte, contend bool) {
+func (p *CpuPort) WritePortInternal(address uint16, b byte, contend bool) {
 	if contend {
 		p.ContendPortPreio(address)
 	}
@@ -44,18 +44,18 @@ func (p *cpuPort) WritePortInternal(address uint16, b byte, contend bool) {
 	}
 }
 
-func (p *cpuPort) WritePort(port uint16, b byte) {
+func (p *CpuPort) WritePort(port uint16, b byte) {
 	p.WritePortInternal(port, b, true)
 }
 
-func (p *cpuPort) ContendPortPreio(port uint16) {
+func (p *CpuPort) ContendPortPreio(port uint16) {
 	if (port & 0xc000) == 0x4000 {
 		events = append(events, fmt.Sprintf("%5d PC %04x\n", p.console.CPU.Tstates, port))
 	}
 	p.console.CPU.Tstates += 1
 }
 
-func (p *cpuPort) ContendPortPostio(port uint16) {
+func (p *CpuPort) ContendPortPostio(port uint16) {
 	if (port & 0x0001) == 1 {
 		if (port & 0xc000) == 0x4000 {
 			for i := 0; i < 3; i++ {
