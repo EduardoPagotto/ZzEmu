@@ -28,7 +28,7 @@ var (
 
 type Z80 struct {
 	Memory MemoryInterface
-	Port   PortInterface
+	Port   MemoryInterface
 	//Cycles uint64
 
 	A, F, B, C, D, E, H, L         byte
@@ -54,7 +54,7 @@ type Z80 struct {
 }
 
 // creates a new Z80 instance.
-func NewZ80(memory MemoryInterface, port PortInterface) *Z80 {
+func NewZ80(memory MemoryInterface, port MemoryInterface) *Z80 {
 	var z80 *Z80 = new(Z80)
 	z80.Memory = memory
 	z80.Port = port
@@ -409,11 +409,11 @@ func (z80 *Z80) in(reg *byte, port uint16) {
 }
 
 func (z80 *Z80) readPort(address uint16) byte {
-	return z80.Port.ReadPort(address)
+	return z80.Port.Read(address)
 }
 
 func (z80 *Z80) writePort(address uint16, b byte) {
-	z80.Port.WritePort(address, b)
+	z80.Port.Write(address, b)
 }
 
 //-- register select to opcode

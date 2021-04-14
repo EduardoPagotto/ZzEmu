@@ -2,7 +2,9 @@ package ZzEmu
 
 import (
 	"bufio"
+	"fmt"
 	"os"
+	"strconv"
 )
 
 const TotROM = 0x100 //0x0100
@@ -24,21 +26,40 @@ func NewCPUMemory(console *Console) MemoryInterface {
 	return &CpuMemory{rom: &console.ROM, ram: &console.RAM}
 }
 
-func NewCPUPort(console *Console) PortInterface {
+func NewCPUPort(console *Console) MemoryInterface {
 	return &CpuPort{Input: console.Input, Output: console.Output}
 }
 
 func NewConsole() *Console {
-
-	console := Console{}
-	console.Input = NewBufferIO()
-	console.Output = NewBufferIO()
-
+	console := Console{Input: NewBufferIO(), Output: NewBufferIO()}
 	var mem MemoryInterface = NewCPUMemory(&console)
-	var port PortInterface = NewCPUPort(&console)
+	var port MemoryInterface = NewCPUPort(&console)
 	console.CPU = NewZ80(mem, port)
 
 	return &console
+}
+
+func (console *Console) Exec() {
+
+	for {
+		console.CPU.DoOpcode()
+		if console.CPU.Halted {
+			break
+		}
+		for {
+			address, value, ok := console.Input.ReadAll()
+			if ok {
+				fmt.Println("TState: " + strconv.FormatInt(int64(console.CPU.Tstates), 10) +
+					" Addr: " + strconv.FormatInt(int64(address), 10) +
+					" Val:" + strconv.FormatInt(int64(value), 10))
+
+				//newAddr := address & 0x0f
+				console.Output.Write(address+1, value)
+			} else {
+				break
+			}
+		}
+	}
 }
 
 func (console *Console) LoadRom(filename string) (int, error) {
