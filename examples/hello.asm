@@ -38,13 +38,15 @@ exec_interrupt:
         ret 
 boot:
         ld sp, top
-        ld a, 0x20
-        out (dev1), a
-        ld a,0x0
-        nop
-        in a,(dev2)
-        inc a
-        out (dev1), a
+        ld hl, 1234
+        ld b, 0x80
+        ld c, dev1
+        out (c), l
+        out (c), h
+        ld hl, 0x0000
+        ld c, dev2
+        in l, (c)
+        in h, (c)
         ei
         halt
 bool_frio:

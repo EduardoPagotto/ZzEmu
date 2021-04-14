@@ -6,24 +6,14 @@ type PortInterface interface {
 }
 
 type CpuPort struct {
-	Input  *map[uint16]byte
-	Output *map[uint16]byte
+	Input  *BufferIO
+	Output *BufferIO
 }
 
 func (port *CpuPort) ReadPort(address uint16) byte {
-	var pMapIO *map[uint16]byte = (*port).Output
-
-	//endAddr := address & 0x0f
-	val, found := (*pMapIO)[address]
-	if found {
-		delete(*pMapIO, address)
-		return val
-	}
-
-	return 0x00
+	return port.Output.Read(address)
 }
 
 func (port *CpuPort) WritePort(address uint16, b byte) {
-	var pMapIO *map[uint16]byte = (*port).Input
-	(*pMapIO)[address] = b
+	port.Input.Write(address, b)
 }

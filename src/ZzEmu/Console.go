@@ -1,5 +1,10 @@
 package ZzEmu
 
+import (
+	"bufio"
+	"os"
+)
+
 const TotROM = 0x100 //0x0100
 const StartRAM = TotROM
 const SizeRAM = 0x100 //0x0100
@@ -11,8 +16,8 @@ type Console struct {
 	CPU    *Z80
 	ROM    [TotROM]byte
 	RAM    [TotRAM]byte
-	Input  map[uint16]byte
-	Output map[uint16]byte
+	Input  *BufferIO
+	Output *BufferIO
 }
 
 func NewCPUMemory(console *Console) MemoryInterface {
@@ -20,18 +25,52 @@ func NewCPUMemory(console *Console) MemoryInterface {
 }
 
 func NewCPUPort(console *Console) PortInterface {
-	return &CpuPort{Input: &console.Input, Output: &console.Output}
+	return &CpuPort{Input: console.Input, Output: console.Output}
 }
 
 func NewConsole() *Console {
 
 	console := Console{}
-	console.Input = make(map[uint16]byte, 1)
-	console.Output = make(map[uint16]byte, 1)
+	console.Input = NewBufferIO()
+	console.Output = NewBufferIO()
 
 	var mem MemoryInterface = NewCPUMemory(&console)
 	var port PortInterface = NewCPUPort(&console)
 	console.CPU = NewZ80(mem, port)
 
 	return &console
+}
+
+func (console *Console) LoadRom(filename string) (int, error) {
+
+	buffer, erro := readBinary(filename)
+	if erro != nil {
+		return -1, erro
+	}
+
+	copy(console.ROM[:], buffer)
+	tot := len(buffer)
+	return tot, nil
+}
+
+func readBinary(filename string) ([]byte, error) {
+	file, err := os.Open(filename)
+
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+
+	stats, statsErr := file.Stat()
+	if statsErr != nil {
+		return nil, statsErr
+	}
+
+	var size int64 = stats.Size()
+	bytes := make([]byte, size)
+
+	bufr := bufio.NewReader(file)
+	_, err = bufr.Read(bytes)
+
+	return bytes, err
 }
