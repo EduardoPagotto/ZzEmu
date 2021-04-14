@@ -25,6 +25,8 @@ func NewCPUPort(console *Console) PortInterface {
 func NewConsole() *Console {
 
 	console := Console{}
+	console.IO = make(map[uint16]byte, 1)
+
 	var mem MemoryInterface = NewCPUMemory(&console)
 	var port PortInterface = NewCPUPort(&console)
 	console.CPU = NewZ80(mem, port)
