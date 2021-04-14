@@ -56,6 +56,20 @@ func main() {
 		if cpu.Halted {
 			break
 		}
+
+		if len(console.Input) > 0 {
+			for k, v := range console.Input {
+				fmt.Println("TState: " + strconv.FormatInt(int64(cpu.Tstates), 10) +
+					" Addr: " + strconv.FormatInt(int64(k), 10) +
+					" Val:" + strconv.FormatInt(int64(v), 10))
+
+				newAddr := k & 0x0f
+				console.Output[newAddr+1] = v
+
+				delete(console.Input, k)
+			}
+
+		}
 	}
 
 	fmt.Println("Final: " + strconv.FormatInt(int64(cpu.Tstates), 10))

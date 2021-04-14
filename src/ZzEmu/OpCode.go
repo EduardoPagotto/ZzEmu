@@ -1096,8 +1096,8 @@ func instr__JP_NC_NNNN(z *Z80, opcode byte) {
 /* OUT (nn),A */
 func instr__OUT_iNN_A(z *Z80, opcode byte) {
 	z.Tstates += 11
-	var outtemp uint16 = uint16(z.Load8()) + (uint16(z.A) << 8)
-	z.writePort(outtemp, z.A)
+	var addrOut uint16 = uint16(z.Load8()) + (uint16(z.A) << 8)
+	z.writePort(addrOut, z.A)
 }
 
 /* CALL NC,nnnn */
