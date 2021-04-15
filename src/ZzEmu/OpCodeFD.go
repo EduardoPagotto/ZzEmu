@@ -196,13 +196,13 @@ func instrFD__ADD_REG_DE(z *Z80, opcode byte) {
 /* LD iy,nnnn */
 func instrFD__LD_REG_NNNN(z *Z80, opcode byte) {
 	z.Tstates += 14
-	z.IY.Set(z.Load16())
+	z.LoadR(&z.IY)
 }
 
 /* LD (nnnn),iy */
 func instrFD__LD_iNNNN_REG(z *Z80, opcode byte) {
 	z.Tstates += 20
-	z.StoreIndex16(z.IYL, z.IYH)
+	z.StoreIndexR(z.IY)
 }
 
 /* INC iy */
@@ -240,7 +240,7 @@ func instrFD__ADD_REG_REG(z *Z80, opcode byte) {
 /* LD iy,(nnnn) */
 func instrFD__LD_REG_iNNNN(z *Z80, opcode byte) {
 	z.Tstates += 20
-	z.LoadIndex16(&z.IYL, &z.IYH)
+	z.LoadIndexR(&z.IY)
 }
 
 /* DEC iy */
@@ -696,8 +696,7 @@ func instrFD__SHIFT_DDFDCB(z *Z80, opcode byte) {
 /* POP iy */
 func instrFD__POP_REG(z *Z80, opcode byte) {
 	z.Tstates += 14
-	z.IYH = z.Pop8()
-	z.IYL = z.Pop8()
+	z.PopR(&z.IY)
 }
 
 /* EX (SP),iy */
@@ -717,7 +716,7 @@ func instrFD__EX_iSP_REG(z *Z80, opcode byte) {
 func instrFD__PUSH_REG(z *Z80, opcode byte) {
 	//z.Memory.ContendReadNoMreq(z.IR(), 1)
 	z.Tstates += 15
-	z.Push16(z.IY.Get())
+	z.PushR(z.IY)
 }
 
 /* JP iy */

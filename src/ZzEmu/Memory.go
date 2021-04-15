@@ -8,8 +8,8 @@ type MemoryInterface interface {
 }
 
 type CpuMemory struct {
-	ram *[TotROM]byte
-	rom *[TotRAM]byte
+	rom *[TotROM]byte
+	ram *[TotRAM]byte
 }
 
 func (mem *CpuMemory) Read(address uint16) byte {

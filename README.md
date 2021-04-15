@@ -61,3 +61,13 @@ code --install-extension QiaoJie.binary-viewer
 ## Testar:
 DJNZ offset
 JR offset
+
+## oderm de push pop 
+
+push
+1 - high
+2 - low
+
+pop
+1 - low
+2 - high

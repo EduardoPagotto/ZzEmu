@@ -9,7 +9,7 @@ import (
 
 const TotROM = 0x100 //0x0100
 const StartRAM = TotROM
-const SizeRAM = 0x100 //0x0100
+const SizeRAM = 0x020 //0x0100
 
 const TopAddr = StartRAM + SizeRAM // usado pelo stackpointer
 const TotRAM = TopAddr - StartRAM

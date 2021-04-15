@@ -116,13 +116,7 @@ func (z80 *Z80) Interrupt() {
 		z80.IFF1, z80.IFF2 = 0, 0
 
 		// push PC
-		{
-			pch, pcl := splitWord(z80.pc)
-			z80.sp--
-			z80.Memory.Write(z80.sp, pch)
-			z80.sp--
-			z80.Memory.Write(z80.sp, pcl)
-		}
+		z80.Push(z80.pc)
 
 		switch z80.IM {
 		case 0, 1:
@@ -154,15 +148,7 @@ func (z80 *Z80) NonMaskableInterrupt() {
 	z80.IFF1, z80.IFF2 = 0, 0
 
 	// push PC
-	{
-		pch, pcl := splitWord(z80.pc)
-
-		z80.sp--
-		z80.Memory.Write(z80.sp, pch)
-		z80.sp--
-		z80.Memory.Write(z80.sp, pcl)
-	}
-
+	z80.Push(z80.pc)
 	z80.pc = 0x0066
 }
 
@@ -176,7 +162,7 @@ func (z80 *Z80) sltTrap(address int16, level byte) int {
 func (z80 *Z80) Call() {
 	z80.Tstates += 17
 	newpc := z80.Load16()
-	z80.Push16(z80.pc)
+	z80.Push(z80.pc)
 	z80.pc = newpc
 }
 
@@ -188,7 +174,7 @@ func (z80 *Z80) Jr() {
 }
 
 func (z80 *Z80) Rst(value byte) {
-	z80.Push16(z80.pc)
+	z80.Push(z80.pc)
 	z80.pc = uint16(value)
 }
 
@@ -294,26 +280,29 @@ func (z80 *Z80) Dec(ptrValue *byte) { // TODO merge com DecR
 //-- memory
 
 /*
-Empilha byte no stack
+Salve registro no stack
 */
-func (z80 *Z80) Push8(value byte) {
+func (z80 *Z80) PushR(register16 Register16) {
 	z80.sp--
-	z80.Memory.Write(z80.sp, value)
+	z80.Memory.Write(z80.sp, *register16.high)
+	z80.sp--
+	z80.Memory.Write(z80.sp, *register16.low)
 }
 
 /*
-Desempilha byte do stack
+Carrgado registro do stack
 */
-func (z80 *Z80) Pop8() byte {
-	val := z80.Memory.Read(z80.sp)
+func (z80 *Z80) PopR(register16 *Register16) {
+	*register16.low = z80.Memory.Read(z80.sp)
 	z80.sp++
-	return val
+	*register16.high = z80.Memory.Read(z80.sp)
+	z80.sp++
 }
 
 /*
-Empilha uint16 no stack
+Salva uint16 no stack
 */
-func (z80 *Z80) Push16(value uint16) {
+func (z80 *Z80) Push(value uint16) {
 	high, low := splitWord(value)
 	z80.sp--
 	z80.Memory.Write(z80.sp, high)
@@ -322,14 +311,21 @@ func (z80 *Z80) Push16(value uint16) {
 }
 
 /*
-Desempilha uint16 do stack
+Carrega uint16 do stack
 */
-func (z80 *Z80) Pop16() uint16 {
+func (z80 *Z80) Pop() uint16 {
 	valLo := z80.Memory.Read(z80.sp)
 	z80.sp++
 	valHi := z80.Memory.Read(z80.sp)
 	z80.sp++
 	return joinBytes(valHi, valLo)
+}
+
+func (z80 *Z80) LoadR(register16 *Register16) {
+	*register16.low = z80.Memory.Read(z80.pc)
+	z80.pc++
+	*register16.high = z80.Memory.Read(z80.pc)
+	z80.pc++
 }
 
 /*
@@ -353,23 +349,23 @@ func (z80 *Z80) Load8() byte {
 }
 
 /*
-Carrega ponteiros (Low, Hight) com conteudo indexado pelo PC, PC+1
+Carrega conteudo apontado pelo PC, PC+1 no ponteido do Register16
 */
-func (z80 *Z80) LoadIndex16(regl, regh *byte) {
+func (z80 *Z80) LoadIndexR(register16 *Register16) {
 	ldtemp := z80.Load16()
-	*regl = z80.Memory.Read(ldtemp)
+	*register16.low = z80.Memory.Read(ldtemp)
 	ldtemp++
-	*regh = z80.Memory.Read(ldtemp)
+	*register16.high = z80.Memory.Read(ldtemp)
 }
 
 /*
-Armazenda bytes (Low, High) na posicao indexada pelo PC, PC+1
+Armazena o conteudo do Register16 no endereco apontado por PC, PC+1
 */
-func (z80 *Z80) StoreIndex16(regl, regh byte) {
+func (z80 *Z80) StoreIndexR(register16 Register16) {
 	ldtemp := z80.Load16()
-	z80.Memory.Write(ldtemp, regl)
+	z80.Memory.Write(ldtemp, *register16.low)
 	ldtemp++
-	z80.Memory.Write(ldtemp, regh)
+	z80.Memory.Write(ldtemp, *register16.high)
 }
 
 /*

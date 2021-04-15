@@ -265,8 +265,7 @@ func instr__NOP(z *Z80, opcode byte) {
 
 func instr__LD_BC_NNNN(z *Z80, opcode byte) {
 	z.Tstates += 10
-	z.C = z.Load8()
-	z.B = z.Load8()
+	z.LoadR(&z.BC)
 }
 
 func instr__LD_iBC_A(z *Z80, opcode byte) {
@@ -378,8 +377,7 @@ func instr__DJNZ_OFFSET(z *Z80, opcode byte) {
 /* LD DE,nnnn */
 func instr__LD_DE_NNNN(z *Z80, opcode byte) {
 	z.Tstates += 10
-	z.E = z.Load8()
-	z.D = z.Load8()
+	z.LoadR(&z.DE)
 }
 
 /* LD (DE),A */
@@ -490,15 +488,13 @@ func instr__JR_NZ_OFFSET(z *Z80, opcode byte) {
 /* LD HL,nnnn */
 func instr__LD_HL_NNNN(z *Z80, opcode byte) {
 	z.Tstates += 10
-	z.L = z.Load8()
-	z.H = z.Load8()
-
+	z.LoadR(&z.HL)
 }
 
 /* LD (nnnn),HL */
 func instr__LD_iNNNN_HL(z *Z80, opcode byte) {
 	z.Tstates += 16
-	z.StoreIndex16(z.L, z.H)
+	z.StoreIndexR(z.HL)
 }
 
 /* INC HL */
@@ -571,8 +567,7 @@ func instr__ADD_HL_HL(z *Z80, opcode byte) {
 /* LD HL,(nnnn) */
 func instr__LD_HL_iNNNN(z *Z80, opcode byte) {
 	z.Tstates += 16
-	z.LoadIndex16(&z.L, &z.H)
-	// break
+	z.LoadIndexR(&z.HL)
 }
 
 /* DEC HL */
@@ -931,7 +926,7 @@ func instr__RET_NZ(z *Z80, opcode byte) {
 	//z.Memory.ContendReadNoMreq(z.IR(), 1)
 	if !((z.F & FLAG_Z) != 0) {
 		z.Tstates += 11
-		z.pc = z.Pop16()
+		z.pc = z.Pop()
 	} else {
 		z.Tstates += 5
 	}
@@ -940,8 +935,7 @@ func instr__RET_NZ(z *Z80, opcode byte) {
 // /* POP BC */
 func instr__POP_BC(z *Z80, opcode byte) {
 	z.Tstates += 10
-	z.B = z.Pop8()
-	z.C = z.Pop8()
+	z.PopR(&z.BC)
 }
 
 /* JP NZ,nnnn */
@@ -978,8 +972,7 @@ func instr__CALL_NZ_NNNN(z *Z80, opcode byte) {
 func instr__PUSH_BC(z *Z80, opcode byte) {
 	//z.Memory.ContendReadNoMreq(z.IR(), 1)
 	z.Tstates += 11
-	z.Push8(z.C)
-	z.Push8(z.B)
+	z.PushR(z.BC)
 }
 
 /* ADD A,nn */
@@ -1000,7 +993,7 @@ func instr__RET_Z(z *Z80, opcode byte) {
 	//z.Memory.ContendReadNoMreq(z.IR(), 1)
 	if (z.F & FLAG_Z) != 0 {
 		z.Tstates += 11
-		z.pc = z.Pop16()
+		z.pc = z.Pop()
 	} else {
 		z.Tstates += 5
 	}
@@ -1009,7 +1002,7 @@ func instr__RET_Z(z *Z80, opcode byte) {
 // /* RET */
 func instr__RET(z *Z80, opcode byte) {
 	z.Tstates += 10
-	z.pc = z.Pop16()
+	z.pc = z.Pop()
 }
 
 /* JP Z,nnnn */
@@ -1068,7 +1061,7 @@ func instr__RET_NC(z *Z80, opcode byte) {
 	//z.Memory.ContendReadNoMreq(z.IR(), 1)
 	if !((z.F & FLAG_C) != 0) {
 		z.Tstates += 11
-		z.pc = z.Pop16()
+		z.pc = z.Pop()
 	} else {
 		z.Tstates += 5
 	}
@@ -1077,8 +1070,7 @@ func instr__RET_NC(z *Z80, opcode byte) {
 // /* POP DE */
 func instr__POP_DE(z *Z80, opcode byte) {
 	z.Tstates += 10
-	z.D = z.Pop8()
-	z.E = z.Pop8()
+	z.PopR(&z.DE)
 }
 
 /* JP NC,nnnn */
@@ -1116,9 +1108,7 @@ func instr__CALL_NC_NNNN(z *Z80, opcode byte) {
 func instr__PUSH_DE(z *Z80, opcode byte) {
 	//z.Memory.ContendReadNoMreq(z.IR(), 1)
 	z.Tstates += 11
-	z.Push8(z.E)
-	z.Push8(z.D)
-
+	z.PushR(z.DE)
 }
 
 /* SUB nn */
@@ -1140,7 +1130,7 @@ func instr__RET_C(z *Z80, opcode byte) {
 	//z.Memory.ContendReadNoMreq(z.IR(), 1)
 	if (z.F & FLAG_C) != 0 {
 		z.Tstates += 11
-		z.pc = z.Pop16()
+		z.pc = z.Pop()
 	} else {
 		z.Tstates += 5
 	}
@@ -1225,7 +1215,7 @@ func instr__RET_PO(z *Z80, opcode byte) {
 	//z.Memory.ContendReadNoMreq(z.IR(), 1)
 	if !((z.F & FLAG_P) != 0) {
 		z.Tstates += 11
-		z.pc = z.Pop16()
+		z.pc = z.Pop()
 	} else {
 		z.Tstates += 5
 	}
@@ -1234,8 +1224,7 @@ func instr__RET_PO(z *Z80, opcode byte) {
 // /* POP HL */
 func instr__POP_HL(z *Z80, opcode byte) {
 	z.Tstates += 10
-	z.H = z.Pop8()
-	z.L = z.Pop8()
+	z.PopR(&z.HL)
 }
 
 /* JP PO,nnnn */
@@ -1279,8 +1268,7 @@ func instr__CALL_PO_NNNN(z *Z80, opcode byte) {
 func instr__PUSH_HL(z *Z80, opcode byte) {
 	//z.Memory.ContendReadNoMreq(z.IR(), 1)
 	z.Tstates += 11
-	z.Push8(z.L)
-	z.Push8(z.H)
+	z.PushR(z.HL)
 }
 
 /* AND nn */
@@ -1301,7 +1289,7 @@ func instr__RET_PE(z *Z80, opcode byte) {
 	//z.Memory.ContendReadNoMreq(z.IR(), 1)
 	if (z.F & FLAG_P) != 0 {
 		z.Tstates += 11
-		z.pc = z.Pop16()
+		z.pc = z.Pop()
 	} else {
 		z.Tstates += 5
 	}
@@ -1378,7 +1366,7 @@ func instr__RET_P(z *Z80, opcode byte) {
 	//z.Memory.ContendReadNoMreq(z.IR(), 1)
 	if !((z.F & FLAG_S) != 0) {
 		z.Tstates += 11
-		z.pc = z.Pop16()
+		z.pc = z.Pop()
 	} else {
 		z.Tstates += 5
 	}
@@ -1387,8 +1375,7 @@ func instr__RET_P(z *Z80, opcode byte) {
 /* POP AF */
 func instr__POP_AF(z *Z80, opcode byte) {
 	z.Tstates += 10
-	z.A = z.Pop8()
-	z.B = z.Pop8()
+	z.PopR(&z.AF)
 }
 
 /* JP P,nnnn */
@@ -1425,8 +1412,7 @@ func instr__CALL_P_NNNN(z *Z80, opcode byte) {
 func instr__PUSH_AF(z *Z80, opcode byte) {
 	//z.Memory.ContendReadNoMreq(z.IR(), 1)
 	z.Tstates += 11
-	z.Push8(z.F)
-	z.Push8(z.A)
+	z.PushR(z.AF)
 }
 
 /* OR nn */
@@ -1447,7 +1433,7 @@ func instr__RET_M(z *Z80, opcode byte) {
 	//z.Memory.ContendReadNoMreq(z.IR(), 1)
 	if (z.F & FLAG_S) != 0 {
 		z.Tstates += 11
-		z.pc = z.Pop16()
+		z.pc = z.Pop()
 	} else {
 		z.Tstates += 5
 	}

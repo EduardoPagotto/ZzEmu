@@ -8,7 +8,10 @@ import (
 
 func main() {
 
-	pgm := "./examples/hello.bin"
+	//pgm := "./examples/hello.bin"
+	//pgm := "./examples/pilha.bin"
+	pgm := "./examples/indices.bin"
+
 	var console *ZzEmu.Console = ZzEmu.NewConsole()
 	size, erro := console.LoadRom(pgm)
 	if erro != nil {

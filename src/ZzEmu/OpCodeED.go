@@ -173,7 +173,7 @@ func instrED__SBC_HL_BC(z *Z80, opcode byte) {
 /* LD (nnnn),BC */
 func instrED__LD_iNNNN_BC(z *Z80, opcode byte) {
 	z.Tstates += 20
-	z.StoreIndex16(z.C, z.B)
+	z.StoreIndexR(z.BC)
 }
 
 /* NEG */
@@ -188,7 +188,7 @@ func instrED__NEG(z *Z80, opcode byte) {
 func instrED__RETN(z *Z80, opcode byte) {
 	z.Tstates += 14
 	z.IFF1 = z.IFF2
-	z.pc = z.Pop16()
+	z.pc = z.Pop()
 }
 
 /* IM 0 */
@@ -226,7 +226,7 @@ func instrED__ADC_HL_BC(z *Z80, opcode byte) {
 /* LD BC,(nnnn) */
 func instrED__LD_BC_iNNNN(z *Z80, opcode byte) {
 	z.Tstates += 20
-	z.LoadIndex16(&z.C, &z.B)
+	z.LoadIndexR(&z.BC)
 }
 
 /* LD R,A */
@@ -260,7 +260,7 @@ func instrED__SBC_HL_DE(z *Z80, opcode byte) {
 /* LD (nnnn),DE */
 func instrED__LD_iNNNN_DE(z *Z80, opcode byte) {
 	z.Tstates += 20
-	z.StoreIndex16(z.E, z.D)
+	z.StoreIndexR(z.DE)
 }
 
 /* IM 1 */
@@ -299,7 +299,7 @@ func instrED__ADC_HL_DE(z *Z80, opcode byte) {
 /* LD DE,(nnnn) */
 func instrED__LD_DE_iNNNN(z *Z80, opcode byte) {
 	z.Tstates += 20
-	z.LoadIndex16(&z.E, &z.D)
+	z.LoadIndexR(&z.DE)
 }
 
 /* IM 2 */
@@ -338,7 +338,7 @@ func instrED__SBC_HL_HL(z *Z80, opcode byte) {
 /* LD (nnnn),HL */
 func instrED__LD_iNNNN_HL(z *Z80, opcode byte) {
 	z.Tstates += 20
-	z.StoreIndex16(z.L, z.H)
+	z.StoreIndexR(z.HL)
 }
 
 /* RRD */
@@ -373,7 +373,7 @@ func instrED__ADC_HL_HL(z *Z80, opcode byte) {
 /* LD HL,(nnnn) */
 func instrED__LD_HL_iNNNN(z *Z80, opcode byte) {
 	z.Tstates += 20
-	z.LoadIndex16(&z.L, &z.H)
+	z.LoadIndexR(&z.HL)
 }
 
 /* RLD */
@@ -410,7 +410,11 @@ func instrED__SBC_HL_SP(z *Z80, opcode byte) {
 func instrED__LD_iNNNN_SP(z *Z80, opcode byte) {
 	z.Tstates += 20
 	sph, spl := splitWord(z.sp)
-	z.StoreIndex16(spl, sph)
+
+	ldtemp := z.Load16()
+	z.Memory.Write(ldtemp, spl)
+	ldtemp++
+	z.Memory.Write(ldtemp, sph)
 }
 
 /* IN A,(C) */
@@ -432,11 +436,13 @@ func instrED__ADC_HL_SP(z *Z80, opcode byte) {
 	z.Adc16(z.sp)
 }
 
-// /* LD SP,(nnnn) */
+/* LD SP,(nnnn) */
 func instrED__LD_SP_iNNNN(z *Z80, opcode byte) {
 	z.Tstates += 20
-	sph, spl := splitWord(z.sp)
-	z.LoadIndex16(&spl, &sph)
+	ldtemp := z.Load16()
+	spl := z.Memory.Read(ldtemp)
+	ldtemp++
+	sph := z.Memory.Read(ldtemp)
 	z.sp = joinBytes(sph, spl)
 }
 
