@@ -28,7 +28,7 @@ var (
 
 type Z80 struct {
 	Memory MemoryInterface
-	Port   MemoryInterface
+	Port   PortInterface
 	//Cycles uint64
 
 	A, F, B, C, D, E, H, L         byte
@@ -54,7 +54,7 @@ type Z80 struct {
 }
 
 // creates a new Z80 instance.
-func NewZ80(memory MemoryInterface, port MemoryInterface) *Z80 {
+func NewZ80(memory MemoryInterface, port PortInterface) *Z80 {
 	var z80 *Z80 = new(Z80)
 	z80.Memory = memory
 	z80.Port = port
@@ -100,6 +100,70 @@ func (z80 *Z80) Reset() {
 
 func invalidOpcode(z80 *Z80, opcode byte) {
 	panic("Opcode invalido: " + strconv.Itoa(int(opcode)))
+}
+
+// Interrupt process a Z80 maskable interrupt
+func (z80 *Z80) Interrupt() {
+	if z80.IFF1 != 0 {
+		if z80.Halted {
+			z80.pc++
+			z80.Halted = false
+		}
+
+		z80.Tstates += 7
+
+		z80.R = (z80.R + 1) & 0x7f
+		z80.IFF1, z80.IFF2 = 0, 0
+
+		// push PC
+		{
+			pch, pcl := splitWord(z80.pc)
+			z80.sp--
+			z80.Memory.Write(z80.sp, pch)
+			z80.sp--
+			z80.Memory.Write(z80.sp, pcl)
+		}
+
+		switch z80.IM {
+		case 0, 1:
+			z80.pc = 0x0038
+
+		case 2:
+			var inttemp uint16 = (uint16(z80.I) << 8) | 0xff
+			pcl := z80.Memory.Read(inttemp)
+			inttemp++
+			pch := z80.Memory.Read(inttemp)
+			z80.pc = joinBytes(pch, pcl)
+
+		default:
+			panic("Unknown interrupt mode")
+		}
+	}
+}
+
+// Process a Z80 non-maskable interrupt.
+func (z80 *Z80) NonMaskableInterrupt() {
+	if z80.Halted {
+		z80.pc++
+		z80.Halted = false
+	}
+
+	z80.Tstates += 7
+
+	z80.R = (z80.R + 1) & 0x7f
+	z80.IFF1, z80.IFF2 = 0, 0
+
+	// push PC
+	{
+		pch, pcl := splitWord(z80.pc)
+
+		z80.sp--
+		z80.Memory.Write(z80.sp, pch)
+		z80.sp--
+		z80.Memory.Write(z80.sp, pcl)
+	}
+
+	z80.pc = 0x0066
 }
 
 //--- flow controll
@@ -409,7 +473,12 @@ func (z80 *Z80) in(reg *byte, port uint16) {
 }
 
 func (z80 *Z80) readPort(address uint16) byte {
-	return z80.Port.Read(address)
+	value, ok := z80.Port.Read(address)
+	if ok {
+		return value
+	}
+
+	return 0xff
 }
 
 func (z80 *Z80) writePort(address uint16, b byte) {

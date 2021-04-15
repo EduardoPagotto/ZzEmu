@@ -26,14 +26,14 @@ func NewCPUMemory(console *Console) MemoryInterface {
 	return &CpuMemory{rom: &console.ROM, ram: &console.RAM}
 }
 
-func NewCPUPort(console *Console) MemoryInterface {
+func NewCPUPort(console *Console) PortInterface {
 	return &CpuPort{Input: console.Input, Output: console.Output}
 }
 
 func NewConsole() *Console {
 	console := Console{Input: NewBufferIO(), Output: NewBufferIO()}
 	var mem MemoryInterface = NewCPUMemory(&console)
-	var port MemoryInterface = NewCPUPort(&console)
+	var port PortInterface = NewCPUPort(&console)
 	console.CPU = NewZ80(mem, port)
 
 	return &console

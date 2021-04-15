@@ -43,10 +43,16 @@ func (r16 *Register16) Add(value byte) {
 
 // Auxiliares
 
+/*
+Converte 16b em 2 8b na ordem (low, high)
+*/
 func splitWord(word uint16) (byte, byte) {
 	return byte(word >> 8), byte(word & 0xff)
 }
 
+/*
+Converte 2 8bs em 1 16b, entrada high, low
+*/
 func joinBytes(h, l byte) uint16 {
 	return uint16(l) | (uint16(h) << 8)
 }

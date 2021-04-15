@@ -23,7 +23,7 @@ func (buffer *BufferIO) Write(address uint16, value byte) {
 	}
 }
 
-func (buffer *BufferIO) Read(address uint16) byte {
+func (buffer *BufferIO) Read(address uint16) (byte, bool) {
 
 	queue, ok := buffer.mapIO[address]
 	if ok {
@@ -32,11 +32,11 @@ func (buffer *BufferIO) Read(address uint16) byte {
 			interf := iterator.Value
 			value, _ := interf.(byte)
 			queue.Remove(iterator)
-			return value
+			return value, true
 		}
 	}
 
-	return 0x00
+	return 0xff, false
 }
 
 func (buffer *BufferIO) Len() int {
@@ -67,5 +67,5 @@ func (buffer *BufferIO) ReadAll() (uint16, byte, bool) {
 			return address, value, true
 		}
 	}
-	return 0, 0, false
+	return 0, 0xff, false
 }
