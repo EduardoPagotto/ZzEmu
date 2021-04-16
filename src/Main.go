@@ -1,7 +1,7 @@
 package main
 
 import (
-	"ZzEmu"
+	ZzEmu "ZzEmu/Hardware"
 	"fmt"
 	"strconv"
 )

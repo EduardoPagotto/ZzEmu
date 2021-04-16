@@ -1,6 +1,7 @@
 package ZzEmu
 
 import (
+	ZzEmu "ZzEmu/CPU"
 	"bufio"
 	"fmt"
 	"os"
@@ -15,26 +16,26 @@ const TopAddr = StartRAM + SizeRAM // usado pelo stackpointer
 const TotRAM = TopAddr - StartRAM
 
 type Console struct {
-	CPU    *Z80
+	CPU    *ZzEmu.Z80
 	ROM    [TotROM]byte
 	RAM    [TotRAM]byte
 	Input  *BufferIO
 	Output *BufferIO
 }
 
-func NewCPUMemory(console *Console) MemoryInterface {
+func NewCPUMemory(console *Console) ZzEmu.MemoryInterface {
 	return &CpuMemory{rom: &console.ROM, ram: &console.RAM}
 }
 
-func NewCPUPort(console *Console) PortInterface {
+func NewCPUPort(console *Console) ZzEmu.PortInterface {
 	return &CpuPort{Input: console.Input, Output: console.Output}
 }
 
 func NewConsole() *Console {
 	console := Console{Input: NewBufferIO(), Output: NewBufferIO()}
-	var mem MemoryInterface = NewCPUMemory(&console)
-	var port PortInterface = NewCPUPort(&console)
-	console.CPU = NewZ80(mem, port)
+	var mem ZzEmu.MemoryInterface = NewCPUMemory(&console)
+	var port ZzEmu.PortInterface = NewCPUPort(&console)
+	console.CPU = ZzEmu.NewZ80(mem, port)
 
 	return &console
 }

@@ -2,11 +2,6 @@ package ZzEmu
 
 import "log"
 
-type MemoryInterface interface {
-	Read(address uint16) byte
-	Write(address uint16, value byte)
-}
-
 type CpuMemory struct {
 	rom *[TotROM]byte
 	ram *[TotRAM]byte
