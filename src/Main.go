@@ -10,7 +10,8 @@ func main() {
 
 	//pgm := "./examples/hello.bin"
 	//pgm := "./examples/pilha.bin"
-	pgm := "./examples/indices.bin"
+	//pgm := "./examples/indices.bin"
+	pgm := "./examples/interrup1.bin"
 
 	var console *ZzEmu.Console = ZzEmu.NewConsole()
 	size, erro := console.LoadRom(pgm)

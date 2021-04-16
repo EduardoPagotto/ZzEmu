@@ -7,7 +7,7 @@
 ;===========================================================
 
 ram:        equ 0100h   ; Inicio da ram, cfg em Console.TotROM
-top:        equ 0200h   ; Fim da ram, cfg em Console.TotROM + Connsole.SizeRAM
+top:        equ 0120h   ; Fim da ram, cfg em Console.TotROM + Connsole.SizeRAM
 dev1:       equ 0x01
 dev2:       equ 0x02
 

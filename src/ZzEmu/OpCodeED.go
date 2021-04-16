@@ -2,7 +2,7 @@ package ZzEmu
 
 func initOpcodeEDMap() {
 
-	// 	// BEGIN of 0xed shifted opcodes
+	// BEGIN of 0xed shifted opcodes
 	/* IN B,(C) */
 	OpcodeEDMap[0x40] = instrED__IN_B_iC
 	/* OUT (C),B */
@@ -11,6 +11,8 @@ func initOpcodeEDMap() {
 	OpcodeEDMap[0x42] = instrED__SBC_HL_BC
 	/* LD (nnnn),BC */
 	OpcodeEDMap[0x43] = instrED__LD_iNNNN_BC
+	/* RETI */
+	OpcodeEDMap[0x4d] = instrED__RETI
 	/* NEG */
 	OpcodeEDMap[0x7c] = instrED__NEG
 	// Fallthrough cases
@@ -25,7 +27,7 @@ func initOpcodeEDMap() {
 	OpcodeEDMap[0x7d] = instrED__RETN
 	// Fallthrough cases
 	OpcodeEDMap[0x45] = OpcodeEDMap[0x7d]
-	OpcodeEDMap[0x4d] = OpcodeEDMap[0x7d]
+	//OpcodeEDMap[0x4d] = OpcodeEDMap[0x7d]
 	OpcodeEDMap[0x55] = OpcodeEDMap[0x7d]
 	OpcodeEDMap[0x5d] = OpcodeEDMap[0x7d]
 	OpcodeEDMap[0x65] = OpcodeEDMap[0x7d]
@@ -174,6 +176,12 @@ func instrED__SBC_HL_BC(z *Z80, opcode byte) {
 func instrED__LD_iNNNN_BC(z *Z80, opcode byte) {
 	z.Tstates += 20
 	z.StoreIndexR(z.BC)
+}
+
+func instrED__RETI(z *Z80, opcode byte) {
+	// nao existia ???
+	z.Tstates += 14
+	z.pc = z.Pop()
 }
 
 /* NEG */

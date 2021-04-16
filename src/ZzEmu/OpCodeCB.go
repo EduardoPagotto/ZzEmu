@@ -1,7 +1,7 @@
 package ZzEmu
 
 func initOpcodeCBMap() {
-	// 	// BEGIN of 0xcb shifted opcodes
+	// BEGIN of 0xcb shifted opcodes
 	/* RLC B */
 	OpcodeCBMap[0x00] = instrCB__RLC_r
 	/* RLC C */
@@ -515,7 +515,7 @@ func initOpcodeCBMap() {
 	/* SET 7,A */
 	OpcodeCBMap[0xff] = instrCB__SET_b_r
 
-	// 	// END of 0xcb shifted opcodes
+	// END of 0xcb shifted opcodes
 }
 
 /* RLC r */

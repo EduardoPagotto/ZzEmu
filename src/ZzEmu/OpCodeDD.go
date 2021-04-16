@@ -175,7 +175,7 @@ func initOpcodeDDMap() {
 	/* LD SP,REGISTER */
 	OpcodeDDMap[0xf9] = instrDD__LD_SP_REG
 
-	// 	// END of 0xdd shifted opcodes
+	// END of 0xdd shifted opcodes
 
 }
 
@@ -684,9 +684,9 @@ func instrDD__CP_A_iREGpDD(z *Z80, opcode byte) {
 	z.Cp(bytetemp)
 }
 
-// /* shift DDFDCB */
+/* shift DDFDCB */
 func instrDD__SHIFT_DDFDCB(z *Z80, opcode byte) {
-	z.Tstates += 4
+	//z.Tstates += 4
 	addr := z.IX.Get() + uint16(signExtend(z.Load8()))
 	opcode2 := z.Load8()
 	z.R++

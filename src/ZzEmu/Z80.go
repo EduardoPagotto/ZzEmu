@@ -106,8 +106,12 @@ func invalidOpcode(z80 *Z80, opcode byte) {
 func (z80 *Z80) Interrupt() {
 	if z80.IFF1 != 0 {
 		if z80.Halted {
-			z80.pc++
+			//z80.pc++
 			z80.Halted = false
+		}
+
+		if z80.interruptsEnabledAt+24 > int(z80.Tstates) {
+			return
 		}
 
 		z80.Tstates += 7
@@ -138,7 +142,7 @@ func (z80 *Z80) Interrupt() {
 // Process a Z80 non-maskable interrupt.
 func (z80 *Z80) NonMaskableInterrupt() {
 	if z80.Halted {
-		z80.pc++
+		//z80.pc++
 		z80.Halted = false
 	}
 
@@ -531,10 +535,14 @@ func (z80 *Z80) GetPrtRegisterValByte(opcode byte) *byte {
 
 // Execute a single instruction at the program counter.
 func (z80 *Z80) DoOpcode() {
-	// z80.Tstates += 4
-	opcode := z80.Memory.Read(z80.pc)
-	z80.R = (z80.R + 1) & 0x7f
-	z80.pc++
+	if !z80.Halted {
+		opcode := z80.Memory.Read(z80.pc)
+		z80.R = (z80.R + 1) & 0x7f
+		z80.pc++
+		OpcodeMap[opcode](z80, opcode)
+	} else {
+		z80.Tstates += 4
+		z80.R = (z80.R + 1) & 0x7f
+	}
 
-	OpcodeMap[opcode](z80, opcode)
 }

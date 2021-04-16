@@ -810,7 +810,7 @@ func instr__LD_iHL_r(z *Z80, opcode byte) {
 func instr__HALT(z *Z80, opcode byte) {
 	z.Tstates += 4
 	z.Halted = true
-	z.pc++
+	//z.pc++
 }
 
 // /* LD A,r */
@@ -1019,7 +1019,7 @@ func instr__JP_Z_NNNN(z *Z80, opcode byte) {
 
 /* shift CB */
 func instr__SHIFT_CB(z *Z80, opcode byte) {
-	z.Tstates += 4
+	//z.Tstates += 4
 	opcode2 := z.Load8()
 	z.R++
 	OpcodeCBMap[opcode2](z, opcode2)
@@ -1183,9 +1183,9 @@ func instr__CALL_C_NNNN(z *Z80, opcode byte) {
 	}
 }
 
-// /* shift DD */
+/* shift DD */
 func instr__SHIFT_DD(z *Z80, opcode byte) {
-	z.Tstates += 4
+	//z.Tstates += 4
 	opcode2 := z.Load8()
 	z.R++
 	if f := OpcodeDDMap[opcode2]; f != nil {
@@ -1336,9 +1336,9 @@ func instr__CALL_PE_NNNN(z *Z80, opcode byte) {
 	}
 }
 
-// /* shift ED */
+/* shift ED */
 func instr__SHIFT_ED(z *Z80, opcode byte) {
-	z.Tstates += 4
+	//z.Tstates += 4
 	opcode2 := z.Load8()
 	z.R++
 	if f := OpcodeEDMap[opcode2]; f != nil {
@@ -1479,9 +1479,9 @@ func instr__CALL_M_NNNN(z *Z80, opcode byte) {
 	}
 }
 
-// /* shift FD */
+/* shift FD */
 func instr__SHIFT_FD(z *Z80, opcode byte) {
-	z.Tstates += 4
+	//z.Tstates += 4
 	opcode2 := z.Load8()
 	z.R++
 	if f := OpcodeDFMap[opcode2]; f != nil {

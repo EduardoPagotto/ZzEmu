@@ -43,9 +43,11 @@ func (console *Console) Exec() {
 
 	for {
 		console.CPU.DoOpcode()
-		if console.CPU.Halted {
-			break
+
+		if (console.CPU.Tstates > 50) && (console.CPU.Tstates < 500) {
+			console.CPU.Interrupt()
 		}
+
 		for {
 			// 1667 de ts para 1/60 de segundos
 			address, value, ok := console.Input.ReadAll()
