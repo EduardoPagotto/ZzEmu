@@ -1,7 +1,6 @@
 package ZzEmu
 
 import (
-	ZzEmu "ZzEmu/CPU"
 	"bufio"
 	"os"
 )
@@ -14,20 +13,17 @@ import (
 // const TotRAM = TopAddr - StartRAM
 
 type Console struct {
-	CPU *ZzEmu.Z80
-	Bus *ZzEmu.Bus
+	CPU *Z80
+	Bus *Bus
 	// ROM    [TotROM]byte
 	// RAM    [TotRAM]byte
 	// Input  *BufferIO
 	// Output *BufferIO
 }
 
-func NewConsole() *Console {
-
-	console := new(Console)
-	console.Bus = ZzEmu.NewBuz()
-	console.CPU = ZzEmu.NewZ80(console.Bus)
-
+func NewConsole() Console {
+	console := Console{Bus: NewBuz()}
+	console.CPU = NewZ80(console.Bus)
 	return console
 }
 
