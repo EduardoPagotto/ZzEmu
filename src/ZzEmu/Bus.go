@@ -13,6 +13,14 @@ type Bus struct {
 	io     map[string]DeviceInterface
 }
 
+func (b *Bus) GetMemory(name string) DeviceInterface {
+	return b.memory[name]
+}
+
+func (b *Bus) GetIO(name string) DeviceInterface {
+	return b.io[name]
+}
+
 func (b *Bus) AddMemory(name string, device DeviceInterface) {
 	b.memory[name] = device
 }

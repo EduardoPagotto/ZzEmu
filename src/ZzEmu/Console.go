@@ -1,24 +1,8 @@
 package ZzEmu
 
-import (
-	"bufio"
-	"os"
-)
-
-// const TotROM = 8192 //0x100 //0x0100
-// const StartRAM = TotROM
-// const SizeRAM = 2048 //0x020 //0x0100
-
-// const TopAddr = StartRAM + SizeRAM // usado pelo stackpointer
-// const TotRAM = TopAddr - StartRAM
-
 type Console struct {
 	CPU *Z80
 	Bus *Bus
-	// ROM    [TotROM]byte
-	// RAM    [TotRAM]byte
-	// Input  *BufferIO
-	// Output *BufferIO
 }
 
 func NewConsole() Console {
@@ -51,38 +35,4 @@ func (console *Console) Exec() {
 		// 	}
 		// }
 	}
-}
-
-func (console *Console) LoadRom(filename string) (int, error) {
-
-	buffer, erro := readBinary(filename)
-	if erro != nil {
-		return -1, erro
-	}
-
-	//copy(console.ROM[:], buffer)
-	tot := len(buffer)
-	return tot, nil
-}
-
-func readBinary(filename string) ([]byte, error) {
-	file, err := os.Open(filename)
-
-	if err != nil {
-		return nil, err
-	}
-	defer file.Close()
-
-	stats, statsErr := file.Stat()
-	if statsErr != nil {
-		return nil, statsErr
-	}
-
-	var size int64 = stats.Size()
-	bytes := make([]byte, size)
-
-	bufr := bufio.NewReader(file)
-	_, err = bufr.Read(bytes)
-
-	return bytes, err
 }
