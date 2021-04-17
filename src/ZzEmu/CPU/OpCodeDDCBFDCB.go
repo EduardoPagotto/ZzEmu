@@ -476,10 +476,10 @@ func instrDDCB__LD_r_RLC_iREGpDD(z *Z80, opcode byte, address uint16) {
 	z.Tstates += 15 //FIXME ??
 
 	var pReg *byte = z.GetPrtRegisterValByte(opcode)
-	(*pReg) = z.Memory.Read(address)
+	(*pReg) = z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
 	(*pReg) = z.rlc((*pReg))
-	z.Memory.Write(address, (*pReg))
+	z.bus.WriteMemory(address, (*pReg))
 }
 
 /* RLC (REGISTER+dd) */
@@ -487,10 +487,10 @@ func instrDDCB__RLC_iREGpDD(z *Z80, opcode byte, address uint16) {
 
 	z.Tstates += 15 //FIXME ??
 
-	var bytetemp byte = z.Memory.Read(address)
+	var bytetemp byte = z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
 	bytetemp = z.rlc(bytetemp)
-	z.Memory.Write(address, bytetemp)
+	z.bus.WriteMemory(address, bytetemp)
 }
 
 /* LD r,RRC (REGISTER+dd) */
@@ -499,10 +499,10 @@ func instrDDCB__LD_r_RRC_iREGpDD(z *Z80, opcode byte, address uint16) {
 	z.Tstates += 15 //FIXME ??
 
 	var pReg *byte = z.GetPrtRegisterValByte(opcode)
-	(*pReg) = z.Memory.Read(address)
+	(*pReg) = z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
 	(*pReg) = z.rrc((*pReg))
-	z.Memory.Write(address, (*pReg))
+	z.bus.WriteMemory(address, (*pReg))
 }
 
 /* RRC (REGISTER+dd) */
@@ -510,10 +510,10 @@ func instrDDCB__RRC_iREGpDD(z *Z80, opcode byte, address uint16) {
 
 	z.Tstates += 15 //FIXME ??
 
-	var bytetemp byte = z.Memory.Read(address)
+	var bytetemp byte = z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
 	bytetemp = z.rrc(bytetemp)
-	z.Memory.Write(address, bytetemp)
+	z.bus.WriteMemory(address, bytetemp)
 }
 
 /* LD B,RL (REGISTER+dd) */
@@ -522,10 +522,10 @@ func instrDDCB__LD_r_RL_iREGpDD(z *Z80, opcode byte, address uint16) {
 	z.Tstates += 15 //FIXME ??
 	var pReg *byte = z.GetPrtRegisterValByte(opcode)
 
-	(*pReg) = z.Memory.Read(address)
+	(*pReg) = z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
 	(*pReg) = z.rl((*pReg))
-	z.Memory.Write(address, (*pReg))
+	z.bus.WriteMemory(address, (*pReg))
 }
 
 /* RL (REGISTER+dd) */
@@ -533,10 +533,10 @@ func instrDDCB__RL_iREGpDD(z *Z80, opcode byte, address uint16) {
 
 	z.Tstates += 15 //FIXME ??
 
-	var bytetemp byte = z.Memory.Read(address)
+	var bytetemp byte = z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
 	bytetemp = z.rl(bytetemp)
-	z.Memory.Write(address, bytetemp)
+	z.bus.WriteMemory(address, bytetemp)
 }
 
 /* LD r,RR (REGISTER+dd) */
@@ -545,10 +545,10 @@ func instrDDCB__LD_r_RR_iREGpDD(z *Z80, opcode byte, address uint16) {
 	z.Tstates += 15 //FIXME ??
 	var pReg *byte = z.GetPrtRegisterValByte(opcode)
 
-	(*pReg) = z.Memory.Read(address)
+	(*pReg) = z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
 	(*pReg) = z.rr((*pReg))
-	z.Memory.Write(address, (*pReg))
+	z.bus.WriteMemory(address, (*pReg))
 }
 
 /* RR (REGISTER+dd) */
@@ -556,10 +556,10 @@ func instrDDCB__RR_iREGpDD(z *Z80, opcode byte, address uint16) {
 
 	z.Tstates += 15 //FIXME ??
 
-	var bytetemp byte = z.Memory.Read(address)
+	var bytetemp byte = z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
 	bytetemp = z.rr(bytetemp)
-	z.Memory.Write(address, bytetemp)
+	z.bus.WriteMemory(address, bytetemp)
 }
 
 /* LD r,SLA (REGISTER+dd) */
@@ -568,10 +568,10 @@ func instrDDCB__LD_r_SLA_iREGpDD(z *Z80, opcode byte, address uint16) {
 	z.Tstates += 15 //FIXME ??
 	var pReg *byte = z.GetPrtRegisterValByte(opcode)
 
-	(*pReg) = z.Memory.Read(address)
+	(*pReg) = z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
 	(*pReg) = z.sla((*pReg))
-	z.Memory.Write(address, (*pReg))
+	z.bus.WriteMemory(address, (*pReg))
 }
 
 /* SLA (REGISTER+dd) */
@@ -579,10 +579,10 @@ func instrDDCB__SLA_iREGpDD(z *Z80, opcode byte, address uint16) {
 
 	z.Tstates += 15 //FIXME ??
 
-	var bytetemp byte = z.Memory.Read(address)
+	var bytetemp byte = z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
 	bytetemp = z.sla(bytetemp)
-	z.Memory.Write(address, bytetemp)
+	z.bus.WriteMemory(address, bytetemp)
 }
 
 /* LD B,SRA (REGISTER+dd) */
@@ -591,10 +591,10 @@ func instrDDCB__LD_r_SRA_iREGpDD(z *Z80, opcode byte, address uint16) {
 	z.Tstates += 15 //FIXME ??
 	var pReg *byte = z.GetPrtRegisterValByte(opcode)
 
-	(*pReg) = z.Memory.Read(address)
+	(*pReg) = z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
 	(*pReg) = z.sra((*pReg))
-	z.Memory.Write(address, (*pReg))
+	z.bus.WriteMemory(address, (*pReg))
 }
 
 /* SRA (REGISTER+dd) */
@@ -602,10 +602,10 @@ func instrDDCB__SRA_iREGpDD(z *Z80, opcode byte, address uint16) {
 
 	z.Tstates += 15 //FIXME ??
 
-	var bytetemp byte = z.Memory.Read(address)
+	var bytetemp byte = z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
 	bytetemp = z.sra(bytetemp)
-	z.Memory.Write(address, bytetemp)
+	z.bus.WriteMemory(address, bytetemp)
 }
 
 /* LD r,SLL (REGISTER+dd) */
@@ -614,10 +614,10 @@ func instrDDCB__LD_r_SLL_iREGpDD(z *Z80, opcode byte, address uint16) {
 	z.Tstates += 15 //FIXME ??
 	var pReg *byte = z.GetPrtRegisterValByte(opcode)
 
-	(*pReg) = z.Memory.Read(address)
+	(*pReg) = z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
 	(*pReg) = z.sll((*pReg))
-	z.Memory.Write(address, (*pReg))
+	z.bus.WriteMemory(address, (*pReg))
 }
 
 /* SLL (REGISTER+dd) */
@@ -625,10 +625,10 @@ func instrDDCB__SLL_iREGpDD(z *Z80, opcode byte, address uint16) {
 
 	z.Tstates += 15 //FIXME ??
 
-	var bytetemp byte = z.Memory.Read(address)
+	var bytetemp byte = z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
 	bytetemp = z.sll(bytetemp)
-	z.Memory.Write(address, bytetemp)
+	z.bus.WriteMemory(address, bytetemp)
 }
 
 /* LD r,SRL (REGISTER+dd) */
@@ -637,10 +637,10 @@ func instrDDCB__LD_r_SRL_iREGpDD(z *Z80, opcode byte, address uint16) {
 	z.Tstates += 15 //FIXME ??
 	var pReg *byte = z.GetPrtRegisterValByte(opcode)
 
-	(*pReg) = z.Memory.Read(address)
+	(*pReg) = z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
 	(*pReg) = z.srl((*pReg))
-	z.Memory.Write(address, (*pReg))
+	z.bus.WriteMemory(address, (*pReg))
 }
 
 /* SRL (REGISTER+dd) */
@@ -648,10 +648,10 @@ func instrDDCB__SRL_iREGpDD(z *Z80, opcode byte, address uint16) {
 
 	z.Tstates += 15 //FIXME ??
 
-	var bytetemp byte = z.Memory.Read(address)
+	var bytetemp byte = z.bus.ReadMemory(address)
 	// z.Memory.ContendReadNoMreq(address, 1)
 	bytetemp = z.srl(bytetemp)
-	z.Memory.Write(address, bytetemp)
+	z.bus.WriteMemory(address, bytetemp)
 }
 
 /* BIT 0,(REGISTER+dd) */
@@ -659,7 +659,7 @@ func instrDDCB__BIT_0_iREGpDD(z *Z80, opcode byte, address uint16) {
 
 	z.Tstates += 15 //FIXME ??
 
-	bytetemp := z.Memory.Read(address)
+	bytetemp := z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
 	z.biti(0, bytetemp, address)
 }
@@ -669,7 +669,7 @@ func instrDDCB__BIT_1_iREGpDD(z *Z80, opcode byte, address uint16) {
 
 	z.Tstates += 15 //FIXME ??
 
-	bytetemp := z.Memory.Read(address)
+	bytetemp := z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
 	z.biti(1, bytetemp, address)
 }
@@ -679,7 +679,7 @@ func instrDDCB__BIT_2_iREGpDD(z *Z80, opcode byte, address uint16) {
 
 	z.Tstates += 15 //FIXME ??
 
-	bytetemp := z.Memory.Read(address)
+	bytetemp := z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
 	z.biti(2, bytetemp, address)
 }
@@ -689,7 +689,7 @@ func instrDDCB__BIT_3_iREGpDD(z *Z80, opcode byte, address uint16) {
 
 	z.Tstates += 15 //FIXME ??
 
-	bytetemp := z.Memory.Read(address)
+	bytetemp := z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
 	z.biti(3, bytetemp, address)
 }
@@ -699,7 +699,7 @@ func instrDDCB__BIT_4_iREGpDD(z *Z80, opcode byte, address uint16) {
 
 	z.Tstates += 15 //FIXME ??
 
-	bytetemp := z.Memory.Read(address)
+	bytetemp := z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
 	z.biti(4, bytetemp, address)
 }
@@ -709,7 +709,7 @@ func instrDDCB__BIT_5_iREGpDD(z *Z80, opcode byte, address uint16) {
 
 	z.Tstates += 15 //FIXME ??
 
-	bytetemp := z.Memory.Read(address)
+	bytetemp := z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
 	z.biti(5, bytetemp, address)
 }
@@ -719,7 +719,7 @@ func instrDDCB__BIT_6_iREGpDD(z *Z80, opcode byte, address uint16) {
 
 	z.Tstates += 15 //FIXME ??
 
-	bytetemp := z.Memory.Read(address)
+	bytetemp := z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
 	z.biti(6, bytetemp, address)
 }
@@ -729,7 +729,7 @@ func instrDDCB__BIT_7_iREGpDD(z *Z80, opcode byte, address uint16) {
 
 	z.Tstates += 15 //FIXME ??
 
-	bytetemp := z.Memory.Read(address)
+	bytetemp := z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
 	z.biti(7, bytetemp, address)
 }
@@ -743,66 +743,66 @@ func instrDDCB__LD_r_RES_b_iREGpDD(z *Z80, opcode byte, address uint16) {
 	offset := (opcode >> 4) & 0x07
 	mask := getMaskBitReset(offset)
 
-	(*pReg) = z.Memory.Read(address) & mask //  0xfe, 0xfd, 0xfb, 0xf7, 0xef, 0xdf, 0xbf, 0x7f
+	(*pReg) = z.bus.ReadMemory(address) & mask //  0xfe, 0xfd, 0xfb, 0xf7, 0xef, 0xdf, 0xbf, 0x7f
 
 	//z.Memory.ContendReadNoMreq(address, 1)
-	z.Memory.Write(address, (*pReg))
+	z.bus.WriteMemory(address, (*pReg))
 }
 
 /* RES 0,(REGISTER+dd) */
 func instrDDCB__RES_0_iREGpDD(z *Z80, opcode byte, address uint16) {
-	var bytetemp byte = z.Memory.Read(address)
+	var bytetemp byte = z.bus.ReadMemory(address)
 	// z.Memory.ContendReadNoMreq(address, 1)
-	z.Memory.Write(address, bytetemp&0xfe)
+	z.bus.WriteMemory(address, bytetemp&0xfe)
 }
 
 /* RES 1,(REGISTER+dd) */
 func instrDDCB__RES_1_iREGpDD(z *Z80, opcode byte, address uint16) {
-	var bytetemp byte = z.Memory.Read(address)
+	var bytetemp byte = z.bus.ReadMemory(address)
 	// z.Memory.ContendReadNoMreq(address, 1)
-	z.Memory.Write(address, bytetemp&0xfd)
+	z.bus.WriteMemory(address, bytetemp&0xfd)
 }
 
 /* RES 2,(REGISTER+dd) */
 func instrDDCB__RES_2_iREGpDD(z *Z80, opcode byte, address uint16) {
-	var bytetemp byte = z.Memory.Read(address)
+	var bytetemp byte = z.bus.ReadMemory(address)
 	// z.Memory.ContendReadNoMreq(address, 1)
-	z.Memory.Write(address, bytetemp&0xfb)
+	z.bus.WriteMemory(address, bytetemp&0xfb)
 }
 
 /* RES 3,(REGISTER+dd) */
 func instrDDCB__RES_3_iREGpDD(z *Z80, opcode byte, address uint16) {
-	var bytetemp byte = z.Memory.Read(address)
+	var bytetemp byte = z.bus.ReadMemory(address)
 	// z.Memory.ContendReadNoMreq(address, 1)
-	z.Memory.Write(address, bytetemp&0xf7)
+	z.bus.WriteMemory(address, bytetemp&0xf7)
 }
 
 /* RES 4,(REGISTER+dd) */
 func instrDDCB__RES_4_iREGpDD(z *Z80, opcode byte, address uint16) {
-	var bytetemp byte = z.Memory.Read(address)
+	var bytetemp byte = z.bus.ReadMemory(address)
 	// z.Memory.ContendReadNoMreq(address, 1)
-	z.Memory.Write(address, bytetemp&0xef)
+	z.bus.WriteMemory(address, bytetemp&0xef)
 }
 
 /* RES 5,(REGISTER+dd) */
 func instrDDCB__RES_5_iREGpDD(z *Z80, opcode byte, address uint16) {
-	var bytetemp byte = z.Memory.Read(address)
+	var bytetemp byte = z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
-	z.Memory.Write(address, bytetemp&0xdf)
+	z.bus.WriteMemory(address, bytetemp&0xdf)
 }
 
 /* RES 6,(REGISTER+dd) */
 func instrDDCB__RES_6_iREGpDD(z *Z80, opcode byte, address uint16) {
-	var bytetemp byte = z.Memory.Read(address)
+	var bytetemp byte = z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
-	z.Memory.Write(address, bytetemp&0xbf)
+	z.bus.WriteMemory(address, bytetemp&0xbf)
 }
 
 /* RES 7,(REGISTER+dd) */
 func instrDDCB__RES_7_iREGpDD(z *Z80, opcode byte, address uint16) {
-	var bytetemp byte = z.Memory.Read(address)
+	var bytetemp byte = z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
-	z.Memory.Write(address, bytetemp&0x7f)
+	z.bus.WriteMemory(address, bytetemp&0x7f)
 }
 
 /* LD r,SET b,(REGISTER+dd) */
@@ -814,9 +814,9 @@ func instrDDCB__LD_r_SET_b_iREGpDD(z *Z80, opcode byte, address uint16) {
 	offset := (opcode >> 4) & 0x07
 	mask := ^getMaskBitReset(offset)
 
-	(*pReg) = z.Memory.Read(address) | mask
+	(*pReg) = z.bus.ReadMemory(address) | mask
 	//z.Memory.ContendReadNoMreq(address, 1)
-	z.Memory.Write(address, (*pReg))
+	z.bus.WriteMemory(address, (*pReg))
 }
 
 /* SET 0,(REGISTER+dd) */
@@ -824,9 +824,9 @@ func instrDDCB__SET_0_iREGpDD(z *Z80, opcode byte, address uint16) {
 
 	z.Tstates += 15 //FIXME ??
 
-	var bytetemp byte = z.Memory.Read(address)
+	var bytetemp byte = z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
-	z.Memory.Write(address, bytetemp|0x01)
+	z.bus.WriteMemory(address, bytetemp|0x01)
 }
 
 /* SET 1,(REGISTER+dd) */
@@ -834,9 +834,9 @@ func instrDDCB__SET_1_iREGpDD(z *Z80, opcode byte, address uint16) {
 
 	z.Tstates += 15 //FIXME ??
 
-	var bytetemp byte = z.Memory.Read(address)
+	var bytetemp byte = z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
-	z.Memory.Write(address, bytetemp|0x02)
+	z.bus.WriteMemory(address, bytetemp|0x02)
 }
 
 /* SET 2,(REGISTER+dd) */
@@ -844,9 +844,9 @@ func instrDDCB__SET_2_iREGpDD(z *Z80, opcode byte, address uint16) {
 
 	z.Tstates += 15 //FIXME ??
 
-	var bytetemp byte = z.Memory.Read(address)
+	var bytetemp byte = z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
-	z.Memory.Write(address, bytetemp|0x04)
+	z.bus.WriteMemory(address, bytetemp|0x04)
 }
 
 /* SET 3,(REGISTER+dd) */
@@ -854,9 +854,9 @@ func instrDDCB__SET_3_iREGpDD(z *Z80, opcode byte, address uint16) {
 
 	z.Tstates += 15 //FIXME ??
 
-	var bytetemp byte = z.Memory.Read(address)
+	var bytetemp byte = z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
-	z.Memory.Write(address, bytetemp|0x08)
+	z.bus.WriteMemory(address, bytetemp|0x08)
 }
 
 /* SET 4,(REGISTER+dd) */
@@ -864,9 +864,9 @@ func instrDDCB__SET_4_iREGpDD(z *Z80, opcode byte, address uint16) {
 
 	z.Tstates += 15 //FIXME ??
 
-	var bytetemp byte = z.Memory.Read(address)
+	var bytetemp byte = z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
-	z.Memory.Write(address, bytetemp|0x10)
+	z.bus.WriteMemory(address, bytetemp|0x10)
 }
 
 /* SET 5,(REGISTER+dd) */
@@ -874,9 +874,9 @@ func instrDDCB__SET_5_iREGpDD(z *Z80, opcode byte, address uint16) {
 
 	z.Tstates += 15 //FIXME ??
 
-	var bytetemp byte = z.Memory.Read(address)
+	var bytetemp byte = z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
-	z.Memory.Write(address, bytetemp|0x20)
+	z.bus.WriteMemory(address, bytetemp|0x20)
 }
 
 /* SET 6,(REGISTER+dd) */
@@ -884,9 +884,9 @@ func instrDDCB__SET_6_iREGpDD(z *Z80, opcode byte, address uint16) {
 
 	z.Tstates += 15 //FIXME ??
 
-	var bytetemp byte = z.Memory.Read(address)
+	var bytetemp byte = z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
-	z.Memory.Write(address, bytetemp|0x40)
+	z.bus.WriteMemory(address, bytetemp|0x40)
 }
 
 /* SET 7,(REGISTER+dd) */
@@ -894,7 +894,7 @@ func instrDDCB__SET_7_iREGpDD(z *Z80, opcode byte, address uint16) {
 
 	z.Tstates += 15 //FIXME ??
 
-	var bytetemp byte = z.Memory.Read(address)
+	var bytetemp byte = z.bus.ReadMemory(address)
 	//z.Memory.ContendReadNoMreq(address, 1)
-	z.Memory.Write(address, bytetemp|0x80)
+	z.bus.WriteMemory(address, bytetemp|0x80)
 }

@@ -3,41 +3,32 @@ package ZzEmu
 import (
 	ZzEmu "ZzEmu/CPU"
 	"bufio"
-	"fmt"
 	"os"
-	"strconv"
 )
 
-const TotROM = 0x100 //0x0100
-const StartRAM = TotROM
-const SizeRAM = 0x020 //0x0100
+// const TotROM = 8192 //0x100 //0x0100
+// const StartRAM = TotROM
+// const SizeRAM = 2048 //0x020 //0x0100
 
-const TopAddr = StartRAM + SizeRAM // usado pelo stackpointer
-const TotRAM = TopAddr - StartRAM
+// const TopAddr = StartRAM + SizeRAM // usado pelo stackpointer
+// const TotRAM = TopAddr - StartRAM
 
 type Console struct {
-	CPU    *ZzEmu.Z80
-	ROM    [TotROM]byte
-	RAM    [TotRAM]byte
-	Input  *BufferIO
-	Output *BufferIO
-}
-
-func NewCPUMemory(console *Console) ZzEmu.MemoryInterface {
-	return &CpuMemory{rom: &console.ROM, ram: &console.RAM}
-}
-
-func NewCPUPort(console *Console) ZzEmu.PortInterface {
-	return &CpuPort{Input: console.Input, Output: console.Output}
+	CPU *ZzEmu.Z80
+	Bus *ZzEmu.Bus
+	// ROM    [TotROM]byte
+	// RAM    [TotRAM]byte
+	// Input  *BufferIO
+	// Output *BufferIO
 }
 
 func NewConsole() *Console {
-	console := Console{Input: NewBufferIO(), Output: NewBufferIO()}
-	var mem ZzEmu.MemoryInterface = NewCPUMemory(&console)
-	var port ZzEmu.PortInterface = NewCPUPort(&console)
-	console.CPU = ZzEmu.NewZ80(mem, port)
 
-	return &console
+	console := new(Console)
+	console.Bus = ZzEmu.NewBuz()
+	console.CPU = ZzEmu.NewZ80(console.Bus)
+
+	return console
 }
 
 func (console *Console) Exec() {
@@ -49,20 +40,20 @@ func (console *Console) Exec() {
 			console.CPU.Interrupt()
 		}
 
-		for {
-			// 1667 de ts para 1/60 de segundos
-			address, value, ok := console.Input.ReadAll()
-			if ok {
-				fmt.Println("TState: " + strconv.FormatInt(int64(console.CPU.Tstates), 10) +
-					" Addr: " + strconv.FormatInt(int64(address), 10) +
-					" Val:" + strconv.FormatInt(int64(value), 10))
+		// for {
+		// 	// 1667 de ts para 1/60 de segundos
+		// 	address, value, ok := console.Input.ReadAll()
+		// 	if ok {
+		// 		fmt.Println("TState: " + strconv.FormatInt(int64(console.CPU.Tstates), 10) +
+		// 			" Addr: " + strconv.FormatInt(int64(address), 10) +
+		// 			" Val:" + strconv.FormatInt(int64(value), 10))
 
-				//newAddr := address & 0x0f
-				console.Output.Write(address+1, value)
-			} else {
-				break
-			}
-		}
+		// 		//newAddr := address & 0x0f
+		// 		console.Output.Write(address+1, value)
+		// 	} else {
+		// 		break
+		// 	}
+		// }
 	}
 }
 
@@ -73,7 +64,7 @@ func (console *Console) LoadRom(filename string) (int, error) {
 		return -1, erro
 	}
 
-	copy(console.ROM[:], buffer)
+	//copy(console.ROM[:], buffer)
 	tot := len(buffer)
 	return tot, nil
 }

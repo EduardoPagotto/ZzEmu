@@ -34,7 +34,7 @@
                 "command": "go test",
                 "args": [
                     "-v",
-                    "./..."
+                    "./.."
                 ],
                 "group": "test"
             },

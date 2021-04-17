@@ -270,7 +270,7 @@ func instr__LD_BC_NNNN(z *Z80, opcode byte) {
 
 func instr__LD_iBC_A(z *Z80, opcode byte) {
 	z.Tstates += 7
-	z.Memory.Write(z.BC.Get(), z.A)
+	z.bus.WriteMemory(z.BC.Get(), z.A)
 }
 
 func instr__INC_BC(z *Z80, opcode byte) {
@@ -321,7 +321,7 @@ func instr__ADD_HL_BC(z *Z80, opcode byte) {
 /* LD A,(BC) */
 func instr__LD_A_iBC(z *Z80, opcode byte) {
 	z.Tstates += 7
-	z.A = z.Memory.Read(z.BC.Get())
+	z.A = z.bus.ReadMemory(z.BC.Get())
 }
 
 /* DEC BC */
@@ -383,7 +383,7 @@ func instr__LD_DE_NNNN(z *Z80, opcode byte) {
 /* LD (DE),A */
 func instr__LD_iDE_A(z *Z80, opcode byte) {
 	z.Tstates += 7
-	z.Memory.Write(z.DE.Get(), z.A)
+	z.bus.WriteMemory(z.DE.Get(), z.A)
 }
 
 /* INC DE */
@@ -436,7 +436,7 @@ func instr__ADD_HL_DE(z *Z80, opcode byte) {
 /* LD A,(DE) */
 func instr__LD_A_iDE(z *Z80, opcode byte) {
 	z.Tstates += 7
-	z.A = z.Memory.Read(z.DE.Get())
+	z.A = z.bus.ReadMemory(z.DE.Get())
 }
 
 /* DEC DE */
@@ -639,26 +639,26 @@ func instr__INC_SP(z *Z80, opcode byte) {
 /* INC (HL) */
 func instr__INC_iHL(z *Z80, opcode byte) {
 	z.Tstates += 11
-	var bytetemp byte = z.Memory.Read(z.HL.Get())
+	var bytetemp byte = z.bus.ReadMemory(z.HL.Get())
 	//z.Memory.ContendReadNoMreq(z.HL(), 1)
 	z.Inc(&bytetemp)
-	z.Memory.Write(z.HL.Get(), bytetemp)
+	z.bus.WriteMemory(z.HL.Get(), bytetemp)
 
 }
 
 /* DEC (HL) */
 func instr__DEC_iHL(z *Z80, opcode byte) {
 	z.Tstates += 11
-	var bytetemp byte = z.Memory.Read(z.HL.Get())
+	var bytetemp byte = z.bus.ReadMemory(z.HL.Get())
 	//z.Memory.ContendReadNoMreq(z.HL(), 1)
 	z.Dec(&bytetemp)
-	z.Memory.Write(z.HL.Get(), bytetemp)
+	z.bus.WriteMemory(z.HL.Get(), bytetemp)
 }
 
 /* LD (HL),nn */
 func instr__LD_iHL_NN(z *Z80, opcode byte) {
 	z.Tstates += 10
-	z.Memory.Write(z.HL.Get(), z.Load8())
+	z.bus.WriteMemory(z.HL.Get(), z.Load8())
 }
 
 /* SCF */
@@ -737,7 +737,7 @@ func instr__LD_B_r(z *Z80, opcode byte) {
 /* LD B,(HL) */
 func instr__LD_B_iHL(z *Z80, opcode byte) {
 	z.Tstates += 7
-	z.B = z.Memory.Read(z.HL.Get())
+	z.B = z.bus.ReadMemory(z.HL.Get())
 }
 
 /* LD C,r */
@@ -749,7 +749,7 @@ func instr__LD_C_r(z *Z80, opcode byte) {
 /* LD C,(HL) */
 func instr__LD_C_iHL(z *Z80, opcode byte) {
 	z.Tstates += 7
-	z.C = z.Memory.Read(z.HL.Get())
+	z.C = z.bus.ReadMemory(z.HL.Get())
 }
 
 /* LD D,r */
@@ -761,7 +761,7 @@ func instr__LD_D_r(z *Z80, opcode byte) {
 /* LD D,(HL) */
 func instr__LD_D_iHL(z *Z80, opcode byte) {
 	z.Tstates += 7
-	z.D = z.Memory.Read(z.HL.Get())
+	z.D = z.bus.ReadMemory(z.HL.Get())
 }
 
 /* LD E,r */
@@ -773,7 +773,7 @@ func instr__LD_E_r(z *Z80, opcode byte) {
 /* LD E,(HL) */
 func instr__LD_E_iHL(z *Z80, opcode byte) {
 	z.Tstates += 7
-	z.E = z.Memory.Read(z.HL.Get())
+	z.E = z.bus.ReadMemory(z.HL.Get())
 }
 
 /* LD H,r */
@@ -785,7 +785,7 @@ func instr__LD_H_r(z *Z80, opcode byte) {
 /* LD H,(HL) */
 func instr__LD_H_iHL(z *Z80, opcode byte) {
 	z.Tstates += 7
-	z.H = z.Memory.Read(z.HL.Get())
+	z.H = z.bus.ReadMemory(z.HL.Get())
 }
 
 /* LD L,r */
@@ -797,13 +797,13 @@ func instr__LD_L_r(z *Z80, opcode byte) {
 /* LD L,(HL) */
 func instr__LD_L_iHL(z *Z80, opcode byte) {
 	z.Tstates += 7
-	z.L = z.Memory.Read(z.HL.Get())
+	z.L = z.bus.ReadMemory(z.HL.Get())
 }
 
 // /* LD (HL),r */
 func instr__LD_iHL_r(z *Z80, opcode byte) {
 	z.Tstates += 7
-	z.Memory.Write(z.HL.Get(), z.GetRegisterValByte(opcode))
+	z.bus.WriteMemory(z.HL.Get(), z.GetRegisterValByte(opcode))
 }
 
 // /* HALT */
@@ -822,7 +822,7 @@ func instr__LD_A_r(z *Z80, opcode byte) {
 // /* LD A,(HL) */
 func instr__LD_A_iHL(z *Z80, opcode byte) {
 	z.Tstates += 7
-	z.A = z.Memory.Read(z.HL.Get())
+	z.A = z.bus.ReadMemory(z.HL.Get())
 }
 
 /* ADD A,r */
@@ -834,7 +834,7 @@ func instr__ADD_A_r(z *Z80, opcode byte) {
 /* ADD A,(HL) */
 func instr__ADD_A_iHL(z *Z80, opcode byte) {
 	z.Tstates += 7
-	z.Add(z.Memory.Read(z.HL.Get()))
+	z.Add(z.bus.ReadMemory(z.HL.Get()))
 }
 
 // /* ADC A,r */
@@ -846,7 +846,7 @@ func instr__ADC_A_r(z *Z80, opcode byte) {
 /* ADC A,(HL) */
 func instr__ADC_A_iHL(z *Z80, opcode byte) {
 	z.Tstates += 4
-	z.Adc(z.Memory.Read(z.HL.Get()))
+	z.Adc(z.bus.ReadMemory(z.HL.Get()))
 }
 
 /* SUB A,r */
@@ -858,7 +858,7 @@ func instr__SUB_A_r(z *Z80, opcode byte) {
 /* SUB A,(HL) */
 func instr__SUB_A_iHL(z *Z80, opcode byte) {
 	z.Tstates += 7
-	z.Sub(z.Memory.Read(z.HL.Get()))
+	z.Sub(z.bus.ReadMemory(z.HL.Get()))
 }
 
 /* SBC A,r */
@@ -870,7 +870,7 @@ func instr__SBC_A_r(z *Z80, opcode byte) {
 /* SBC A,(HL) */
 func instr__SBC_A_iHL(z *Z80, opcode byte) {
 	z.Tstates += 7
-	z.Sbc(z.Memory.Read(z.HL.Get()))
+	z.Sbc(z.bus.ReadMemory(z.HL.Get()))
 }
 
 /* AND A,r */
@@ -882,7 +882,7 @@ func instr__AND_A_r(z *Z80, opcode byte) {
 /* AND A,(HL) */
 func instr__AND_A_iHL(z *Z80, opcode byte) {
 	z.Tstates += 7
-	z.And(z.Memory.Read(z.HL.Get()))
+	z.And(z.bus.ReadMemory(z.HL.Get()))
 }
 
 // /* XOR A,r */
@@ -894,7 +894,7 @@ func instr__XOR_A_r(z *Z80, opcode byte) {
 /* XOR A,(HL) */
 func instr__XOR_A_iHL(z *Z80, opcode byte) {
 	z.Tstates += 7
-	z.Xor(z.Memory.Read(z.HL.Get()))
+	z.Xor(z.bus.ReadMemory(z.HL.Get()))
 }
 
 /* OR A,r */
@@ -906,7 +906,7 @@ func instr__OR_A_r(z *Z80, opcode byte) {
 /* OR A,(HL) */
 func instr__OR_A_iHL(z *Z80, opcode byte) {
 	z.Tstates += 7
-	z.Or(z.Memory.Read(z.HL.Get()))
+	z.Or(z.bus.ReadMemory(z.HL.Get()))
 }
 
 /* CP r */
@@ -918,7 +918,7 @@ func instr__CP_r(z *Z80, opcode byte) {
 /* CP (HL) */
 func instr__CP_iHL(z *Z80, opcode byte) {
 	z.Tstates += 7
-	z.Cp(z.Memory.Read(z.HL.Get()))
+	z.Cp(z.bus.ReadMemory(z.HL.Get()))
 }
 
 /* RET NZ */
@@ -1242,11 +1242,11 @@ func instr__JP_PO_NNNN(z *Z80, opcode byte) {
 /* EX (SP),HL */
 func instr__EX_iSP_HL(z *Z80, opcode byte) {
 	z.Tstates += 19
-	var bytetempl = z.Memory.Read(z.sp)
-	var bytetemph = z.Memory.Read(z.sp + 1)
+	var bytetempl = z.bus.ReadMemory(z.sp)
+	var bytetemph = z.bus.ReadMemory(z.sp + 1)
 	//z.Memory.ContendReadNoMreq(z.SP()+1, 1)
-	z.Memory.Write(z.sp+1, z.H)
-	z.Memory.Write(z.sp, z.L)
+	z.bus.WriteMemory(z.sp+1, z.H)
+	z.bus.WriteMemory(z.sp, z.L)
 	//z.Memory.ContendWriteNoMreq_loop(z.SP(), 1, 2)
 	z.L = bytetempl
 	z.H = bytetemph

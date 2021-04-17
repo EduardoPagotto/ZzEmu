@@ -1,6 +1,8 @@
 package ZzEmu
 
-import "strconv"
+import (
+	"strconv"
+)
 
 // The flags
 const FLAG_C = 0x01
@@ -27,8 +29,7 @@ var (
 )
 
 type Z80 struct {
-	Memory MemoryInterface
-	Port   PortInterface
+	bus *Bus
 	//Cycles uint64
 
 	A, F, B, C, D, E, H, L         byte
@@ -54,10 +55,9 @@ type Z80 struct {
 }
 
 // creates a new Z80 instance.
-func NewZ80(memory MemoryInterface, port PortInterface) *Z80 {
+func NewZ80(bus *Bus) *Z80 {
 	var z80 *Z80 = new(Z80)
-	z80.Memory = memory
-	z80.Port = port
+	z80.bus = bus
 
 	z80.AF = Register16{&z80.A, &z80.F}
 	z80.BC = Register16{&z80.B, &z80.C}
@@ -128,9 +128,9 @@ func (z80 *Z80) Interrupt() {
 
 		case 2:
 			var inttemp uint16 = (uint16(z80.I) << 8) | 0xff
-			pcl := z80.Memory.Read(inttemp)
+			pcl := z80.bus.ReadMemory(inttemp)
 			inttemp++
-			pch := z80.Memory.Read(inttemp)
+			pch := z80.bus.ReadMemory(inttemp)
 			z80.pc = joinBytes(pch, pcl)
 
 		default:
@@ -172,7 +172,7 @@ func (z80 *Z80) Call() {
 
 func (z80 *Z80) Jr() {
 	z80.Tstates += 12
-	var jrtemp int16 = signExtend(z80.Memory.Read(z80.pc))
+	var jrtemp int16 = signExtend(z80.bus.ReadMemory(z80.pc))
 	z80.pc += uint16(jrtemp)
 	z80.pc++
 }
@@ -288,18 +288,18 @@ Salve registro no stack
 */
 func (z80 *Z80) PushR(register16 Register16) {
 	z80.sp--
-	z80.Memory.Write(z80.sp, *register16.high)
+	z80.bus.WriteMemory(z80.sp, *register16.high)
 	z80.sp--
-	z80.Memory.Write(z80.sp, *register16.low)
+	z80.bus.WriteMemory(z80.sp, *register16.low)
 }
 
 /*
 Carrgado registro do stack
 */
 func (z80 *Z80) PopR(register16 *Register16) {
-	*register16.low = z80.Memory.Read(z80.sp)
+	*register16.low = z80.bus.ReadMemory(z80.sp)
 	z80.sp++
-	*register16.high = z80.Memory.Read(z80.sp)
+	*register16.high = z80.bus.ReadMemory(z80.sp)
 	z80.sp++
 }
 
@@ -309,26 +309,26 @@ Salva uint16 no stack
 func (z80 *Z80) Push(value uint16) {
 	high, low := splitWord(value)
 	z80.sp--
-	z80.Memory.Write(z80.sp, high)
+	z80.bus.WriteMemory(z80.sp, high)
 	z80.sp--
-	z80.Memory.Write(z80.sp, low)
+	z80.bus.WriteMemory(z80.sp, low)
 }
 
 /*
 Carrega uint16 do stack
 */
 func (z80 *Z80) Pop() uint16 {
-	valLo := z80.Memory.Read(z80.sp)
+	valLo := z80.bus.ReadMemory(z80.sp)
 	z80.sp++
-	valHi := z80.Memory.Read(z80.sp)
+	valHi := z80.bus.ReadMemory(z80.sp)
 	z80.sp++
 	return joinBytes(valHi, valLo)
 }
 
 func (z80 *Z80) LoadR(register16 *Register16) {
-	*register16.low = z80.Memory.Read(z80.pc)
+	*register16.low = z80.bus.ReadMemory(z80.pc)
 	z80.pc++
-	*register16.high = z80.Memory.Read(z80.pc)
+	*register16.high = z80.bus.ReadMemory(z80.pc)
 	z80.pc++
 }
 
@@ -336,9 +336,9 @@ func (z80 *Z80) LoadR(register16 *Register16) {
 Carrega uint16 seguinte do PC em LittleEndian
 */
 func (z80 *Z80) Load16() uint16 {
-	ldtemp := uint16(z80.Memory.Read(z80.pc))
+	ldtemp := uint16(z80.bus.ReadMemory(z80.pc))
 	z80.pc++
-	ldtemp |= uint16(z80.Memory.Read(z80.pc)) << 8
+	ldtemp |= uint16(z80.bus.ReadMemory(z80.pc)) << 8
 	z80.pc++
 	return ldtemp
 }
@@ -347,7 +347,7 @@ func (z80 *Z80) Load16() uint16 {
 Carrega byte seguinte do PC
 */
 func (z80 *Z80) Load8() byte {
-	val := z80.Memory.Read(z80.pc)
+	val := z80.bus.ReadMemory(z80.pc)
 	z80.pc++
 	return val
 }
@@ -357,9 +357,9 @@ Carrega conteudo apontado pelo PC, PC+1 no ponteido do Register16
 */
 func (z80 *Z80) LoadIndexR(register16 *Register16) {
 	ldtemp := z80.Load16()
-	*register16.low = z80.Memory.Read(ldtemp)
+	*register16.low = z80.bus.ReadMemory(ldtemp)
 	ldtemp++
-	*register16.high = z80.Memory.Read(ldtemp)
+	*register16.high = z80.bus.ReadMemory(ldtemp)
 }
 
 /*
@@ -367,9 +367,9 @@ Armazena o conteudo do Register16 no endereco apontado por PC, PC+1
 */
 func (z80 *Z80) StoreIndexR(register16 Register16) {
 	ldtemp := z80.Load16()
-	z80.Memory.Write(ldtemp, *register16.low)
+	z80.bus.WriteMemory(ldtemp, *register16.low)
 	ldtemp++
-	z80.Memory.Write(ldtemp, *register16.high)
+	z80.bus.WriteMemory(ldtemp, *register16.high)
 }
 
 /*
@@ -377,7 +377,7 @@ Carrega ponteiro de byte na posicao indexada pelo PC, PC+1
 */
 func (z80 *Z80) LoadIndex8(reg *byte) {
 	ldtemp := z80.Load16()
-	*reg = z80.Memory.Read(ldtemp)
+	*reg = z80.bus.ReadMemory(ldtemp)
 }
 
 /*
@@ -385,7 +385,7 @@ Armazena bute na posicao indexada pelo PC, PC+1
 */
 func (z80 *Z80) StoreIndex8(reg byte) {
 	var addr uint16 = z80.Load16()
-	z80.Memory.Write(addr, reg)
+	z80.bus.WriteMemory(addr, reg)
 }
 
 //-- bit shift
@@ -473,16 +473,11 @@ func (z80 *Z80) in(reg *byte, port uint16) {
 }
 
 func (z80 *Z80) readPort(address uint16) byte {
-	value, ok := z80.Port.Read(address)
-	if ok {
-		return value
-	}
-
-	return 0xff
+	return z80.bus.ReadIO(address)
 }
 
 func (z80 *Z80) writePort(address uint16, b byte) {
-	z80.Port.Write(address, b)
+	z80.bus.WriteIO(address, b)
 }
 
 //-- register select to opcode
@@ -536,7 +531,7 @@ func (z80 *Z80) GetPrtRegisterValByte(opcode byte) *byte {
 // Execute a single instruction at the program counter.
 func (z80 *Z80) DoOpcode() {
 	if !z80.Halted {
-		opcode := z80.Memory.Read(z80.pc)
+		opcode := z80.bus.ReadMemory(z80.pc)
 		z80.R = (z80.R + 1) & 0x7f
 		z80.pc++
 		OpcodeMap[opcode](z80, opcode)

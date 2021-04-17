@@ -528,10 +528,10 @@ func instrCB__RLC_r(z *Z80, opcode byte) {
 /* RLC (HL) */
 func instrCB__RLC_iHL(z *Z80, opcode byte) {
 	z.Tstates += 16
-	var bytetemp byte = z.Memory.Read(z.HL.Get())
+	var bytetemp byte = z.bus.ReadMemory(z.HL.Get())
 	//z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
 	bytetemp = z.rlc(bytetemp)
-	z.Memory.Write(z.HL.Get(), bytetemp)
+	z.bus.WriteMemory(z.HL.Get(), bytetemp)
 }
 
 /* RRC r */
@@ -544,10 +544,10 @@ func instrCB__RRC_r(z *Z80, opcode byte) {
 /* RRC (HL) */
 func instrCB__RRC_iHL(z *Z80, opcode byte) {
 	z.Tstates += 15
-	var bytetemp byte = z.Memory.Read(z.HL.Get())
+	var bytetemp byte = z.bus.ReadMemory(z.HL.Get())
 	//z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
 	bytetemp = z.rrc(bytetemp)
-	z.Memory.Write(z.HL.Get(), bytetemp)
+	z.bus.WriteMemory(z.HL.Get(), bytetemp)
 }
 
 /* RL r */
@@ -560,10 +560,10 @@ func instrCB__RL_r(z *Z80, opcode byte) {
 /* RL (HL) */
 func instrCB__RL_iHL(z *Z80, opcode byte) {
 	z.Tstates += 15
-	var bytetemp byte = z.Memory.Read(z.HL.Get())
+	var bytetemp byte = z.bus.ReadMemory(z.HL.Get())
 	//z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
 	bytetemp = z.rl(bytetemp)
-	z.Memory.Write(z.HL.Get(), bytetemp)
+	z.bus.WriteMemory(z.HL.Get(), bytetemp)
 }
 
 /* RR r */
@@ -576,10 +576,10 @@ func instrCB__RR_r(z *Z80, opcode byte) {
 /* RR (HL) */
 func instrCB__RR_iHL(z *Z80, opcode byte) {
 	z.Tstates += 15
-	var bytetemp byte = z.Memory.Read(z.HL.Get())
+	var bytetemp byte = z.bus.ReadMemory(z.HL.Get())
 	//z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
 	bytetemp = z.rr(bytetemp)
-	z.Memory.Write(z.HL.Get(), bytetemp)
+	z.bus.WriteMemory(z.HL.Get(), bytetemp)
 }
 
 /* SLA r */
@@ -592,10 +592,10 @@ func instrCB__SLA_r(z *Z80, opcode byte) {
 /* SLA (HL) */
 func instrCB__SLA_iHL(z *Z80, opcode byte) {
 	z.Tstates += 15
-	var bytetemp byte = z.Memory.Read(z.HL.Get())
+	var bytetemp byte = z.bus.ReadMemory(z.HL.Get())
 	//z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
 	bytetemp = z.sla(bytetemp)
-	z.Memory.Write(z.HL.Get(), bytetemp)
+	z.bus.WriteMemory(z.HL.Get(), bytetemp)
 }
 
 /* SRA r */
@@ -608,10 +608,10 @@ func instrCB__SRA_r(z *Z80, opcode byte) {
 /* SRA (HL) */
 func instrCB__SRA_iHL(z *Z80, opcode byte) {
 	z.Tstates += 15
-	var bytetemp byte = z.Memory.Read(z.HL.Get())
+	var bytetemp byte = z.bus.ReadMemory(z.HL.Get())
 	//z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
 	bytetemp = z.sra(bytetemp)
-	z.Memory.Write(z.HL.Get(), bytetemp)
+	z.bus.WriteMemory(z.HL.Get(), bytetemp)
 }
 
 /* SLL B */
@@ -624,10 +624,10 @@ func instrCB__SLL_r(z *Z80, opcode byte) {
 /* SLL (HL) */
 func instrCB__SLL_iHL(z *Z80, opcode byte) {
 	z.Tstates += 15
-	var bytetemp byte = z.Memory.Read(z.HL.Get())
+	var bytetemp byte = z.bus.ReadMemory(z.HL.Get())
 	//z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
 	bytetemp = z.sll(bytetemp)
-	z.Memory.Write(z.HL.Get(), bytetemp)
+	z.bus.WriteMemory(z.HL.Get(), bytetemp)
 }
 
 /* SRL r */
@@ -640,10 +640,10 @@ func instrCB__SRL_r(z *Z80, opcode byte) {
 /* SRL (HL) */
 func instrCB__SRL_iHL(z *Z80, opcode byte) {
 	z.Tstates += 15
-	var bytetemp byte = z.Memory.Read(z.HL.Get())
+	var bytetemp byte = z.bus.ReadMemory(z.HL.Get())
 	//z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
 	bytetemp = z.srl(bytetemp)
-	z.Memory.Write(z.HL.Get(), bytetemp)
+	z.bus.WriteMemory(z.HL.Get(), bytetemp)
 }
 
 /* BIT b,r */
@@ -658,7 +658,7 @@ func instrCB__BIT_b_r(z *Z80, opcode byte) {
 func instrCB__BIT_b_iHL(z *Z80, opcode byte) {
 	var bitSel byte = (opcode & 0x38) >> 3
 	z.Tstates += 12
-	bytetemp := z.Memory.Read(z.HL.Get())
+	bytetemp := z.bus.ReadMemory(z.HL.Get())
 	//z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
 	z.bit(bitSel, bytetemp)
 }
@@ -675,11 +675,11 @@ func instrCB__RES_b_r(z *Z80, opcode byte) {
 /* RES b,(HL) */
 func instrCB__RES_b_iHL(z *Z80, opcode byte) {
 	z.Tstates += 15
-	var bytetemp byte = z.Memory.Read(z.HL.Get())
+	var bytetemp byte = z.bus.ReadMemory(z.HL.Get())
 	var bitSel byte = (opcode & 0x38) >> 3
 	mask := getMaskBitReset(bitSel)
 	//z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
-	z.Memory.Write(z.HL.Get(), bytetemp&mask)
+	z.bus.WriteMemory(z.HL.Get(), bytetemp&mask)
 }
 
 /* SET b,r */
@@ -694,9 +694,9 @@ func instrCB__SET_b_r(z *Z80, opcode byte) {
 func instrCB__SET_b_iHL(z *Z80, opcode byte) {
 
 	z.Tstates += 15
-	var bytetemp byte = z.Memory.Read(z.HL.Get())
+	var bytetemp byte = z.bus.ReadMemory(z.HL.Get())
 	var bitSel byte = (opcode & 0x38) >> 3
 	mask := ^getMaskBitReset(bitSel)
 	//z.Memory.ContendReadNoMreq(z.HL.Get(), 1)
-	z.Memory.Write(z.HL.Get(), bytetemp|mask)
+	z.bus.WriteMemory(z.HL.Get(), bytetemp|mask)
 }

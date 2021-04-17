@@ -11,9 +11,14 @@ func main() {
 	//pgm := "./examples/hello.bin"
 	//pgm := "./examples/pilha.bin"
 	//pgm := "./examples/indices.bin"
-	pgm := "./examples/interrup1.bin"
+	pgm := "./examples/zx81.bin" //"./examples/interrup1.bin"
+
+	var rom ZzEmu.DeviceInterface = ZzEmu.NewDeviceMemory(0x0000, 0x0100)
+	ram = ZzEmu.NewDeviceMemory(0x0100, 0x0100)
 
 	var console *ZzEmu.Console = ZzEmu.NewConsole()
+	console.Bus.AddMemory("RAM", ram)
+
 	size, erro := console.LoadRom(pgm)
 	if erro != nil {
 		fmt.Println(erro)

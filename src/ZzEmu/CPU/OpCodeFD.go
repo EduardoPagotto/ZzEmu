@@ -274,10 +274,10 @@ func instrFD__INC_iREGpDD(z *Z80, opcode byte) {
 	var offset byte = z.Load8()
 	//z.Memory.ContendReadNoMreq_loop(z.pc, 1, 5)
 	var wordtemp uint16 = z.IY.Get() + uint16(signExtend(offset))
-	var bytetemp byte = z.Memory.Read(wordtemp)
+	var bytetemp byte = z.bus.ReadMemory(wordtemp)
 	//z.Memory.ContendReadNoMreq(wordtemp, 1)
 	z.Inc(&bytetemp)
-	z.Memory.Write(wordtemp, bytetemp)
+	z.bus.WriteMemory(wordtemp, bytetemp)
 }
 
 /* DEC (iy+dd) */
@@ -286,10 +286,10 @@ func instrFD__DEC_iREGpDD(z *Z80, opcode byte) {
 	var offset byte = z.Load8()
 	//z.Memory.ContendReadNoMreq_loop(z.pc, 1, 5)
 	var wordtemp uint16 = z.IY.Get() + uint16(signExtend(offset))
-	var bytetemp byte = z.Memory.Read(wordtemp)
+	var bytetemp byte = z.bus.ReadMemory(wordtemp)
 	//z.Memory.ContendReadNoMreq(wordtemp, 1)
 	z.Dec(&bytetemp)
-	z.Memory.Write(wordtemp, bytetemp)
+	z.bus.WriteMemory(wordtemp, bytetemp)
 }
 
 /* LD (iy+dd),nn */
@@ -298,7 +298,7 @@ func instrFD__LD_iREGpDD_NN(z *Z80, opcode byte) {
 	offset := z.Load8()
 	value := z.Load8()
 	//z.Memory.ContendReadNoMreq_loop(z.pc, 1, 2)
-	z.Memory.Write(z.IY.Get()+uint16(signExtend(offset)), value)
+	z.bus.WriteMemory(z.IY.Get()+uint16(signExtend(offset)), value)
 }
 
 /* ADD iy,SP */
@@ -325,7 +325,7 @@ func instrFD__LD_B_iREGpDD(z *Z80, opcode byte) {
 	z.Tstates += 19
 	var offset byte = z.Load8()
 	//z.Memory.ContendReadNoMreq_loop(z.pc, 1, 5)
-	z.B = z.Memory.Read(z.IY.Get() + uint16(signExtend(offset)))
+	z.B = z.bus.ReadMemory(z.IY.Get() + uint16(signExtend(offset)))
 }
 
 /* LD C,IYH */
@@ -345,7 +345,7 @@ func instrFD__LD_C_iREGpDD(z *Z80, opcode byte) {
 	z.Tstates += 19
 	var offset byte = z.Load8()
 	//z.Memory.ContendReadNoMreq_loop(z.pc, 1, 5)
-	z.C = z.Memory.Read(z.IY.Get() + uint16(signExtend(offset)))
+	z.C = z.bus.ReadMemory(z.IY.Get() + uint16(signExtend(offset)))
 }
 
 /* LD D,IYH */
@@ -365,7 +365,7 @@ func instrFD__LD_D_iREGpDD(z *Z80, opcode byte) {
 	z.Tstates += 19
 	var offset byte = z.Load8()
 	//z.Memory.ContendReadNoMreq_loop(z.pc, 1, 5)
-	z.D = z.Memory.Read(z.IY.Get() + uint16(signExtend(offset)))
+	z.D = z.bus.ReadMemory(z.IY.Get() + uint16(signExtend(offset)))
 }
 
 /* LD E,IYH */
@@ -385,7 +385,7 @@ func instrFD__LD_E_iREGpDD(z *Z80, opcode byte) {
 	z.Tstates += 19
 	var offset byte = z.Load8()
 	//z.Memory.ContendReadNoMreq_loop(z.pc, 1, 5)
-	z.E = z.Memory.Read(z.IY.Get() + uint16(signExtend(offset)))
+	z.E = z.bus.ReadMemory(z.IY.Get() + uint16(signExtend(offset)))
 }
 
 /* LD IYH,B */
@@ -428,7 +428,7 @@ func instrFD__LD_H_iREGpDD(z *Z80, opcode byte) {
 	z.Tstates += 19
 	var offset byte = z.Load8()
 	//z.Memory.ContendReadNoMreq_loop(z.pc, 1, 5)
-	z.H = z.Memory.Read(z.IY.Get() + uint16(signExtend(offset)))
+	z.H = z.bus.ReadMemory(z.IY.Get() + uint16(signExtend(offset)))
 }
 
 /* LD IYH,A */
@@ -477,7 +477,7 @@ func instrFD__LD_L_iREGpDD(z *Z80, opcode byte) {
 	z.Tstates += 19
 	var offset byte = z.Load8()
 	//z.Memory.ContendReadNoMreq_loop(z.pc, 1, 5)
-	z.L = z.Memory.Read(z.IY.Get() + uint16(signExtend(offset)))
+	z.L = z.bus.ReadMemory(z.IY.Get() + uint16(signExtend(offset)))
 }
 
 /* LD IYL,A */
@@ -492,7 +492,7 @@ func instrFD__LD_iREGpDD_r(z *Z80, opcode byte) {
 	offset := z.Load8()
 	//z.Memory.ContendReadNoMreq_loop(z.pc, 1, 5)
 	var reg *byte = z.GetPrtRegisterValByte(opcode)
-	z.Memory.Write(z.IY.Get()+uint16(signExtend(offset)), *reg)
+	z.bus.WriteMemory(z.IY.Get()+uint16(signExtend(offset)), *reg)
 }
 
 /* LD A,IYH */
@@ -512,7 +512,7 @@ func instrFD__LD_A_iREGpDD(z *Z80, opcode byte) {
 	z.Tstates += 19
 	var offset byte = z.Load8()
 	//z.Memory.ContendReadNoMreq_loop(z.pc, 1, 5)
-	z.A = z.Memory.Read(z.IY.Get() + uint16(signExtend(offset)))
+	z.A = z.bus.ReadMemory(z.IY.Get() + uint16(signExtend(offset)))
 
 }
 
@@ -533,7 +533,7 @@ func instrFD__ADD_A_iREGpDD(z *Z80, opcode byte) {
 	z.Tstates += 19
 	var offset byte = z.Load8()
 	//z.Memory.ContendReadNoMreq_loop(z.pc, 1, 5)
-	var bytetemp byte = z.Memory.Read(z.IY.Get() + uint16(signExtend(offset)))
+	var bytetemp byte = z.bus.ReadMemory(z.IY.Get() + uint16(signExtend(offset)))
 	z.Add(bytetemp)
 }
 
@@ -554,7 +554,7 @@ func instrFD__ADC_A_iREGpDD(z *Z80, opcode byte) {
 	z.Tstates += 19
 	var offset byte = z.Load8()
 	//z.Memory.ContendReadNoMreq_loop(z.pc, 1, 5)
-	var bytetemp byte = z.Memory.Read(z.IY.Get() + uint16(signExtend(offset)))
+	var bytetemp byte = z.bus.ReadMemory(z.IY.Get() + uint16(signExtend(offset)))
 	z.Adc(bytetemp)
 }
 
@@ -575,7 +575,7 @@ func instrFD__SUB_A_iREGpDD(z *Z80, opcode byte) {
 	z.Tstates += 19
 	var offset byte = z.Load8()
 	//z.Memory.ContendReadNoMreq_loop(z.pc, 1, 5)
-	var bytetemp byte = z.Memory.Read(z.IY.Get() + uint16(signExtend(offset)))
+	var bytetemp byte = z.bus.ReadMemory(z.IY.Get() + uint16(signExtend(offset)))
 	z.Sub(bytetemp)
 }
 
@@ -596,7 +596,7 @@ func instrFD__SBC_A_iREGpDD(z *Z80, opcode byte) {
 	z.Tstates += 18
 	var offset byte = z.Load8()
 	//z.Memory.ContendReadNoMreq_loop(z.pc, 1, 5)
-	var bytetemp byte = z.Memory.Read(z.IY.Get() + uint16(signExtend(offset)))
+	var bytetemp byte = z.bus.ReadMemory(z.IY.Get() + uint16(signExtend(offset)))
 	z.Sbc(bytetemp)
 }
 
@@ -617,7 +617,7 @@ func instrFD__AND_A_iREGpDD(z *Z80, opcode byte) {
 	z.Tstates += 19
 	var offset byte = z.Load8()
 	//z.Memory.ContendReadNoMreq_loop(z.pc, 1, 5)
-	var bytetemp byte = z.Memory.Read(z.IY.Get() + uint16(signExtend(offset)))
+	var bytetemp byte = z.bus.ReadMemory(z.IY.Get() + uint16(signExtend(offset)))
 	z.And(bytetemp)
 }
 
@@ -638,7 +638,7 @@ func instrFD__XOR_A_iREGpDD(z *Z80, opcode byte) {
 	z.Tstates += 19
 	var offset byte = z.Load8()
 	//z.Memory.ContendReadNoMreq_loop(z.pc, 1, 5)
-	var bytetemp byte = z.Memory.Read(z.IY.Get() + uint16(signExtend(offset)))
+	var bytetemp byte = z.bus.ReadMemory(z.IY.Get() + uint16(signExtend(offset)))
 	z.Xor(bytetemp)
 }
 
@@ -659,7 +659,7 @@ func instrFD__OR_A_iREGpDD(z *Z80, opcode byte) {
 	z.Tstates += 19
 	var offset byte = z.Load8()
 	//z.Memory.ContendReadNoMreq_loop(z.pc, 1, 5)
-	var bytetemp byte = z.Memory.Read(z.IY.Get() + uint16(signExtend(offset)))
+	var bytetemp byte = z.bus.ReadMemory(z.IY.Get() + uint16(signExtend(offset)))
 	z.Or(bytetemp)
 }
 
@@ -680,7 +680,7 @@ func instrFD__CP_A_iREGpDD(z *Z80, opcode byte) {
 	z.Tstates += 19
 	var offset byte = z.Load8()
 	//z.Memory.ContendReadNoMreq_loop(z.pc, 1, 5)
-	var bytetemp byte = z.Memory.Read(z.IY.Get() + uint16(signExtend(offset)))
+	var bytetemp byte = z.bus.ReadMemory(z.IY.Get() + uint16(signExtend(offset)))
 	z.Cp(bytetemp)
 }
 
@@ -702,11 +702,11 @@ func instrFD__POP_REG(z *Z80, opcode byte) {
 /* EX (SP),iy */
 func instrFD__EX_iSP_REG(z *Z80, opcode byte) {
 	z.Tstates += 23
-	var bytetempl = z.Memory.Read(z.sp)
-	var bytetemph = z.Memory.Read(z.sp + 1)
+	var bytetempl = z.bus.ReadMemory(z.sp)
+	var bytetemph = z.bus.ReadMemory(z.sp + 1)
 	//z.Memory.ContendReadNoMreq(z.sp+1, 1)
-	z.Memory.Write(z.sp+1, z.IYH)
-	z.Memory.Write(z.sp, z.IYL)
+	z.bus.WriteMemory(z.sp+1, z.IYH)
+	z.bus.WriteMemory(z.sp, z.IYL)
 	//z.Memory.ContendWriteNoMreq_loop(z.sp, 1, 2)
 	z.IYL = bytetempl
 	z.IYH = bytetemph
