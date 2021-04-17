@@ -1,34 +1,5 @@
 package ZzEmu
 
-// type CpuMemory struct {
-// 	rom *[TotROM]byte
-// 	ram *[TotRAM]byte
-// }
-
-// func (mem *CpuMemory) Read(address uint16) byte {
-
-// 	if address < TotROM {
-// 		return mem.rom[address]
-// 	} else if (address >= StartRAM) && (address < TopAddr) {
-// 		addrFinal := address % StartRAM
-// 		return mem.ram[addrFinal]
-// 	}
-// 	// else {
-// 	// 	log.Fatal("Memoria fora de range", address)
-// 	// }
-
-// 	return 0xff
-// }
-
-// func (mem *CpuMemory) Write(address uint16, value byte) {
-// 	if (address >= StartRAM) && (address < TopAddr) {
-// 		addrFinal := address % StartRAM
-// 		mem.ram[addrFinal] = value
-// 	} else {
-// 		//log.Fatal("Escrita em memoria invalida")
-// 	}
-// }
-
 type DeviceMemory struct {
 	mem   []byte
 	start uint16
