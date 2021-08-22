@@ -1,9 +1,10 @@
 package main
 
 import (
-	"ZzEmu"
 	"fmt"
 	"strconv"
+
+	"github.com/EduardoPagotto/ZzEmu/src/ZzEmu"
 )
 
 func main() {

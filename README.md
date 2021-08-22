@@ -57,6 +57,8 @@ code --install-extension mohsen1.prettify-json
 code --install-extension QiaoJie.binary-viewer
 ```
 
+# to create pathfix
+go mod init github.com/EduardoPagotto/ZzEmu
 
 ## Testar:
 DJNZ offset
